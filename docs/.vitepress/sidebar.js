@@ -1,8 +1,10 @@
-const fg = require('fast-glob');
-const path = require('path');
-import { useLocalDoc } from './custom';
+const fg = require("fast-glob");
+const path = require("path");
 
-const docsPath = useLocalDoc ? process.cwd() : path.resolve(process.cwd(), '../web-note');
+// const docsPath = useLocalDoc
+//   ? process.cwd()
+//   : path.resolve(process.cwd(), "../web-note");
+const docsPath = process.cwd();
 console.log(docsPath);
 // console.log(
 //   fg.sync('**', {
@@ -13,22 +15,22 @@ console.log(docsPath);
 // );
 
 function getPath(p) {
-  return path.join(docsPath, './docs', p);
+  return path.join(docsPath, "./docs", p);
 }
 function getDirs(p) {
-  return fg.sync('**', {
+  return fg.sync("**", {
     onlyFiles: false,
     cwd: getPath(p),
     deep: 1,
-    ignore: ['*.md'],
+    ignore: ["*.md"],
   });
 }
 function getMdFiles(p) {
-  return fg.sync('**', {
+  return fg.sync("**", {
     onlyFiles: true,
     cwd: getPath(p),
     deep: 1,
-    ignore: ['index.md'],
+    ignore: ["index.md"],
   });
 }
 /**
@@ -55,7 +57,7 @@ function genSideBar(dirPath) {
     }),
     // 有md文件
     ...mdFiles.map((file) => {
-      const text = file.replace('.md', '');
+      const text = file.replace(".md", "");
       return {
         text: text,
         link: `/${dirPath}/${text}`,
@@ -64,13 +66,13 @@ function genSideBar(dirPath) {
   ];
   return res;
 }
-const webnote = genSideBar('webnote');
+const webnote = genSideBar("webnote");
 console.log(JSON.stringify(webnote));
 
 export default {
-  '/webnote/': [
+  "/webnote/": [
     {
-      text: 'webnote',
+      text: "webnote",
       items: webnote,
     },
   ],
