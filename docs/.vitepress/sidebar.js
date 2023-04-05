@@ -67,7 +67,7 @@ function genSideBar(dirPath) {
   return res;
 }
 const webnote = genSideBar("webnote");
-console.log(JSON.stringify(webnote));
+console.log("自动生成：", JSON.stringify(webnote));
 
 export default {
   "/webnote/": [
