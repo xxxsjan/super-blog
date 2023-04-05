@@ -1,0 +1,22 @@
+{
+  "name": "super-blog",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "homepage": "https://github.com/xxxsjan/super-blog",
+  "scripts": {
+    "docs:dev": "vitepress dev docs --port 3333 --host",
+    "docs:build": "vitepress build docs",
+    "build:github": "cross-env NODE_ENV=github vitepress build docs",
+    "build:vercel": "cross-env BUILD_ENV=vercel vitepress build docs",
+    "docs:serve": "vitepress serve docs"
+  },
+  "devDependencies": {
+    "vitepress": "^1.0.0-alpha.5"
+  },
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "fast-glob": "^3.2.11",
+    "sass": "^1.54.4"
+  }
+}
