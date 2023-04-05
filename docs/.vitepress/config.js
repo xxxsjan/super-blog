@@ -41,12 +41,12 @@ module.exports = {
   },
 
   themeConfig: {
+    logo: "../public/wk.png",
     // 搜索
     algolia: {
       apiKey: "your_api_key",
       indexName: "index_name",
     },
-    logo: "/logo.svg",
     socialLinks: [{ icon: "github", link: "https://github.com/xxxsjan" }],
     footer: {
       message: "Released under the MIT License.",
