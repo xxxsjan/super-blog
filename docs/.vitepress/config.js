@@ -41,7 +41,7 @@ module.exports = {
   },
 
   themeConfig: {
-    logo: "../public/wk.png",
+    logo: "../public/github.png",
     // 搜索
     algolia: {
       apiKey: "your_api_key",
