@@ -20,11 +20,18 @@ module.exports = {
       "link",
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" },
     ],
+    [
+      "link",
+      {
+        rel: "icon",
+        href: "/icon_32.ico",
+      },
+    ],
     // would render: <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   ],
   lang: "zh-cn", // build时才会放到html标签里
-  title: "VitePress",
-  description: "Just playing around.", // 站点的描述。 这将作为<meta>标记渲染在页面HTML中。
+  title: "我的主页",
+  description: "记录前端学习", // 站点的描述。 这将作为<meta>标记渲染在页面HTML中。
   lastUpdated: true,
   //The directory where your markdown pages are stored, relative to project root.
   // srcDir: useLocalDoc ? './' : '../../web-note/docs', // Default: .
@@ -41,12 +48,12 @@ module.exports = {
   },
 
   themeConfig: {
-    logo: "../public/github.png",
+    logo: "/github.png",
     // 搜索
-    algolia: {
-      apiKey: "your_api_key",
-      indexName: "index_name",
-    },
+    // algolia: {
+    //   apiKey: "your_api_key",
+    //   indexName: "index_name",
+    // },
     socialLinks: [{ icon: "github", link: "https://github.com/xxxsjan" }],
     footer: {
       message: "Released under the MIT License.",
@@ -70,7 +77,7 @@ module.exports = {
       ],
     },
     nav: [
-      // / 结尾找 index.md 名字结尾找 名字.md
+      // 结尾找 index.md 名字结尾找 名字.md
       { text: "首页", link: "/" },
       { text: "笔记", link: "/webnote/" },
       { text: "Guide", link: "/guide/" },
