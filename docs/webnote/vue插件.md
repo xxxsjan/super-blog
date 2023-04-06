@@ -1,7 +1,5 @@
 # vue插件
 
-
-
 ### 图片懒加载
 
 vue-lazyload
@@ -10,13 +8,11 @@ vue-lazyload
 
 vue-virtual-scroller
 
-https://www.npmjs.com/package/vue-virtual-scroller
+<https://www.npmjs.com/package/vue-virtual-scroller>
 
 vue-virtual-scroll-list
 
-https://www.npmjs.com/package/vue-virtual-scroll-list
-
-
+<https://www.npmjs.com/package/vue-virtual-scroll-list>
 
 ## vue3插件
 
@@ -148,8 +144,6 @@ export default defineConfig({
 })
 ```
 
-
-
 ### 货币计算 数字计算
 
 currency.js
@@ -159,8 +153,6 @@ number-precision
 ### 随机头像 multiavatar
 
 @multiavatar/multiavatar
-
-
 
 ```javascript
 import multiavatar from '@multiavatar/multiavatar/esm'
@@ -180,43 +172,23 @@ function createAvatar() {
 }
 ```
 
-
-
-
-
-
-
 ### 图片识别文字 tesseract.js
 
-https://github.com/naptha/tesseract.js#tesseractjs
-
-
-
-
+<https://github.com/naptha/tesseract.js#tesseractjs>
 
 ### pl-table -pl-table大数据树表格
 
-https://www.npmjs.com/package/pl-table
-
-
-
-
+<https://www.npmjs.com/package/pl-table>
 
 ### 网站背景动画
 
 vanta.js
 
-
-
-
-
 ### dom动画
 
 可选juery和gsap
 
-https://greensock.com/docs/v3/GSAP/gsap.to()
-
-
+<https://greensock.com/docs/v3/GSAP/gsap.to()>
 
 有时候transition对于某些属性不会有过度效果，比如scrollLeft这种，需要js实现
 
@@ -228,17 +200,11 @@ gsap.to('.top-slide', {
 });
 ```
 
-
-
 ## 流程图
 
-http://logic-flow.org/
+<http://logic-flow.org/>
 
 antv-x6
-
-
-
-
 
 ### browser-sync
 
@@ -246,11 +212,9 @@ antv-x6
 
 ![img](https://cdn.nlark.com/yuque/0/2022/png/28823371/1671728839226-e5fd1050-0c86-4506-b2d2-b1ac408a8bbd.png)
 
-
-
 ### particles.js
 
-https://github.com/VincentGarreau/particles.js
+<https://github.com/VincentGarreau/particles.js>
 
 做背景动效
 
@@ -258,9 +222,7 @@ https://github.com/VincentGarreau/particles.js
 
 A web component for drawing patterns with CSS
 
-https://github.com/css-doodle/css-doodle
-
-
+<https://github.com/css-doodle/css-doodle>
 
 ## postcss相关
 
@@ -278,19 +240,13 @@ module.exports = {
 }
 ```
 
-
-
 ### 爬虫
 
 puppeteer
 
-
-
-
-
 ## **import顺序格式化插件**
 
- https://github.com/wangrongding/super-extensions.git 
+ <https://github.com/wangrongding/super-extensions.git>
 
 @plasmohq/prettier-plugin-sort-imports
 
@@ -300,18 +256,16 @@ html2canvas
 
 dom-to-image
 
-
-
 ### 假的进度条
 
 fake-progress
 
-https://github.com/piercus/fake-progress
+<https://github.com/piercus/fake-progress>
 
 ```javascript
 var p = new FakeProgress({
-	timeConstant : 10000,
-	autoStart : true
+ timeConstant : 10000,
+ autoStart : true
 });
 // 手动结束
 p.end();

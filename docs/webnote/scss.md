@@ -84,13 +84,11 @@ SCSS中的@at-root可以用来放弃当前的嵌套层级，让其内部的CSS�
 }
 ```
 
-## Mixin 和 include 
+## Mixin 和 include
 
 ```
 
 ```
-
-
 
 ## BEM规范
 
@@ -138,13 +136,11 @@ $modifier-separator: '-';
 }
 ```
 
-
-
 ## 安装
 
 #### node-sass
 
-#### https://github.com/sass/node-sass
+#### <https://github.com/sass/node-sass>
 
 | NodeJS  | Supported node-sass version | Node Module |
 | ------- | --------------------------- | ----------- |
@@ -194,8 +190,7 @@ node-sass和node版本依赖较强，所以使用sass吧
 }
 ```
 
-#### 高版本 17 18版本报错 
-
+#### 高版本 17 18版本报错
 
 解决 nodejs 17: digital envelope routines::unsupported
 相关构建命令之前加入set NODE_OPTIONS=--openssl-legacy-provider

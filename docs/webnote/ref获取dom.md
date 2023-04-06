@@ -33,11 +33,9 @@ export default {
 
 ```
 
-
-
 ### 获取多个
 
-https://cn.vuejs.org/guide/essentials/template-refs.html#function-refs
+<https://cn.vuejs.org/guide/essentials/template-refs.html#function-refs>
 
 ```
 <template>
@@ -96,8 +94,6 @@ const listRef = ref(null);// 获取的是一个ref数组，dom的话是dom，组
 
 ```
 
-
-
 ## 函数模板引用  ref是函数
 
 ### 获取单个多个都一样
@@ -146,6 +142,3 @@ export default {
 </script>
 
 ```
-
-
-

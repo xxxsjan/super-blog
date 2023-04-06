@@ -5,9 +5,11 @@
 vue3+ts+vite
 
 ### 特点
+
 使用后可以不手动引入ref reactive onMounted这些api
 
 ### 最简单使用
+
 npm i  unplugin-auto-import -D
 
 npm i unplugin-vue-components -D
@@ -28,6 +30,7 @@ export default defineConfig({
 ```
 
 ### AutoImport参数类型
+
 ```
 interface Options {
     /**
@@ -106,8 +109,8 @@ interface Options {
 }
 ```
 
-
 ### 开始配置
+
 ```
  AutoImport({
       dts: true, // 会在根目录生成auto-imports.d.ts，里面可以看到自动导入的api
@@ -150,10 +153,9 @@ interface Options {
 
 ![image.png](https://upload-images.jianshu.io/upload_images/20993246-714160d49b1a52f4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-
-
 你可以在tsconfig.json进行如下配置
 把他添加进include
+
 ```
 {
   "compilerOptions": {
@@ -168,7 +170,9 @@ interface Options {
    ],
 }
 ```
+
 eslint配置
+
 ```
 {
   "extends": [
@@ -179,5 +183,6 @@ eslint配置
 ```
 
 ### 验证结果
+
 发现不报错，项目也能运行
 ![image.png](https://upload-images.jianshu.io/upload_images/20993246-7464ab8fc4de8be1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
