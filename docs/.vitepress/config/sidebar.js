@@ -35,23 +35,23 @@ function getMdFiles(p) {
 }
 /**
  *
- * @param {String} dirPath docs文件所在目录下的某个文件夹名
+ * @param {String} dirName docs文件所在目录下的某个文件夹名
  * @returns
  */
-function genSideBar(dirPath) {
-  // dirPath 文件夹下的所有文件夹
-  const dirs = getDirs(`${dirPath}`);
-  const mdFiles = getMdFiles(`${dirPath}`);
+function genSideBar(dirName) {
+  // dirName 文件夹下的所有文件夹
+  const dirs = getDirs(`${dirName}`);
+  const mdFiles = getMdFiles(`${dirName}`);
   let res = [
     // 有文件夹
     ...dirs.map((dir) => {
       let obj = {
         text: dir,
-        items: genSideBar(`${dirPath}/${dir}`),
+        items: genSideBar(`${dirName}/${dir}`),
       };
       if (obj.items.length === 0) {
         delete obj.items;
-        obj.link = `/${dirPath}/${dir}/`;
+        obj.link = `/${dirName}/${dir}/`;
       }
       return obj;
     }),
@@ -60,14 +60,14 @@ function genSideBar(dirPath) {
       const text = file.replace(".md", "");
       return {
         text: text,
-        link: `/${dirPath}/${text}`,
+        link: `/${dirName}/${text}`,
       };
     }),
   ];
   return res;
 }
 const webnote = genSideBar("webnote");
-console.log("自动生成：", JSON.stringify(webnote));
+// console.log("自动生成：", JSON.stringify(webnote, null, 2));
 
 export default {
   "/webnote/": [
