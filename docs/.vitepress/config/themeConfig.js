@@ -1,6 +1,7 @@
 import sidebar from "./sidebar";
 
-export default {
+/** @type {import("vitepress").DefaultTheme.Config} */
+const themeConfig = {
   logo: "/github.png",
   // 搜索
   // algolia: {
@@ -16,6 +17,10 @@ export default {
   // editLinkText: '编辑此页',
   // selectText: '选择语言',
   // sidebarDepth: 2,
+  docFooter: {
+    prev: "上一篇",
+    next: "下一篇",
+  },
   sidebar: {
     ...sidebar,
     // "/component/": [
@@ -46,3 +51,4 @@ export default {
     { text: "Guide", link: "/guide/" },
   ],
 };
+export default themeConfig;

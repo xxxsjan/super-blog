@@ -48,6 +48,8 @@ function genSideBar(dirName) {
       let obj = {
         text: dir,
         items: genSideBar(`${dirName}/${dir}`),
+        // collapsible: true,
+        collapsed: false,
       };
       if (obj.items.length === 0) {
         delete obj.items;
@@ -68,11 +70,12 @@ function genSideBar(dirName) {
 }
 const webnote = genSideBar("webnote");
 // console.log("自动生成：", JSON.stringify(webnote, null, 2));
+console.log("自动生成：", webnote);
 
 export default {
   "/webnote/": [
     {
-      text: "webnote",
+      text: "笔记",
       items: webnote,
     },
   ],
