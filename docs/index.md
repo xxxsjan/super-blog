@@ -8,7 +8,7 @@ hero:
   text: 
   tagline: 
   image:
-    src: /home.svg
+    src: /earth.png
     alt: logo
   actions:
     - theme: brand
