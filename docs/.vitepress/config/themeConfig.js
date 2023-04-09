@@ -2,7 +2,7 @@ import sidebar from "./sidebar";
 
 /** @type {import("vitepress").DefaultTheme.Config} */
 const themeConfig = {
-  logo: "/github.png",
+  logo: "/earth.png",
   // 搜索 https://www.algolia.com/apps/YBYUHFPZ1C/dashboard
   algolia: {
     apiKey: "YBYUHFPZ1C",
@@ -12,7 +12,7 @@ const themeConfig = {
   socialLinks: [{ icon: "github", link: "https://github.com/xxxsjan" }],
   footer: {
     message: "Released under the MIT License.",
-    copyright: "Copyright © 2022-07-27～present aehyok",
+    copyright: "Copyright © 2022-07-27～present ",
   },
   lastUpdated: true, // 最后更新时间
   // editLinkText: '编辑此页',
