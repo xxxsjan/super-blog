@@ -3,7 +3,7 @@ import sidebar from "./sidebar";
 /** @type {import("vitepress").DefaultTheme.Config} */
 const themeConfig = {
   logo: "/github.png",
-  // 搜索
+  // 搜索 https://www.algolia.com/apps/YBYUHFPZ1C/dashboard
   algolia: {
     apiKey: "YBYUHFPZ1C",
     indexName: "super-blog",
