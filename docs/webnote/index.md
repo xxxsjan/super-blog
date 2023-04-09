@@ -1,4 +1,4 @@
-# webnote-vitepress
+# 笔记
 
 <https://vitepress.vuejs.org/guide/deploying>
 

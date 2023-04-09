@@ -4,7 +4,7 @@ layout: home
 title: Home
 
 hero:
-  name: xxxsjan
+  name: xsjan
   text: 
   tagline: 
   image:

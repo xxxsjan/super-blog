@@ -5,4 +5,4 @@
 vitepress
 
 ## 预览
-<https://xxxsjan.github.io/blog-vitepress/>
+<https://dolam.top/>
