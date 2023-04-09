@@ -4,10 +4,11 @@ import sidebar from "./sidebar";
 const themeConfig = {
   logo: "/github.png",
   // 搜索
-  // algolia: {
-  //   apiKey: "your_api_key",
-  //   indexName: "index_name",
-  // },
+  algolia: {
+    apiKey: "YBYUHFPZ1C",
+    indexName: "super-blog",
+    apiKey: "d4076b979399477f79c55eec660730ec",
+  },
   socialLinks: [{ icon: "github", link: "https://github.com/xxxsjan" }],
   footer: {
     message: "Released under the MIT License.",
