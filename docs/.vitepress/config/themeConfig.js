@@ -5,8 +5,8 @@ const themeConfig = {
   logo: "/earth.png",
   // 搜索 https://www.algolia.com/apps/YBYUHFPZ1C/dashboard
   algolia: {
-    apiKey: "YBYUHFPZ1C",
     indexName: "super-blog",
+    appId: "YBYUHFPZ1C",
     apiKey: "d4076b979399477f79c55eec660730ec",
   },
   socialLinks: [{ icon: "github", link: "https://github.com/xxxsjan" }],
