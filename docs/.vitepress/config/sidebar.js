@@ -5,7 +5,7 @@ const path = require("path");
 //   ? process.cwd()
 //   : path.resolve(process.cwd(), "../web-note");
 const docsPath = process.cwd();
-console.log(docsPath);
+// console.log(docsPath);
 // console.log(
 //   fg.sync('**', {
 //     onlyFiles: false,
@@ -70,7 +70,13 @@ function genSideBar(dirName) {
 }
 const webnote = genSideBar("webnote");
 // console.log("自动生成：", JSON.stringify(webnote, null, 2));
-console.log("自动生成：", webnote);
+
+export const webnote_nav = webnote.map((item) => {
+  return {
+    text: item.text,
+    link: `/webnote/${item.text}/${item.items[0].text}`,
+  };
+});
 
 export default {
   "/webnote/": [

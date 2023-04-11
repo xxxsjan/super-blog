@@ -1,4 +1,16 @@
-# algolia的使用
+---
+title: algolia在vitepress中的使用
+author: xxxsjan
+date: 2023/04/11 10:00
+isTop: true
+categories:
+ - 工程化
+tags:
+ - vitepress
+ - algolia
+---
+
+# algolia在vitepress中的使用
 
 
 

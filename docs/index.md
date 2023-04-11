@@ -4,16 +4,16 @@ layout: home
 title: Home
 
 hero:
-  name: xsjan
-  text: 
+  name: 新世界的知识库
+  text: 专注 & 洞察 & 分享
   tagline: 
   image:
     src: /earth.png
     alt: logo
   actions:
     - theme: brand
-      text: 更多详情
-      link: /guide/
+      text: 笔记
+      link: /webnote/
     - theme: alt
       text: 关于我
       link: /me/

@@ -1,8 +1,9 @@
+
 # 发布npm
 
-## 上传到npm官网 
+## 上传到npm官网
 
-https://www.npmjs.com/
+<https://www.npmjs.com/>
 
 ## 切换镜像地址
 
@@ -12,7 +13,7 @@ https://www.npmjs.com/
 
 所以老老实实切回官方的
 
-npm config set registry https://registry.npmjs.org/
+npm config set registry <https://registry.npmjs.org/>
 
 ## 然后进行登录
 
@@ -20,9 +21,9 @@ npm config set registry https://registry.npmjs.org/
 
 注意一下即可，都是 写简单的为英文
 
-npm adduser --registry https://registry.npmjs.org/
+npm adduser --registry <https://registry.npmjs.org/>
 
-## 发布 
+## 发布
 
 发布的包的目录下，也就是package.json同目录下
 
@@ -31,8 +32,6 @@ npm publish
 跑完就可发布完成
 
 上官网瞄一眼，就会发现有了
-
-
 
 ## package.json内容说明
 
