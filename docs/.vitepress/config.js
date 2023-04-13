@@ -1,5 +1,6 @@
 import head from "./config/head";
 import themeConfig from "./config/themeConfig";
+
 const baseMap = {
   production: "/blog-vitepress/",
   github: "/blog-vitepress/",
