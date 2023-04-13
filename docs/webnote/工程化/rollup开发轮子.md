@@ -81,39 +81,6 @@ export default {
 };
 ```
 
-##### 可选插件
-
-##### rollup-plugin-commonjs
-
-> 将CommonJS模块转换为 ES2015 供 Rollup 处理
-
-```
-import commonjs from 'rollup-plugin-commonjs';
-
-commonjs(), 
-```
-
-##### rollup-plugin-terser
-
-> 压缩js代码，包括es6代码压缩
-
-```javascript
-import { terser } from 'rollup-plugin-terser';  
-
-terser()
-```
-
-##### rollup-plugin-eslint
-
-> js代码检测
-
-```
-import { eslint } from 'rollup-plugin-eslint';
-eslint()
-```
-
-
-
 #### dev.config
 
 安装插件
@@ -143,16 +110,10 @@ coreConfig.plugins = [
 export default coreConfig;
 ```
 
-
-
 #### prod.config
 
-##### 可选丑化插件
-
-pnpm  i -D rollup-plugin-uglify
-
 ```javascript
-import { uglify } from 'rollup-plugin-uglify';
+
 import coreConfig from './rollup.base.config.js'
 
 coreConfig.output.forEach((item) => {
@@ -161,12 +122,11 @@ coreConfig.output.forEach((item) => {
 
 coreConfig.plugins = [
   ...coreConfig.plugins,
-  uglify(),
 ]
 export default coreConfig;
 ```
 
-### 使用babel
+## 使用babel
 
 npm i core-js @babel/core @babel/preset-env @babel/plugin-transform-runtime
 
@@ -212,3 +172,95 @@ module.exports= {
   }
 }
 ```
+
+
+
+## 新插件
+
+有一些插件不维护，迁移了
+
+```javascript
+import { nodeResolve } from "@rollup/plugin-node-resolve";
+import { babel } from "@rollup/plugin-babel";
+import json from "@rollup/plugin-json";
+
+import typescript from "rollup-plugin-typescript2";
+export default {
+  input: "./src/hmrCallback.ts",
+  output: [
+    {
+      file: "lib/index.js",
+      format: "cjs",
+      sourcemap: true,
+    },
+    {
+      file: "lib/index.module.js",
+      format: "esm",
+      sourcemap: true,
+    },
+  ],
+  plugins: [
+    typescript(),
+    nodeResolve({
+      moduleDirectories: ["node_modules", "src"],
+    }),
+    json(),
+    babel({
+      presets: ["@babel/preset-env"],
+      //   exclude: "node_modules/**",
+    }),
+  ],
+};
+
+```
+
+
+
+## 其他插件
+
+
+
+### rollup-plugin-commonjs
+
+已迁移到@rollup/plugin-commonjs
+
+> 将CommonJS模块转换为 ES2015 供 Rollup 处理
+
+```
+import commonjs from 'rollup-plugin-commonjs';
+
+commonjs(), 
+```
+
+### rollup-plugin-terser
+
+> 压缩js代码，包括es6代码压缩
+
+```javascript
+import { terser } from 'rollup-plugin-terser';  
+
+terser()
+```
+
+### rollup-plugin-eslint
+
+> js代码检测
+
+```
+import { eslint } from 'rollup-plugin-eslint';
+eslint()
+```
+
+
+
+### rollup-plugin-uglify
+
+可选丑化插件
+
+```
+ import { uglify } from 'rollup-plugin-uglify';
+ uglify(),
+```
+
+
+
