@@ -1,10 +1,6 @@
 # typescript
 
-
-
-## [utility-types](https://www.typescriptlang.org/docs/handbook/utility-types.html)
-
-
+[utility-types](https://www.typescriptlang.org/docs/handbook/utility-types.html)
 
 ## 基础概念
 
@@ -22,20 +18,16 @@ K in keyof  T as K什么意思
 
 具体来说，`key in keyof T as K` 中的 `as K` 表示将映射类型 `{ [key in keyof T]: T[key] }` 中的 `key` 属性名重新命名为 `K`，以避免在后续的属性过滤操作中因为属性名不一致而无法识别该属性。换句话说，`as K` 声明了一个新的类型变量 `K`，并将原本的属性名 `key` 赋值给它，以便在后面的类型声明中使用。
 
-### extends
+## extends
 
-```
+```javaScript
 function getLength<T extends { length: number }>(arg: T): number {
   return arg.length;
 }
 上述代码中，T 是一个泛型类型参数，并使用 extends 关键字限制了 T 的类型必须有一个名为 length 的数值属性。
 ```
 
-
-
-
-
-### 泛型
+## 泛型
 
 一般类型就是小写这些：string，number，array
 
@@ -44,10 +36,6 @@ function getLength<T extends { length: number }>(arg: T): number {
 T可以是普通类型或者自定义的类型
 
 等号后面就类似是函数表达式
-
-
-
-
 
 #### [类型分发](https://link.juejin.cn/?target=https%3A%2F%2Fwww.typescriptlang.org%2Fdocs%2Fhandbook%2F2%2Fconditional-types.html%23distributive-conditional-types) --裸类型
 
@@ -60,8 +48,6 @@ A extends B
 A 里的值一个个去B里面匹配，匹配到走true，匹配不到走false，都会根据三元运算符返回一个类型
 
 A走完最后一个，之前返回的类型会组成一个联合类型，作为本次三元运算符返回结果
-
-
 
 ```javascript
 // Type 是裸类型，会进行分发
@@ -81,8 +67,6 @@ type C<T, U> = T extends U ? T : never
 type D = C<A, B>   // 1 | 2
 ```
 
-
-
 #### infer
 
 infer的话是结合extends进行使用
@@ -91,9 +75,7 @@ infer的话是结合extends进行使用
 
 有点类似js数组 [a,b] = [1,2]，最后a=1，b=2
 
-
-
-比如 
+比如
 
 type Infer1<T> = T extends (infer S)[] ? S : never;
 
@@ -107,11 +89,7 @@ a1中：T是 string ，infer S应该匹配不到，T  extends string[]为false�
 
 a2中：T是 string[], infer S 匹配的还是string，T   extends string[]明显true，所以输出S ，也就是string
 
-
-
 其他例子
-
-
 
 ```typescript
 // 单元素元组 infer
@@ -157,9 +135,7 @@ infer S匹配string，S是string
 Promise<infer S>匹配Promise<string>, S是string
 ```
 
-
-
-### 题目
+## 题目
 
 [取元组第二项的类型](https://www.typescriptlang.org/play?#code/C4TwDgpgBAKgrmANhAglAvFA2gOzgWwCMIAnAGikIHsrkBDHCgZ2BIEscBzAXQFgAoUJFgJkAIQzZqtCA2asOnCniKkKcHAGscVAO44A-H0Hho8JBADCk3AWLkoK+xWn1GlGm+MCh0AMoQAMZUOAAmADzmyFAQAB7AEGFMUBraejhY3AB8klHQcQlJ2BwAZqRQKBSl5WIUAHQN1SRQltxQBlASAFyOEABupAI+plABwWFomGMhEXkoWcPC02ESU0EzkaIQYgsmS+th1mvjs1uWu4vQAGJsJCyRMfGJocmpOvqZOZgwj4UvxTgys1KlAGnUmp02h00D0cP1BntoABRWKBRBwUIQG53YAPArPV5ad4ZbK5X4EgFAir1RqAmpQzpQWHwkiXKAAGTo9x++KKb3SnzJvP+WDBEJBELEDO6vQGrMRUBRaIxEE53PJfKJAtJ3w1IrFdOBVUNkPaFSZsvKQwVy1CABFJEr0ZjsdyzhcFa7gJMoF7NhZ5mynSqvT7gy7bm6A7tfByud7JGrcXMYyNw6r42HUc6M1HkIH+GyAAokKj4NhMVCSEtlisQcIsdhcVPCGvlysANTo6PrPKeRTbdfC-P0WS+sD1yUHlfCEK7PZyHXncGgzLlxdL7Ygy6rmGn2+7K-C+-mQA)
 
@@ -180,13 +156,9 @@ type SecondC = Second<TupleC>  // number
 // infer A  infer B 匹配元组的第一二个类型
 ```
 
-
-
 [初学者入门ts](https://mp.weixin.qq.com/s?__biz=Mzk0MDMwMzQyOA==&mid=2247493477&idx=1&sn=f6a74b2352fbdf3036f06049789e2baf&chksm=c2e1124ef5969b589eb603330f0ceb293b0908df20f7bf6df58218e7b068f0993883a84c4f32&token=907147968&lang=zh_CN&mode=light#rd)
 
-
-
-### DOM
+## DOM
 
 ```javascript
 // !
@@ -201,9 +173,7 @@ form.addEventListener('submit', (e: Event) => {
 });
 ```
 
-
-
-### class
+## class
 
 ```javascript
 class Person {
@@ -234,9 +204,9 @@ class Person {
 }
 ```
 
-### type与interface
+## type与interface
 
-#### 扩展
+扩展
 
 type通过&
 
@@ -258,7 +228,7 @@ type Bear = Animal & {
 
 type不行，因为他是等号，相当于重新赋值了
 
-#### 一般来说
+一般来说
 
 当你不知道用啥的时候，默认就用 **interface** 就行
 
@@ -266,33 +236,7 @@ type不行，因为他是等号，相当于重新赋值了
 
 
 
-### keyof
-
-获取类型的key值，返回一个类型或者联合类型
-
-### 语法in
-
-in后面是联合类型
-
-## 泛型工具类型
-
-
-
-### 索引签名
-
-```typescript
-interface MyObj<T> {
-  [a：string]:T
-}
-
-interface MyArray<T> {
-  [n:number]:T
-}
-```
-
-
-
-
+## 
 
 ## 类型声明文件d.ts
 
@@ -310,8 +254,6 @@ export {count,MyType}
 // 使用 不需要.d.ts后缀
 import {MyType} from './index' 
 ```
-
-
 
 ## React
 
@@ -333,7 +275,7 @@ function Com(){
 }
 ```
 
-## Function组件
+### Function组件
 
 [https://www.bilibili.com/video/BV14Z4y1u7pi](https://www.bilibili.com/video/BV14Z4y1u7pi?p=87&spm_id_from=pageDriver&vd_source=11e14f37a256537712e73b4b7f52411c)
 
@@ -353,21 +295,15 @@ function Com({age=18}){
 }
 ```
 
-
-
-## class组件
+### class组件
 
 类型声明
 
 ![img](https://cdn.nlark.com/yuque/0/2022/png/28823371/1656178217003-fcaf1d44-5f73-4f3e-b660-ecc540a53153.png)
 
-
-
 props默认值
 
 ![img](https://cdn.nlark.com/yuque/0/2022/png/28823371/1656178394364-1b16c064-8247-4472-8e1a-af4320d26941.png)
-
-
 
 ## 配置文件d.ts
 
@@ -412,56 +348,7 @@ index.d.ts
 /// <reference path="custom-typings.d.ts" />
 ```
 
-## tsconfig.json
 
-配置路径别名
-
-```json
-{
-  "compilerOptions":{
-    "paths": {
-      "@/*":[
-        "src/*"
-      ],
-      "@components/*":[
-        "src/components/*"
-      ]
-    }
-  }
-}
-```
-
-ts include范围
-
-```json
-{
-  "include": ["src"]
-}
-{
-  "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true, // 建议开启
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-    "baseUrl": ".",
-  },
-}
-```
 
 ## 体操
 
@@ -658,8 +545,6 @@ https://github.com/type-challenges/type-challenges/issues/14046
 https://github.com/type-challenges/type-challenges/issues/13507
 ```
 
-
-
 ### FlattenDepth 可自定义深度的拍平
 
 ```javascript
@@ -695,8 +580,6 @@ type AllCombinations<
   )
 ```
 
-
-
 ### 填充数组
 
 ```javascript
@@ -729,8 +612,6 @@ type MapTypes<T, R extends { mapFrom: any; mapTo: any }> = {
   : T[K]
 }
 ```
-
-
 
 ### 第三方库声明
 

@@ -186,9 +186,9 @@ const cheerio = require('cheerio');
 const puppeteer = require("puppeteer");
 
 const browser = await puppeteer.launch();
-  const page = await browser.newPage();
+const page = await browser.newPage();
 
-  await page.goto("https://live.douyin.com/212606438033");
+await page.goto("https://live.douyin.com/212606438033");
 ```
 
 ### 打开浏览器
@@ -196,9 +196,9 @@ const browser = await puppeteer.launch();
 ```javascript
 const puppeteer = require("puppeteer");
 const browser = await puppeteer.launch({ headless: false});
-  const page = await browser.newPage();
+const page = await browser.newPage();
 
-  await page.goto("https://live.douyin.com/212606438033");
+await page.goto("https://live.douyin.com/212606438033");
 ```
 
 ### 使用本地浏览器

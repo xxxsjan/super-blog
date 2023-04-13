@@ -34,10 +34,6 @@ Android Studio打开解压后的HBuilder-HelloUniApp
 
 替换里面的内容
 
-![1681225142753](C:/Users/admin/AppData/Roaming/Typora/typora-user-images/1681225142753.png)
-
-
-
 
 
 ## 修改assets/data/dcloud_control.xml
@@ -78,7 +74,7 @@ com.android.HelloH5的两处地方
 
 ```
 
-![1681236348469](C:/Users/admin/AppData/Roaming/Typora/typora-user-images/1681236348469.png)
+
 
 
 
@@ -103,7 +99,7 @@ versionName "1.0"
 
 https://dev.dcloud.net.cn/pages/app/list
 
-![1681225576038](C:/Users/admin/AppData/Roaming/Typora/typora-user-images/1681225576038.png)
+
 
 包名  就是上面的com.android.HelloH5
 
