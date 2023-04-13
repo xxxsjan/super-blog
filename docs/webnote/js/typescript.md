@@ -4,6 +4,7 @@
 
 ## 基础概念
 
+```
 K in keyof  T 什么意思
 
 意思是，遍历T的所有key值
@@ -17,6 +18,9 @@ K in keyof  T as K什么意思
 在这个例子中，`as K` 的作用是映射属性名，将所有符合条件的属性名重新赋值为它们原本的名称，以便在后面的类型声明中使用。
 
 具体来说，`key in keyof T as K` 中的 `as K` 表示将映射类型 `{ [key in keyof T]: T[key] }` 中的 `key` 属性名重新命名为 `K`，以避免在后续的属性过滤操作中因为属性名不一致而无法识别该属性。换句话说，`as K` 声明了一个新的类型变量 `K`，并将原本的属性名 `key` 赋值给它，以便在后面的类型声明中使用。
+```
+
+
 
 ## extends
 
@@ -27,29 +31,16 @@ function getLength<T extends { length: number }>(arg: T): number {
 上述代码中，T 是一个泛型类型参数，并使用 extends 关键字限制了 T 的类型必须有一个名为 length 的数值属性。
 ```
 
-## 泛型
-
-一般类型就是小写这些：string，number，array
-
-要是是Array<string>、Array<T>就是泛型
-
-T可以是普通类型或者自定义的类型
-
-等号后面就类似是函数表达式
+## 
 
 #### [类型分发](https://link.juejin.cn/?target=https%3A%2F%2Fwww.typescriptlang.org%2Fdocs%2Fhandbook%2F2%2Fconditional-types.html%23distributive-conditional-types) --裸类型
 
-extends前面的参数如果为裸联合类型时则会分解联合类型进行判断（依次遍历所有的子类型进行条件判断）。
-
-然后将最终的结果组成新的联合类型。
-
-A extends B
-
-A 里的值一个个去B里面匹配，匹配到走true，匹配不到走false，都会根据三元运算符返回一个类型
-
-A走完最后一个，之前返回的类型会组成一个联合类型，作为本次三元运算符返回结果
-
 ```javascript
+extends前面的参数如果为裸联合类型时则会分解联合类型进行判断（依次遍历所有的子类型进行条件判断）。
+然后将最终的结果组成新的联合类型。
+A extends B
+A 里的值一个个去B里面匹配，匹配到走true，匹配不到走false，都会根据三元运算符返回一个类型
+A走完最后一个，之前返回的类型会组成一个联合类型，作为本次三元运算符返回结果
 // Type 是裸类型，会进行分发
 type NakedToArray<Type> = Type extends any ? Type[] : never;
 type t1 = NakedToArray<string | number>; // string[] | number[];
@@ -69,6 +60,7 @@ type D = C<A, B>   // 1 | 2
 
 #### infer
 
+```
 infer的话是结合extends进行使用
 
 用做匹配，按位置匹配，
@@ -88,6 +80,9 @@ type a2 = Infer1<string[]>; // string
 a1中：T是 string ，infer S应该匹配不到，T  extends string[]为false，输出never
 
 a2中：T是 string[], infer S 匹配的还是string，T   extends string[]明显true，所以输出S ，也就是string
+```
+
+
 
 其他例子
 
@@ -206,13 +201,12 @@ class Person {
 
 ## type与interface
 
-扩展
-
-type通过&
-
-interface通过extends
+### 扩展
 
 ```javascript
+type通过&
+interface通过extends
+
 interface Bear extends Animal {
   honey: boolean
 }
@@ -220,7 +214,6 @@ interface Bear extends Animal {
 type Bear = Animal & {
   honey: boolean
 }
-```
 
 **interface** 是可以自动合并类型的，但是 **type** 不支持
 
@@ -233,10 +226,9 @@ type不行，因为他是等号，相当于重新赋值了
 当你不知道用啥的时候，默认就用 **interface** 就行
 
 直到 **interface** 满足不了我们的需求的时候再用 **type**
+```
 
 
-
-## 
 
 ## 类型声明文件d.ts
 
@@ -259,7 +251,9 @@ import {MyType} from './index'
 
 ### react查看事件的类型技巧
 
+```
 在jsx中写好onClick = {e=>{}}
+```
 
 把鼠标放e上面即可
 
@@ -271,7 +265,7 @@ function Com(){
   const onChange = (e:React.ChangeEvent<HTMLInputElement>)=>{}
   return (
     <input onClick={handleClick}/>
-)
+	)
 }
 ```
 
@@ -529,7 +523,7 @@ type MinusOne<T extends number, C extends any[] = []> = [
 
 // 缺点数字长度过长就不行了，也就是number太大 自测3000都不行了
 
-//type numberLess = {
+type numberLess = {
 "0": 9,
   "1": 0,
   "2": 1,
