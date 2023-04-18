@@ -1,6 +1,6 @@
-# vue数据更新前后
+# vue数据更新前后发生了什么
 
-场景
+### 场景
 
 ```
 methods: {
@@ -32,7 +32,7 @@ notify () {
 
 ### watcher
 
-watcher上有个update方法，根据逻辑是否判断立即执行与否
+watcher上有个update方法，根据逻辑是否判断立即执行
 
 情况有
 
@@ -50,7 +50,6 @@ update () {
         // 如果要同步更新
         this.run()
     } else {
-        // 进入更新队列
         queueWatcher(this)
     }
 }
@@ -234,3 +233,4 @@ function flushCallbacks() {
 当前已添加完了异步任务，所以就不pending了
 
 这样后面进来的timerFunc就可以执行，用以保证异步任务的顺序
+

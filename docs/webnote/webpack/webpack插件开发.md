@@ -59,3 +59,17 @@
 - [Module Objects](https://webpack.js.org/api/stats/#module-objects)
 - [Entry Objects](https://webpack.js.org/api/stats/#entry-objects)
 
+
+
+## 添加新文件
+
+```
+compiler.hook.emit.tap('',function(compilation){
+	compilation.assets
+})
+```
+
+
+
+
+
