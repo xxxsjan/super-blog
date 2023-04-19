@@ -116,7 +116,7 @@ npm run build || yarn build
 
 ## 创建组件src/components/Home.js
 
-```plain
+```javascript
 constructor(props) {
     // props父子传值
     super(props); // 继承
@@ -149,7 +149,7 @@ constructor(props) {
 
 ### 引入使用img
 
-```plain
+```javascript
 import logo from './...'
 
 <img src="xx"></img>
@@ -191,13 +191,12 @@ inputChange=()=>{}
 <input value={this.state.msg} onChange={this.inputChange}></input>
 ```
 
-###
 
 ### 事件
 
 #### 键盘事件
 
-```plain
+```javascript
 <onKeyUp={this.func} />
 func(e){
   e.keyCode
@@ -371,7 +370,7 @@ npm run eject
 
 降级处理
 
-cnpm i react-app-rewired[@2.0.2-next.0]() --save-dev
+cnpm i react-app-rewired@2.0.2-next.0 --save-dev
 
 ### 按需打包antd 的css
 
@@ -428,7 +427,7 @@ module.exports = override(
 package.json里加个代理人,适用于开发模式
 
 ```plain
-"proxy":"localhost://:5000"
+"proxy":"localhost//:5000"
 ```
 
 baseURL那边也要写：`baseURL = ""`
