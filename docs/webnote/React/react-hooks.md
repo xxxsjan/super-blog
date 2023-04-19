@@ -1,7 +1,5 @@
 # hooks
 
-
-
 ## useCallback
 
 ```
@@ -38,8 +36,6 @@ function ParentComponent() {
   );
 }
 ```
-
-
 
 ## useReducer
 
@@ -95,8 +91,6 @@ function Counter() {
 }
 ```
 
-
-
 ## Context
 
 首先需要创建一个context，需要用到createContext
@@ -129,4 +123,3 @@ function ChildComponent() {
   return <p>{contextData.message}</p>;
 }
 ```
-

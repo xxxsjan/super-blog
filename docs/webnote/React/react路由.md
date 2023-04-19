@@ -14,13 +14,6 @@ React Router 5 和 React Router 6 在 API 和用法上有一些差异。
 
 需要注意的是，React Router 6 目前还处于 beta 版本，可能会有一些 API 发生变化。建议在使用之前先仔细阅读官方文档和升级指南。
 
-
-
 ## 文档
 
-https://reactrouter.com/en/main/start/tutorial
-
-
-
-
-
+<https://reactrouter.com/en/main/start/tutorial>

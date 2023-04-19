@@ -50,8 +50,6 @@ window.addEventListener("resize", init);
 import "./modules/rem"; // 自适应
 ```
 
-
-
 #### sass函数生成vw单位
 
 vite 只需要安装sass
@@ -121,13 +119,9 @@ export default function RoutesConfig() {
 }
 ```
 
-
-
 ## 组建通信
 
-
-
-https://www.jb51.net/article/226671.htm
+<https://www.jb51.net/article/226671.htm>
 
 ### props通信
 
@@ -152,8 +146,6 @@ class Parent {
 // Child
 this.props.callback('传递一些值')
 ```
-
-
 
 ### context共享状态
 

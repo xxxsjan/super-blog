@@ -1,28 +1,18 @@
-### 安装
+# 安装
 
-##### npm i react react-dom -S
+npm i react react-dom -S
 
-### 理解
-
-
+## 理解
 
 index.js是入口文件，引入App.js ,
 
 把App.js 这个地位最大的组件render到名为root 的div中
 
-
-
 App.js 定义路由什么的，还不知道干嘛的
-
-
 
 setState 异步更新状态，等别人执行完才能更新
 
-
-
-#### 原理-核心
-
-
+## 原理-核心
 
 ```plain
 当行不需要括号，且只能有一个根标签
@@ -34,15 +24,11 @@ let root = document.getElementById("root")
 ReactDOM.render(element,root)
 ```
 
-
-
-##### 安装babel插件
-
-
+## 安装babel插件
 
 ```plain
 cnpm i babel-core babel-loader babel-plugin-transform-runtime -D
-cnpm i babel-preset-env	babel-preset-stage-0 -D
+cnpm i babel-preset-env babel-preset-stage-0 -D
 //识别转化jsx语法的包
 cnpm i babel-preset-react -D
 //配置webpack.config.js
@@ -61,18 +47,14 @@ module exports = {
 }
 ```
 
-
-
-##### 创建组件
-
-
+## 创建组件
 
 ```plain
 //同级
 function Component1(props){
-	return (
-	<li key={props.index}></li>
-	)
+ return (
+ <li key={props.index}></li>
+ )
 }
 //独立
 class App extends Component {
@@ -87,17 +69,11 @@ class App extends Component {
 export default App;
 ```
 
-
-
 ```plain
 import Hello from './components/Hello.jsx'//后缀名需要配置后才可以省略
 ```
 
-
-
-##### webpack.config.js配置省略文件名
-
-
+## webpack.config.js配置省略文件名
 
 ```plain
 module。exports = {
@@ -111,11 +87,7 @@ module。exports = {
 }
 ```
 
-
-
-##### class基础用法
-
-
+## class基础用法
 
 ```plain
 class Animal (){
@@ -131,26 +103,18 @@ class Animal (){
 const a1 = new Animal('大黄'，3)
 ```
 
-
-
 ```javascript
 npm install -g create-react-app
 create-react-app mydemo
-// 	进入项目
+//  进入项目
 cd mydemo
-//	运行项目
+// 运行项目
 npm start || yarn start
-//	生成项目
+// 生成项目
 npm run build || yarn build
 ```
 
-
-
-
-
-### 创建组件src/components/Home.js
-
-
+## 创建组件src/components/Home.js
 
 ```plain
 constructor(props) {
@@ -163,49 +127,39 @@ constructor(props) {
   fun1(){方法里的this，不是外面那个this},
   fun2(){方法里的this，不是外面那个this},
   fun3 = () =>{
-  	this.setState({ })
+   this.setState({ })
   },  
   fun4=(str)=>{
-  	this.setState({ msg:str })
+   this.setState({ msg:str })
   }, 
   // 相当于vue的《template》
   render() {
    return 
       <div>
-				<button onClick={this.fun1.bind(this)}></button>
-				<button onClick={this.fun2}></button>
-				<button onClick={this.fun3}></button>
-  			// 箭头函数可写bind,如果是在遍历里面的话需要bind,因为this指向
-				<button onClick={this.fun4('zs')}></button>
-				<button onClick={this.fun4.bind(this,'zs')}></button>
+    <button onClick={this.fun1.bind(this)}></button>
+    <button onClick={this.fun2}></button>
+    <button onClick={this.fun3}></button>
+     // 箭头函数可写bind,如果是在遍历里面的话需要bind,因为this指向
+    <button onClick={this.fun4('zs')}></button>
+    <button onClick={this.fun4.bind(this,'zs')}></button>
       </div>
 }
    
 ```
 
-
-
 ### 引入使用img
-
-
 
 ```plain
 import logo from './...'
 
-<img src="http....."></img>
+<img src="xx"></img>
 
 <img src={require('./...')}></img>
 
 <img src={logo}></img>
 ```
 
-
-
-
-
 ### 标签传值
-
-
 
 ```plain
 <aid = "666">
@@ -214,22 +168,14 @@ function(e){
 }
 ```
 
-
-
 ### ref
-
-
 
 ```plain
 <A ref="one"/>
 this.refs.one
 ```
 
-
-
 ### 单向绑定
-
-
 
 ```plain
 this.state = {}
@@ -237,11 +183,7 @@ this.state = {}
 <input defaultValue={this.state.msg}></input>
 ```
 
-
-
 ### 双向数据绑定
-
-
 
 ```plain
 this.state = {}
@@ -249,19 +191,11 @@ inputChange=()=>{}
 <input value={this.state.msg} onChange={this.inputChange}></input>
 ```
 
-
-
-
-
-### 
+###
 
 ### 事件
 
-
-
 #### 键盘事件
-
-
 
 ```plain
 <onKeyUp={this.func} />
@@ -278,17 +212,9 @@ func(msg,e,a,b,c){
 }
 ```
 
-
-
-
-
 ### 传值
 
-
-
 #### 标签传值 传方法  传自己 --父-->子
-
-
 
 ```html
 父:
@@ -304,11 +230,7 @@ news(组件名)={this}
 --{this.props.news.funxx.bind(this,"传值")}
 ```
 
-
-
 #### 父调用子的方法
-
-
 
 ```plain
 父:
@@ -316,17 +238,13 @@ news(组件名)={this}
 this.refs.footer.fun()
 ```
 
-
-
 #### defaultProps---PropTypes
-
-
 
 ```plain
 父组件有传入props的话,用父组件的,没有就用默认参数
 <h2>--{this.props.title}--</h2>
 Son.defaultProps={
-	title:"标题"
+ title:"标题"
 }
 //porpsTypes验证合法性(子组件使用)
 import PropTypes from 'prop-types'
@@ -335,15 +253,9 @@ Son.propsTypes = {
 }
 ```
 
-
-
 #### 路由传值
 
-
-
 ##### 动态路由传值---match.params
-
-
 
 ```plain
 App.js配置
@@ -356,11 +268,7 @@ componentDidMount(){
 }
 ```
 
-
-
 ##### get传值----location.search
-
-
 
 ```plain
 App.js配置
@@ -376,15 +284,9 @@ import url from 'url'
 var aid = url.parse( this.props.location.search.aid,true).query.aid
 ```
 
-
-
 ### 路由
 
-
-
 #### 路由配置
-
-
 
 Router下需要一个div包裹
 
@@ -394,8 +296,6 @@ Router下需要一个div包裹
 | Redirect | 重定向组件                       |
 | redirect | 改路由                           |
 | Switch   | 组件 只匹配一个路由              |
-
-
 
 ```plain
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
@@ -410,15 +310,9 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 </Router>
 ```
 
-
-
 #### 嵌套路由
 
-
-
 遍历时把自己小弟routes(children)传下去
-
-
 
 ```plain
 return 
@@ -430,30 +324,20 @@ render={props => <route.component {...props} routes={route.routes}
 />
 ```
 
-
-
 #### 路由跳转
-
-
 
 ```plain
 this.props.history.replace('/')
 <Redirect to='/login' />
 ```
 
-
-
 ### 数据请求
-
-
 
 ##### axios不支持json,需要用fetch
 
-
-
 ```plain
 fetch('/users.json')
-	//先转换
+ //先转换
   .then(function(response) {
     return response.json()
   })
@@ -467,67 +351,39 @@ fetch('/users.json')
   })
 ```
 
-
-
 ### webpack配置
-
-
 
 方法1:
 
-
-
 点开package.json文件，可看到配置的命令是以 "react-scripts ***" 来执行，所以打开node_modules文件夹，找到react-scripts文件夹进去， config目录即是你需要找的webpack的配置文件，然后就自己去修改配置就好
-
-
 
 方法二:
 
-
-
 使用 create-react-app 创建的项目，默认情况下是看不到 webpack 相关的配置文件，我们需要给它暴露出来，使用下面命令即可
-
-
 
 ```plain
 npm run eject
 ```
 
-### 
+###
 
 #### ant 按需引入 报错
 
-
-
 降级处理
 
-
-
-cnpm i react-app-rewired[@2.0.2-next.0 ]() --save-dev 
-
-
+cnpm i react-app-rewired[@2.0.2-next.0]() --save-dev
 
 ### 按需打包antd 的css
 
-
-
-https://ant-design.gitee.io/docs/react/use-with-create-react-app-cn
-
-
+<https://ant-design.gitee.io/docs/react/use-with-create-react-app-cn>
 
 下载依赖包
-
-
 
 ```plain
 yarn add react-app-rewired customize-cra babel-plugin-import
 ```
 
-
-
 config-overrides.js
-
-
 
 ```plain
 const { override, fixBabelImports, addLessLoader } = require('customize-cra');
@@ -544,11 +400,7 @@ module.exports = override(
 );
 ```
 
-
-
 更改 package.json
-
-
 
 ```json
 /* package.json */
@@ -562,11 +414,7 @@ module.exports = override(
 }
 ```
 
-
-
 ### 使用pm2管理应用
-
-
 
 安装命令：npm i pm2 -g
 启动项目：pm2 start app.js --name 自定义名称
@@ -575,25 +423,15 @@ module.exports = override(
 停止项目：pm2 stop 自定义名称
 删除项目：pm2 delete 自定义名称
 
-
-
 ### 解决跨越
-
-
 
 package.json里加个代理人,适用于开发模式
 
-
-
 ```plain
-"proxy":"http://localhost:5000"
+"proxy":"localhost://:5000"
 ```
 
-
-
 baseURL那边也要写：`baseURL = ""`
-
-
 
 ```plain
 //解决ajax跨域问题
@@ -601,19 +439,11 @@ res.append("Access-Control-Allow-Origin", "*")
 res.append("Access-Control-Allow-content-type", "*")
 ```
 
-
-
 ### antd开发
-
-
 
 #### Form
 
-
-
 getFieldDecorator修饰验证
-
-
 
 ```plain
 {
@@ -627,11 +457,7 @@ rules: [{ validator: this.validatePwd }],})
 }
 ```
 
-
-
 ##### 验证规则rules写法
-
-
 
 ```javascript
 一
@@ -658,11 +484,7 @@ rules: [{ validator: this.validatePwd }],
 }}
 ```
 
-
-
 ##### 暴露组件需要包装，包装后组件新增location match history属性
-
-
 
 ```plain
 不暴露原来组件Login，暴露新输出的的
@@ -671,15 +493,9 @@ const wrapLogin = Form.create()(Login)
 export default wrapLogin;
 ```
 
-
-
 ### React 插槽
 
-
-
 给引用的子组件里面写标签，data-positon="header"
-
-
 
 ```plain
 <Children>
@@ -689,11 +505,7 @@ export default wrapLogin;
 </Children>
 ```
 
-
-
 子组件里面可以通过foreach判断条件添加对应插槽
-
-
 
 ```plain
 this.props.children.forEach((v,i)=>{
@@ -713,8 +525,6 @@ footerDom = item
 </div
 ```
 
-
-
 ### redux--数据管理
 
 | Store    | 数据仓库                             |
@@ -723,8 +533,6 @@ footerDom = item
 | Action   | 动作 触发改变的方法                  |
 | Dispatch | 将动作触发成方法                     |
 | Reducer  | 函数 获取动作 改变数据 生成新的state |
-
-
 
 ```plain
 import Redux,{createStore} from 'redux'
@@ -737,15 +545,15 @@ cosnt reducer=function(state={num:0},action){
     case "decrement":state.num --;break;
     default：return
   }
-	return {...state}
+ return {...state}
 }
 function add(){
   // 调用仓库的dispatch方法修改数据
-	store.dispatch({type:"add"})
+ store.dispatch({type:"add"})
 }
 function decrement(){
   // 调用仓库的dispatch方法修改数据
-	store.dispatch({type:"decrement"})
+ store.dispatch({type:"decrement"})
 }
 // 监听修改 重新渲染
 store.subscribe(()=>{
@@ -755,19 +563,15 @@ store.subscribe(()=>{
 {store.getState()}
 ```
 
-
-
 #### react-redux
-
-
 
 ```plain
 import {Povider，connect} from 'react-redux'
 class Counter extends React.Component{
-	reder(){
-		const value = this.props.value;
-		const onAddClick = this.props.onAddClick
-	}
+ reder(){
+  const value = this.props.value;
+  const onAddClick = this.props.onAddClick
+ }
 }
 const
  addAction = { type: "add"}
@@ -776,7 +580,7 @@ const
     case "add":state.num ++;break;
     default：return
   }
-	return {...state}
+ return {...state}
  }
 const store = createStore(reducer)
 / 修改state里的方法，映射到props
@@ -786,11 +590,7 @@ function mapDispatchToProps(dispatch){
 }
 ```
 
-
-
 ### Echart不更新
-
-
 
 props和state最好别联系在一起，state的更新麻烦，
 
@@ -798,15 +598,11 @@ props和state最好别联系在一起，state的更新麻烦，
 
 render时state不会更新，setState刷新的关键：
 
-
-
 1. setState不会立刻改变React组件中state的值
 2. setState通过引发一次组件的更新过程来引发重新绘制
 3. 多次setState函数调用产生的效果会合并。
 
 ## redux
-
-
 
 ```javascript
 // store.js-------------------------------------------
@@ -907,8 +703,6 @@ export default connect(
     }
   })(Child)
 ```
-
-
 
 ### 使用svg
 

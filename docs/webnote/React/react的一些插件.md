@@ -1,6 +1,6 @@
 ## classnames
 
-https://www.npmjs.com/package/classnames
+<https://www.npmjs.com/package/classnames>
 
 ```typescript
 import classnames from 'classnames'
@@ -64,8 +64,6 @@ const {
 
 <Toast show={loading} icon="loading">加载中...</Toast>
 ```
-
-
 
 ## swiper
 
