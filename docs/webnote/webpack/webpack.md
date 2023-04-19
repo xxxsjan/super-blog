@@ -2,14 +2,14 @@
 
 ## loader
 
-https://juejin.cn/post/7067051380803895310#heading-3
+<https://juejin.cn/post/7067051380803895310#heading-3>
 
 ### markdown-loader
 
 markdown编译器和解析器
 
 ```javascript
- // file.js 
+// file.js 
 import md from 'markdown-file.md'; 
 console.log(md);
 // wenpack.config.js 
@@ -37,10 +37,6 @@ module.exports = {   // ...
   },
 };
 ```
-
-
-
-
 
 ### raw-loader
 
@@ -104,7 +100,7 @@ css文件里的图片路径变成如下：
 background-image: url(https://www.tencent.com/webpack_605dc7bf.png);
 ```
 
-### url-loader: 
+### url-loader
 
 它与file-loader作用相似，也是处理图片的，只不过url-loader可以设置一个根据图片大小进行不同的操作，如果该图片大小大于指定的大小，则将图片进行打包资源，否则将图片转换为base64字符串合并到js文件里。
 
@@ -130,50 +126,6 @@ module.exports = {
   }
 }
 ```
-
-### svg-sprite-loader
-
-会把引用的 svg文件 塞到一个个 symbol 中，合并成一个大的SVG sprite，使用时则通过 SVG 的 <use> 传入图标 id 后渲染出图标。最后将这个大的 svg 放入 body 中。symbol的id如果不特别指定，就是你的文件名。
-
-该loader可以搭配**svgo-loader** 一起使用，svgo-loader是svg的优化器，它可以删除和修改SVG元素，折叠内容，移动属性等，具体不展开描述。感兴趣的可以移步 [官方介绍](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fsvg%2Fsvgo-loader)。
-
-原理：利用 svg 的 symbol 元素，将每个 icon 包裹在 symbol 中，通过 use 使用该 symbol。
-
-```javascript
-// js文件里用法
-import webpack from './webpack/webpack.svg';
-const type = 'webpack';
-const svg =  `<svg>
-    <use xlink:href="#${type}"/>
-  </svg>`;
-const dom = `<div class="tag">
-  ${svg}
-  </div>`;
-document.getElementById('react-app').innerHTML = dom;
-// webpack.config.js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.(png|jpg|jpeg)$/,
-        use: [
-          {
-            test: /\.svg$/,
-            use: [
-                {
-                  loader: 'svg-sprite-loader'
-                },
-                'svgo-loader'
-            ]
-          },
-        ]
-      }
-    ]
-  }
-}
-```
-
- 
 
 ### postcss-loader
 
@@ -245,14 +197,53 @@ module.exports = {
 }
 ```
 
+### svg-sprite-loader
+
+会把引用的 svg文件 塞到一个个 symbol 中，合并成一个大的SVG sprite，使用时则通过 SVG 的 <use> 传入图标 id 后渲染出图标。最后将这个大的 svg 放入 body 中。symbol的id如果不特别指定，就是你的文件名。
+
+该loader可以搭配**svgo-loader** 一起使用，svgo-loader是svg的优化器，它可以删除和修改SVG元素，折叠内容，移动属性等，具体不展开描述。感兴趣的可以移步 [官方介绍](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fsvg%2Fsvgo-loader)。
+
+原理：利用 svg 的 symbol 元素，将每个 icon 包裹在 symbol 中，通过 use 使用该 symbol。
+
+```javascript
+// js文件里用法
+// import webpack from './webpack/webpack.svg';
+// const type = 'webpack';
+// const dom = `
+// <div class="tag">
+//     <svg>
+//       <use xlink:href="#${type}"/>
+//     </svg>
+// </div>`;
+// document.getElementById('react-app').innerHTML = dom;
+// webpack.config.js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(png|jpg|jpeg)$/,
+        use: [
+          {
+            test: /\.svg$/,
+            use: [
+                {
+                  loader: 'svg-sprite-loader'
+                },
+                'svgo-loader'
+            ]
+          },
+        ]
+      }
+    ]
+  }
+}
+```
+
 ## plugin
 
 Webpack 就像一条生产线，要经过一系列处理流程后才能将源文件转换成输出结果。 这条生产线上的每个处理流程的职责都是单一的，多个流程之间有存在依赖关系，只有完成当前处理后才能交给下一个流程去处理。 插件就像是一个插入到生产线中的一个功能，在特定的时机对生产线上的资源做处理。
 
-
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。Webpack 通过 Tapable 来组织这条复杂的生产线。 Webpack 在运行过程中会广播事件，插件只需要监听它所关心的事件，就能加入到这条生产线中，去改变生产线的运作。 Webpack 的事件流机制保证了插件的有序性，使得整个系统扩展性很好。
-
-
 
 ```javascript
 const CopyPlugin = require("copy-webpack-plugin");
@@ -277,10 +268,10 @@ module.exports = {
       filename: "./css/index.css",
     })
     new webpack.DefinePlugin({
-  PAGE_URL: JSON.stringify(isProd
-                           ? 'https://www.tencent.com/page'
-                           : 'http://testsite.tencent.com/page'
-                          )
+         PAGE_URL: JSON.stringify(isProd
+          ? 'https://www.tencent.com/page'
+          : 'http://testsite.tencent.com/page'
+    )
 }), 
   new CopyPlugin({
     patterns: [
@@ -363,19 +354,20 @@ module.exports = {
 
 ### maxInitialRequests的理解
 
-https://www.cnblogs.com/kwzm/p/10316217.html
+<https://www.cnblogs.com/kwzm/p/10316217.html>
 
+```
 maxInitialRequests最大请求数
 
 首先三个入口文件对应entry1 entry2 entry3，没有问题
 
 然后上面配置maxInitialRequests设置的是3
 
-entry1 引入了 react 、$、orgchart 
+entry1 引入了 react 、$、orgchart
 
 entry2 引入了 react 、$、
 
-entry3 引入了 react 、orgchart 
+entry3 引入了 react 、orgchart
 
 1 2都用了第三方库rreact react-dom 所以default~ entry1 ~entry2.chunkhash.chunk.js
 
@@ -388,20 +380,19 @@ entry3 引入了 react 、orgchart
 4、page1因为是在entry1.js里面动态引入的所以被拆分出来
 
 5、vendors~page1就是page1里面引入的第三方库lodash
-
-
+```
 
 ## 老东西
 
-### [详解CommonsChunkPlugin的配置和用法](https://segmentfault.com/a/1190000012828879)
+### 详解CommonsChunkPlugin的配置和用法
 
-
+<https://segmentfault.com/a/1190000012828879>
 
 ### 移除未引用代码(tree shaking )
 
-https://dandelioncloud.cn/article/details/1486720561085796354
+<https://dandelioncloud.cn/article/details/1486720561085796354>
 
-https://blog.csdn.net/weixin_45844049/article/details/120043245
+<https://blog.csdn.net/weixin_45844049/article/details/120043245>
 
 > **"sideEffects": false** **代表：所有代码都没有副作用（都可以进行tree shaking），这是sideEffects的默认值**，这可能会把css / @babel/polyfill （副作用）等文件干掉
 
@@ -414,12 +405,10 @@ https://blog.csdn.net/weixin_45844049/article/details/120043245
 由此可以安全地删除文件中未使用的部分。
 
 ```tsx
-// ...
 "sideEffects": [
   "**/*.css",
   "**/*.scss",
   "./esnext/index.js",
   "./esnext/configure.js"
 ],
-// ...
 ```
