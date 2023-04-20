@@ -1,4 +1,4 @@
-import { webnote_nav } from "./sidebar";
+import { webnote_nav, sourceCode_nav } from "./sidebar";
 
 export default [
   { text: "首页", link: "/" },
@@ -7,6 +7,11 @@ export default [
     // link: "/webnote/",
     activeMatch: "/webnote/",
     items: webnote_nav,
+  },
+  {
+    text: "源码分析",
+    activeMatch: "/source-code/",
+    items: sourceCode_nav,
   },
   // {
   //   text: "我的标签",

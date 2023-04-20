@@ -68,21 +68,38 @@ function genSideBar(dirName) {
   ];
   return res;
 }
+function toNav(sideBar, dirName) {
+  return sideBar.map((item) => {
+    return {
+      text: item.text,
+      link: item.items
+        ? `/${dirName}/${item.text}/${item.items[0].text}`
+        : `/${dirName}/${item.text}`,
+    };
+  });
+}
+
 const webnote = genSideBar("webnote");
+const sourceCode = genSideBar("source-code");
+
 // console.log("自动生成：", JSON.stringify(webnote, null, 2));
 
-export const webnote_nav = webnote.map((item) => {
-  return {
-    text: item.text,
-    link: `/webnote/${item.text}/${item.items[0].text}`,
-  };
-});
+export const webnote_nav = toNav(webnote, "webnote");
 
+export const sourceCode_nav = toNav(sourceCode, "source-code");
+
+// console.log(sourceCode_nav);
 export default {
   "/webnote/": [
     {
       text: "笔记",
       items: webnote,
+    },
+  ],
+  "/source-code/": [
+    {
+      text: "源码分析",
+      items: sourceCode,
     },
   ],
 };
