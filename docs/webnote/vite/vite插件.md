@@ -15,3 +15,17 @@ export default {
 }
 ```
 
+## vite-plugin-vue-setup-extend
+
+```javascript
+// vite.config.ts
+import { defineConfig } from 'vite'
+import VueSetupExtend from 'vite-plugin-vue-setup-extend'
+
+export default defineConfig({
+  plugins: [
+    VueSetupExtend()
+  ]
+})
+```
+

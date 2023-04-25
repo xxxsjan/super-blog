@@ -1,6 +1,6 @@
 
 
-# uniapp 打包安卓
+# uniapp 原生app本地打包安卓
 
 https://nativesupport.dcloud.net.cn/AppDocs/usesdk/android.html#
 
