@@ -46,10 +46,6 @@ const server = app.listen(3000, () => {
 
 
 
-
-
-
-
 ## 处理文件请求
 
 formidable
@@ -75,11 +71,5 @@ router.post('/portrait',(re1,res)=>{
 
 
 
-## lowdb
 
-json存储方案
-
-commonjs推荐下载1.0.0版本
-
-https://www.npmjs.com/package/lowdb/v/1.0.0
 
