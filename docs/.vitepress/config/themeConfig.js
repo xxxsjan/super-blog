@@ -14,6 +14,7 @@ const themeConfig = {
   nav,
 
   lastUpdated: true, // 最后更新时间
+  lastUpdatedText: "最后更新", // 最后更新时间文本配置, 需先配置lastUpdated为true
   // editLinkText: '编辑此页',
   // selectText: '选择语言',
   // sidebarDepth: 2,
