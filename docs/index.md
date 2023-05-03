@@ -4,7 +4,7 @@ layout: home
 title: Home
 
 hero:
-  name: 新世界的知识库
+  name: super~blog
   text: 专注 & 洞察 & 分享
   tagline: 
   image:
