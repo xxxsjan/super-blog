@@ -1,6 +1,8 @@
 import { webnote_nav, sourceCode_nav } from "./sidebar";
+import { DefaultTheme } from "vitepress";
 
-export default [
+/** @type {DefaultTheme.NavItem[]} */
+const navList = [
   { text: "首页", link: "/" },
   {
     text: "笔记",
@@ -16,5 +18,6 @@ export default [
   // {
   //   text: "我的标签",
   //   link: "/tags",
-  // },
+  // }
 ];
+export default navList;

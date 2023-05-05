@@ -314,3 +314,17 @@ reset   只推荐使用于个人分支
 ## git HEAD / HEAD^ / HEAD~ 的含义
 
 https://segmentfault.com/a/1190000022506884
+
+
+
+
+
+## 文件大小写问题
+
+
+
+git默认不识别大小写
+
+执行 命令
+
+git config core.ignorecase false
