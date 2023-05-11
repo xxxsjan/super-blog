@@ -1,6 +1,5 @@
 import head from "./config/head";
 import themeConfig from "./config/themeConfig";
-
 const baseMap = {
   production: "/blog-vitepress/",
   github: "/blog-vitepress/",
@@ -14,7 +13,8 @@ console.log("process.env.BUILD_ENV: ", process.env.BUILD_ENV);
 
 // https://vitepress.vuejs.org/config/app-configs
 
-module.exports = {
+/** @type {import("vitepress").LocaleConfig}  **/
+const config = {
   base: baseMap[process.env.BUILD_ENV || process.env.NODE_ENV] || "/", // 会影响部署的读取路径
   appearance: true, // Whether to enable dark mode or not. Default: true
   lang: "zh-cn", // build时才会放到html标签里
@@ -36,3 +36,5 @@ module.exports = {
   },
   themeConfig,
 };
+
+module.exports = config;
