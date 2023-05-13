@@ -5,7 +5,9 @@
 
 ```
 <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>
+```
 
+安装
 npm install intersection-observer --save
 
 main.js 引入
@@ -14,7 +16,6 @@ import 'intersection-observer'
 源码用的是
  加载后window.load后就会执行 相关的操作，
 如果需要详细的配置或者知道的dom元素，请参考文档
-```
 
 ### promise
 
