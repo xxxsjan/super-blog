@@ -1,4 +1,4 @@
-### 基本使用
+## 基本使用
 首先看koa2的基本使用
 ```javascript
 const app = new Koa()
@@ -8,7 +8,10 @@ app.listen(3000)
 
 ```
 
+## 原理
+
 app.use一次就数组新增一个
+
 ```javascript
 {
   this.middlewares = []
@@ -138,7 +141,7 @@ return dispatch(0)
 }
 ```
 ### 第二个参数中间件
- 
+
 ```javascript
 router
     .get('/users', loginChecker, async ctx => {
