@@ -16,7 +16,7 @@ pnpm i -D unocss @unocss/preset-uno @unocss/preset-attributify @unocss/preset-ic
 
 
 
-![img](https://cdn.nlark.com/yuque/0/2022/png/28823371/1671535516875-8ee85c88-d085-472b-afdd-11a3c7be2603.png)
+![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305131203268.png)
 
 以@unocss/preset-uno预设为例
 
@@ -58,7 +58,7 @@ https://icones.js.org/
 
 根据官网物料icon找到对应分类，安装对应分类的icon
 
-![img](https://cdn.nlark.com/yuque/0/2022/png/28823371/1671535375277-82309cd3-4ffe-4824-a064-60a2e15dd449.png)
+![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305131203915.png)
 
 pnpm i -D @iconify-json/ic
 

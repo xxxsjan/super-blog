@@ -38,7 +38,9 @@ A--B--C        起始A，中间点B，终点C
 
 
 
-![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202304132225679.gif)![img](https://cdn.nlark.com/yuque/0/2023/gif/28823371/1678472216147-b59399e9-f62a-4cf0-97e4-5fd301ddda51.gif)
+![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202304132225679.gif)
+
+![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305131203419.gif)
 
 
 

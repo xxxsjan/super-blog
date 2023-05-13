@@ -221,7 +221,7 @@ https://medium.com/@jaredpotter1/connecting-puppeteer-to-existing-chrome-window-
 
 http://127.0.0.1:9222/json/version
 
-![img](https://cdn.nlark.com/yuque/0/2022/png/28823371/1668190168577-bea05cf6-840c-4114-bcf6-1402166232e8.png)
+![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305131205682.png)
 
 #### 桌面快捷方式的方法
 

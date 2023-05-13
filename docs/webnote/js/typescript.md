@@ -257,7 +257,7 @@ import {MyType} from './index'
 
 把鼠标放e上面即可
 
-![img](https://cdn.nlark.com/yuque/0/2022/png/28823371/1656177988417-73235899-775b-4da7-89e9-ebffd8295362.png)
+![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305131204890.png)
 
 ```typescript
 function Com(){
@@ -293,11 +293,11 @@ function Com({age=18}){
 
 类型声明
 
-![img](https://cdn.nlark.com/yuque/0/2022/png/28823371/1656178217003-fcaf1d44-5f73-4f3e-b660-ecc540a53153.png)
+![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305131204094.png)
 
 props默认值
 
-![img](https://cdn.nlark.com/yuque/0/2022/png/28823371/1656178394364-1b16c064-8247-4472-8e1a-af4320d26941.png)
+![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305131204104.png)
 
 ## 配置文件d.ts
 

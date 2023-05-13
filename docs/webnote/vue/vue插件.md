@@ -210,7 +210,7 @@ antv-x6
 
 监视打包文件
 
-![img](https://cdn.nlark.com/yuque/0/2022/png/28823371/1671728839226-e5fd1050-0c86-4506-b2d2-b1ac408a8bbd.png)
+![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305131204783.png)
 
 ### particles.js
 
