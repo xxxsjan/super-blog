@@ -1,3 +1,5 @@
+# nexttick
+
 ```javascript
 const callbacks = [];
 let pending = false;
@@ -46,4 +48,3 @@ pending是等待状态，开始push就把pending状态打开，
 所以后面还有push的cb就继续push，push完，
 就开始走微任务，把pending关了，遍历执行收集的cb
 并清空收集的cb
-

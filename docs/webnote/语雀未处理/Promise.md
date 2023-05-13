@@ -1,5 +1,4 @@
 
-
 ## 手写Promise
 
 需要定义Promise本身和本身的函数和原型上的函数
@@ -134,7 +133,7 @@ static rejectDelay = function (reason, time) {
     }
 ```
 
-### 原型上的函数：
+### 原型上的函数
 
 #### .then
 

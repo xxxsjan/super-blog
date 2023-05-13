@@ -30,15 +30,15 @@ print(response.read().decode())
 # 包装请求头，伪装
 req = urllib.request.Request(url, headers=header)
 try:
-	res = urllib.request.urlopen(req)
-	html = res.read().decode("utf-8")
-	# print(html)
-	return html
+ res = urllib.request.urlopen(req)
+ html = res.read().decode("utf-8")
+ # print(html)
+ return html
 except urllib.error.URLError as e:
   if hasattr(e, "code"):
-  	print(e.code)
+   print(e.code)
   if hasattr(e, "reason"):
-  	print(e.reason)
+   print(e.reason)
 ```
 
 ### beautifulsoup使用
@@ -167,7 +167,7 @@ import xlrd
 执行：import pip; print(pip.pep425tags.get_supported())
 报错：module 'pip' has no attribute 'pep425tags'
 解决：现在的电脑大多数都是64位的。pip 老的查看方法前段时间更新后就不能用了。
-			64位的要在后面pip后面加上._internal.pep425tags，才可以。
+   64位的要在后面pip后面加上._internal.pep425tags，才可以。
 >>> import pip._internal.pep425tags
 >>>print(pip._internal.pep425tags.get_supported())
 如果报错：No module named 'pip._internal.pep425tags'
@@ -187,6 +187,7 @@ compile 函数用于编译正则表达式，生成一个正则表达式（ Patte
 re.match与re.search的区别
 re.match只匹配字符串的开始，如果字符串开始不符合正则表达式，则匹配失败，函数返回None；而re.search匹配整个字符串，直到找到一个匹配。
 ```
+
 | 修饰符 | 描述 |
 | --- | --- |
 | re.I | 使匹配对大小写不敏感 |
@@ -195,7 +196,6 @@ re.match只匹配字符串的开始，如果字符串开始不符合正则表达
 | re.S | 使 . 匹配包括换行在内的所有字符 |
 | re.U | 根据Unicode字符集解析字符。这个标志影响 \\w, \\W, \\b, \\B. |
 | re.X | 该标志通过给予你更灵活的格式以便你将正则表达式写得更易于理解。 |
-
 
 #### pycharm下载插件慢
 

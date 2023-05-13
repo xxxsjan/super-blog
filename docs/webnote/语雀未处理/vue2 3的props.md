@@ -1,4 +1,5 @@
-### vue2实现v-model
+# vue2实现v-model
+
 ```typescript
 // 父
 <div>
@@ -20,7 +21,9 @@ export default {
 }
 
 ```
-### vue2使用.sync
+
+## vue2使用.sync
+
 ```typescript
 // 父
 <div>
@@ -37,11 +40,14 @@ export default {
   }
 }
 ```
-### vue3使用v-model 
+
+## vue3使用v-model
+
 其实就是整合了vue2的sync修饰
 v-model默认是叫modelValue
 xxxModifiers就是你加了修饰符的话，他能读到，.capitalize .number .trim
 子组件可以知道上级设置了上面，从而在自己对应的Modifiers看到
+
 ```typescript
 // 父
 <div>
@@ -85,6 +91,7 @@ export default {
 ```
 
 vue3 setup 使用
+
 ```javascript
 const props = defineProps({
   progress: {
