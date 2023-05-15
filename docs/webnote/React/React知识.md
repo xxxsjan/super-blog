@@ -135,21 +135,7 @@ function(e){
 this.refs.one
 ```
 
-### 单向绑定
 
-```jsx
-this.state = {}
-
-<input defaultValue={this.state.msg}></input>
-```
-
-### 双向数据绑定
-
-```jsx
-this.state = {}
-inputChange=()=>{}
-<input value={this.state.msg} onChange={this.inputChange}></input>
-```
 
 ### 事件
 
