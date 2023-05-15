@@ -31,7 +31,8 @@ compilation.seal()
 compiler.afterCompile()
 compiler.emit() ----串行
 compiler.emitAssets()
-![](https://cdn.nlark.com/yuque/0/2022/jpeg/28823371/1671110327048-a9dc16b7-c81b-48fa-abf3-21d611f08796.jpeg#averageHue=%23fbf5f2&clientId=ub89d6429-d0db-4&from=paste&height=932&id=u99f6d316&originHeight=1863&originWidth=1225&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u8c883cd7-2724-41a2-9997-292b127f2b6&title=&width=613)
+![](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151241380.jpeg)
+
 ### Compiler
 
 compiler.hooks.emit.tap   串行执行  前面异步会阻塞后面
@@ -47,12 +48,12 @@ tapPromise
 写在js写上debugger
 执行 node --inspect-brk ./src/xxx.js
 打开浏览器，f12
-左上角看到nodejs图标![image.png](https://cdn.nlark.com/yuque/0/2022/png/28823371/1671111455559-2c7c532f-95bf-4d5a-9c28-d86fd2c56a2d.png#averageHue=%23f5f8f2&clientId=ub89d6429-d0db-4&from=paste&height=144&id=ud4f91cb6&originHeight=180&originWidth=291&originalType=binary&ratio=1&rotation=0&showTitle=false&size=41148&status=done&style=none&taskId=u5b83a76d-ffe6-4440-aca9-870424a6dd6&title=&width=232.8)
+左上角看到nodejs图标![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151241661.png)
 点击图标
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/28823371/1671111562382-df12fb88-4dd3-4bae-a1ee-dc899b9281f5.png#averageHue=%23ededed&clientId=uc75d22a2-2d29-4&from=paste&height=485&id=u3152ea71&originHeight=606&originWidth=718&originalType=binary&ratio=1&rotation=0&showTitle=false&size=95491&status=done&style=none&taskId=ub114f3ef-bb4c-4d6b-865b-af570a3e6c7&title=&width=574.4)
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151241778.png)
 执行debugger，会执行到下一个debugger
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/28823371/1671111545617-a9b398c7-5722-4cf2-9bed-ac3facc315f4.png#averageHue=%23dddcd4&clientId=uc75d22a2-2d29-4&from=paste&height=284&id=uc96d16d4&originHeight=567&originWidth=891&originalType=binary&ratio=1&rotation=0&showTitle=false&size=208034&status=done&style=none&taskId=ud041c44c-08f1-423f-a47c-26a73b2d737&title=&width=446)
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/28823371/1671111589897-ab28c8a3-3599-4d41-ad77-5b525ac12032.png#averageHue=%23d6dace&clientId=uc75d22a2-2d29-4&from=paste&height=268&id=ud4977fa1&originHeight=535&originWidth=1006&originalType=binary&ratio=1&rotation=0&showTitle=false&size=341301&status=done&style=none&taskId=uc537f840-b5d9-4be9-89d2-c180b0b53ae&title=&width=503)
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151241474.png)
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151241942.png)
 
 ## 例子
 ### BannerWebpackPlugin

@@ -62,11 +62,11 @@ module.exports = {
 #### 使用vue inspectt分析原因
 貌似查不出原因
 配置vueconfig的话 webpack长这样，有两个function
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/28823371/1669002224159-3ba73539-789a-4853-9156-e5db4402e184.png#averageHue=%231e1e1e&clientId=u5ccd1f06-31d2-4&from=paste&height=113&id=u460bbafe&originHeight=141&originWidth=432&originalType=binary&ratio=1&rotation=0&showTitle=false&size=8571&status=done&style=none&taskId=uce887c96-4fc6-4974-876b-55d65590576&title=&width=345.6)
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151252527.png)
 而且用postcss.config.js设置plugin，vue inspect 会看到清空了plugin
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/28823371/1669002193760-1d2577cf-1ab5-4b5f-baae-8fb5a90dbdf2.png#averageHue=%231e1e1e&clientId=u5ccd1f06-31d2-4&from=paste&height=49&id=u9cd53a88&originHeight=61&originWidth=207&originalType=binary&ratio=1&rotation=0&showTitle=false&size=2285&status=done&style=none&taskId=u60ba732d-e1d2-4a14-9db2-e7ce0851b71&title=&width=165.6)
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151252827.png)
 用postcss.config.cjs设置plugin，vue inspect 会看到 plugin 会保留有一个默认的function
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/28823371/1669002136744-8fcb573f-34a2-4bd0-8974-22b7788bc7ec.png#averageHue=%231e1e1e&clientId=u5ccd1f06-31d2-4&from=paste&height=105&id=uf5947241&originHeight=131&originWidth=473&originalType=binary&ratio=1&rotation=0&showTitle=false&size=6571&status=done&style=none&taskId=u70c59c3e-bbde-4792-9c8f-57ccc357189&title=&width=378.4)
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151252923.png)
 
 
 ### tailwind命令
@@ -116,4 +116,4 @@ module.exports = {
 ```
 然后创建 preflight.css文件，去下面的 unpkg 复制基础样式到 preflight.css中，然后删掉 188 行关于 button 冲突的样式。
 [https://unpkg.com/browse/tailwindcss@3.0.23/src/css/preflight.css](https://unpkg.com/browse/tailwindcss@3.0.23/src/css/preflight.css)
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/28823371/1682433263955-7430f597-6c5e-4b16-bb63-5e204127c4ad.png#averageHue=%232b2f38&clientId=u4086d63e-672a-4&from=paste&height=443&id=ubf8416fa&originHeight=554&originWidth=973&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=168750&status=done&style=none&taskId=u16e02716-3108-4eb0-bcd2-469306169c9&title=&width=778.4)
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151253783.png)

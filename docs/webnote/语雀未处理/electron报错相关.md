@@ -64,7 +64,7 @@ app.on("ready", async () => {
 https换http
 将registry中的https://registry.npmjs.org/替换成了http://registry.npmjs.org/
 npm config set registry http://registry.npmjs.org/
- 
+
 #### 方法三
 1.进入 node_modules/electron文件下， 编辑install.js
 2. 修改downloadArtifact这段代码，
@@ -83,7 +83,7 @@ mirrorOptions: {
       arch,
   }
 ```
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/28823371/1675229661166-6dbf3716-5084-4de2-92d4-5b898c188d23.png#averageHue=%23fcfbfa&clientId=ubca6b2e8-284f-4&from=paste&id=u6b16eb93&originHeight=276&originWidth=967&originalType=url&ratio=1&rotation=0&showTitle=false&size=27833&status=done&style=none&taskId=u6f827fb0-d299-49e5-9009-52c07cf2017&title=)
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151245712.png)
 #### 总结
 三也不管用
 换镜像一般就可以解决了

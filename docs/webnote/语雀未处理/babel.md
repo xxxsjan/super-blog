@@ -11,7 +11,7 @@ npm install -D babel-loader @babel/core @babel/preset-env webpack
 - 插件执行顺序 前向后  
 - 预设执行顺序 后向前
 
-![](https://cdn.nlark.com/yuque/0/2022/webp/28823371/1656653616481-2150d974-8216-42d2-be52-749c5465b1e2.webp#averageHue=%23faf8f3&clientId=u765bd493-d99a-4&from=paste&id=u8b1a8325&originHeight=548&originWidth=1626&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u121c1782-15bf-40c3-ae7c-3b3f454a69a&title=)
+![](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151245066.webp)
 
 ## 配置写法
 ###  webpack.config.js
@@ -77,8 +77,9 @@ module.exports = (api) => {
 ### 演示
 入口源代码
 
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/28823371/1653036778334-3e2e7b46-fc21-49a5-abac-d24f0aaf32eb.png#averageHue=%23232120&clientId=u4fa44447-526c-4&from=paste&height=246&id=ud8cbe4a8&originHeight=307&originWidth=458&originalType=binary&ratio=1&rotation=0&showTitle=false&size=21541&status=done&style=none&taskId=u397a3a2e-dcf3-4c43-8354-70c769a4936&title=&width=366.4)
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151245390.png)
 只配置babel-loader的话
+
 ```javascript
 {
         test: /\.js$/,
@@ -89,8 +90,9 @@ module.exports = (api) => {
 },
 ```
 输出代码
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/28823371/1653036827701-0b938bca-c6ab-4dc7-9199-ac0296fdf395.png#averageHue=%23201f1e&clientId=u4fa44447-526c-4&from=paste&height=290&id=uacc1e017&originHeight=362&originWidth=494&originalType=binary&ratio=1&rotation=0&showTitle=false&size=22178&status=done&style=none&taskId=ube816e4d-91d7-45f6-9403-f4fcf6ba738&title=&width=395.2)
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151245330.png)
 配置@babel/preset-env后
+
 ```javascript
 {
   test: /\.js$/,
@@ -107,7 +109,7 @@ module.exports = (api) => {
 },
 ```
 输出代码
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/28823371/1653036902495-0e5856b7-1b82-4549-81ed-1b6dfae6edd2.png#averageHue=%23201f1e&clientId=u4fa44447-526c-4&from=paste&height=230&id=u5ccc768d&originHeight=288&originWidth=430&originalType=binary&ratio=1&rotation=0&showTitle=false&size=15904&status=done&style=none&taskId=uca1ef412-12ce-4791-863f-b33f517fa59&title=&width=344)
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151245122.png)
 
 ## polyfill
 > 在开发过程中，如果我们写的代码是es6语法的，其中有很多语法如：async、Array.isArray、Object.assign等等是低版本浏览器所不支持的。为了保证我们写的es6语法能够在各个新旧客户端上撒欢跑，我们需要引入polyfill对这些新的语法进行全局注入。
@@ -237,7 +239,7 @@ test:/\.less$/,
         },
 'less-loader']
 ```
- 
+
 
 写一个babel插件
 [https://juejin.cn/post/7114486435487023112](https://juejin.cn/post/7114486435487023112)

@@ -13,15 +13,16 @@ npm i eslint -D
 npx eslint --init
 初始化eslint配置，按照步骤，最后会生成.eslintrc文件
 帖个图
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/28823371/1659707841734-de5a8cf4-6bec-4c4e-8af9-039fa0e40bdd.png#averageHue=%233d3b3b&clientId=u9c5d1b77-0445-4&errorMessage=unknown%20error&from=paste&height=710&id=u610f4d9d&originHeight=888&originWidth=860&originalType=binary&ratio=1&rotation=0&showTitle=false&size=572576&status=error&style=none&taskId=uf3cd2bda-c4bc-4e44-8d55-b5fc5ae5604&title=&width=688)
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151235423.png)
 最后一步yes的话
 会安装eslint-plugin-vue@latest, @typescript-eslint/eslint-plugin@latest, @typescript-eslint/parser@latest
 
 跑完后，会生成一个.eslintrc
 
 #### 注意：vue3加这两句，不然eslint报 Parsing error: ‘＞‘ expected.
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/28823371/1677736554756-d1da04bc-2933-4a92-9860-508e3122c23f.png#averageHue=%23ba7545&clientId=u7685491a-7ca0-4&from=paste&height=130&id=u072fff38&originHeight=163&originWidth=668&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=19784&status=done&style=none&taskId=ub12c1f03-e248-453a-a953-3e999479b8c&title=&width=534.4)
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151236680.png)
 把.eslintrc.json里的parserOptions配置改成
+
 ```typescript
 // parser: '@typescript-eslint/parser',
 // parserOptions: {
@@ -141,11 +142,13 @@ module.exports = {
 }
 ```
 npm run prepare   // 这个命令会生成.husky文件夹
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/28823371/1677737401715-92aa44e3-e5b6-426d-b87c-40d58db9d118.png#averageHue=%23252628&clientId=u7685491a-7ca0-4&from=paste&height=70&id=ue975694b&originHeight=87&originWidth=170&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=3078&status=done&style=none&taskId=u252889e3-07ca-4867-9f08-ce8398938f3&title=&width=136)
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151236219.png)
+
 ##### 添加git钩子命令
 npx husky add .husky/pre-commit "npx lint-staged"
 这个命令会在项目根目录创建一个.husky的文件夹，里面会有钩子及对应的脚本
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/28823371/1677737446704-39b4109e-1a2a-4ac9-83ac-ac7994c95db5.png#averageHue=%237b985b&clientId=u7685491a-7ca0-4&from=paste&height=113&id=ub95d1696&originHeight=141&originWidth=700&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=11995&status=done&style=none&taskId=u8143337d-255b-466c-b5a6-17e8233bfc9&title=&width=560)
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151236239.png)
+
 ```json
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
@@ -205,10 +208,11 @@ npm i commitlint @commitlint/config-conventional -D
 @commitlint/config-conventional这个默认是_**Angular**_的提交规范
 **添加husky钩子**
 npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/28823371/1677737841615-428acd6a-9305-4fc3-8fd6-45346c52060f.png#averageHue=%238d9c61&clientId=ub19b4226-867f-4&from=paste&height=140&id=ud8e75569&originHeight=175&originWidth=770&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=14413&status=done&style=none&taskId=uc3f7c624-dd0f-4f54-956c-6591c93fff1&title=&width=616)
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151236184.png)
 旧版本是commitlint -E HUSKY_GIT_PARAMS这种
 新版本是commitlint --edit "$1"
 或者手动在package.json添加（可能会不生效，不建议，可能版本原因）
+
 ```json
 {
   "husky": {
@@ -333,7 +337,7 @@ module.exports = {
 ```
 最后提交变成这样了
 提交要使用git cz
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/28823371/1659709033963-c6af738c-44eb-4cc2-925d-f8e2ac304cf2.png#averageHue=%23252321&clientId=u9c5d1b77-0445-4&errorMessage=unknown%20error&from=paste&height=207&id=u48b5f34a&originHeight=259&originWidth=657&originalType=binary&ratio=1&rotation=0&showTitle=false&size=62748&status=error&style=none&taskId=u0312ffed-809b-4cfd-afd7-69d1d6c957a&title=&width=525.6)
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151236237.png)
 
 
 ### 参考文章

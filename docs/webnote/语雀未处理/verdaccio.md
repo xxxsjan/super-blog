@@ -3,7 +3,7 @@
 [https://juejin.cn/post/6932264833312096270](https://juejin.cn/post/6932264833312096270#heading-1)
 npm i -g verdaccio
 执行    verdaccio   即可启动，参考如下
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/28823371/1652960475595-b6c79fa5-836f-4df5-9c67-9e2d459ed858.png#clientId=u7b284126-73f5-4&from=paste&height=70&id=u6aeac752&originHeight=87&originWidth=800&originalType=binary&ratio=1&rotation=0&showTitle=false&size=15039&status=done&style=none&taskId=ud865a901-bc0f-4e81-bda7-38181a283b7&title=&width=640)
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151259833.png)
 > config file是配置文件config.yaml
 > htpasswd是用户名单
 

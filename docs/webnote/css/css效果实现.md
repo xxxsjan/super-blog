@@ -153,3 +153,8 @@ object-position:left top;
 ```
 
 ![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202304232111654.png)
+
+## 行盒截断样式
+
+box-decoration-break:clone  // slice
+

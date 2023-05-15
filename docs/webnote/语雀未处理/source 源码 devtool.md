@@ -27,8 +27,8 @@ Recommended choice for development builds with high quality SourceMaps.
 nosourse-source-map：可以看到错误位置信息，但无源代码
 ### 
 
- 
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/28823371/1671731506384-604cdb77-979e-44a7-b6a0-8f3b8c8ba00c.png#averageHue=%23eeeeee&clientId=udcd8d712-893e-4&from=paste&height=484&id=ubd42110e&originHeight=605&originWidth=1705&originalType=binary&ratio=1&rotation=0&showTitle=false&size=349858&status=done&style=none&taskId=u77e3aa96-fd92-4ea4-981f-c9ac04bcc4f&title=&width=1364)
+
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151252016.png)
 ### 第三方包
 #### hidden-source-map
 生成souce-map开发第三方包时候使用。生成source-map文件，但没有引用文件

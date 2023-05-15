@@ -50,10 +50,11 @@ leave-active-class
 enter-active-class
 注意
 版本4 需要加上 animate__animated这个类，版本3不需要 
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/28823371/1656902470311-4ace0a61-3975-4740-96ac-0bc385aa64e2.png#averageHue=%231d201d&clientId=u3cfec744-a7b3-4&errorMessage=unknown%20error&from=paste&height=129&id=u68ba67a8&originHeight=161&originWidth=1093&originalType=binary&ratio=1&rotation=0&showTitle=false&size=115113&status=error&style=none&taskId=u27121f82-b087-4fbc-b91b-af0ea1fd5ca&title=&width=874.4)
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151259698.png)
+
 #### 声明周期---@事件
 可以结合[gsap](https://greensock.com) 使用
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/28823371/1656903467488-7049f5fd-f6ba-4374-8cba-610b6d7854d6.png#averageHue=%231e201d&clientId=u3cfec744-a7b3-4&errorMessage=unknown%20error&from=paste&height=338&id=u8c1538a5&originHeight=422&originWidth=692&originalType=binary&ratio=1&rotation=0&showTitle=false&size=139802&status=error&style=none&taskId=uf29e8955-f23c-4dd9-b055-ff5917d56e8&title=&width=553.6)
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151259563.png)
 ```typescript
 @before-enter  // 形参：el;
 @enter // 形参：el:Element ，done:Function;
@@ -96,7 +97,7 @@ enter-active-class
 ```
 #### 状态过渡
 
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/28823371/1656908401646-2b27a7a9-797b-4867-ab30-eb68955df41f.png#averageHue=%231d1f1c&clientId=u3cfec744-a7b3-4&errorMessage=unknown%20error&from=paste&height=499&id=uad3ca3ab&originHeight=624&originWidth=727&originalType=binary&ratio=1&rotation=0&showTitle=false&size=205655&status=error&style=none&taskId=ue38d41ee-d2df-4328-a0b8-4f899487114&title=&width=581.6)![image.png](https://cdn.nlark.com/yuque/0/2022/png/28823371/1656908415591-d38501fd-c6b9-40f0-813c-cc07bf7dac18.png#averageHue=%23dbdddb&clientId=u3cfec744-a7b3-4&errorMessage=unknown%20error&from=paste&height=92&id=ufe7c6d8f&originHeight=115&originWidth=427&originalType=binary&ratio=1&rotation=0&showTitle=false&size=13957&status=error&style=none&taskId=uf7cec87b-e2b2-4885-98e3-e3afc5cdaa9&title=&width=341.6)
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151259781.png)![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151259694.png)
 借助gsap.to可以实现状态的过渡，数字可以有递增效果
 
 ## 组件通信

@@ -125,7 +125,7 @@ const config = {
 
 // ...
 ```
-![image.png](https://cdn.nlark.com/yuque/0/2022/png/28823371/1661276692707-6fb349be-6a59-4cff-8bc9-fca9d0a7082c.png#averageHue=%232a2b25&clientId=u059062f7-5990-4&from=paste&height=246&id=u7c9375f1&originHeight=307&originWidth=961&originalType=binary&ratio=1&rotation=0&showTitle=false&size=284818&status=done&style=none&taskId=u208434b5-502f-4aed-9c30-affc36d1faf&title=&width=768.8)
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151300754.png)
 
 ### 压缩 JS
 因为 webpack5 内置了[terser-webpack-plugin](https://link.juejin.cn/?target=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fterser-webpack-plugin) 插件，所以我们不需重复安装，直接引用就可以了，具体配置如下

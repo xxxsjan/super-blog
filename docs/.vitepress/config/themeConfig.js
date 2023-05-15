@@ -46,7 +46,7 @@ const themeConfig = {
   },
   footer: {
     message: "粤ICP备2021026613号-1",
-    copyright: "Copyright © 2019-2023 xsjan",
+    copyright: "Copyright © 2019-2023 xxsjan",
   },
   // 自定义扩展: 页脚配置
   footerConfig: {
