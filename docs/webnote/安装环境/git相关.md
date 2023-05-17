@@ -241,13 +241,13 @@ https://www.bilibili.com/video/BV1ne4y1S7S9/?spm_id_from=333.337.search-card.all
 
 ### reset
 
-1 编辑器编辑后的撤销：
+#### 1 编辑器编辑后的撤销：
 
 git checkout <file_name>
 
 git restore <file_name>    -- 新版本git
 
-2 撤销暂存区的修改
+#### 2 撤销暂存区的修改
 
 即撤销到git add之前的状态
 
@@ -257,19 +257,16 @@ git restore --staged <changed_file>   撤销后，暂存区没了这个文件，
 
 git checkout HEAD <changed_file>    撤销后，暂存区没了这个文件，本地文件状态是从未修改过的
 
-HEAD表示最近一次的commit的文件状态
+> HEAD表示最近一次的commit的文件状态
+>
 
-3 撤销commit的修改
+#### 3 撤销commit的修改
 
 即撤销到commit之前
 
-git reset --soft HEAD~1   只是撤销这个commit，log上也不会有记录，文件还是修改后状态
-
-HEAD~1 表示最近一个之前的那一个，因为最近一个就是刚提交的commit吗，应该理解吧
-
-git reset  HEAD~1 === git reset --mixed HEAD~1 会撤销commit ，在撤销git add，回到文件只是做修改的状态
-
- git reset --hard HEAD~1 一键回到解放前，撤销commit 、git add、以及对文件的修改（还想找回来是可以的，会麻烦）
+- `git reset --soft HEAD~` 命令会将 Git 移动到上一个提交，并保留工作树和暂存区中的更改。这使得用户可以在将文件添加到 Git 的新提交之前修改它们。
+- `git reset --soft HEAD~1` 命令会将 Git 移动到两个提交之前的提交，并保留工作树和暂存区中的更改。这意味着用户可能会在回滚到之前的状态后，继续进行编辑，并将其作为新提交。
+- `git reset --hard HEAD~` 命令会将 Git 移动到上一个提交，并完全删除工作树和暂存区中的更改。这意味着用户可能会失去将文件添加到 Git 的新提交之前的更改。
 
 
 
@@ -328,3 +325,8 @@ git默认不识别大小写
 执行 命令
 
 git config core.ignorecase false
+
+
+
+
+
