@@ -2,6 +2,7 @@ import { SearchPlugin } from "vitepress-plugin-search";
 import { defineConfig } from "vite";
 import flexSearchIndexOptions from "flexsearch";
 // https://chodocs.cn/program/vitepress-local-search/
+
 //default options
 var options = {
   ...flexSearchIndexOptions,

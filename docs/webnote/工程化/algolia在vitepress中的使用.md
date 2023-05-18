@@ -12,13 +12,11 @@ tags:
 
 # algolia在vitepress中的使用
 
-
-
->  以vitepress为例说明
+> 以vitepress为例说明
 
 ## 注册登录
 
-首先官网https://www.algolia.com/ 注册登录，用github账户快速注册即可
+首先官网<https://www.algolia.com/> 注册登录，用github账户快速注册即可
 
 ## 进入设置
 
@@ -28,15 +26,13 @@ General下找到Applications，点击
 
 ## 创建应用
 
-进入后，点击Create Application 
+进入后，点击Create Application
 
 ### 第一步
 
 ![](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202304111444987.png)
 
 ### 第二步
-
-
 
 ![](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202304111445742.png)
 
@@ -45,8 +41,6 @@ General下找到Applications，点击
 勾选
 
 ![](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202304111446911.png)
-
-
 
 创建成功
 
@@ -58,14 +52,12 @@ General下找到Applications，点击
 
 ![](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202304111448320.png)
 
-
-
 然后，看到几个关键信息
 
 - indexName                   也就是前面创建的应用名称
 - Application ID              就是appid
--  Search-Only API Key   类似 公钥 的东西，大家能看到
--  Admin API Key    类似私钥的东西，自己保管好，其实也不用保管，复制粘贴到github上管理就行，后面说
+- Search-Only API Key   类似 公钥 的东西，大家能看到
+- Admin API Key    类似私钥的东西，自己保管好，其实也不用保管，复制粘贴到github上管理就行，后面说
 
 ![](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202304111452311.png)
 
@@ -79,17 +71,15 @@ General下找到Applications，点击
 
 - Name: API_KEY                         Secret: Search-Only API Key
 
-- Name: APPLICATION_ID          Secret: Application ID     
+- Name: APPLICATION_ID          Secret: Application ID
 
 ![](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202304111508446.png)
 
 ![](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202304111506239.png)
 
-
-
 ## vitepress 配置 algolia
 
- docs/.vitepress/config    themeConfig
+> docs/.vitepress/config    themeConfig
 
 ```
 {
@@ -109,13 +99,9 @@ General下找到Applications，点击
 
 配置完成，页面就会有搜索的ui了
 
-## 配置爬取配置文件
+## 配置crawlerConfig.json
 
-项目根目录创建crawlerConfig.json
-
-index_name 对应的是 algolia之前创建的应用名
-
-start_urls  是写你实际部署的域名地址，就是公网能访问的，因为是根据这个爬取数据
+> 项目根目录新建crawlerConfig.json
 
 ```
 {
@@ -154,13 +140,19 @@ start_urls  是写你实际部署的域名地址，就是公网能访问的，�
 
 ```
 
+1. index_name：表示要将爬取到的数据保存到哪个索引中，这里需要根据具体的需求来设置。
+2. start_urls：表示需要爬取的网站的入口 URL，可以有多个入口 URL。
+3. rateLimit：表示请求频率限制，即在多长时间内最多能够发送多少个请求，避免过快地访问网站，影响网站的正常运行。
+4. maxDepth：表示最大爬取深度，即从入口 URL 开始，最多可以爬取多少层内容。
+5. selectors：定义了网站页面中各级标题和内容的 CSS 选择器。其中，lvl0 表示一级标题，其 selector 为空字符串，因为一级标题通常是固定的，不需要选择器来匹配；lvl1 表示二级标题，其 selector 是 ".content h1"，表示匹配 class 为 content 的元素下的所有 h1 标签；lvl2 ~ lvl5 分别表示三到六级标题，以此类推；content 表示页面内容，其 selector 是 ".content p, .content li"，表示匹配 class 为 content 的元素下的所有段落和列表项；lang 是语言选择器，其 selector 是 "/html/@lang"，表示使用 XPath 表达式来选择 HTML 根节点的 lang 属性。
+6. selectors_exclude：列出了需要排除的元素，如侧边栏、页脚等，用于提取页面正文内容时过滤掉这些无用信息。
+7. custom_settings：用于设置需要进行聚合（faceting）的属性，这里将语言和标签作为聚合属性。
+8. js_render：一个布尔值，表示是否启用 JavaScript 渲染。如果启用，则需要使用 Headless Chrome 等工具模拟浏览器访问网站，以便获取动态渲染的内容。
 
+## 配置github action
 
-
-
-配置项目的github action
-
-根目录创建.github\workflows\algolia.yml
+> 根目录创建.github\workflows\algolia.yml
+>
 
 ![](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202304111510633.png)
 
@@ -189,7 +181,13 @@ jobs:
 
 ```
 
-作用：每次提交仓库时，会执行这个脚本
+解释：
+
+<https://github.com/signcl/docsearch-scraper-action>
+
+`cat crawlerConfig.json` 命令会将 crawlerConfig.json 文件的内容输出到标准输出流中；`jq -r tostring` 命令是利用 jq 工具将 JSON 对象转换为字符串，其中 `-r` 表示输出原始数据（raw output），即不包含双引号，而 `tostring` 则将其转换为字符串类型。
+
+最终，通过将 config 变量写入到 GITHUB_OUTPUT 环境变量中，就可以将其传递给下一个 GitHub Action 步骤使用。
 
 ## 提交代码
 
