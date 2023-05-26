@@ -9,29 +9,25 @@
 
 首先源得是官网的，不是淘宝的，
 
-不然会让你addUser ，但你还是会403，add不进去
-
-所以老老实实切回官方的
-
 npm config set registry <https://registry.npmjs.org/>
 
 ## 然后进行登录
+
+npm adduser --registry <https://registry.npmjs.org/>
 
 期间可能会输邮件验证码
 
 注意一下即可，都是 写简单的为英文
 
-npm adduser --registry <https://registry.npmjs.org/>
-
 ## 发布
 
-发布的包的目录下，也就是package.json同目录下
+package.json目录下执行：
 
 npm publish
 
 跑完就可发布完成
 
-上官网瞄一眼，就会发现有了
+上npm官网看发布结果
 
 ## package.json内容说明
 

@@ -27,7 +27,7 @@ export default function(name){
 
 >  使用配置文件
 
-rollup -c  rollup.confog.js 
+rollup -c  rollup.config.js 
 
 > 监听变化
 
@@ -262,5 +262,83 @@ eslint()
  uglify(),
 ```
 
+### rollup-plugin-cleanup
 
+rollup-plugin-cleanup
+
+rollup-plugin-clear
+
+rollup-plugin-clean
+
+```
+import cleanup from "rollup-plugin-cleanup";
+
+cleanup()
+```
+
+
+
+
+
+## ts开发vue插件
+
+https://blog.csdn.net/weixin_38992765/article/details/126557309
+
+安装
+
+rollup-plugin-vue   ` 包含着 `scss` ,所以我们可以自由使用 `scss
+
+rollup-plugin-postcss   postcss 处理css  
+
+autoprefixer   postcss 的插件 处理css属性前缀
+
+rollup-plugin-copy    移动静态文件 
+
+```
+rollup-plugin-vue rollup-plugin-postcss autoprefixer 
+```
+
+### 输出d.ts
+
+#### rollup-plugin-dts
+
+rollup.config.js
+
+```javascript
+import dts from "rollup-plugin-dts";
+
+const config = [
+  // …
+  {
+    input: "./my-input/index.d.ts",
+    output: [{ file: "dist/my-library.d.ts", format: "es" }],
+    plugins: [dts()],
+  },
+];
+
+export default config;
+
+// package.json
+ "types": "dist/my-library.d.ts",
+```
+
+#### rollup-plugin-typescript2
+
+```
+import typescript from "rollup-plugin-typescript2";
+
+typescript({
+    tsconfig: "tsconfig.json",
+ 	useTsconfigDeclarationDir: true,// 输出类型文件
+ }),
+ 
+ // tsconfig.json
+ {
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "dist/types"
+  },
+  "include": ["./index.ts", "./types/*.d.ts"]
+}
+```
 

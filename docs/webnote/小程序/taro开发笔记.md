@@ -1,0 +1,59 @@
+# taro开发笔记
+
+
+
+## rpx问题
+
+```
+import Taro from '@tarojs/taro';
+
+const systemInfo = Taro.getSystemInfoSync();
+```
+
+在移动设备中，有三种不同的像素概念：物理像素、逻辑像素和设备独立像素。它们之间的关系如下：
+
+- 物理像素：是显示设备中最小的物理显示单元，是屏幕上显示图像的基本单位。不同设备的物理像素数量和分辨率不同，通常用像素密度（PPI）描述。
+- 逻辑像素：是指在开发中使用的像素单位，也称为 CSS 像素。在 Taro 中，`rpx` 就是相对于屏幕宽度的 `1/750` 的逻辑像素。在不同设备上，逻辑像素代表的实际物理像素数量不同，因此可以实现适配不同设备的效果。
+- 设备独立像素：是指设备显示的图像大小，通常用设备像素比（DPR）来描述。设备独立像素的概念是为了解决不同分辨率的屏幕上显示相同大小的图像而提出的。在高分辨率的设备上，设备独立像素比物理像素数量更多，因此可以显示更多的内容和细节。例如，在一个 2x 设备独立像素的设备上，每个设备独立像素会对应 2 个物理像素。
+
+在 Taro 中，使用 `rpx` 可以方便地实现适配不同设备的效果。具体来说，`rpx` 是相对于屏幕宽度的 `1/750` 的逻辑像素，可以根据不同设备的屏幕宽度自适应调整实际的物理像素数量，从而实现屏幕适配的效果。
+
+例如，假设在一个 750px 宽度的设计稿中，一个元素的宽度为 100px。如果您希望在一个 375px 宽度的设备上显示该元素，可以将它的宽度设置为 `200rpx`。在设备上，该 `200rpx` 会被转换为相应的物理像素数量，以适应设备的屏幕宽度。
+
+总的来说，物理像素、逻辑像素和设备独立像素是移动设备中的三种不同的像素概念。在 Taro 中，使用 `rpx` 可以方便地实现适配不同设备的效果，`rpx` 是相对于屏幕宽度的 `1/750` 的逻辑像素，可以根据不同设备的屏幕宽度自适应调整实际的物理像素数量，从而实现屏幕适配的效果。
+
+
+
+devicePixelRatio 为2 
+
+750rpx => 375px
+
+转换公式
+
+750rpx / css像素（px screenWidth） =  结果rpx /实际px
+
+```javascript
+function pxToRpx(px){
+  return (750 / screenWidth ) * px
+}
+// 例子
+function getScrollHeight() {
+    const { screenWidth, windowHeight } = getSystemInfoSync();
+    return (750 / screenWidth) * windowHeight + "rpx";
+}
+const scrollStyle = {
+    height: getScrollHeight(),
+};
+
+# 其他：pxTransform
+import {  pxTransform } from "@tarojs/taro";
+pxTransform(windowHeight)
+乘上devicePixelRatio 才等于上面的计算结果
+```
+
+### 
+
+
+
+
+
