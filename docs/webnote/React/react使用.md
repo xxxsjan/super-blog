@@ -176,3 +176,72 @@ import MyContext from './context';
 // 获取数据
 this.context.text
 ```
+
+
+
+
+
+
+
+## ref
+
+使用 `forwardRef` 可以让父组件可以访问子组件的 DOM 节点或 React 组件实例。
+
+```
+const MyComponent = React.forwardRef((props, ref) => {
+  return (
+    <div ref={ref}>
+      {/* 子组件 */}
+    </div>
+  );
+});
+// 父
+function ParentComponent() {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    console.log(ref.current); // 访问子组件中的 DOM 节点或组件实例
+  }, []);
+
+  return (
+    <div>
+      <MyComponent ref={ref} />
+    </div>
+  );
+}
+```
+
+## useImperativeHandle
+
+暴露方法和属性
+
+用于暴露组件实例中的某些方法或属性给父组件使用。
+
+```
+useImperativeHandle(ref, () => ({
+    fn: xxx,
+    data: xxx,
+}));
+```
+
+## ReactDOM.createPortal
+
+挂载到body下
+
+```
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
+
+function Modal(props) {
+  const modalRoot = document.getElementById('modal-root');
+  const { children } = props;
+
+  return ReactDOM.createPortal(
+    <div className="modal-background">
+      <div className="modal-content">{children}</div>
+    </div>,
+    modalRoot
+  );
+}
+```
+

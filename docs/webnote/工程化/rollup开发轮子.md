@@ -2,9 +2,7 @@
 
 https://github.dev/any86/v-use-axios
 
-## 参考文章
 
-https://blog.csdn.net/qiwoo_weekly/article/details/122954883
 
 ## 入口文件
 
@@ -21,21 +19,22 @@ export default function(name){
 };
 ```
 
+Node.js常用的模块有两种形式:
 
+- CommonJS模块:使用`require()` 导出,Rollup不支持
+- ES6模块: 使用`import/export` ,Rollup支持
 
 ## 打包命令
 
->  使用配置文件
-
+```
+rollup -c
 rollup -c  rollup.config.js 
+rollup -c -W
+```
 
-> 监听变化
 
-rollup -w  
 
-## 打包配置文件
-
->  rollup.config.js
+## rollup.config.js配置文件
 
 需要的插件
 
@@ -126,18 +125,26 @@ coreConfig.plugins = [
 export default coreConfig;
 ```
 
-## 使用babel
+## 
+
+
+
+## 插件
+
+### rollup-plugin-babel 
+
+@rollup/plugin-babel
 
 npm i core-js @babel/core @babel/preset-env @babel/plugin-transform-runtime
 
-```javascript
-// 简单配置
+```js
+// babel.config.js简单配置
 {
   "presets": [
     "@babel/preset-env"
   ]
 }
-// 详细配置
+// babel.config.js详细配置
 {
   "presets": [
     [
@@ -152,7 +159,7 @@ npm i core-js @babel/core @babel/preset-env @babel/plugin-transform-runtime
       }
     ]
   ],
-    "plugins": [
+  "plugins": [
     // 解决多个地方使用相同代码导致打包重复的问题
     ["@babel/plugin-transform-runtime"]
   ],
@@ -163,74 +170,106 @@ npm i core-js @babel/core @babel/preset-env @babel/plugin-transform-runtime
 
 // 详细配置还要 添加runtimeHelpers: true
 // rollup.config.js
+import babel from "rollup-plugin-babel";
+
 module.exports= {
   plugin:{
     babel({
-      exclude: 'node_modules/**', // 防止打包node_modules下的文件
-      runtimeHelpers: true,       // 使plugin-transform-runtime生效
+      exclude: "node_modules/**",
+      runtimeHelpers: true,       // 启用@babel/plugin-transform-runtime插件
     }),
   }
 }
+
 ```
 
+@babel/plugin-transform-runtime插件的作用是:
 
+- 把部分Babel helper函数提取出来,引用一个runtime文件
+- 将不变的内容(如regeneratorRuntime)提取出来,不参与编译
 
-## 新插件
+尤其对polyfill有好处:
 
-有一些插件不维护，迁移了
+- 不污染全局环境,代码更干净
+- 节省代码体积,多份代码不需要重复的polyfill
 
-```javascript
-import { nodeResolve } from "@rollup/plugin-node-resolve";
+#### @rollup/plugin-babel
+
+```
 import { babel } from "@rollup/plugin-babel";
-import json from "@rollup/plugin-json";
-
-import typescript from "rollup-plugin-typescript2";
-export default {
-  input: "./src/hmrCallback.ts",
-  output: [
-    {
-      file: "lib/index.js",
-      format: "cjs",
-      sourcemap: true,
-    },
-    {
-      file: "lib/index.module.js",
-      format: "esm",
-      sourcemap: true,
-    },
-  ],
-  plugins: [
-    typescript(),
-    nodeResolve({
-      moduleDirectories: ["node_modules", "src"],
-    }),
-    json(),
-    babel({
+babel({
       presets: ["@babel/preset-env"],
       //   exclude: "node_modules/**",
-    }),
-  ],
-};
-
+ }),
 ```
 
 
 
-## 其他插件
+### @rollup/plugin-json
+
+解析json
+
+```
+import json from "@rollup/plugin-json";
+```
+
+
+
+### rollup-plugin-node-resolve
+
+- 解析使用 `require()` 和 `import` 的依赖
+- 使用browser 优先模式,视情况加载 CommonJS 或 ES module
+- 为 node_modules 下的依赖生成别名,提高构建效率
+
+```
+import resolve from "rollup-plugin-node-resolve";
+```
+
+#### @rollup/plugin-node-resolve
+
+```
+import { nodeResolve } from "@rollup/plugin-node-resolve";
+nodeResolve({
+  moduleDirectories: ["node_modules", "src"],
+})
+```
 
 
 
 ### rollup-plugin-commonjs
 
-已迁移到@rollup/plugin-commonjs
+用于转换 CommonJS 模块,允许 Rollup打包处理 CommonJS 模块。
 
-> 将CommonJS模块转换为 ES2015 供 Rollup 处理
+`rollup-plugin-node-resolve`可以让Rollup解析依赖,但却不知道如何理解CommonJS。
 
 ```
 import commonjs from 'rollup-plugin-commonjs';
 
 commonjs(), 
 ```
+
+#### @rollup/plugin-commonjs
+
+- 用于将 CommonJS 语法转换为 ESM
+- 把`module.exports` 转换成`export`
+- 替换成静态导入
+
+```
+import commonjs from '@rollup/plugin-commonjs';
+
+export default {
+  input: 'src/index.js',
+  output: {
+    file: 'bundle.js',
+    format: 'iife'
+  },
+  plugins: [
+    commonjs() 
+  ]
+}
+```
+
+
 
 ### rollup-plugin-terser
 
@@ -280,27 +319,21 @@ cleanup()
 
 
 
-## ts开发vue插件
+### rollup-plugin-cop
 
-https://blog.csdn.net/weixin_38992765/article/details/126557309
+移动静态文件 
 
-安装
+### rollup-plugin-vue
 
-rollup-plugin-vue   ` 包含着 `scss` ,所以我们可以自由使用 `scss
+处理vue文件 ` 包含着 `scss` ,所以我们可以自由使用 `scss
 
-rollup-plugin-postcss   postcss 处理css  
+### rollup-plugin-postcss
 
-autoprefixer   postcss 的插件 处理css属性前缀
+处理css
 
-rollup-plugin-copy    移动静态文件 
+autoprefixer 处理css前缀
 
-```
-rollup-plugin-vue rollup-plugin-postcss autoprefixer 
-```
-
-### 输出d.ts
-
-#### rollup-plugin-dts
+### rollup-plugin-dts 输出d.ts
 
 rollup.config.js
 
@@ -322,7 +355,7 @@ export default config;
  "types": "dist/my-library.d.ts",
 ```
 
-#### rollup-plugin-typescript2
+### rollup-plugin-typescript2 解析输出d.ts
 
 ```
 import typescript from "rollup-plugin-typescript2";
@@ -341,4 +374,10 @@ typescript({
   "include": ["./index.ts", "./types/*.d.ts"]
 }
 ```
+
+
+
+
+
+
 

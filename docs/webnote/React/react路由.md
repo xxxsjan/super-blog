@@ -30,7 +30,9 @@ https://juejin.cn/post/7075585581706641415
 
 ### React Router v6
 
-`Outlet` 是 React Router v6 中的一个新特性，用于渲染嵌套路由中的子路由。它类似于 React Router v5 中的 `Switch` 和嵌套的 `Route` 组件，但更加简洁和易于使用。
+`Outlet` 是 React Router v6 中的一个新特性，用于渲染嵌套路由中的子路由。
+
+它类似于 React Router v5 中的 `Switch` 和嵌套的 `Route` 组件，但更加简洁和易于使用。
 
 ```jsx
 import React from 'react';
