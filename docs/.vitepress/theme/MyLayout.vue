@@ -20,7 +20,13 @@
   </Layout>
 </template>
 
-<script lang="ts" setup>
+<script>
+export default {
+  name: "MyLayout",
+};
+</script>
+
+<script setup>
 import DefaultTheme from "vitepress/theme";
 import { useData } from "vitepress";
 import { ref } from "vue";
