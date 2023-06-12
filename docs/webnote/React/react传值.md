@@ -127,6 +127,8 @@ this.props.history.push({pathname:`/web/search?id ${row.id}`});
 
 ## redux
 
+https://juejin.cn/post/6844903993278201870#heading-10
+
 ## MobX
 
 ## flux

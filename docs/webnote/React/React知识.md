@@ -430,29 +430,29 @@ export default wrapLogin;
 
 ```jsx
 <Children>
-<div data-positon="header"></div>
-<div data-positon="content"></div>
-<div data-positon="footer"></div>
+    <div data-positon="header"></div>
+    <div data-positon="content"></div>
+    <div data-positon="footer"></div>
 </Children>
 ```
 
 子组件里面可以通过foreach判断条件添加对应插槽
 
 ```jsx
-this.props.children.forEach((v,i)=>{
-if(item.props['data-positon'] === header) {
-headerDom = item 
-}else if(item.props['data-positon'] === content) {
-contentDom = item 
-}else if(item.props['data-positon'] === footer) {
-footerDom = item 
-}
-})
+this.props.children.forEach((item,i)=>{
+    if(item.props['data-positon'] === 'header') {
+    	headerDom = item 
+    }else if(item.props['data-positon'] === 'content') {
+    	contentDom = item 
+    }else if(item.props['data-positon'] === 'footer') {
+   	    footerDom = item 
+    }
+})	
 子组件里面内容
 <div>
   {headerDom}
-  {headerDom}
-  {headerDom}
+  {contentDom}
+  {footerDom}
 </div
 ```
 
@@ -467,20 +467,26 @@ footerDom = item
 
 ```jsx
 import Redux,{createStore} from 'redux'
+
+// 通过动作创建新的state
+cosnt reducer = function( state= {num:0} , action){
+  switch(action.type){
+    case "add":
+          state.num ++;break;
+    case "decrement":
+          state.num --;break;
+    default:
+     return
+  }
+  return {...state}
+}
 // 创建仓库
 const store = createStore(reducer) 
-// 通过动作创建新的state
-cosnt reducer=function(state={num:0},action){
-  switch(action.type){
-    case "add":state.num ++;break;
-    case "decrement":state.num --;break;
-    default：return
-  }
- return {...state}
-}
+
+// usage
 function add(){
   // 调用仓库的dispatch方法修改数据
- store.dispatch({type:"add"})
+  store.dispatch({type:"add"})
 }
 function decrement(){
   // 调用仓库的dispatch方法修改数据
@@ -499,25 +505,26 @@ store.subscribe(()=>{
 ```jsx
 import {Povider，connect} from 'react-redux'
 class Counter extends React.Component{
- reder(){
+ render(){
   const value = this.props.value;
   const onAddClick = this.props.onAddClick
  }
 }
-const
- addAction = { type: "add"}
- function reducer (state={num:0},action){
+const  addAction = { type: "add"}
+function reducer (state={num:0},action){
  switch(action.type){
     case "add":state.num ++;break;
     default：return
   }
  return {...state}
- }
+}
 const store = createStore(reducer)
+
 / 修改state里的方法，映射到props
 function mapDispatchToProps(dispatch){
   return {
-    onAddClick:()={dispatch(addAction)}
+    onAddClick:()={dispatch(addAction)
+  }
 }
 ```
 
@@ -647,3 +654,22 @@ export default connect(
 import logo from "./logo.svg";
 return (  <img src={logo} className="App-logo" alt="logo" />)
 ```
+
+
+
+## 生命周期
+
+***componentWillMount*****()** – 在渲染之前执行，在客户端和服务器端都会执行。
+
+***componentDidMount*****()** – 仅在第一次渲染后在客户端执行。
+
+***componentWillReceiveProps*****()** – 当从父类接收到 props 并且在调用另一个渲染器之前调用。
+
+***shouldComponentUpdate*****()** – 根据特定条件返回 true 或 false。如果你希望更新组件，请返回**true** 否则返回 **false**。默认情况下，它返回 false。
+
+***componentWillUpdate*****()** – 在 DOM 中进行渲染之前调用。
+
+***componentDidUpdate*****()** – 在渲染发生后立即调用。
+
+***componentWillUnmount*****()** – 从 DOM 卸载组件后调用。用于清理内存空间。
+

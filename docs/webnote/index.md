@@ -3,3 +3,5 @@
 <https://vitepress.vuejs.org/guide/deploying>
 
 [Home](/)
+
+<CustomComponent />

@@ -9,7 +9,7 @@ echarts 可视化图表
 vue-lazyload 懒加载
 day.js 时间和日期
 vue-qr 生成二维码
- 
+
 [https://animate.style/](https://www.bilibili.com/video/BV1r94y127qS)
 
 [https://github.com/validatorjs/validator.js](https://github.com/validatorjs/validator.js)
@@ -218,3 +218,9 @@ ctrl c进行退出操作
 ```typescript
 "postinstall": "concurrently \"pnpm gen:version\" \"pnpm run -C internal/metadata dev\""
 ```
+
+
+
+## face-api
+
+https://www.npmjs.com/package/@vladmandic/face-api
