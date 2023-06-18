@@ -315,3 +315,37 @@ let routes: RouteObject[] = [
 export default routes;
 ```
 
+## ScrollRestoration
+
+
+
+```
+import { useState } from 'react';
+import { Outlet } from 'react-router';
+import { ScrollRestoration } from 'react-router-dom';
+import { AuthPage } from './components/Auth';
+import { AuthContext, AuthContextDataType } from './hooks/useAuth';
+import './styles/global.less';
+
+const App: React.FC = () => {
+  const [state, setState] = useState<AuthContextDataType>();
+  return (
+    <>
+      <AuthContext.Provider value={{ data: state, setData: setState }}>
+        <AuthPage>
+          <>
+            <Outlet />
+            <ScrollRestoration />
+          </>
+        </AuthPage>
+      </AuthContext.Provider>
+    </>
+  );
+};
+
+export default App;
+
+```
+
+
+

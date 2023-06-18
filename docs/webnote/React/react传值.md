@@ -195,7 +195,7 @@ export function usePContext(){
 import PContext from '..'
 
 const [state,SetState] = useState({})
-<PContext.Provider value={{ state, SetState }}>
+<PContext.Provider value={{  data: state, setData: setState }}>
       {props.children}
 </PContext.Provider>
 

@@ -198,3 +198,32 @@ node-sass和node版本依赖较强，所以使用sass吧
 ```javascript
 "serve": "set NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
 ```
+
+
+
+## 语法
+
+### unquote
+
+不要引号
+
+```scss
+$size:unquote('#{random(100)}px')
+```
+
+### function
+
+```scss
+@function getShadows($n){
+	$shadows: '#{random(100)}vw '#{random(100)}vh #fff'
+    @for $i from 2 through $n {
+          $shadows: '#{$shadows}, #{random(100)}vw '#{random(100)}vh #fff'  
+    }    
+	@return unquote($shadows)
+}
+
+usage
+
+box-shadows:getShadows(1000)
+```
+
