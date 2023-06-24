@@ -8,7 +8,7 @@ hero:
   text: 专注 & 洞察 & 分享
   tagline: 
   image:
-    src: /earth.png
+    src: /book.png
     alt: logo
   actions:
     - theme: brand

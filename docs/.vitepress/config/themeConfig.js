@@ -3,7 +3,7 @@ import nav from "./nav";
 
 /** @type {import("vitepress").DefaultTheme.Config} */
 const themeConfig = {
-  logo: "/earth.png",
+  logo: "/book.png",
   // 搜索 https://www.algolia.com/apps/YBYUHFPZ1C/dashboard
   algolia: {
     indexName: "super-blog",
