@@ -84,11 +84,60 @@ SCSS中的@at-root可以用来放弃当前的嵌套层级，让其内部的CSS�
 }
 ```
 
-## Mixin 和 include
+## 语法
+
+### Mixin 和 include
+
+```scss
+@mixin usethemn(){
+	html[data-theme='light'] & {
+		color:#fff;
+	}
+}
+&是使用该mixin的那个选择器的变量，可以这么理解
+
+使用
+
+.item {
+ @include usetheme;
+}
+
+编译后
+html[data-theme='light'] .item{
+   color:#fff;
+}
 
 ```
 
+### 变量
+
+```scss
+//普通结构
+$data:'#fff'
+
+//映射结构
+$themes:(
+  light:{
+     color:#fff;
+  },
+  dark:{
+    color:#000;
+  }
+)
+//使用映射结构
+@mixin usetheme(){
+    @each $key , $value in $themes{
+        html[data-theme=#{$key}] & {
+		  @content
+	    }
+    }
+}
+@content是usetheme()的入参
+但使用@include usetheme(color:#000;)，@content会是color:#000;
+
 ```
+
+
 
 ## BEM规范
 
@@ -226,4 +275,6 @@ usage
 
 box-shadows:getShadows(1000)
 ```
+
+
 

@@ -73,6 +73,8 @@ headless为true 则不弹出浏览器
 - iframe.$eval() 相当于在 iframe 中运行 document.queryselector 获取指定元素，并将其作为第一个参数传递
 - iframe.?eval 相当于在 iframe 中运行 document.querySelectorAll 获取指定元素数组，并将其作为第一个参数传递
 
+
+
 ### 获取输入框输入文字
 
 page.keyboard.press("Shift"); //按下 Shift 键 
@@ -254,3 +256,15 @@ const page = await browser.newPage();
 await page.setViewport({ width: 1200, height: 600, deviceScaleFactor: 1 });
 await page.goto("https://live.douyin.com/212606438033");
 ```
+
+## 例子
+
+```javascript
+await page.goto("https://bbs.mihoyo.com/");
+await page.waitForSelector("#app");
+const moreBtnHref = await page.$eval(moreSelect, (a) => a.href);
+const page2 = await browser.newPage();
+await page2.setViewport({ width: 1200, height: 600, deviceScaleFactor: 1 });
+await page2.goto(moreBtnHref);
+```
+

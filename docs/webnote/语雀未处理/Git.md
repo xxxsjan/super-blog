@@ -331,3 +331,17 @@ git config --system http.sslverify false
 git config --global http.sslcainfo C:/Program Files/Git/mingw64/ssl/certs/ca-bundle.crt
 git config --global http.sslCAInfo C:/Program Files/Git/mingw64/ssl/certs/ca-bundle.crt
 ```
+
+## 分支名变更
+
+github上可以rename
+
+然后执行
+
+```
+git branch -m [原分支名] [新分支名]
+git fetch origin
+git branch -u origin/main main
+git remote set-head origin -a
+```
+

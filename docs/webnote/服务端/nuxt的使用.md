@@ -52,4 +52,27 @@ some content...
 };
 ```
 
-## 获取数据
+
+
+## 入口文件
+
+默认是app.vue作为入口文件
+
+app.vue
+
+```
+<template>
+  <div>
+   <h1>Welcome to the homepage</h1>
+  </div>
+</template>
+```
+
+如果需要使用pages作为入口，引入`<NuxtPage />`组件爱你
+
+```
+<template>
+  <NuxtPage />
+</template>
+```
+
