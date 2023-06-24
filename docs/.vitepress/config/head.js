@@ -7,7 +7,7 @@ export default [
     "link",
     {
       rel: "icon",
-      href: "/earth_icon_32.ico",
+      href: "/book.png",
     },
   ],
   // would render: <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
