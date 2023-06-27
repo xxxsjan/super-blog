@@ -1,9 +1,9 @@
 {
-  "name": "super-blog",
+  "name": "so-blog",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "homepage": "https://github.com/xxxsjan/super-blog",
+  "homepage": "https://github.com/xxxsjan/so-blog",
   "scripts": {
     "docs:dev": "vitepress dev docs --port 3333 --host",
     "docs:build": "vitepress build docs",

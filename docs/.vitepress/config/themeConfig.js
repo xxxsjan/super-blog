@@ -1,12 +1,13 @@
 import sidebar from "./sidebar";
 import nav from "./nav";
+import crawlerConfig from "../../../crawlerConfig.json";
 
 /** @type {import("vitepress").DefaultTheme.Config} */
 const themeConfig = {
   logo: "/book.png",
   // 搜索 https://www.algolia.com/apps/YBYUHFPZ1C/dashboard
   algolia: {
-    indexName: "super-blog",
+    indexName: crawlerConfig.index_name,
     appId: "YBYUHFPZ1C",
     apiKey: "d4076b979399477f79c55eec660730ec",
   },

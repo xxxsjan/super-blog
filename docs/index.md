@@ -4,7 +4,7 @@ layout: home
 title: Home
 
 hero:
-  name: super~blog
+  name: so~blog
   text: 专注 & 洞察 & 分享
   tagline: 
   image:
