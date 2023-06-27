@@ -79,14 +79,14 @@ function toNav(sideBar, dirName) {
   });
 }
 
+
 const webnote = genSideBar("webnote");
-const sourceCode = genSideBar("source-code");
-
 // console.log("自动生成：", JSON.stringify(webnote, null, 2));
-
 export const webnote_nav = toNav(webnote, "webnote");
-
-export const sourceCode_nav = toNav(sourceCode, "source-code");
+const sourceCodeSidebar = genSideBar("source-code");
+export const sourceCode_nav = toNav(sourceCodeSidebar, "source-code");
+const jsDocSidebar = genSideBar("doc-js");
+export const jsDoc_nav = toNav(jsDocSidebar, "doc-js");
 
 // console.log(sourceCode_nav);
 export default {
@@ -99,7 +99,13 @@ export default {
   "/source-code/": [
     {
       text: "源码分析",
-      items: sourceCode,
+      items: sourceCodeSidebar,
+    },
+  ],
+  "/doc-js/": [
+    {
+      text: "js相关",
+      items: jsDocSidebar,
     },
   ],
 };
