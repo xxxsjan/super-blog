@@ -6,7 +6,7 @@ export default [
   [
     "link",
     {
-      rel: "stylesheet",
+      rel: "preload stylesheet",
       href: "/css/scroll.css",
     },
   ],
