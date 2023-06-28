@@ -6,10 +6,17 @@ export default [
   [
     "link",
     {
-      rel: "icon",
-      href: "/book.png",
+      rel: "stylesheet",
+      href: "/css/scroll.css",
     },
   ],
+  // [
+  //   "style",
+  //   {
+  //     rel: "icon",
+  //     href: "/book.png",
+  //   },
+  // ],
   // would render: <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   [
     "script",
