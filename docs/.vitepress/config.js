@@ -1,15 +1,15 @@
 import head from "./config/head";
 import themeConfig from "./config/themeConfig";
+
 const baseMap = {
   production: "/blog-vitepress/",
   github: "/blog-vitepress/",
   vercel: "/",
 };
 
-console.log(baseMap[process.env.BUILD_ENV || process.env.NODE_ENV]);
-
-console.log("process.env.NODE_ENV: ", process.env.NODE_ENV);
-console.log("process.env.BUILD_ENV: ", process.env.BUILD_ENV);
+// console.log(baseMap[process.env.BUILD_ENV || process.env.NODE_ENV]);
+// console.log("process.env.NODE_ENV: ", process.env.NODE_ENV);
+// console.log("process.env.BUILD_ENV: ", process.env.BUILD_ENV);
 
 // https://vitepress.vuejs.org/config/app-configs
 

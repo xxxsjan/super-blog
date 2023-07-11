@@ -1,18 +1,7 @@
 const fg = require("fast-glob");
 const path = require("path");
 
-// const docsPath = useLocalDoc
-//   ? process.cwd()
-//   : path.resolve(process.cwd(), "../web-note");
 const docsPath = process.cwd();
-// console.log(docsPath);
-// console.log(
-//   fg.sync('**', {
-//     onlyFiles: false,
-//     cwd: docsPath,
-//     deep: 1,
-//   })
-// );
 
 function getPath(p) {
   return path.join(docsPath, "./docs", p);
@@ -25,6 +14,7 @@ function getDirs(p) {
     ignore: ["*.md"],
   });
 }
+
 function getMdFiles(p) {
   return fg.sync("**", {
     onlyFiles: true,
@@ -78,7 +68,6 @@ function toNav(sideBar, dirName) {
     };
   });
 }
-
 
 const webnote = genSideBar("webnote");
 // console.log("自动生成：", JSON.stringify(webnote, null, 2));
