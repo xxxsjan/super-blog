@@ -5,7 +5,7 @@
   "license": "MIT",
   "homepage": "https://github.com/xxxsjan/so-blog",
   "scripts": {
-    "docs:dev": "vitepress dev docs --port 3333 --host",
+    "docs:dev": "vitepress dev docs --host",
     "docs:build": "vitepress build docs",
     "build:github": "cross-env NODE_ENV=github vitepress build docs",
     "build:vercel": "cross-env BUILD_ENV=vercel vitepress build docs",
