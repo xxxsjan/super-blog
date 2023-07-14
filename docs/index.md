@@ -4,8 +4,8 @@ layout: home
 title: Home
 
 hero:
-  name: so~blog
-  text: 专注 & 洞察 & 分享
+  name: so~doc
+  text: 笔记整理文档
   tagline: 
   image:
     src: /book.png

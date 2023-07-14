@@ -18,7 +18,7 @@ const config = {
   base: baseMap[process.env.BUILD_ENV || process.env.NODE_ENV] || "/", // 会影响部署的读取路径
   appearance: true, // Whether to enable dark mode or not. Default: true
   lang: "zh-cn", // build时才会放到html标签里
-  title: "so~blog",
+  title: "so~doc",
   description: "记录前端学习", // 站点的描述。 这将作为<meta>标记渲染在页面HTML中。
   lastUpdated: true,
   head,

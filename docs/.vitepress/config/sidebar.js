@@ -77,6 +77,12 @@ export const sourceCode_nav = toNav(sourceCodeSidebar, "source-code");
 const jsDocSidebar = genSideBar("doc-js");
 export const jsDoc_nav = toNav(jsDocSidebar, "doc-js");
 
+const readingNotes_sidebar = genSideBar("doc-reading-notes");
+export const readingNotes_nav = toNav(
+  readingNotes_sidebar,
+  "doc-reading-notes"
+);
+
 // console.log(sourceCode_nav);
 export default {
   "/webnote/": [
@@ -95,6 +101,12 @@ export default {
     {
       text: "js相关",
       items: jsDocSidebar,
+    },
+  ],
+  "/doc-reading-notes/": [
+    {
+      text: "读书笔记",
+      items: readingNotes_sidebar,
     },
   ],
 };
