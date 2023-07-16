@@ -19,6 +19,7 @@
     "vitepress-plugin-search": "^1.0.4-alpha.20"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.0.1",
     "cross-env": "^7.0.3",
     "fast-glob": "^3.2.11",
     "fs-extra": "^11.1.1",

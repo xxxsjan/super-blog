@@ -1,6 +1,7 @@
 import DefaultTheme from "vitepress/theme";
 import MyLayout from "./MyLayout.vue";
 import CustomComponent from "../components/CustomComponent.vue";
+import VercelAnalytics from "../components/VercelAnalytics.vue";
 
 import "./styles/vars.scss";
 import "./styles/style.scss";
@@ -10,7 +11,8 @@ const config = {
   ...DefaultTheme,
   Layout: MyLayout,
   enhanceApp({ app }) {
-    // app.component('CustomComponent', CustomComponent);
+    // app.component("CustomComponent", CustomComponent);
+    // app.component("VercelAnalytics", VercelAnalytics);
   },
 };
 

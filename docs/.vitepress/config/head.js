@@ -31,4 +31,11 @@ export default [
   })();
 `,
   ],
+  [
+    "script",
+    {
+      defer: true,
+      src: "/_vercel/insights/script.js",
+    },
+  ],
 ];
