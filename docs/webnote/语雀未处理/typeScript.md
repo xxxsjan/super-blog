@@ -83,3 +83,28 @@ console.log(userCRUD.data)
 const user = userCRUD.getUserId()
 console.log(user)
 ```
+
+
+
+## 函数类型声明
+
+重载的声明
+
+```ts
+interface ShowMessage {
+   (options:object):void;
+   (text:string,onClose?:Function):void;
+   (text:string,mode:string,duration?:number):void;
+}
+
+interface Utils = {
+  showMessage:ShowMessage
+}
+
+const utils = {
+  showMessage(){
+    
+  }
+}
+```
+
