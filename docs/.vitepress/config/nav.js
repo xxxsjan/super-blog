@@ -1,4 +1,11 @@
-import { webnote_nav, sourceCode_nav, jsDoc_nav,readingNotes_nav } from "./sidebar";
+import {
+  webnote_nav,
+  sourceCode_nav,
+  jsDoc_nav,
+  readingNotes_nav,
+  env_nav,
+} from "./sidebar";
+
 import { DefaultTheme } from "vitepress";
 
 /** @type {DefaultTheme.NavItem[]} */
@@ -24,6 +31,11 @@ const navList = [
     text: "读书笔记",
     activeMatch: "/doc-reading-notes/",
     items: readingNotes_nav,
+  },
+  {
+    text: "环境安装",
+    activeMatch: "/doc-env-install/",
+    items: env_nav,
   },
   // {
   //   text: "我的标签",

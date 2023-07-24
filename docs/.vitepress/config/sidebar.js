@@ -58,6 +58,12 @@ function genSideBar(dirName) {
   ];
   return res;
 }
+/**
+ * sideBar 转 nav
+ * @param {*} sideBar
+ * @param {*} dirName
+ * @returns
+ */
 function toNav(sideBar, dirName) {
   return sideBar.map((item) => {
     return {
@@ -69,21 +75,21 @@ function toNav(sideBar, dirName) {
   });
 }
 
-const webnote = genSideBar("webnote");
+function createSideNav(docName) {
+  const _sideBar = genSideBar(docName);
+  const _nav = toNav(_sideBar, docName);
+  return [_sideBar, _nav];
+}
+
+export const [webnote, webnote_nav] = createSideNav("webnote");
 // console.log("自动生成：", JSON.stringify(webnote, null, 2));
-export const webnote_nav = toNav(webnote, "webnote");
-const sourceCodeSidebar = genSideBar("source-code");
-export const sourceCode_nav = toNav(sourceCodeSidebar, "source-code");
-const jsDocSidebar = genSideBar("doc-js");
-export const jsDoc_nav = toNav(jsDocSidebar, "doc-js");
+export const [sourceCodeSidebar, sourceCode_nav] = createSideNav("source-code");
+export const [jsDocSidebar, jsDoc_nav] = createSideNav("doc-js");
+export const [readingNotes_sidebar, readingNotes_nav] =
+  createSideNav("doc-reading-notes");
+export const [env_sidebar, env_nav] = createSideNav("doc-env-install");
 
-const readingNotes_sidebar = genSideBar("doc-reading-notes");
-export const readingNotes_nav = toNav(
-  readingNotes_sidebar,
-  "doc-reading-notes"
-);
 
-// console.log(sourceCode_nav);
 export default {
   "/webnote/": [
     {
