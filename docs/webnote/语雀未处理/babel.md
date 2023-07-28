@@ -118,6 +118,7 @@ module.exports = (api) => {
 ##### 直接引入
  import '@babel/polyfill' 
 但上面那个已经废弃，现在全量引入是下面两句
+
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 

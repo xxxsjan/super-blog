@@ -200,3 +200,48 @@ app.listen(3000,()=>{})
 
 https://github.com/taoqf/node-html-parser
 
+
+
+
+
+## portfinder获取端口
+
+
+
+```
+const Portfinder = require("portfinder");
+Portfinder.basePort = 9080;
+
+portfinder.getPort((err, port) => {
+  if (err) {
+    console.error('Error finding available port:', err);
+  } else {
+    console.log('Available port:', port);
+  }
+});
+```
+
+
+
+
+
+## rollup
+
+watch
+
+```
+const watcher = rollup.watch(opt);
+watcher.on("change", (filename) => {
+      // 主进程日志部分
+      logStats("Main-FileChange", filename);
+    });
+watcher.on("event", (event) => {
+      if (event.code === "END") {
+        
+       
+      } else if (event.code === "ERROR") {
+       
+      }
+});
+```
+
