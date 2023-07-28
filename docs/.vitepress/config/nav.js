@@ -4,6 +4,7 @@ import {
   jsDoc_nav,
   readingNotes_nav,
   env_nav,
+  docker_nav,
 } from "./sidebar";
 
 import { DefaultTheme } from "vitepress";
@@ -36,6 +37,11 @@ const navList = [
     text: "环境安装",
     activeMatch: "/doc-env-install/",
     items: env_nav,
+  },
+  {
+    text: "docker",
+    activeMatch: "/doc-docker/",
+    items: docker_nav,
   },
   // {
   //   text: "我的标签",

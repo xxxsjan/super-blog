@@ -88,7 +88,7 @@ export const [jsDocSidebar, jsDoc_nav] = createSideNav("doc-js");
 export const [readingNotes_sidebar, readingNotes_nav] =
   createSideNav("doc-reading-notes");
 export const [env_sidebar, env_nav] = createSideNav("doc-env-install");
-
+export const [docker_sidebar, docker_nav] = createSideNav("doc-docker");
 
 export default {
   "/webnote/": [
@@ -113,6 +113,12 @@ export default {
     {
       text: "读书笔记",
       items: readingNotes_sidebar,
+    },
+  ],
+  "/doc-docker/": [
+    {
+      text: "Docker",
+      items: docker_sidebar,
     },
   ],
 };
