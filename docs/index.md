@@ -5,7 +5,7 @@ title: Home
 
 hero:
   name: so~doc
-  text: 笔记整理文档
+  text: 前端体系学习文档
   tagline: 
   image:
     src: /book.png

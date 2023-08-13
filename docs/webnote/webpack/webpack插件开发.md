@@ -64,12 +64,35 @@
 ## 添加新文件
 
 ```
-compiler.hook.emit.tap('',function(compilation){
+compiler.hook.emit.tap('PluginName',function(compilation){
 	compilation.assets
 })
 ```
 
 
+
+## compilation.assets
+
+输出资源信息，webpack5已废弃
+
+
+
+### compiler.options
+
+获取webpack最终配置
+
+
+
+## compilation.hooks.buildModule
+
+```
+compiler.hooks.compilation.tap('MyPlugin', (compilation) => {
+      compilation.hooks.buildModule.tap('MyPlugin', (module) => {
+        console.log(`Building module ${module.resource}`);
+        // 在这里可以对模块进行一些自定义的处理
+      });
+});
+```
 
 
 

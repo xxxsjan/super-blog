@@ -4,6 +4,12 @@ https://juejin.cn/post/6907428535510499336
 
 利用的是vue-cli的打包功能，进行输出common umd等js
 
+```
+vue-cli-service build --mode development --target lib --name Utils --entry ./lib/index.js
+```
+
+
+
 ## webapck创建
 
 也可以使用webpack4进行打包输出umd类型的包
