@@ -1,14 +1,18 @@
 [https://mp.weixin.qq.com/s/R9wfbPSZgUOCMs9TBk3Jpw](https://mp.weixin.qq.com/s/R9wfbPSZgUOCMs9TBk3Jpw)
+
 ### docker文档
 [https://www.coonote.com/docker/docker-cmd-manual.html](https://www.coonote.com/docker/docker-cmd-manual.html)
 ### 安装镜像
 docker pull daocloud.io/library/mysql:8.0.20
-更多版本 进入[https://hub.daocloud.io](https://hub.daocloud.io) 搜索
+
+ [更多版本](https://hub.daocloud.io) 
+
 ### 启动MySQL镜像
-image-->container
+image --> container
 > 即生成容器
 
 换行写法
+
 ```json
 docker run -d \ 
 -p 3306:3306 \ 

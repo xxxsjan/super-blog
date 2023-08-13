@@ -1,4 +1,9 @@
+# wsl系统的文件目录位置
+
+
+
 [https://javaforall.cn/136580.html](https://javaforall.cn/136580.html)
+
 ### wsl
 ubuntu Linux子系统的目录是在这个目录下
 C:\Users\用户名\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\LocalState\rootfs

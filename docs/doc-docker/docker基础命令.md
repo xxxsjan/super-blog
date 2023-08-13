@@ -1,6 +1,7 @@
 [https://juejin.cn/post/6870371104335069192#heading-27](https://juejin.cn/post/6870371104335069192#heading-27)
 菜鸟
 [https://www.runoob.com/docker/docker-command-manual.html](https://www.runoob.com/docker/docker-command-manual.html)
+
 ### 镜像市场
 [https://hub.daocloud.io/](https://hub.daocloud.io/)
 [https://hub.docker.com/search?q=](https://hub.docker.com/search?q=)
@@ -178,3 +179,40 @@ docker rmi $(docker images -f "dangling=true" -q)
 echo "clear success."
 fi
 ```
+
+## docker命令基础
+
+- docker images 查看镜像
+- docker ps 查看启动的容器 (-a 查看全部)
+- docker rmi 镜像ID 删除镜像
+- docker rm 容器ID 删除容器
+- docker exec -it 1a8eca716169(容器ID:docker ps获取) sh 进入容器内部
+- docker inspect bf70019da487(容器ID) 查看容器内的信息
+
+### 镜像image
+
+#### 安装镜像
+
+进入<https://hub.daocloud.io> 
+
+搜索node，切换到版本获取下载地址
+
+##### 拉取镜像
+
+- docker pull daocloud.io/library/node:12.18
+
+#### 获取镜像id
+
+- docker images
+
+#### 重命名镜像
+
+- docker tag 28faf336034d node ---
+
+#### 导出镜像
+
+docker save -o node.image(导出镜像要起的名称) 28faf336034d(要导出的镜像的ID)
+
+#### 导入本地镜像
+
+docker load -i node.image(导入的镜像名称)
