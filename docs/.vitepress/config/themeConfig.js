@@ -5,12 +5,16 @@ import crawlerConfig from "../../../crawlerConfig.json";
 /** @type {import("vitepress").DefaultTheme.Config} */
 const themeConfig = {
   logo: "/book.png",
-  // 搜索 https://www.algolia.com/apps/YBYUHFPZ1C/dashboard
+  // algolia搜索 https://www.algolia.com/apps/YBYUHFPZ1C/dashboard
   algolia: {
     indexName: crawlerConfig.index_name,
     appId: "YBYUHFPZ1C",
     apiKey: "d4076b979399477f79c55eec660730ec",
   },
+  // 本地搜索
+  // search: {
+  //   provider: 'local',
+  // },
   socialLinks: [{ icon: "github", link: "https://github.com/xxxsjan" }],
   nav,
   lastUpdated: true, // 最后更新时间
