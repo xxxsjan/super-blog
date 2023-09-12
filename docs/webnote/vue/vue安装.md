@@ -1,19 +1,5 @@
 # **vue**
 
-### 3、创建项目
-
-vue init webpack my-project
-
-vue create my-project
-
-#### 准备工作
-
-##### 装淘宝镜像--装yarn
-
-```
-cnpm install -g yarn
-```
-
 #### 搭建环境（脚手架）
 
 React：`cnpm install -g create-react-app`（可覆盖安装）
@@ -27,6 +13,8 @@ npm install --global vue-cli 命令 报错
 需要删除npmrc文件。
 强调：不是nodejs安装目录npm模块下的那个npmrc文件
 而是在C:\Users{账户}\下的.npmrc文件…
+
+
 
 ##### 升级Vue Cli3 脚手架
 
@@ -50,11 +38,16 @@ npm config set cache "C:\Program Files\nodejs\node_cache"  //---这里是我自�
 
 卸载 Vue-Cli  3：npm uninstall -g @vue/cli / yarn global remove @vue/cli
 
+
+
 #### Vue-Cli  3使用vue init
+
+
 
 <https://www.jianshu.com/p/ca5cecd8d3ee>
 
 如果我们还想使用cli2的脚手架，那么我们可以在安装一个包
+
 `$ cnpm i @vue/cli-init -g`
 
 #### vue ui创建项目
@@ -67,13 +60,15 @@ git 信息: init project
 
 安装: babel router linter  使用配置文件
 
-#### 创建项目
+
+
+## 创建项目
 
 React：create-react-app reactdemo01
 
 Vue2：vue init webpack vuedemo01
 
-​   如果已经是cli3，
+   如果已经是cli3，
 
 ​    安装`cnpm i -g @vue/cli-init`
 
@@ -85,7 +80,9 @@ Vue3 ： vue create vuedemo01
 
 #### 自定义添加功能
 
-![img](https://img2018.cnblogs.com/blog/1059788/201810/1059788-20181003162624015-1456708862.png)
+![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202308302339346.png)
+
+
 
 #### 创建项目-方法2
 
@@ -103,51 +100,11 @@ React：`npx create-react-app reactdemo`
 
 ——创建失败可能由于网络原因，多试几次
 
+
+
 Vue： vue init webpack-simple vue-demo02 --结构简单
 
-#### package
 
-```javascript
-{
-    "name": "asset_manage",  //项目名称
-    "version": "0.1.0",  //项目版本
-    "private": true,  //是否是私有项目
-    "scripts": {   //npm快捷执行命令脚本配置
-        "start": "npm run serve",
-        "serve": "node ../node_modules/@vue/cli-service/bin/vue-cli-service.js serve",
-        "build": "node ../node_modules/@vue/cli-service/bin/vue-cli-service.js build",
-        "lint": "node ../node_modules/@vue/cli-service/bin/vue-cli-service.js lint"
-    },
-    "dependencies": {  //打包后的项目依赖
-        "el-tree-select": "^2.0.6",
-        "element-ui": "^2.4.7",
-        "moment": "^2.24.0",
-        "vue-clipboard2": "^0.2.1"
-    },
-    devDependencies:{ //开发环境依赖
- 
-    },
-    "eslintConfig": {  //eslint配置
-        "root": true,
-        "env": {
-            "node": true
-        },
-        "extends": [
-            "plugin:vue/essential",
-            "eslint:recommended"
-        ],
-        "rules": {},
-        "parserOptions": {
-            "parser": "babel-eslint"
-        }
-    },
-    "browserslist": [  //项目浏览器兼容配置
-        "> 1%",
-        "last 2 versions",
-        "not ie <= 8"
-    ]
-}
-```
 
 #### 启动项目
 

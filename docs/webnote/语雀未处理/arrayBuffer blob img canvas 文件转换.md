@@ -220,3 +220,35 @@ function fileToArrayBuffer(file) {
   });
 }
 ```
+
+
+
+## 下载文件
+
+### iframe
+
+```
+console.log(record，'rec')
+
+var elemIF = document.createElement( iframe')
+
+elemIF.style.display = 'none'
+
+elemIF.src = process.env.VUE APP API BASE URL + /oamat/bus0amatMain/fileDownById?id=' + record.fileUpload
+
+document.body.appendchild(elemIF)
+```
+
+### fetch下载blob
+
+```
+fetch(url).then(res=>res.blob()).then(blob=>{
+	 
+	const url = URL.createObjectURL(res.data)
+	const box = document.createElement('a')
+        box.download = '附件.pdf'
+        box.href = href
+        box.click()
+})
+```
+
