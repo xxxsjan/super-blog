@@ -68,8 +68,18 @@ module.exports = {
 用postcss.config.cjs设置plugin，vue inspect 会看到 plugin 会保留有一个默认的function
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151252923.png)
 
-
 ### tailwind命令
+
+
+
+#### 初始化
+
+tailwindcss init -p
+
+会生成postcss.config.js tailwind.config.js
+
+
+
 #### 检出css查看
 npx tailwindcss --postcss -o tailwind.css
 config里要配置content
@@ -86,8 +96,12 @@ module.exports = {
 ```
 
 可以输出 css 进行检查 类似 vue inspect
+
 可以在输出的css里面有没使用的css类名生成
+
 这是postcss8 的命令， postcss7版本的vue2用不了
+
+
 
 
 ## 样式冲突

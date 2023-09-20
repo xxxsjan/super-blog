@@ -11,17 +11,47 @@ npx eslint --init
 
 
 
-会生成.eslintrc 文件
+会生成.eslintrc  或者 .eslintrc.cjs文件
 
 #### 报错相关
 
-##### module is not defined
+##### 1 变量未定义
+
+###### module is not defined
 
 ![](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202304030055503.png)
 
-##### 自动引入后报错：api 未定义
+```
+  env: {
+  +++  node: true,
+    browser: true,
+    es2021: true,
+  },
+```
+
+
+
+###### 自动引入后报错：api 未定义
 
 ![](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202304030134389.png)
+
+通过配置vite.config.ts，使用AutoImport生成.eslintrc-auto-import.json
+
+```
+import AutoImport from "unplugin-auto-import/vite";
+plugins:[
+    AutoImport({
+            include: [/\.[tj]s$/, /\.vue$/],
+            imports: ["vue", "vue-router"],
+            resolvers: [ElementPlusResolver()],
+            eslintrc: {
+              enabled: true  
+            }
+    }),
+]
+```
+
+再配置.eslintrc.cjs extends即可
 
 ```
  extends: [
@@ -32,24 +62,26 @@ npx eslint --init
   ],
 ```
 
-##### vue 文件会报 Parsing error: ‘＞‘ expected
 
-```
-// before
+
+##### 2 vue 文件会报 Parsing error: ‘＞‘ expected
+
+```javascript
+// 修改前
 parser: '@typescript-eslint/parser',
  parserOptions: {
  ecmaVersion: 'latest',
  sourceType: 'module'
 },
 
-// now
+// 修改后 
 "parser": "vue-eslint-parser",
-  "parserOptions":{
+"parserOptions":{
   "parser":"@typescript-eslint/parser",
 },
 ```
 
-##### Parsing error: Unexpected token !
+##### 3 Parsing error: Unexpected token !
 
 识别不了 ts 断言
 
@@ -67,6 +99,33 @@ plugins: [
 ],
 ```
 
+##### 4 关闭eslint 规则造成的报错  ，也就是绕过
+
+看到不爽的，统统可以进行关闭，比如
+
+```
+// .eslintrc.cjs
+rules: {
+    '@typescript-eslint/no-unused-vars': 'off',
+    'vue/multi-word-component-names': 'off',
+    '@typescript-eslint/ban-types': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+},
+```
+
+
+
+#### 命令
+
+```
+"lint": "eslint --ext .vue,.js,.ts src/",
+"fix": "eslint --ext .vue,.js,.ts src/ --fix",
+```
+
+
+
+
+
 ### 二、安装 prettier
 
 npm i prettier -D
@@ -74,11 +133,13 @@ npm i prettier -D
 
 ```
 {
-  "semi": true,
+   "semi": true,
   "tabWidth": 2,
-  "trailingComma": "none",
   "singleQuote": true,
-  "arrowParens": "avoid"
+  "arrowParens": "avoid",
+  "trailingComma": "all",
+   "htmlWhitespaceSensitivity": "ignore"
+
 }
 
 ```
@@ -94,10 +155,13 @@ module.exports = {
   extends: [
     "eslint:recommended",
     "plugin:vue/vue3-essential",
-+    'plugin:prettier/recommended'
+    // 'plugin:prettier/recommended',
+    + 'prettier'
   ],
 }
 ```
+
+
 
 ### 三、安装 stylelint
 
