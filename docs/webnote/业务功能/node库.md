@@ -247,6 +247,8 @@ watcher.on("event", (event) => {
 
 ## 抽离已用css
 
+https://v1.purgecss.com/#cli
+
 ```
 npx sass ./index.scss ./index.css
 npx purgecss --css './index.css' --content './profile.vue' --output './optimized.css'
