@@ -163,3 +163,20 @@ cat extensions.txt | xargs -n 1 code --install-extension
 }
 ```
 
+
+
+### 代码补全
+
+#### html标签
+
+```
+"emmet.includeLanguages": {
+    "vue-html": "html",
+    "vue": "html"
+  },
+  "emmet.syntaxProfiles": {
+    "vue-html": "html",
+    "vue": "html"
+  }
+```
+

@@ -181,30 +181,37 @@ function ChildComponent() {
 
 ## useContext+useState
 
-```
-export const PContext = createContext({
-  state:undefined,
-  SetState:undefined
+```javascript
+// @/hooks/useAuth
+export const AuthContext = React.createContext({
+  data: undefined,
+  setData: undefined
 });
-export function usePContext(){
-	const context = useContext(PContext)
-	return context
-}
+
+export const useAuthController = () => {
+  const context = useContext(AuthContext);
+  return context;
+};
 
 使用
-import PContext from '..'
+import { AuthContext, AuthContextDataType } from '@/hooks/useAuth';
 
-const [state,SetState] = useState({})
-<PContext.Provider value={{  data: state, setData: setState }}>
-      {props.children}
-</PContext.Provider>
+const [state, setState] = useState();
+  return (
+      <AuthContext.Provider value={{ data: state, setData: setState }}>
+        <Child />
+      </AuthContext.Provider>
+  );
 
-后代
+# 后代
+const {data,setData}  = useContext(PContext)
 
-const {state,SetState}  = useContenxt(PContext)
-或者
-import usePContext from '..'
-const {state,SetState} = usePContext()
+# 或者
+import { useAuthController } from '@/hooks/useAuth';
+const auth = useAuthController();
+
+auth.data
+auth.setData
 ```
 
 #### 区别
