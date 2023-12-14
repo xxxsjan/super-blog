@@ -67,3 +67,22 @@ rm -rf .pnpm-store
 pnpm 会自动重新生成缓存。
 
 总的来说,通过上面的几种方式,你可以清理 pnpm 的全局缓存或者当前项目缓存。
+
+
+
+## npm、pnpm、yarn 清理缓存，更改缓存目录
+
+
+
+```
+// 清理缓存
+$ yarn cache clean
+$ npm cache clean -f
+$ pnpm store prune
+
+// 设置新的缓存地址
+$ npm config  set global-folder "E:/npm/global"
+$ pnpm config  set global-folder "E:/yarn/global"
+$ pnpm config set "E:/pnpm/global"
+```
+
