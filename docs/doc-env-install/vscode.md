@@ -50,7 +50,7 @@ Vue 2 Snippets	--vue 代码工具
 
 node sn  --代码工具
 
-## 导出插件数据
+## 导出vscode插件数据
 
 
 

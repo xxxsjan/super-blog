@@ -29,3 +29,15 @@ taskkill -f -pid "进程PID号"
 netsh http show servicestate 
 #没有进程占用就ok了
 ```
+
+
+
+## windows激活命令
+
+```
+slmgr/skms kms.03k.org
+slmgr/ato
+```
+
+保存后缀为.bat     以管理员运行
+
