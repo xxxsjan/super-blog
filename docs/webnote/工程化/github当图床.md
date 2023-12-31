@@ -4,7 +4,7 @@
 
 ## 生成token
 
-仓库 Settings Developer settings
+头像 > Settings > Developer Settings
 
 
 

@@ -4,7 +4,7 @@ import crawlerConfig from "../../../crawlerConfig.json";
 
 /** @type {import("vitepress").DefaultTheme.Config} */
 const themeConfig = {
-  logo: "/book.png",
+  logo: "/code.png",
   // algolia搜索 https://www.algolia.com/apps/YBYUHFPZ1C/dashboard
   algolia: {
     indexName: crawlerConfig.index_name,

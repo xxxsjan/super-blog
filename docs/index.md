@@ -8,7 +8,7 @@ hero:
   text: 前端体系学习文档
   tagline: 
   image:
-    src: /book.png
+    src: /code.png
     alt: logo
   actions:
     - theme: brand

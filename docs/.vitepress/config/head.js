@@ -10,14 +10,15 @@ export default [
       href: "/css/scroll.css",
     },
   ],
-  // [
-  //   "style",
-  //   {
-  //     rel: "icon",
-  //     href: "/book.png",
-  //   },
-  // ],
-  // would render: <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  [
+    "link",
+    {
+      rel: "icon",
+      href: "/code.png",
+    },
+  ],
+
   [
     "script",
     {},
