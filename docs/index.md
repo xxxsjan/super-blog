@@ -4,8 +4,8 @@ layout: home
 title: Home
 
 hero:
-  name: so~doc
-  text: 前端体系学习文档
+  name: Front End Doc
+  text: 前端文档沉淀
   tagline: 
   image:
     src: /code.png
