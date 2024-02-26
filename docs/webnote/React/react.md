@@ -1,30 +1,6 @@
 ### React
 
-##### cnpm i react react-dom -S
-
-### 优点：
-
-- 
-jsx执行更快，js的优化
-
-- 
-更安全，可以及时发现错误，停止编译
-
-- 
-编写简单快速 ，vue除外
-
-
-### 理解
-
-index.js是入口文件，引入App.js , 把App.js 这个地位最大的组件render到名为root 的div中
-
-App.js 定义路由什么的，还不知道干嘛的
-
-setState 异步更新状态，等别人执行完才能更新
-
-#### 相比vue
-
-v-if v-for 都需要自己实现
+##### 
 
 #### 原理-核心
 
@@ -166,21 +142,9 @@ npm config get registry
       </div>
 ```
 
-### 绑定属性
+### 
 
-```
-this.state = {
-  style:{
-    color:'red'
-  }
-}
-return(
-<div style={{"color":"red"}}></div>
-<div style={this.state.style}></div>
-)
-```
-
-### img
+### img引入
 
 ```
 import logo from './...'
@@ -189,34 +153,27 @@ import logo from './...'
 <img src={logo}></img>
 ```
 
-### 遍历
 
-```react
-list=[{title:'11'},{title:'22'}]
-{
-  this.stata.list.map((v,i) =>{
-    return (<li key={i}>{v.title}</li>)
-  })
-}
-```
+
+### 
 
 ### 标签传值
 
 ```
-<aid = "666">
+<Com aid = "666">
 function(e){
-e.target.getAttribute('aid')
+	e.target.getAttribute('aid')
 }
 ```
 
 ### ref
 
 ```
-< ref="one">
+<Com ref="one">
 this.refs.one
 ```
 
-### 单向绑定
+### 单向绑定 defaultValue
 
 ```
 this.state = {}
@@ -231,17 +188,7 @@ inputChange=()=>{}
 <input value={this.state.msg} onChange={this.inputChange}></input>
 ```
 
-### 阻止form表单提交事件
-
-```react
-handleSubmit=(e)=>{
-  e.preventDefault();
-}
-<form onSubmit={this.handleSubmit}>
-<input type="text"></input>
-<input type="submit" defaultValue="提交"></input>
-</form>
-```
+### 
 
 ### 生命周期
 
@@ -627,23 +574,23 @@ export default wrapLogin;
 
 ```
 <Children>
-<div data-positon="header"></div>
-<div data-positon="content"></div>
-<div data-positon="footer"></div>
+    <div data-positon="header"></div>
+    <div data-positon="content"></div>
+    <div data-positon="footer"></div>
 </Children>
 ```
 
-子组件里面可以通过foreach判断条件添加对应插槽
+子组件里面可以通过forEach判断条件添加对应插槽
 
 ```react
 this.props.children.forEach((v,i)=>{
-if(item.props['data-positon'] === header) {
-headerDom = item 
-}else if(item.props['data-positon'] === content) {
-contentDom = item 
-}else if(item.props['data-positon'] === footer) {
-footerDom = item 
-}
+    if(item.props['data-positon'] === header) {
+   		headerDom = item 
+    }else if(item.props['data-positon'] === content) {
+    	contentDom = item 
+    }else if(item.props['data-positon'] === footer) {
+    	footerDom = item 
+    }
 })
 子组件里面内容
 <div>
@@ -653,28 +600,35 @@ footerDom = item
 </div
 ```
 
-### redux--数据管理
+## redux--数据管理
 | Store | 数据仓库 |
 | --- | --- |
 | State | 数据 |
 | Action | 动作 触发改变的方法 |
 | Dispatch | 将动作触发成方法 |
 | Reducer | 函数 获取动作 改变数据 生成新的state |
+| subscribe | 监听状态更新 |
 
 
 ```react
 import Redux,{createStore} from 'redux'
-// 创建仓库
-const store = createStore(reducer) 
+
 // 通过动作创建新的state
-cosnt reducer=function(state={num:0},action){
-  switch(action.type){
-    case "add":state.num ++;break;
-    case "decrement":state.num --;break;
+cosnt reducer= function(state={num:0},action){
+  switch(action.type) {
+    case "add":
+          state.num ++;
+          break;
+    case "decrement":
+          state.num --;
+          break;
     default：return
   }
-	return {...state}
+  return {...state}
 }
+// 创建仓库
+const store = createStore(reducer) 
+
 function add(){
   // 调用仓库的dispatch方法修改数据
 	store.dispatch({type:"add"})
@@ -683,45 +637,81 @@ function decrement(){
   // 调用仓库的dispatch方法修改数据
 	store.dispatch({type:"decrement"})
 }
-// 监听修改 重新渲染
-store.subscribe(()=>{
-  ReactDOM.render(<Counter></Counter/>,document.getElementById("root"))
+// 监听修改 
+store.subscribe(()=>{ 
+    console.log(store.getState())  // 数据获取
+ 	ReactDOM.render(<Counter/>,document.getElementById("root")) // 重新渲染
 })
-// 数据获取
-{store.getState()}
+
 ```
 
 #### react-redux
 
 ```react
-import {Povider，connect} from 'react-redux'
-class Counter extends React.Component{
-	reder(){
-		const value = this.props.value;
-		const onAddClick = this.props.onAddClick
-	}
-}
-const
- addAction = { type: "add"}
- function reducer (state={num:0},action){
- switch(action.type){
-    case "add":state.num ++;break;
-    default：return
+import { connect} from 'react-redux'
+ 
+class MyComponent extends React.Component {
+  // component code...
+
+  render() {
+    return (
+      <button onClick={this.props.onAddClick}>Add</button>
+    );
   }
-	return {...state}
- }
-const store = createStore(reducer)
-/ 修改state里的方法，映射到props
+}
+
+export default connect(null, mapDispatchToProps)(MyComponent);
+
+// 修改state里的方法，映射到props
 function mapDispatchToProps(dispatch){
   return {
-    onAddClick:()={dispatch(addAction)}
+    onAddClick:()={dispatch({ type: "add"})
+  }
 }
 ```
 
-### Echart不更新
+## Echart不更新
 
 props和state最好别联系在一起，state的更新麻烦，因为`componentDidMount`方法只会执行一次，render时state不会更新，setState刷新的关键：
 
 1. setState不会立刻改变React组件中state的值；
 2. setState通过引发一次组件的更新过程来引发重新绘制；
 3. 多次setState函数调用产生的效果会合并。
+
+## 高阶组件
+
+包一层组件
+
+props透传
+
+### render props
+
+render使用props传入的render
+
+```
+<div>
+{this.props.render(this.state)}
+</div>
+
+使用
+<Com render={data=><div>{data.a}</div>}>
+```
+
+## shouldComponentUpdate
+
+默认ture
+
+### **pureComponent**
+
+官方的pureComponent，做了浅比较的优化
+
+
+
+## 异步组件
+
+```
+React.lazy(()=>import())
+```
+
+
+
