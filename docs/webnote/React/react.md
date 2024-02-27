@@ -648,11 +648,21 @@ store.subscribe(()=>{
 #### react-redux
 
 ```react
-import { connect} from 'react-redux'
- 
+import {Provider, connect} from 'react-redux'
+
+// 根
+const store = createStore(rootReducer);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
+
+// App里的组件
 class MyComponent extends React.Component {
   // component code...
-
   render() {
     return (
       <button onClick={this.props.onAddClick}>Add</button>
@@ -660,13 +670,20 @@ class MyComponent extends React.Component {
   }
 }
 
-export default connect(null, mapDispatchToProps)(MyComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(MyComponent);
 
-// 修改state里的方法，映射到props
+// dispatch映射到props
 function mapDispatchToProps(dispatch){
   return {
     onAddClick:()={dispatch({ type: "add"})
   }
+}
+// state映射到props   
+function mapStateToProps(state) {
+  return {
+    counter: state.counter,
+    user: state.user
+  };
 }
 ```
 
