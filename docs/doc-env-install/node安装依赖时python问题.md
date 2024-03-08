@@ -37,6 +37,8 @@ windows-build-tools装不了的话，可以去C:\Users\admin\.windows-build-tool
 
 ##### 安装python27
 
+https://www.python.org/downloads/
+
 安装时记得选Add python.exe to Path>>Entire feature will be installed on local hard drive
 
 选上了会把安装目录添加到环境变量
@@ -85,28 +87,38 @@ https://blog.csdn.net/wangtao88888888/article/details/106681641
 
 ### 报错：需要python3
 
-共存方式
+
+
+![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202304291744923.png)
+
+
+
+### 2 3共存方式
 
 https://blog.csdn.net/weixin_44953600/article/details/107638692
+
+
+
+
+
+#### python3 改名
+
+![image-20240304153226633](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/image-20240304153226633.png)
+
+#### pip共存
+
+python3.x 目录下的 pip.exe文件删除
+
+安装pip2：在Dos中输入：python2 -m pip install --upgrade pip --force-reinstall
+
+安装 pip3： 在Dos中输入：python3 -m pip install --upgrade pip --force-reinstall 
+
+
+
+#### 其他方法
 
 https://www.jianshu.com/p/fe327b72fa31
 
 miniconda会小一点,50m
 
 anaconda 要600m
-
-![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202304291744923.png)
-
-
-
-安装2 3其实改一个就好，以你喜欢的为python，
-
-比如你想默认是2 那2的exe就python不改，pip也不用刷新安装了，pip2 -V是不会报错的
-
-pip3 -V就会报错
-
-这时你可以
-
-python3 -m pip install --upgrade pip --force-reinstall
-
-这样pip3 -V也能用了

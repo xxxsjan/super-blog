@@ -4,7 +4,7 @@
       <!-- 网易云外链播放器 -->
       <div :class="{ 'iframe-container': true, hidden: !show }">
         <div class="prefix" @click="show = !show">
-          <img src="/svg/right.svg" alt="" />
+          <img :src="svgSrc" alt="" />
         </div>
         <iframe
           width="330"
@@ -29,10 +29,18 @@ export default {
 <script setup>
 import DefaultTheme from "vitepress/theme";
 import { useData } from "vitepress";
-import { ref } from "vue";
-const { page, theme, frontmatter } = useData();
+import { ref, watch } from "vue";
+const data = useData();
+// console.log("data: ", data);
+
 const { Layout } = DefaultTheme;
 const songId = "30854100";
+const svgSrcMap = {
+  black: "/svg/right.svg",
+  white: "/svg/right-white.svg",
+};
+const svgSrc = ref(svgSrcMap["black"]);
+
 const show = ref(true);
 // const src = 'https://music.163.com/outchain/player?type=2&id=167876&auto=1&height=66'
 // const src =
@@ -41,6 +49,13 @@ const show = ref(true);
 //   "https://music.163.com/outchain/player?type=2&id=1340439829&auto=1&height=66";
 
 const src = `https://music.163.com/outchain/player?type=2&id=${songId}&auto=0&height=66`;
+
+watch(
+  () => data.isDark.value,
+  (val) => {
+    svgSrc.value = val ? svgSrcMap["white"] : svgSrcMap["black"];
+  }
+);
 </script>
 
 <style scoped>

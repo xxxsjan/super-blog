@@ -26,17 +26,25 @@ docker需要开启hyper-V
 
 <img src="https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281327051.png" alt="image.png" style="zoom:50%;" /><img src="https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281327009.png" alt="image.png" style="zoom:50%;" />
 
-#### 开启 适用于Linux的Window子系统
+
+
+### windows功能需要开启
+
+#### ✅开启 适用于Linux的Window子系统
 
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 
-#### Hyper-v 开启
+#### ✅开启 Hyper-v 
 
-注意这里不要在"启用或关闭Windows功能"（命令optionalfeatures）中勾选Hyper-v
+⚠注意这里不要在"启用或关闭Windows功能"（命令optionalfeatures）中勾选Hyper-v
+
+可以通过命令行开启
 
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 
-#### 守护hyper进程
+##### hyper莫名关闭
+
+守护hyper进程
 
 --这个很可能是开启hyper后不生效的主因
 
