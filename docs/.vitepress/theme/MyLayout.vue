@@ -34,7 +34,6 @@ const data = useData();
 // console.log("data: ", data);
 
 const { Layout } = DefaultTheme;
-const songId = "30854100";
 const svgSrcMap = {
   black: "/svg/right.svg",
   white: "/svg/right-white.svg",
@@ -42,13 +41,14 @@ const svgSrcMap = {
 const svgSrc = ref(svgSrcMap["black"]);
 
 const show = ref(true);
-// const src = 'https://music.163.com/outchain/player?type=2&id=167876&auto=1&height=66'
-// const src =
-//   "https://music.163.com/outchain/player?type=2&id=1923325275&auto=1&height=66";
-// const src =
-//   "https://music.163.com/outchain/player?type=2&id=1340439829&auto=1&height=66";
 
-const src = `https://music.163.com/outchain/player?type=2&id=${songId}&auto=0&height=66`;
+// const songId = "30854100";// ピタカゲ(CROOKED)
+// const songId = "1923325275";// 只因你太美（狂放版）
+// const songId = "167876"; // 有何不可
+const songId = "2099887740"; // 离别开出花（DJHZ版）
+
+const src = `https://music.163.com/outchain/player?type=2&id=${songId}&auto=1&height=66`;
+console.log("src: ", src);
 
 watch(
   () => data.isDark.value,
