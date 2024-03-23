@@ -5,7 +5,7 @@
         <a class="task-name" target="_blank">some file name</a>
         <span class="task-progress">50%</span>
       </div>
-    </template>
+</template>
 ```
 ```typescript
 function (task) {
@@ -47,3 +47,4 @@ if (!taskBox) {
 taskBox.innerHTML = "";
 taskBox.append(this.taskRenderer(task));
 ```
+
