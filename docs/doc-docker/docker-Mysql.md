@@ -7,9 +7,8 @@ docker pull daocloud.io/library/mysql:8.0.20
 
  [更多版本](https://hub.daocloud.io) 
 
-### 启动MySQL镜像
+### 生成容器
 image --> container
-> 即生成容器
 
 换行写法
 
@@ -23,9 +22,13 @@ docker run -d \
 be0dbf01a0f3(mysql镜像ID)
 ```
 一行写法
+
 docker run -d  -p 3306:3306  --name mysql57 -v ~/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 459651132a11
 
 docker run -d  -p 3306:3306  --name mysql57 -v /mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 [image-id]
+
+
+
 ##### options如下
 ```json
 -P: 随机端口映射，容器内部端口随机映射到主机的端口
@@ -132,3 +135,52 @@ docker run --name  mysql_mount -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 --moun
 电脑重启后依旧存在，解决
 相关问题
 [http://t.zoukankan.com/T-FQlin-p-9294208.html](http://t.zoukankan.com/T-FQlin-p-9294208.html)
+
+
+
+
+
+## mysql报错
+
+Client does not support authentication protocol requested by server; conside
+
+https://www.cnblogs.com/hauner/p/14142390.html
+
+```
+ALTER USER 'root'@'localhost' IDENTIFIED BY '12345678' PASSWORD EXPIRE NEVER;
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '12345678';
+FLUSH PRIVILEGES;
+
+切换数据库
+use mysql;
+select user,host,plugin from user where user='root';
++------+-----------+-----------------------+
+| user | host      | plugin                |
++------+-----------+-----------------------+
+| root | %         | caching_sha2_password |
+| root | localhost | mysql_native_password |
++------+-----------+-----------------------+
+2 rows in set (0.00 sec)
+# 此时 % 没修改成功
+
+alter user 'root'@'%' identified by '12345678' password expire never;
+alter user 'root'@'%' identified with mysql_native_password by '12345678';
+flush privileges;
+use mysql;                                                                  
+
+mysql> select user,host,plugin from user where user='root';
++------+-----------+-----------------------+
+| user | host      | plugin                |
++------+-----------+-----------------------+
+| root | %         | mysql_native_password |
+| root | localhost | mysql_native_password |
++------+-----------+-----------------------+
+2 rows in set (0.00 sec)
+
+# 此时% 也使用了 mysql_native_password
+```
+
+
+
+![image-20240419163718318](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/image-20240419163718318.png)
+

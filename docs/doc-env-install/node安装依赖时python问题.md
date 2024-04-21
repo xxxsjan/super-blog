@@ -65,7 +65,7 @@ python -V
 
 
 
-##### vs_buildtools
+##### vs_buildtools 、 Visual Studio
 
 另一个vs_buildtools也要操作
 

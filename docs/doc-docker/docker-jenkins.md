@@ -9,9 +9,17 @@
 ## docker安装jenkins
 ### 创建容器
 #### 单行
-docker run  -d  --rm -u root -p 8080:8080  -v jenkins-data:/var/jenkins_home  -v /var/run/docker.sock:/var/run/docker.sock -v /d/docker/jenkins/home:/home   --name jenkins jenkinsci/blueocean
+
+```
+docker run  -d  --rm -u root -p 8080:8080  -v jenkins-data:/var/jenkins_home  -v /var/run/docker.sock:/var/run/docker.sock -v /d/docker/jenkins/home:/home  --name jenkins jenkinsci/blueocean
+```
+
 -rm 关闭后会移除容器
+
+```
 docker run  -d  -u root -p 8080:8080  -v jenkins-data:/var/jenkins_home  -v /var/run/docker.sock:/var/run/docker.sock -v /d/docker/jenkins/home:/home   --name jenkins jenkinsci/blueocean
+```
+
 #### 多行
 ```javascript
 docker run \
@@ -24,12 +32,17 @@ docker run \
   -v "$HOME":/home \
   jenkinsci/blueocean
 ```
-#### 一步一步。磨磨唧唧
+
+
 搜索命令：docker search jenkinsci/blueocean
 下载镜像：docker pull  jenkinsci/blueocean
 新建容器：docker run  -d  --rm -u root -p 8080:8080  -v jenkins-data:/var/jenkins_home  -v /var/run/docker.sock:/var/run/docker.sock -v "$HOME":/home   jenkinsci/blueocean
+
 "$HOME"会报错，待解决，可使用下面命令
+
 docker run  -d  --rm -u root -p 8080:8080  -v jenkins-data:/var/jenkins_home  -v /var/run/docker.sock:/var/run/docker.sock -v /d/docker/jenkins/home:/home   --name jenkins jenkinsci/blueocean
+
+
 
 #### Dockerfile创建（待完善）
 docker build -t .
@@ -40,7 +53,8 @@ FROM jenkinsci/blueocean
 
 ---
 
-### 前置准备
+## 前置准备
+
 #### github生成token
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281402283.png)
 
@@ -72,19 +86,24 @@ FROM jenkinsci/blueocean
 
 ---
 
-### 进入jenkins
+## 首次进入jenkins
 
 `http://localhost:8080`
 
-#### 输入密钥
-第一次打开页面，输入密钥
-密钥在 cat /var/jenkins_home/secrets/initialAdminPassword
+### 输入密钥
+第一次打开页面，输入密码
+密码在 cat /var/jenkins_home/secrets/initialAdminPassword
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281403181.png)
 下一步，**安装推荐的插件**
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281350376.png)
+
 提示某些插件下载失败（如SSH Build Agents）就先跳过
-[https://blog.csdn.net/weixin_48500307/article/details/125006605](https://blog.csdn.net/weixin_48500307/article/details/125006605)
+
+
 进入系统再设置源 解决下载错误的问题
+
+### 设置源
+
 在插件管理-高级进行设置源
 
 ```javascript
@@ -95,51 +114,60 @@ http://mirror.esuni.jp/jenkins/updates/update-center.json
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281350297.png)![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281405332.png)
 
 创建用户或者使用管理员继续
-> 管理员账号：admin 密码为上面那个密钥
+> 管理员账号：admin 密码为上面那个密码
 
 下一步叫你重启，确认，等待
 
+## 开始使用
+
 ### 新建任务
+
+相关视频
+
+https://www.bilibili.com/video/BV1zM41127hC/?spm_id_from=333.337.search-card.all.click&vd_source=11e14f37a256537712e73b4b7f52411c
+
 左侧新建任务
-输入任务名，例如test，选择自由风格
+输入任务名，例如test，选择构建自由风格项目（自定义）
+
 #### general
 设置git地址
 #### 源码管理
-点击git。填写地址，添加用户
+点击git
+
+填写地址
+
+添加用户
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281403579.png)
 
 类型、用户名、密码和描述，填完
 
-
-
-### ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281403817.png)
-
-
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281403817.png)
 
 
 
 并且选择监听分支
+
 默认是master，我的是main
+
+
 
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281403009.png)
 
 
 
 #### 构建触发器
---设置轮询
+设置轮询      * * * * *   表示每分钟，星号之间要一个空格
 
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281403841.png)
 
 
 
-
-
-```javascript
-* * * * *            表示每分钟，星号之间要一个空格
-```
 #### 构建环境
 勾选**Use secret text(s) or file(s)**
+
 **绑定里添加secret text，就是之前github生成的token**
+
+
 
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281403334.png)
 
@@ -160,9 +188,11 @@ ls
 echo $PATH
 ```
 #### 构建后的操作
-跳过，不操作
+
+这里可以做一些打包结果上传服务器的操作
+
+这里跳过，不操作 点击保存
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281351835.png)
-点击保存
 
 ### 构建
 回到首页，看到任务test已经出现了，点击test的名称
@@ -188,6 +218,9 @@ echo $PATH
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281351750.png)
 构建下的shell修改一下
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281404145.png)
+
+示例shell
+
 作用是压缩项目代码，解压放到nginx代理的html目录
 
 ```javascript
@@ -203,7 +236,7 @@ tar -zxvf /root/.jenkins/workspace/test/dist/dist.tar.gz -C /usr/share/nginx/htm
 cd /root/.jenkins/workspace/vue-online-admin 
 rm -R dist #删除项目打包后的残留
 ```
-### 目录说明
+## 目录说明
 /var/jenkins_home/workspace
 nginx html位置
 /usr/share/nginx/html

@@ -150,3 +150,11 @@ wsl1升级到wsl2之后，内核却没有升级，所以会出现这种错误提
 更新包：
 
 <https://learn.microsoft.com/zh-cn/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package>
+
+
+
+
+
+# Docker Desktop WSL 2 backend on Windows
+
+https://docs.docker.com/desktop/wsl/?uuid=7532B8E9-9BC6-449E-B7BF-49FC6DA37C99
