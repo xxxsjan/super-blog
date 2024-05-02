@@ -1,6 +1,14 @@
 # linux命令
 
+https://github.com/jaywcjlove/linux-command
 
+
+
+https://wangchujiang.com/linux-command/
+
+
+
+https://www.linuxcool.com/
 
 ```
 netstat -nplt

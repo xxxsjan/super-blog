@@ -1,4 +1,4 @@
-# replace
+# replace的用的和区别
 
 
 
@@ -10,21 +10,23 @@
 
 ```
 let str = "Hello World!";
-let newStr = str.replace(/o/g, "");
-console.log(newStr); // Hell Wrld!
+let newStr = str.replace(/o/, "");
+console.log(newStr); // Hell World!
 ```
 
 全替换
 
 ```
 let str = "Hello World!";
-let newStr = str.replace(/o/, "");
-console.log(newStr); // Hell World!
+let newStr = str.replace(/o/g, "");
+console.log(newStr); // Hell Wrld!
 ```
+
+
 
 #### 参数2为$
 
-非括号正则  $1为单纯字符串
+非括号正则  $1为单纯字符串 ‘$1’
 
 括号正则 $1为匹配结果
 
@@ -34,16 +36,16 @@ console.log(newStr); // Hell World!
 
 ```js
 var text = "你的操作666，了解new哈哈old";
-//非括号正则 全局
+//非括号正则 全局 $1只为字符串，匹配所有
 console.log(text.replace(/[a-zA-Z]+/g, " $1 "));// 你的操作666，了解 $1 哈哈 $1
 
-//括号正则 全局
+//括号正则 全局 $1为结果，匹配所有
 console.log(text.replace(/([a-zA-Z]+)/g, " $1 "));// 你的操作666，了解 new 哈哈 old 
 
-//非括号正则  非全局
+//非括号正则  非全局   $1只为字符串，只匹配第一个
 console.log(text.replace(/[a-zA-Z]+/, " $1 ")); // 你的操作666，了解 $1 哈哈old
 
-//括号正则 非全局
+//括号正则 非全局  $1为结果，只匹配第一个
 console.log(text.replace(/([a-zA-Z]+)/, " $1 ")); // 你的操作666，了解 new 哈哈old
 ```
 

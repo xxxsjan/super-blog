@@ -1,4 +1,4 @@
-# vite打包
+# vite打包优化
 
 
 
@@ -16,7 +16,7 @@ rollupOptions: {
 },
 ```
 
-#### chunkInfo类型
+## chunkInfo类型
 
 ```javascript
 export interface PreRenderedChunk {
@@ -31,7 +31,7 @@ export interface PreRenderedChunk {
 }
 ```
 
-#### 打印例子
+## 打印例子
 
 ```javascript
 # exports: string[]：代码块导出的模块名称数组。
@@ -54,5 +54,61 @@ false
 index
 # type: 'chunk'：代码块的类型，始终为 'chunk'。
 chunk
+```
+
+
+
+## 分包
+
+### manualChunks
+
+手动对三方库分包
+
+```
+build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ["vue", "axios", "vue-router", "pinia", "dayjs"],
+          element: ["element-plus"],
+        },
+      },
+    },
+},
+```
+
+
+
+### chunkFileNames
+
+根据文件分包，都可以是字符串或者函数配置
+
+chunkFileNames    js文件
+
+entryFileNames     入口文件
+
+assetFileNames     资源文件  非js的
+
+
+
+```
+build: {
+      rollupOptions: {
+        output: {
+          chunkFileNames: chunkInfo => {
+            const { facadeModuleId } = chunkInfo;
+            let name = '[name]';
+            if (facadeModuleId) {
+              const pattern = /\/([^/]+)\/index.vue$/;
+              const match = facadeModuleId.match(pattern);
+              name = match ? match[1] : name;
+            }
+            return `static/js/${name}-[hash].js`;
+          },
+          entryFileNames: 'static/js/app-[hash].js',
+          assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
+        },
+      },
+},
 ```
 
