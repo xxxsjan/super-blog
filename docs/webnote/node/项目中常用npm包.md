@@ -1,4 +1,4 @@
-### 各种工具 对应文档地址
+## 各种工具 对应文档地址
 
  animat.css 动画效果
 validator.js 登录验证
@@ -22,11 +22,11 @@ vue-qr 生成二维码
 二维码生成
 [https://www.npmjs.com/package/vue-qr](https://www.npmjs.com/package/vue-qr)
 ### 
-### clipboard 
+## clipboard 
 粘贴板
-### screenfull 
+## screenfull 
 控制全屏
-### xlsx 
+## xlsx 
 解析excel表格
 ```javascript
 private readerData(rawFile: File) {
@@ -195,7 +195,7 @@ ROUND_HALF_UP
 ```
 
 
-### npkill--清理node_modules
+## npkill--清理node_modules
 #### 安装
 npm i  npmkill -g
 #### 执行
@@ -210,10 +210,11 @@ ctrl c进行退出操作
 
 ### normalize.css   css reset库
 
-### fast-glob
+## fast-glob
 返回目录下的文件名[]
 
-### concurrently
+## concurrently
+
 执行多个npm命令 单个命令双引号引起来，记得使用\转义
 ```typescript
 "postinstall": "concurrently \"pnpm gen:version\" \"pnpm run -C internal/metadata dev\""
@@ -221,6 +222,109 @@ ctrl c进行退出操作
 
 
 
-## face-api
+face-api
 
 https://www.npmjs.com/package/@vladmandic/face-api
+
+
+
+## picocolors
+
+```
+import pc from "picocolors"
+
+console.log(
+  pc.green(`How are ${pc.italic(`you`)} doing?`)
+)
+```
+
+## prompts
+
+```
+const prompts = require('prompts');
+
+(async () => {
+  const response = await prompts({
+    type: 'number',
+    name: 'value',
+    message: 'How old are you?',
+    validate: value => value < 18 ? `Nightclub is 18+ only` : true
+  });
+
+  console.log(response); // => { value: 24 }
+})();
+```
+
+## cac
+
+```
+// examples/basic-usage.js
+const cli = require('cac')()
+
+cli.option('--type <type>', 'Choose a project type', {
+  default: 'node',
+})
+
+const parsed = cli.parse()
+
+console.log(JSON.stringify(parsed, null, 2))
+```
+
+## npm-run-all
+
+```
+npm-run-all clean lint build
+```
+
+## semver
+
+判断版本号是否符合规则
+
+
+
+```
+const semver = require('semver')
+
+semver.valid('1.2.3') // '1.2.3'
+semver.valid('a.b.c') // null
+semver.clean('  =v1.2.3   ') // '1.2.3'
+semver.satisfies('1.2.3', '1.x || >=2.5.0 || 5.0.0 - 7.2.3') // true
+semver.gt('1.2.3', '9.8.7') // false
+semver.lt('1.2.3', '9.8.7') // true
+semver.minVersion('>=1.0.0') // '1.0.0'
+semver.valid(semver.coerce('v2')) // '2.0.0'
+semver.valid(semver.coerce('42.6.7.9.3-alpha')) // '42.6.7'
+```
+
+## minimist 
+
+命令行参数解析工具
+
+```
+node test.js -x 10 -y 20 --env dev
+--> { x:10,y:20,env:'dev' }
+
+
+test.js
+var argv = require('minimist')(process.argv.slice(2));
+console.log(argv);
+```
+
+## chokidar
+
+文件监控
+
+```
+
+```
+
+## single-line-log
+
+打印只显示一行
+
+```
+var log = require("single-line-log").stdout;
+
+log('hello world')
+```
+
