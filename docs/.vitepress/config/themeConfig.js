@@ -32,16 +32,6 @@ const themeConfig = {
   },
   sidebar: {
     ...sidebar,
-    // "/component/": [
-    //   {
-    //     text: "文件夹1",
-    //     items: [{ text: "icon", link: "/component/icon" }],
-    //   },
-    //   {
-    //     text: "文件夹2",
-    //     items: [],
-    //   },
-    // ],
     // "/guide/": [
     //   {
     //     text: "Guide",
