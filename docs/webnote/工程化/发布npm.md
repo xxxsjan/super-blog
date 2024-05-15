@@ -9,11 +9,17 @@
 
 首先源得是官网的，不是淘宝的，
 
-npm config set registry <https://registry.npmjs.org/>
+```
+npm config set registry https://registry.npmjs.org/
+```
+
+
 
 ## 然后进行登录
 
-npm adduser --registry <https://registry.npmjs.org/>
+```
+npm adduser --registry https://registry.npmjs.org/
+```
 
 期间可能会输邮件验证码
 
@@ -36,7 +42,7 @@ npm publish
   "name": "@liyongning/ts-cli"
   "main": "./lib/index.js",
   "keywords": ["typescript", "cli", "typescript 脚手架", "ts 脚手架", "ts-cli", "脚手架"],
-  "author": "李永宁",
+  "author": "",
   "files": ["package.json", "README.md", "lib"],
   "repository": {
     "type": "git",
@@ -53,6 +59,4 @@ repository：项目仓库
 
 npm 的账户名、密码就不用说，必不可少
 
-作者：李永宁
-链接：https://juejin.cn/post/6901552013717438472
 ```

@@ -99,11 +99,11 @@ https://blog.csdn.net/weixin_44953600/article/details/107638692
 
 
 
+直接改名
+
+python.exe改成 python2.exe
 
 
-#### python3 改名
-
-![image-20240304153226633](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/image-20240304153226633.png)
 
 #### pip共存
 
@@ -111,7 +111,7 @@ python3.x 目录下的 pip.exe文件删除
 
 安装pip2：在Dos中输入：python2 -m pip install --upgrade pip --force-reinstall
 
-安装 pip3： 在Dos中输入：python3 -m pip install --upgrade pip --force-reinstall 
+安装 pip3： 在Dos中输入：python -m pip install --upgrade pip --force-reinstall 
 
 
 
@@ -121,4 +121,3 @@ https://www.jianshu.com/p/fe327b72fa31
 
 miniconda会小一点,50m
 
-anaconda 要600m
