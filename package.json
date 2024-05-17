@@ -1,9 +1,9 @@
 {
-  "name": "so-blog",
+  "name": "blog",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "homepage": "https://github.com/xxxsjan/so-blog",
+  "homepage": "https://github.com/xxxsjan",
   "scripts": {
     "docs:dev": "vitepress dev docs --host",
     "docs:build": "vitepress build docs",
@@ -21,8 +21,10 @@
   "dependencies": {
     "@vercel/analytics": "^1.0.1",
     "cross-env": "^7.0.3",
+    "dayjs": "^1.11.11",
     "fast-glob": "^3.2.11",
     "fs-extra": "^11.1.1",
+    "gray-matter": "4.0.3",
     "husky": "^8.0.3",
     "sass": "^1.54.4"
   },

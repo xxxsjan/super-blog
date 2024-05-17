@@ -640,3 +640,26 @@ declare module '@vue/runtime-core' {
   }
 }
 ```
+
+
+
+## InstanceType
+
+获取类的实例类型
+
+```
+const formRef = ref<InstanceType<typeof ELForm>>()
+
+// 封装
+export  function useComRef<T extends abstract new (...args:any)=>any>(){
+	return ref(InstanceType<T>)
+}
+const formRef = useComRef<ELForm>()
+
+// 或者
+export  function useComRef<T extends abstract new (...args:any)=>any>(_com:T){
+	return ref(InstanceType<T>)
+}
+const formRef = useComRef(ELForm)
+```
+

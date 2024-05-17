@@ -5,6 +5,7 @@ import VercelAnalytics from "../components/VercelAnalytics.vue";
 
 import "./styles/vars.scss";
 import "./styles/style.scss";
+import './styles/flexsearch.css';
 
 /** @type {import("vitepress/theme")} **/
 const config = {
