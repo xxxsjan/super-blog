@@ -1,8 +1,6 @@
 ### git
 
-### git流程图
-
-
+### git 流程图
 
 [https://www.bilibili.com/video/av75718460](https://www.bilibili.com/video/av75718460)
 
@@ -23,10 +21,10 @@ git config --global --edit
 :q!强制退出
 ```
 
-配置当前当前fork的仓库的原仓库地址
-git remote add upstream <原仓库github地址>
+配置当前当前 fork 的仓库的原仓库地址
+git remote add upstream <原仓库 github 地址>
 
-fork相关操作
+fork 相关操作
 
 [https://zhuanlan.zhihu.com/p/467670042](https://zhuanlan.zhihu.com/p/467670042)
 
@@ -78,7 +76,7 @@ git add .    #添加
 git commit -m "你要添加的日志"  #可以不写
 git commit -am "你要添加的日志"  #可以不写git add直接提交
 #和自己的仓库简历远程连接，链接可以在你的github仓库中获得
-git remote add origin https://github.com/xxx/xxx  
+git remote add origin https://github.com/xxx/xxx 
 git pull orgin master    //从master 拉取
 git push -u origin master  // 推送到master
 
@@ -119,11 +117,11 @@ git pull origin dev
 
 ### 图形化管理工具
 
-1.  github for desktop  --官方 
+1.  github for desktop  --官方
 2.  source tree
-[https://www.jianshu.com/p/6d2717c2a3e1](https://www.jianshu.com/p/6d2717c2a3e1) 
-3.  tortoiseGit 
-4.  Git GUI Here（右键） 
+    [https://www.jianshu.com/p/6d2717c2a3e1](https://www.jianshu.com/p/6d2717c2a3e1)
+3.  tortoiseGit
+4.  Git GUI Here（右键）
 
 ### 报错
 
@@ -142,7 +140,7 @@ git remote add origin https://gitee.com/sjan233/miniProgram_shop.git
 
 ##### error:failed to push some refs to '[https://github.com/xxx/xxx.git](https://github.com/xxx/xxx.git)'
 
-原因是：刚才在网站上改了README.md文件，添加了一些项目的说明，然后使用Git客户端再次提交的时候，需要先更新服务器上的变化，然后才能提交，也就是先更新再提交。
+原因是：刚才在网站上改了 README.md 文件，添加了一些项目的说明，然后使用 Git 客户端再次提交的时候，需要先更新服务器上的变化，然后才能提交，也就是先更新再提交。
 
 将线上、线下代码进行合并
 
@@ -150,15 +148,15 @@ git remote add origin https://gitee.com/sjan233/miniProgram_shop.git
 git pull --rebase origin master
 ```
 
-然后再进行push
+然后再进行 push
 
 ```
 git push origin master
 ```
 
-#### cmd报错：不是命令
+#### cmd 报错：不是命令
 
-系统变量path设置为C:\Program Files\Git\cmd，网上那个git-core bin 的替换掉
+系统变量 path 设置为 C:\Program Files\Git\cmd，网上那个 git-core bin 的替换掉
 
 工具更新
 
@@ -171,8 +169,6 @@ git update
 git update-git-for-windows
 ```
 
-
-
 [https://blog.csdn.net/weixin_42596434/article/details/88759295](https://blog.csdn.net/weixin_42596434/article/details/88759295)
 
 原因是没有指定本地 `master` 分支和远程 `origin/master` 的连接，这里根据提示：
@@ -183,7 +179,7 @@ git branch --set-upstream-to=origin/master master
 
 **解决方案：**
 
-因为远程仓库新建时，有LIENCE，由于本地仓库和远程仓库有不同的开始点，也就是两个仓库没有共同的commit出现，无法提交
+因为远程仓库新建时，有 LIENCE，由于本地仓库和远程仓库有不同的开始点，也就是两个仓库没有共同的 commit 出现，无法提交
 
 此时我们需要在后面加上 --allow-unrelated-histories
 
@@ -206,8 +202,6 @@ git pull --allow-unrelated-histories
 ##### 编辑器出不去
 
 [https://blog.csdn.net/u014027876/article/details/81665636](https://blog.csdn.net/u014027876/article/details/81665636)
-
-
 
 **莫方**~可以按照以下步骤来解决：
 
@@ -236,7 +230,7 @@ demo.html   过滤该文件
 !index.html 不过滤该文件
 ```
 
-#### 远程有打包 本地新增.gitignore文件 更新远程
+#### 远程有打包 本地新增.gitignore 文件 更新远程
 
 重置所有缓存(注意后面有个.)
 
@@ -273,7 +267,7 @@ ci: 持续集成
 
 git commit -m "备注"
 
-此时不要急着push，先pull看看分支的代码有没更新---git pull
+此时不要急着 push，先 pull 看看分支的代码有没更新---git pull
 
 ```javascript
 #可设置upstream上流分支，提交分支到远程仓库remote，提示远程没有对应分支
@@ -290,16 +284,16 @@ git rebase 分支名   ---以当前分支为基础，把别的分支的commit加
 
 作者：敲代码的小提琴手链接：[https://juejin.cn/post/7089850111794085901](https://juejin.cn/post/7089850111794085901)
 
--  分支管理 `Gitflow`工作流文档 
-> 一个功能一个分支，写完了一个功能就提pr 提完pr就删除分支~
->  
-> 相关文档：`[my-git/git-workflow-tutorial.md at master · xirong/my-git (github.com)](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fxirong%2Fmy-git%2Fblob%2Fmaster%2Fgit-workflow-tutorial.md%23236-%E7%A4%BA%E4%BE%8B)`
+- 分支管理 `Gitflow`工作流文档
 
- 
+  > 一个功能一个分支，写完了一个功能就提 pr 提完 pr 就删除分支~
+  >
+  > 相关文档：`[my-git/git-workflow-tutorial.md at master · xirong/my-git (github.com)](https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fxirong%2Fmy-git%2Fblob%2Fmaster%2Fgit-workflow-tutorial.md%23236-%E7%A4%BA%E4%BE%8B)`
 
--  commit命名规范 
-   -  每天一提交的commit，这个还是要保证基本的规范滴，要不然想追溯之前的版本，就懵逼了XD 
-   -  
+- commit 命名规范
+  - 每天一提交的 commit，这个还是要保证基本的规范滴，要不然想追溯之前的版本，就懵逼了 XD
+  -
+
 ```
  'feat', // 新功能 feature
  'fix', // 一个错误修复
@@ -310,15 +304,17 @@ git rebase 分支名   ---以当前分支为基础，把别的分支的commit加
  'style', // 不影响代码含义的更改（空白，格式，缺少分号等）
  'perf', // 改进性能的代码更改
  'revert', // 回退
- 
+
  // eg: 'feat: 添加了图表功能'
 复制代码
 ```
 
+- 不要在代码仓库中使用强制回滚的命令~
 
--  不要在代码仓库中使用强制回滚的命令~ 
-###  OpenSSL SSL_connect: Connection was reset in connection to github.com:443
+### OpenSSL SSL_connect: Connection was reset in connection to github.com:443
+
 [https://www.codenong.com/27807319/](https://www.codenong.com/27807319/)
+
 ```javascript
 运行以下命令来获取openssl正在使用的"正确"目录(在Linux / Git Bash下)
 openssl version -d | awk '{ print $2 }'
@@ -334,7 +330,7 @@ git config --global http.sslCAInfo C:/Program Files/Git/mingw64/ssl/certs/ca-bun
 
 ## 分支名变更
 
-github上可以rename
+github 上可以 rename
 
 然后执行
 
@@ -345,3 +341,13 @@ git branch -u origin/main main
 git remote set-head origin -a
 ```
 
+## git 忽略大小写
+
+```
+git config core.ignorecase false
+
+git config --unset core.ignorecase
+
+git config --list
+
+```

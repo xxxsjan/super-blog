@@ -4,8 +4,8 @@ layout: home
 title: Home
 
 hero:
-  name: Front End Doc
-  text: 前端文档沉淀
+  name: 前端笔记文档
+  text: 300+篇原创笔记
   tagline: 
   image:
     src: /code.png
