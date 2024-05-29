@@ -180,3 +180,15 @@ cat extensions.txt | xargs -n 1 code --install-extension
   }
 ```
 
+
+
+## 终端自动提示和补全
+
+https://juejin.cn/post/7187442172671557689
+
+https://dev.to/animo/fish-like-autosuggestion-in-powershell-21ec
+
+https://juejin.cn/post/7224109605071945787
+
+
+
