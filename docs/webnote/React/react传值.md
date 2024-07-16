@@ -30,6 +30,8 @@ Context在 16.x 之前是定义一个全局的对象,类似 vue 的 eventBus,如
 
 16.x 之后的Context使用了Provider和Customer模式,在顶层的Provider中传入value，在子孙级的Consumer中获取该值，并且能够传递函数，用来修改context 声明一个全局的 context 定义,context.js
 
+
+
 ```
 context.js
 import React from 'react'
@@ -129,11 +131,87 @@ this.props.history.push({pathname:`/web/search?id ${row.id}`});
 
 https://juejin.cn/post/6844903993278201870#heading-10
 
+npm install redux react-redux
+
+### store
+
+```js
+// action types
+const INCREMENT = 'INCREMENT';
+const DECREMENT = 'DECREMENT';
+
+// action creators
+const increment = () => ({ type: INCREMENT });
+const decrement = () => ({ type: DECREMENT });
+
+const initialState = {
+  count: 0,
+};
+
+const counterReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case INCREMENT:
+      return { ...state, count: state.count + 1 };
+    case DECREMENT:
+      return { ...state, count: state.count - 1 };
+    default:
+      return state;
+  }
+};
+
+
+import { createStore } from 'redux';
+const store = createStore(counterReducer);
+```
+
+### main.js
+
+```js
+import { Provider } from 'react-redux';
+import App from './App';
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
+```
+
+### 子
+
+```js
+import { connect } from 'react-redux';
+
+const Counter = ({ count, increment, decrement }) => (
+  <div>
+    <p>Count: {count}</p>
+    <button onClick={increment}>Increment</button>
+    <button onClick={decrement}>Decrement</button>
+  </div>
+);
+
+const mapStateToProps = (state) => ({
+  count: state.count,
+});
+
+const mapDispatchToProps = {
+  increment,
+  decrement,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+```
+
+
+
 ## MobX
+
+
 
 ## flux
 
-## hooks
+
 
 ## useContext+useReducer 
 

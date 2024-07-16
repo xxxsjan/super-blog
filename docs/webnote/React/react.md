@@ -1,11 +1,8 @@
 ### React
 
-##### 
-
 #### 原理-核心
 
 ```react
-当行不需要括号，且只能有一个根标签
 let element = (
   <h2></h2>
 )
@@ -155,29 +152,12 @@ import logo from './...'
 
 
 
-### 
-
-### 标签传值
-
-```
-<Com aid = "666">
-function(e){
-	e.target.getAttribute('aid')
-}
-```
-
-### ref
-
-```
-<Com ref="one">
-this.refs.one
-```
-
 ### 单向绑定 defaultValue
 
 ```
 this.state = {}
 <input defaultValue={this.state.msg}></input>
+
 ```
 
 ### 双向数据绑定
@@ -188,7 +168,7 @@ inputChange=()=>{}
 <input value={this.state.msg} onChange={this.inputChange}></input>
 ```
 
-### 
+
 
 ### 生命周期
 

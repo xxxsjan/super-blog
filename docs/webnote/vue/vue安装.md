@@ -1,6 +1,6 @@
 # **vue**
 
-#### 搭建环境（脚手架）
+## 搭建环境（脚手架）
 
 React：`cnpm install -g create-react-app`（可覆盖安装）
 
@@ -8,7 +8,7 @@ Vue ：npm install --global vue-cli  /  cnpm install --global vue-cli
 
 npm install --global vue-cli 命令 报错
 
-###### 解决办法
+### 解决办法
 
 需要删除npmrc文件。
 强调：不是nodejs安装目录npm模块下的那个npmrc文件
@@ -16,7 +16,7 @@ npm install --global vue-cli 命令 报错
 
 
 
-##### 升级Vue Cli3 脚手架
+### 升级Vue Cli3 脚手架
 
 先卸载 Vue-Cli  2：npm uninstall -g vue-cli / yarn global remove vue-cli
 
@@ -40,7 +40,7 @@ npm config set cache "C:\Program Files\nodejs\node_cache"  //---这里是我自�
 
 
 
-#### Vue-Cli  3使用vue init
+### Vue-Cli  3使用vue init
 
 
 
@@ -49,16 +49,6 @@ npm config set cache "C:\Program Files\nodejs\node_cache"  //---这里是我自�
 如果我们还想使用cli2的脚手架，那么我们可以在安装一个包
 
 `$ cnpm i @vue/cli-init -g`
-
-#### vue ui创建项目
-
-git 信息: init project
-
-下一步,
-
-手动,下一步
-
-安装: babel router linter  使用配置文件
 
 
 
@@ -84,271 +74,17 @@ Vue3 ： vue create vuedemo01
 
 
 
-#### 创建项目-方法2
+#### 命令创建
 
 React：`npx create-react-app reactdemo`
-
-——一键安装
-
-——包括了
-
-——1、npm install -g create-react-app
-
-——2、create-react-app reactdemo
-
-——3、删除create-react-app
-
-——创建失败可能由于网络原因，多试几次
-
-
 
 Vue： vue init webpack-simple vue-demo02 --结构简单
 
 
 
-#### 启动项目
+## 传值★★★★★
 
-React：启动：yarn start或者 npm start
 
-Vue2：npm run dev
-
-Vue3：npm run serve / yarn serve
-
-#### 编译
-
-React:npm build
-
-Vue: npm run build
-
-#### 其他
-
-npm install  --安装json里面的包
-
-React：可通过npm init初始json，再npm install 安装json里面的包
-
-Vue：如果创建项目的时候没有报错，这一步可以省略。
-
-——如果报错了  cd到项目里面运行  cnpm install  /  npm install
-
-#### 查询版本
-
-vue -V node -v npm -v cnpm -v
-
-### 4、安装stylus
-
-cnpm install stylus stylus-loader --save-dev
-
-### 5、脚手架目录
-
-### 6、路由的四种跳转方式
-
-父：
-
-params: 动态匹配
-
-query: 查询匹配
-
-```javascript
-//1. 不带参数
-<router-link :to="'/content/'+ key "> {{key}}--{{item}} </router-link> 
-//2.带参数
-//动态匹配--最终输出：/content/1
-<router-link :to="{name:'UserA', params:{id:1}}">{{key}}--{{item}}</router-link>
-//查询匹配--最终输出：/content?userid=10
-<router-link :to="{name:'UserB', query:{userId:1}}">{{key}}--{{item}}</router-link> 
-============================ 
-1.  router-link
-1. 不带参数
-<router-link :to="{name:'home'}">
-<router-link :to="{path:'/home'}"> //name,path都行, 建议用name
-#注意：router-link中链接如果是'/'开始就是从根路由开始，如果开始不带'/'，则从当前路由开始。
-2.带参数
-<router-link :to="{name:'home', params: {id:1}}">
-// params传参数 (类似post)
-// 路由配置 path: "/home/:id" 或者 path: "/home:id"
-// 不配置path ,第一次可请求,刷新页面id会消失
-// 配置path,刷新页面id会保留
-// html 取参 $route.params.id
-// script 取参 this.$route.params.id
-<router-link :to="{name:'home', query: {id:1}}">
-// query传参数 (类似get,url后面会显示参数)
-// 路由可不配置
-// html 取参 $route.query.id
-// script 取参 this.$route.query.id 
-  
-2.  this.$router.push() (函数里面调用)
-#1. 不带参数
-this.$router.push('/home')
-this.$router.push({name:'home'})
-this.$router.push({path:'/home'})
-
-#2. query传参
-this.$router.push({name:'home',query: {id:'1'}})
-this.$router.push({path:'/home',query: {id:'1'}})
-
-// html 取参 $route.query.id
-// script 取参 this.$route.query.id
-
-#3. params传参
-this.$router.push({name:'home',params: {id:'1'}}) // 只能用 name
-// 路由配置 path: "/home/:id" 或者 path: "/home:id" ,
-// 不配置path ,第一次可请求,刷新页面id会消失
-// 配置path,刷新页面id会保留
-
-// html 取参 $route.params.id
-// script 取参 this.$route.params.id
-
-#4. query和params区别
-query类似 get, 跳转之后页面 url后面会拼接参数,类似?id=1, 非重要性的可以这样传, 密码之类还是用params刷新页面id还在
-
-params类似 post, 跳转之后页面 url后面不会拼接参数 , 但是刷新页面id 会消失
- 
-3.  this.$router.replace() (用法同上,push)
-4.  this.$router.go(n) ()
-this.$router.go(n)
-向前或者向后跳转n个页面，n可为正整数或负整数
-ps : 区别
-
-this.$router.push
-跳转到指定url路径，并想history栈中添加一个记录，点击后退会返回到上一个页面
-this.$router.replace
-跳转到指定url路径，但是history栈中不会有记录，点击返回会跳转到上上个页面 (就是直接替换了当前页面)
-
-this.$router.go(n)
-向前或者向后跳转n个页面，n可为正整数或负整数
-```
-
-```javascript
-var router = new VueRouter({
-routes:[
-    { 
-    path: '/content/:aid', //动态匹配-->最终输出：/content/1
-    component: UserA
-    },
-    { 
-    path: '/user', //查询匹配-->最终输出：/content?userid=10
-    component: UserB
-    }
-]
-})
-```
-
-子： （跳转去的那个路由）
-
-```vue
-mounted(){        
-console.log(this.$route.params);//获取动态路由传值
-console.log(this.$route.query);    //get传值 
-}
-```
-
-### 7、嵌套路由&路由权限&路由守卫
-
-```javascript
-Vue.use(VueRouter);
-var Home = {
-  data() {
-    return {
-      msg: "123"
-    }},
-  template: `
-<div>二级路由：
-<router-link to="/home/song">歌曲</router-link>
-<router-link to="/home/movie">电影</router-link>
-<keep-alive><router-view/></keep-alive>
-</div>
-`,
-  watch: {
-    '$route'(to, from) {
-      this.msg = to.params.id
-    }
-  }
-}
-var Blog = {
-  template: `<div>我的博客</div>`
-}
-var Login = {
-  data() {
-    return {name: '',pwd: ''}
-  },
-  template: `
-<div>
-<input type="text" v-model="name"/>
-<input type="password" v-model="pwd"/>
-<input type="button" value="登录" @click="loginHandler"/>
-</div>
-`,
-  methods: {
-    loginHandler() {
-      console.log('点击了登录')
-      //缓存
-      localStorage.setItem('userInfo', { name: this.name, pwd: this.pwd });
-      this.$router.push({
-        name: 'blog'
-      })
-    }
-  }
-}
-var Song = {
-  template: `<div> Song </div> `
-}
-var Movie = {
-  template: `<div> Movie </div> `
-}
-var router = new VueRouter({
-  routes: [
-    {
-      path: '/',
-      redirect: '/home'
-    },
-    {
-      path: '/home',
-      component: Home,
-      children: [
-        { name: 'song', path: 'song', component: Song },
-        { name: 'movie', path: 'movie', component: Movie }
-      ]
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: Login
-    },
-    {
-      path: '/blog',
-      name: 'blog',
-      component: Blog,
-      //访问权限，true需要登录不能放行，false不需要登录放行
-      meta: {
-        auth: true
-      }
-    }
-  ]
-});
-//全局守卫--每个路由都守卫
-router.beforeEach((to, from, next) => {
-  console.log(to, from)
-  if (to.meta.auth) {
-    if (localStorage.getItem('userInfo')) {
-      next()
-    } else {
-      next({
-        path: '/login'
-      })
-    }
-  } else {
-    next();//这里要调用，不然可能会卡住
-  }
-})
-new Vue({
-  el: '#app',
-  router,
-})
-```
-
-—————————————————————————————————————————————
-
-### 8、传值★★★★★
 
 (1) props $emit解决父子组件层数较少的情况
 
@@ -405,85 +141,18 @@ C  v-bind="$attrs"
 
 $attrs[0].a
 
-### 事件车eventBus
 
-兄弟传值
 
-##### 一. 子传父，父传子
-
-```plain
-子传父：
-子：this.$emit('订阅'，值)
-父标签：@订阅="fn"
-父：fn(res){console.log(res)}
-```
-
-##### 二.兄弟之间传递数据需要借助于事件车，通过事件车的方式传递数据
+## main.js runtime  compiler
 
 ```javascript
-#创建一个Vue的实例，让各个兄弟共用同一个事件机制。
-//eventBus.js
-import vue from 'vue'
-export default new Vue
-#传递数据方，通过一个事件触发bus.$emit(方法名，传递的数据)。
-import eventBus from '../上面那个文件'
-eventBus.$emit("方法名",数据)
-#接收数据方，通过mounted(){}触发bus.$on(方法名，function(){})，此时函数中的this已经发生了改变，可以使用箭头函数。
-eventBus.$on("方法名",(接收数据的参数)=>{用该组件的数据接收传递过来的数据})
-eventBus.$off
-```
 
-### 10、小程序
-
-#### 固定底部栏,只有中间滚动
-
-如果ui可以弄则ok，例如mint-ui 样式加 fixed，不行的话改css样式
-
-```plain
-html{width:100%;height:100%;overflow:hidden}
-body{width:100%;height:100%;overflow:auto}
-中间内容上下设置padding就行
-```
-
-### 11、static和assets区别
-
-区别一: assets文件是src下的,所以最后运行时需要进行打包,而static文件不需要打包就直接放在最终的文件中了
-
-区别二: assets中的文件在vue中的template/style下用/这种相对路径的形式进行引用,在script下必须用import的方式引入,而static下的文件在.vue中的任何地方都只要使用..这种相对路径的方式引入,
-
-### 12、main.js全局设置
-
-```javascript
-import Vue from 'vue'
-import App from './App'
-import router from './router'
-Vue.config.productionTip = false
-
-//全局引入mint-ui----------------------------
-import Mint from 'mint-ui'
-import '../static/css/global. css'
-//局部引入
-import { Loadmore } from 'mint-ui'
-Vue.component(Loadmore.name, Loadmore)
-//注册全局组件
-import Header from './...'
-Vue.component(Header.name,Header)
-
-//常规引入模块----------------------------------
-Vue.use()  等同于 Vue.prototype.
-//axios----------------------------------
-import Axios from 'Axios'
-//axios需要通过Vue.prototype.引入
-Vue.prototype.$axios = Axios
-//配置全局URL
-Axios.defaults.baseURL = "http://www.xxx.com/api/"
-######新旧版本---------------------------------------------
-//compiler模式（Cli 2.0+++旧版本）
+// compiler模式（Cli 2.0+++旧版本）
 new Vue({
-el: '#app',
-router,//引用router
-template: '',
-components: { App }
+    el: '#app',
+    router,//引用router
+    template: '',
+    components: { App }
 })
 
 //runtime模式（CLi 3.0+++版本）
@@ -493,136 +162,6 @@ new Vue({
  render: h => h(App)
 }).$mount("#app")
 ```
-
-#### Moment.js
-
-```plain
-var moment = require('moment');
-moment.locale('zh-cn')
-```
-
-#### 过滤器filter
-
-```plain
-//写在main.js----全局设置
-Vue.filter()
-```
-
-### 13、事件车（组件通信）
-
-```javascript
-//main.js相同目录新建EventBus.js----------------
-import Vue from "vue"
-const EventBus = new Vue();
-export default EventBus;
-//App.js引入-----------------------------------
-import EventBus from "./EventBus"
-Vue.prototype.$bus = EventBus
-created(){
-  this.$bus.$on("function",(参数) =>{})
-}
-//需要的页面组件里调用---------------------
-this.$bus.$emit("function",this.参数)
-```
-
-### 14、Vuex
-
-template标签中this.![img](https://g.yuque.com/gr/latex?store.state%E7%9A%84this%E5%8F%AF%E4%BB%A5%E7%9C%81%E7%95%A5%2C%E5%86%99%E6%88%90)store.state即可
-
-##### 入口文件main.js
-
-```javascript
-import store from './store.js'
-import Vue from 'vue'
-import Vuex from 'vuex'
-
-const store = new Vuex.Store({
-  //五大将
-  state:{ count: 1 },
-  getters:{ },
-  // 变更state的数据,类似于computed
-  mutations: {
-    add(state,{params1,params2}) {state.count++}
-  },
-  //处理异步
-  actions: {
-    addAsync(context,params) {
-      setTimeout(() => {
-        context.commit('add',params)
-      }, 1000)
-    }
-  },
-})
-//也可以封装成组件暴露使用store.js
-export default new Vuex.Store({ })
-
-new Vue({
-  store,
-  .....
-})
-```
-
-##### 组件.vue
-
-```javascript
-import { mapState, mapMutations } from 'vuex'
-computed: {
- #普通引用 --
- count(){ return this.$store.state.count }
- #mapState 引用数据
- ...mapState(['count'])  // template里面直接{{数据}}就可以引用
-}
-methods:{
-  #引用mutations里的方法一
-  func1(){this.$store.commit('add')}
-  #引用mutations里的方法二
-  ...mapMutations(['add','addN'])
-}
-```
-
-store刷新页面消失解决办法
-
-```javascript
-methods:{
-  saveState() {
-    console.log('保存state')
-    localStorage.setItem('state', JSON.stringify(this.$store.state))
-  }
-}
-mounted() {
-  // 监听卸载事件  文档或一个依赖资源正在被卸载。
-  window.addEventListener('unload', this.saveState)
-}
-# store.js
-state: localStorage.getItem('state') ? JSON.parse(localStorage.getItem('state')) : {
-  tabsIndex: 0,
-  tabbarIndex: 0
-},
-```
-
-#### vuex v-model
-
-```javascript
-<van-checkbox v-model="myAllCheck" shape="square">全选</van-checkbox>
-computed: {
-  ...mapGetters(['cartList', 'tPrice', 'tNum']),
-    myAllCheck: {
-    get() {
-      return this.$store.getters.allCheckStatus
-    },
-    set(val) {
-      console.log(val)
-      this.onAllCheck(val)
-    }
-  }
-},
-```
-
-### 打包
-
-npm run build
-
-config下的index.js里的productionSourceMap改为false可以加快编译打包速度
 
 ### 上线
 
@@ -764,42 +303,7 @@ resolve:{
 }
 ```
 
-### scss的使用
 
-报错：Syntax Error: TypeError: this.getOptions is not a function
-
-版本太高了，安装低一点的
-
-```javascript
-npm install -D sass-loader@8.0.2 node-sass@4.14.1
-1 准备存放全局样式变量的文件
-_variable.scss，内容如下：
-$theme-color: #3385ff;
-
-2 配置loader
-// vue.config.js
-module.exports = {
-  // ...
-  css: {
-    loaderOptions: {
-      sass: {
-        data: `
-          @import "@/assets/styles/_variable.scss";
-        `
-      }
-    }
-  }
-}
-3 使用全局变量
-现在就可以在每个vue文件中直接使用全局变量了
-<template></template>
-<script></script>
-<style lang="scss" scoped>
-button{
-color: $theme-color;
-}
-</style>
-```
 
 ### slot插槽的使用
 
@@ -1331,98 +835,7 @@ export default class SocketService {
 }
 ```
 
-## 获取dom元素
 
-```javascript
-let xxx = document.querySelector('.xxx')
-xxx.addEventListener('webkitAnimationEnd',()=>{})
-#修改样式
-this.$refs.vanTabRef[this.active].$el.children[0].style.fontWeight
-```
-
-## 点击事件
-
-@click="onClick"
-
-## Class 与 Style 绑定
-
-<https://www.cnblogs.com/cisum/p/10012492.html>
-
-:class="{style里的样式：布尔值}"  对象形式，一个或者多个，有横杆的要引号
-
-:class="[data数据里写好样式]"
-
-```vue
-<template>
- <div>
-  <!-- 单类 -->
-  <view :class="{ active: true }">111</view>
-  <!-- 对象 -->
-  <view class="static" :class="{ active: isActive, 'text-danger': hasError }">222</view>
-  <!-- 数组 -->
-  <view class="static" :class="[activeClass, errorClass]">333</view>
-  <!-- 条件 -->
-  <view class="static" v-bind:class="[isActive ? activeClass : '', errorClass]">444</view>
-  <!-- 数组+对象 -->
-  <view class="static" v-bind:class="[{ activeGrey: isActive }, errorClass]">555</view>
-  <!-- 执行类 -->
-  <view class="container" :class="{activeGrey: isActive}">9999</view>
-
-  <!-- style支持的类 -->
-  <view v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">666</view>
-  <view v-bind:style="[{ color: activeColor, fontSize: fontSize + 'px' }]">777</view>
-   
-   <view :style="{ fontWeight:700, color:'#f00'}">888</view>
- </div>
-</template>
-
-<script>
- export default {
-  data() {
-   return {
-    title: 'Hello',
-    // 单激活类
-    isActive: true,
-    hasError: true,
-    // 多种激活类
-    activeClass: {
-     'active': false,
-     'text-danger': true
-    },
-    errorClass: {
-     'active': true,
-     'text-danger': false
-    },
-    activeColor: '#f80',
-    fontSize: 30
-   }
-  }
- }
-</script>
-
-<style scoped>
- .active {
-  color: #bfa;
- }
-
- .activeGrey {
-  color: #aaa;
- }
-
- .text-danger {
-  color: #f0f;
-  font-weight: bold;
- }
-
- .f {
-  display: flex;
- }
-
- .f-wrap {
-  flex-wrap: wrap;
- }
-</style>
-```
 
 ## scroll-view flex不生效问题
 
@@ -1451,11 +864,9 @@ scroll-view{
  }
 ```
 
-## 计算属性
 
-# vant-ui
 
-### rem适配
+## rem适配
 
 <https://youzan.github.io/vant/#/zh-CN/advanced-usage#liu-lan-qi-gua-pei>
 

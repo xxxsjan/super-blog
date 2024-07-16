@@ -328,3 +328,12 @@ var log = require("single-line-log").stdout;
 log('hello world')
 ```
 
+
+
+## 运行ts
+
+esno 或者 tsx
+
+From v0.15, `esno` is essentially an alias of [`tsx`](https://github.com/esbuild-kit/tsx), with automated CJS/ESM mode and caching.
+
+从v0.15开始， `esno` 本质上是 `tsx` 的别名，具有自动CJS/ESM模式和缓存。

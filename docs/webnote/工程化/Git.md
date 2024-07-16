@@ -351,3 +351,19 @@ git config --unset core.ignorecase
 git config --list
 
 ```
+
+
+
+## 线性的提交记录
+
+如果多人开发，别人提交了代码，你本地的base就是落后的，
+
+需要rebase变基到最新的节点
+
+命令为 git pull --rebase ，或者设置默认行为
+
+```
+git config --global pull.rebase true
+```
+
+但使用rebase前提是需要本地代码没改动的，所以结合stash暂存可以解决这个问题

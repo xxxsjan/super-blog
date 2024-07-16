@@ -27,5 +27,5 @@
 - [√ 添加 IE 兼容](https://github.com/staven630/vue-cli4-config#ie)
 - [√ 静态资源自动打包上传阿里 oss、华为 obs](https://github.com/staven630/vue-cli4-config#alioss)
 - [√ 完整依赖](https://github.com/staven630/vue-cli4-config#allconfig)
-### 
+
 
