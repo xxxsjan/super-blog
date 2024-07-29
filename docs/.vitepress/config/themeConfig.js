@@ -2,9 +2,10 @@ import sidebar from "./sidebar";
 import nav from "./nav";
 import crawlerConfig from "../../../crawlerConfig.json";
 
-const icpRecordCode = "粤ICP备2021026613号";
+// const icpRecordCode = "粤ICP备2021026613号";
+const icpRecordCode = "粤ICP备2024285819号";
 const copyright = `Copyright © 2019-${new Date().getFullYear()} xxxsjan`;
-const publicSecurityRecordCode = "粤ICP备2021026613号-1";
+// const publicSecurityRecordCode = "粤ICP备2021026613号-1";
 
 /** @type {import("vitepress").DefaultTheme.Config} */
 const themeConfig = {
@@ -51,7 +52,7 @@ const themeConfig = {
   footerConfig: {
     showFooter: true, // 是否显示页脚
     icpRecordCode: icpRecordCode, // ICP备案号
-    publicSecurityRecordCode: publicSecurityRecordCode, // 联网备案号
+    // publicSecurityRecordCode: publicSecurityRecordCode, // 联网备案号
     copyright: copyright,
   },
 };
