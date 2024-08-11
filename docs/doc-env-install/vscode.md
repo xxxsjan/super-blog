@@ -192,3 +192,20 @@ https://juejin.cn/post/7224109605071945787
 
 
 
+
+
+## ai工具
+
+```
+Codeium
+
+TONGYI
+
+CodeGeeX: AI Code AutoComplete, Chat, Auto Comment
+
+```
+
+
+
+
+
