@@ -140,3 +140,59 @@ class ComputedImpl{
 提高是否同一类型节点的对比速度
 ![image.png](https://cdn.nlark.com/yuque/0/2022/png/28823371/1661011868628-f37fa462-f61e-4ed1-81ef-182e70035777.png#clientId=ubbeee8f2-0183-4&from=paste&height=629&id=u175bba17&originHeight=786&originWidth=712&originalType=binary&ratio=1&rotation=0&showTitle=false&size=174568&status=done&style=none&taskId=u2b9188ae-e9d0-4f97-bae8-c9ac21b0669&title=&width=569.6)
 ![image.png](https://cdn.nlark.com/yuque/0/2022/png/28823371/1661012007939-1381f14f-e8f4-4c03-81be-5d002dde072b.png#clientId=ubbeee8f2-0183-4&from=paste&height=334&id=ud2430457&originHeight=417&originWidth=620&originalType=binary&ratio=1&rotation=0&showTitle=false&size=108536&status=done&style=none&taskId=uae50c326-ed9e-4220-a2d1-670bd4ce6f3&title=&width=496)
+
+## 绕过 响应式
+
+
+
+```
+// vue3
+const list = [
+    {name:'--'}
+]
+
+const data = ref(list.map(m=>{
+     fetch().then(res=>{
+            m.name = res.name
+     })
+     return m
+    })
+)
+```
+
+上面代码，接口回来后，data是不更新数据的，因为改的是list
+
+
+
+如果是vue2就正常，因为vue2是劫持，3是创建的代理对象
+
+```
+// vue2
+const list = [
+    {name:'--'}
+]
+
+this.data = list.map(m=>{
+     fetch().then(res=>{
+            m.name = res.name
+     })
+     return m
+})
+```
+
+#### 优化
+
+```
+const list = [
+    {name:'--'}
+]
+
+const data = ref(list)
+
+for(const m of data.value){
+ fetch().then(res=>{
+ 		m.name = res.name
+ })
+}
+```
+

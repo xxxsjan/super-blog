@@ -26,3 +26,47 @@ export default function replacePlugin(options) {
 
 
 
+## 控制图片输出base64
+
+```
+import { defineConfig } from 'vite';
+import fs from 'node:fs';
+
+function toBase64Plugin(limit = 4096) {
+  return {
+    name: 'tobase64-plugin',
+    async transform(code, id) { // Add async keyword here
+      if (process.env.NODE_ENV !== 'development') {
+        return;
+      }
+      if (!id.endsWith('.png')) {
+        return;
+      }
+
+      try {
+        const stat = await fs.stat(id);
+        if (stat.size > limit) {
+          return;
+        }
+
+        const buffer = await fs.readFile(id);
+        const base64 = buffer.toString('base64');
+        const dataURL = `data:image/png;base64,${base64}`;
+
+        return {
+          code: `export default "${dataURL}";`,
+          map: null, // Provide source map if needed
+        };
+      } catch (error) {
+        console.error('Error processing image:', error);
+        return; // Return undefined on error
+      }
+    },
+  };
+}
+
+export default defineConfig({
+  plugins: [toBase64Plugin()],
+});
+```
+

@@ -367,3 +367,15 @@ git config --global pull.rebase true
 ```
 
 但使用rebase前提是需要本地代码没改动的，所以结合stash暂存可以解决这个问题
+
+## gitignore已经添加了，但线上没删除
+
+要取消追踪才行，gitigonre只会对新追踪的生效
+
+```
+git rm -r --cached [dirname]
+git commit -m 'remove dirname'
+git push origin master
+
+```
+
