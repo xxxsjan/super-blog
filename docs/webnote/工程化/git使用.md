@@ -379,3 +379,13 @@ git push origin master
 
 ```
 
+## 删除：远端已删除，本地还显示的分支
+
+git remote prune origin
+
+## 删除远端分支
+
+git push origin --delete [branchname]
+
+
+
