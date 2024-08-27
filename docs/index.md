@@ -5,7 +5,7 @@ title: Home
 
 hero:
   name: 前端笔记文档
-  text: 300+篇原创笔记
+  text: 原创笔记
   tagline: 
   image:
     src: /code.png
