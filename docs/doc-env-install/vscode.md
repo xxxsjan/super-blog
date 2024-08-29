@@ -205,7 +205,15 @@ CodeGeeX: AI Code AutoComplete, Chat, Auto Comment
 
 ```
 
+## setting
 
+### js文件开启div补全 html补全
+```
+"emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+},
+"emmet.triggerExpansionOnTab": true,
+```
 
 
 
