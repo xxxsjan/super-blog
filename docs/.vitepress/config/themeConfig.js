@@ -1,4 +1,4 @@
-import sidebar from "./sidebar";
+import {sideBarObj} from "./sidebar";
 import nav from "./nav";
 import crawlerConfig from "../../../crawlerConfig.json";
 
@@ -32,7 +32,7 @@ const themeConfig = {
     next: "下一篇",
   },
   sidebar: {
-    ...sidebar,
+    ...sideBarObj,
     // "/guide/": [
     //   {
     //     text: "Guide",

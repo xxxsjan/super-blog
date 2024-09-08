@@ -6,6 +6,7 @@ const docsPath = process.cwd();
 function getPath(p) {
   return path.join(docsPath, "./docs", p);
 }
+
 function getDirs(p) {
   return fg.sync("**", {
     onlyFiles: false,
@@ -75,50 +76,38 @@ function toNav(sideBar, dirName) {
   });
 }
 
-function createSideNav(docName) {
-  const _sideBar = genSideBar(docName);
-  const _nav = toNav(_sideBar, docName);
+function createSideNav(docDirName) {
+  const _sideBar = genSideBar(docDirName);
+  const _nav = toNav(_sideBar, docDirName);
   return [_sideBar, _nav];
 }
 
-export const [webnote, webnote_nav] = createSideNav("webnote");
-// console.log("自动生成：", JSON.stringify(webnote, null, 2));
-export const [sourceCodeSidebar, sourceCode_nav] = createSideNav("source-code");
-export const [jsDocSidebar, jsDoc_nav] = createSideNav("doc-js");
-export const [readingNotes_sidebar, readingNotes_nav] =
-  createSideNav("doc-reading-notes");
-export const [env_sidebar, env_nav] = createSideNav("doc-env-install");
-export const [docker_sidebar, docker_nav] = createSideNav("doc-docker");
+const arr = [
+  { text: "笔记", docDirName: "webnote" },
+  { text: "源码分析", docDirName: "source-code" },
+  { text: "js相关", docDirName: "doc-js" },
+  { text: "读书笔记", docDirName: "doc-reading-notes" },
+  { text: "环境安装", docDirName: "doc-env-install" },
+  { text: "docker", docDirName: "doc-docker" },
+];
+function createSideNavData() {
+  const navList = [];
+  const sideBarObj = {};
+  for (let item of arr) {
+    const data = createSideNav(item.docDirName);
+    navList.push({
+      text: item.text,
+      activeMatch: `/${item.docDirName}/`,
+      items: data[1],
+    });
+    sideBarObj[`/${item.docDirName}/`] = [{ text: item.text, items: data[0] }];
+  }
+  return {
+    navList,
+    sideBarObj,
+  };
+}
 
-export default {
-  "/webnote/": [
-    {
-      text: "笔记",
-      items: webnote,
-    },
-  ],
-  "/source-code/": [
-    {
-      text: "源码分析",
-      items: sourceCodeSidebar,
-    },
-  ],
-  "/doc-js/": [
-    {
-      text: "js相关",
-      items: jsDocSidebar,
-    },
-  ],
-  "/doc-reading-notes/": [
-    {
-      text: "读书笔记",
-      items: readingNotes_sidebar,
-    },
-  ],
-  "/doc-docker/": [
-    {
-      text: "Docker",
-      items: docker_sidebar,
-    },
-  ],
-};
+const { navList, sideBarObj } = createSideNavData();
+
+export { navList, sideBarObj };
