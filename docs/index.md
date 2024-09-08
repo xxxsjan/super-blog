@@ -5,7 +5,7 @@ title: Home
 
 hero:
   name: 前端笔记文档
-  text: 原创笔记
+  text: vue react webpack node.js
   tagline: 
   image:
     src: /code.png
