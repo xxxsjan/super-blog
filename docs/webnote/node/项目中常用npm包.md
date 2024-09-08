@@ -1,6 +1,6 @@
 ## 各种工具 对应文档地址
 
- animat.css 动画效果
+animat.css 动画效果
 validator.js 登录验证
 mescroll.js 滚动效果
 vant 开源组件库
@@ -15,19 +15,23 @@ vue-qr 生成二维码
 [https://github.com/validatorjs/validator.js](https://github.com/validatorjs/validator.js)
 移动端滚动
 
-
-
-
-
 二维码生成
 [https://www.npmjs.com/package/vue-qr](https://www.npmjs.com/package/vue-qr)
-### 
-## clipboard 
+
+###
+
+## clipboard
+
 粘贴板
-## screenfull 
+
+## screenfull
+
 控制全屏
-## xlsx 
+
+## xlsx
+
 解析excel表格
+
 ```javascript
 private readerData(rawFile: File) {
   this.loading = true
@@ -62,9 +66,12 @@ var worksheet = XLSX.utils.table_to_sheet(dom_element, opts);
 XLSX.utils.book_append_sheet(workbook, worksheet, sheet_name);
 ```
 
-### 
+###
+
 ### 引导小提示
+
 driver.js
+
 ```javascript
 import Driver from 'driver.js'
 const steps = [
@@ -125,8 +132,10 @@ if (this.driver) {
   this.driver.start()
 }
 ```
+
 ### js计算库decimal.js
-> npm install --save decimal.js  // 安装 
+>
+> npm install --save decimal.js  // 安装
 > import Decimal from "decimal.js"  // 具体文件中引入
 > 可以带 new 也不可以不带 new
 
@@ -194,39 +203,44 @@ ROUND_HALF_UP
 来源：简书
 ```
 
-
 ## npkill--清理node_modules
+
 #### 安装
+
 npm i  npmkill -g
+
 #### 执行
+
 npkill -d ./
 即可搜索当前目录下的node_modules文件夹
+
 #### 删除
+
 然后上下选择
 空格键确认进行删除
+
 #### 退出
+
 ctrl c进行退出操作
 或者关闭命令窗口
 
 ### normalize.css   css reset库
 
 ## fast-glob
+
 返回目录下的文件名[]
 
 ## concurrently
 
 执行多个npm命令 单个命令双引号引起来，记得使用\转义
+
 ```typescript
 "postinstall": "concurrently \"pnpm gen:version\" \"pnpm run -C internal/metadata dev\""
 ```
 
-
-
 face-api
 
-https://www.npmjs.com/package/@vladmandic/face-api
-
-
+<https://www.npmjs.com/package/@vladmandic/face-api>
 
 ## picocolors
 
@@ -280,8 +294,6 @@ npm-run-all clean lint build
 
 判断版本号是否符合规则
 
-
-
 ```
 const semver = require('semver')
 
@@ -296,7 +308,7 @@ semver.valid(semver.coerce('v2')) // '2.0.0'
 semver.valid(semver.coerce('42.6.7.9.3-alpha')) // '42.6.7'
 ```
 
-## minimist 
+## minimist
 
 命令行参数解析工具
 
@@ -327,8 +339,6 @@ var log = require("single-line-log").stdout;
 
 log('hello world')
 ```
-
-
 
 ## 运行ts
 
