@@ -37,3 +37,13 @@ log('step 2')
 
 spinner.succeed();
 ```
+
+## 彩色打印
+
+### chalk
+
+unpackedSize: 43.7 kB
+
+### picocolors
+
+unpackedSize: 11.4 kB
