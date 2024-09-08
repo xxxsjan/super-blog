@@ -4,7 +4,7 @@ layout: home
 title: Home
 
 hero:
-  name: 前端笔记文档
+  name: web笔记文档
   text: vue react webpack node.js
   tagline: 
   image:

@@ -89,6 +89,7 @@ const arr = [
   { text: "读书笔记", docDirName: "doc-reading-notes" },
   { text: "环境安装", docDirName: "doc-env-install" },
   { text: "docker", docDirName: "doc-docker" },
+  // { text: "life", docDirName: "doc-life" },
 ];
 function createSideNavData() {
   const navList = [];
