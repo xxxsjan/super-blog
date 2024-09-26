@@ -205,9 +205,27 @@ CodeGeeX: AI Code AutoComplete, Chat, Auto Comment
 
 ```
 
-## setting
 
-### js文件开启div补全 html补全
+
+## js项目路径跳转
+
+```
+{
+  "compilerOptions": {
+    "baseUrl": "./assets"
+  },
+  "include": ["assets/**/*.js", "assets/**/*.jsx"]
+}
+
+```
+
+
+
+
+
+## setting.json
+
+### js文件 div补全 emmet
 ```
 "emmet.includeLanguages": {
     "javascript": "javascriptreact"
@@ -215,5 +233,13 @@ CodeGeeX: AI Code AutoComplete, Chat, Auto Comment
 "emmet.triggerExpansionOnTab": true,
 ```
 
+### eslint
 
+```
+"eslint.format.enable": true,
+"[typescriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.formatOnSave": true
+}
+```
 
