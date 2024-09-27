@@ -61,9 +61,9 @@ const DEV = import.meta.env.MODE === 'development';
 
 const start_urls = crawlerConfig?.start_urls[0]
 
-// const blogHost = start_urls && new URL(start_urls)?.host
+const origin = start_urls && new URL(start_urls)?.origin
 
-const badgeSrc = `https://visitor-badge.laobi.icu/badge?page_id=${start_urls}`
+const badgeSrc = `https://visitor-badge.laobi.icu/badge?page_id=${origin}`
 
 
 </script>
