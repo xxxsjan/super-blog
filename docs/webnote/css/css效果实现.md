@@ -46,11 +46,7 @@ margin-right:auto;
 
  width:fit-content能在不改变元素display属性Q的的同时使其具有行内框的某些特性，如包裹内容以自适应内容宽度。如果是max-content就是在一行中尽量多的显示内容。min-content是最小内容宽度，如果是中文就是一个中文字符的宽度。
 
-
-
-inset-inline 、margin-inline是逻辑css 
-
-
+inset-inline 、margin-inline是逻辑css
 
 # max-length过渡问题
 
@@ -68,7 +64,7 @@ child:
 scroll-snap-align:start
 ```
 
-##  css立体效果 透视效果
+## css立体效果 透视效果
 
 ### 开启3d
 
@@ -92,8 +88,6 @@ scroll-snap-align:start
 
 需要立体感，需要开启透视(近大远小)
 
-
-
 **父级元素设置：**perspective:1000px
 
 ### 其他知识
@@ -103,8 +97,6 @@ scroll-snap-align:start
 假如翻转后需要不可见，可使用
 
 backface-visibility: hidden  
-
-
 
 ## 浮动环绕效果
 
@@ -120,15 +112,11 @@ backface-visibility: hidden
 
 filter:drop-shadow(0 0 10px #fff)
 
-
-
 ## 文字边缘环绕
 
 盒子开启圆角，文字不环绕，还是根据盒子边界环绕，这时需要设置
 
 shape-outside:circle(50%)
-
-
 
 ## 图片缩放
 
@@ -136,8 +124,6 @@ shape-outside:circle(50%)
 object-fit:cover;
 object-position:left top;
 ```
-
-
 
 ## 等比例
 
@@ -148,7 +134,7 @@ object-position:left top;
   width:90%;
   height:300opx;
   margin:0 auto;
-	aspect-ratio:16/9;
+ aspect-ratio:16/9;
 }
 ```
 
@@ -158,3 +144,21 @@ object-position:left top;
 
 box-decoration-break:clone  // slice
 
+## 背光效果
+
+根据图片颜色进行背光显示
+
+```
+
+.backlight:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:inherit;
+  filter: blur(10px);
+  z-index: -1;
+}
+```
