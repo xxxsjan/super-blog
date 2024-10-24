@@ -36,10 +36,10 @@ fork 相关操作
 mkdir vue-eleui
 cd vue-eleui
 git init
-touch README.md				#新建文件
+touch README.md    #新建文件
 git add README.md    #添加暂存
-git commit -m "first commit"		#提交本地仓库
-git remote add origin https:xxxxxxxxxxxxxxxx  #关联远程仓库
+git commit -m "first commit"  #提交本地仓库
+git remote add origin https:xxxxxxxxxxxxxxxx   
 git push -u origin master
 ```
 
@@ -51,7 +51,7 @@ git init
 git add .
 git commit -m "本地项目提交"
 #绑定码云
-git remote add origin https:xxxxxxxxxxxxxxxx #关联远程仓库
+git remote add origin https:xxxxxxxxxxxxxxxx  
 #在码云上新建master主分支,并推送
 git push -u origin master
 ```
@@ -66,7 +66,7 @@ git push -u origin master
 
 ### 常用命令
 
-```javascript
+```sh
 提交分支
 远程没有分支
 git push -u origin 新分支
@@ -88,27 +88,20 @@ git remote origin set-url https://gitee.com/sjan233/shop_uniapp.git
 git remote rm origin
 git remote add origin https://gitee.com/sjan233/bgsystem_byvueeleadmin
 
-rm -rf .git/ 	#删除当前路径下的 git仓库
-git branch		#Git分支
+rm -rf .git/  #删除当前路径下的 git仓库
+git branch  #Git分支
 git branch -a #查看远程分支
-git status		#git查看状态
-git add .			#添加文件
+git status  #git查看状态
+git add .   #添加文件
 
-pwd					#查看路径
-cd ..				#上层路径
-git commit -m "第一次提交" 	#提交代码
-git status		#查看工作目录中文件的状态(已跟踪(已提交 已暂存 已修改) 未跟踪)
-git add .		#增加进暂存区
+pwd     #查看路径
+cd ..    #上层路径
+git commit -m "第一次提交"  #提交代码
+
 git commit -m "注释内容"     #提交
-git rm 要删除的文件     git mv 老文件 新文件
-git diff     #查看未暂存的修改
-git diff --cache #查看未提交的暂存
+
 git log --oneline # 查看提交记录
-git branch									#查看分支
-git branch 分支名						#创建
-git checkout -b [branch]		# 新建一个分支，指向指定commit
-git branch -d 分支名   			#删除
-git merge 									#合并
+
 #把远程dev分支拷贝到本地
 git checkout -b dev origin/dev
 #拉取远程dev分支
@@ -117,17 +110,17 @@ git pull origin dev
 
 ### 图形化管理工具
 
-1.  github for desktop  --官方
-2.  source tree
+1. github for desktop  --官方
+2. source tree
     [https://www.jianshu.com/p/6d2717c2a3e1](https://www.jianshu.com/p/6d2717c2a3e1)
-3.  tortoiseGit
-4.  Git GUI Here（右键）
+3. tortoiseGit
+4. Git GUI Here（右键）
 
 ### 报错
 
 ##### 403： 无权限
 
-##### fatal: remote origin already exists.
+##### fatal: remote origin already exists
 
 先移除再添加
 
@@ -199,36 +192,12 @@ git pull --allow-unrelated-histories
 
 然后 git push 就可以了。
 
-##### 编辑器出不去
-
-[https://blog.csdn.net/u014027876/article/details/81665636](https://blog.csdn.net/u014027876/article/details/81665636)
-
-**莫方**~可以按照以下步骤来解决：
+### 编辑器出不去(vim编辑)
 
 1. 按键盘上的`“i”`键可进入插入模式
 2. 这时可以修改最上方的黄色部分，改成你想写的合并原因
 3. 按键盘上的`“Esc”`键退出插入模式
 4. 最后在最下面输入`“ :wq ”`后按回车键即可
-
-### .gitignore 忽略文件
-
-```
-.DS_Store
-node_modules/
-dist/
-npm-debug.log
-4、下面我们看看常用的规则：
-1）/mtk/               过滤整个文件夹
-2）*.zip                过滤所有.zip文件
-3）/mtk/do.c         过滤某个具体文件
-
-node_modules/   表示过滤这个文件夹
-*.zip   过滤zip后缀文件
-demo.html   过滤该文件
-!src/   不过滤该文件夹
-!*.js   不过滤java源文件
-!index.html 不过滤该文件
-```
 
 #### 远程有打包 本地新增.gitignore 文件 更新远程
 
@@ -243,23 +212,6 @@ git add .
 提交
 
 git commit -m ".gitignore is now working"
-
-### 规范
-
-```
-feat: 新功能（feature）
-fix: 修补bug
-docs: 文档（documentation）
-style: 格式（不影响代码运行的变动）
-refactor: 重构（即不是新增功能，也不是修改bug的代码变动）
-chore: 构建过程或辅助工具的变动
-revert: 撤销，版本回退
-perf: 性能优化
-test：测试
-improvement: 改进
-build: 打包
-ci: 持续集成
-```
 
 ### 误操作
 
@@ -294,21 +246,6 @@ git rebase 分支名   ---以当前分支为基础，把别的分支的commit加
   - 每天一提交的 commit，这个还是要保证基本的规范滴，要不然想追溯之前的版本，就懵逼了 XD
   -
 
-```
- 'feat', // 新功能 feature
- 'fix', // 一个错误修复
- 'refactor', // 重构(既不增加新功能，也不是修复bug)
- 'docs', // 仅文档更改
- 'test', // 添加缺失的测试或更正现有的测试
- 'chore', // 既不修正错误也不增加功能的代码更改
- 'style', // 不影响代码含义的更改（空白，格式，缺少分号等）
- 'perf', // 改进性能的代码更改
- 'revert', // 回退
-
- // eg: 'feat: 添加了图表功能'
-复制代码
-```
-
 - 不要在代码仓库中使用强制回滚的命令~
 
 ### OpenSSL SSL_connect: Connection was reset in connection to github.com:443
@@ -328,19 +265,6 @@ git config --global http.sslcainfo C:/Program Files/Git/mingw64/ssl/certs/ca-bun
 git config --global http.sslCAInfo C:/Program Files/Git/mingw64/ssl/certs/ca-bundle.crt
 ```
 
-## 分支名变更
-
-github 上可以 rename
-
-然后执行
-
-```
-git branch -m [原分支名] [新分支名]
-git fetch origin
-git branch -u origin/main main
-git remote set-head origin -a
-```
-
 ## git 忽略大小写
 
 ```
@@ -351,8 +275,6 @@ git config --unset core.ignorecase
 git config --list
 
 ```
-
-
 
 ## 线性的提交记录
 
@@ -386,6 +308,3 @@ git remote prune origin
 ## 删除远端分支
 
 git push origin --delete [branchname]
-
-
-

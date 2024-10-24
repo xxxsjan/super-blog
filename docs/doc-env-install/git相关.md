@@ -2,23 +2,17 @@
 
 ## git访问问题 host
 
-
-
 git连接慢，clone慢
 
-https://blog.csdn.net/weixin_42728767/article/details/122568179
+<https://blog.csdn.net/weixin_42728767/article/details/122568179>
 
-https://juejin.cn/post/7090190514028937230?share_token=e2e2a9ad-4232-4d79-978a-871d440cda4e
-
-
+<https://juejin.cn/post/7090190514028937230?share_token=e2e2a9ad-4232-4d79-978a-871d440cda4e>
 
 ### ip怎么看
 
-https://ping.chinaz.com/github.com 这个网站可以看哪个ip延迟低，从而选择好的ip
+<https://ping.chinaz.com/github.com> 这个网站可以看哪个ip延迟低，从而选择好的ip
 
-https://www.ipaddress.com/ 这个是根据域名查ip
-
-
+<https://www.ipaddress.com/> 这个是根据域名查ip
 
 ### hosts文件路径
 
@@ -42,37 +36,27 @@ C:\Windows\System32\drivers\etc\hosts
 
 ### ![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305011859917.png)
 
-### 
-
-
+###
 
 ## git地址变更
 
 个人空间地址变更后，执行以下命令更新你本地 git 仓库的 remote 地址，如:
 
-git remote set-url origin https://gitee.com/xxxsjan/vue-eleui.git
-
-
+git remote set-url origin <https://gitee.com/xxxsjan/vue-eleui.git>
 
 ## Gitlab分支策略建议指南
 
 [Gitlab分支策略建议指南](https://baijiahao.baidu.com/s?id=1737642596617193381&wfr=spider&for=pc)
 
-
-
 ![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305011859463.jpeg)
-
-
 
 ## ci/cd
 
-https://juejin.cn/post/7012203717818580999
-
-
+<https://juejin.cn/post/7012203717818580999>
 
 ## fork仓库的更新
 
-https://blog.csdn.net/JavaMonsterr/article/details/125930855
+<https://blog.csdn.net/JavaMonsterr/article/details/125930855>
 
  点击 pull request
 
@@ -84,17 +68,15 @@ https://blog.csdn.net/JavaMonsterr/article/details/125930855
 
 ![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305011859227.png)
 
-
-
 ![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305131202734.png)
 
-点击create pull request 
+点击create pull request
 
 填写信息，这个是自己fork的仓库的commit
 
 ## 通过命令
 
-https://blog.csdn.net/u013673437/article/details/127198924
+<https://blog.csdn.net/u013673437/article/details/127198924>
 
 ### 设置源地址
 
@@ -126,8 +108,6 @@ git log
 
 git push origin master
 
-
-
 分支拉代码
 
 ```javascript
@@ -138,10 +118,6 @@ git pull  https://github.com/wangrongding/wechat-bot.git main
 git pull <remote> <branch>
 ```
 
-
-
-
-
 ## git 大小写不敏感 如何解决
 
 默认是true 忽略大小写
@@ -149,10 +125,6 @@ git pull <remote> <branch>
 改成false即可
 
 git config core.ignorecase false
-
-
-
-
 
 ## 暂存代码切换分支
 
@@ -162,15 +134,11 @@ git checkout master  -- 切换分支
 
 git stash pop 把暂存的代码恢复
 
-
-
 ## 提交到暂存，提交错了分支
 
 执行`git reset --soft HEAD^`
 
 如果是是vscode，他支持撤销
-
-
 
 ## 如果你拿到了a b需求，再发版，再合并主分支
 
@@ -198,8 +166,6 @@ git push --set-upstream origin A
 
 然后去到GitHub上创建pr，合并到main主分支
 
-
-
 ## git reset 和 git revert区别
 
 git reset 撤销提交
@@ -210,11 +176,9 @@ git revert 撤销提交，会留记录
 
 git revert HEAD 会记录你的撤销操作在log里
 
-
-
 ## 彻底清除git所有历史提交记录
 
-### https://blog.csdn.net/jhsword/article/details/107543884
+### <https://blog.csdn.net/jhsword/article/details/107543884>
 
 在线rename分支后，，你可以这样更新本地代码
 
@@ -227,21 +191,15 @@ git branch -u origin/main main  // branch 'main' set up to track 'origin/main'.
 git remote set-head origin -a // origin/HEAD set to main
 ```
 
-
-
 ## git 撤销
 
-https://www.bilibili.com/video/BV1ne4y1S7S9/?spm_id_from=333.337.search-card.all.click
-
-
+<https://www.bilibili.com/video/BV1ne4y1S7S9/?spm_id_from=333.337.search-card.all.click>
 
 ![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305011900034.jpeg)
 
-
-
 ### reset
 
-#### 1 编辑器编辑后的撤销：
+#### 1 编辑器编辑后的撤销
 
 git checkout <file_name>
 
@@ -268,8 +226,6 @@ git checkout HEAD <changed_file>    撤销后，暂存区没了这个文件，�
 - `git reset --soft HEAD~1` 命令会将 Git 移动到两个提交之前的提交，并保留工作树和暂存区中的更改。这意味着用户可能会在回滚到之前的状态后，继续进行编辑，并将其作为新提交。
 - `git reset --hard HEAD~` 命令会将 Git 移动到上一个提交，并完全删除工作树和暂存区中的更改。这意味着用户可能会失去将文件添加到 Git 的新提交之前的更改。
 
-
-
 ### 强制提交git push -f
 
 场景，当你本地分支git reset --hard HEAD~1
@@ -277,8 +233,6 @@ git checkout HEAD <changed_file>    撤销后，暂存区没了这个文件，�
 也就是回退一个版本，你再提交远端git push会不给你提交
 
 因为远端会发现你莫名其妙少了最近一个版本，也就是HEAD那个版本
-
-
 
 #### 使用建议
 
@@ -289,8 +243,6 @@ git checkout HEAD <changed_file>    撤销后，暂存区没了这个文件，�
 ### revert
 
 把修改的文件反过来，之前新增的修改，变成移除，重新给你commit上去，会有log记录，以此达到回退的目的
-
-
 
 git revert HEAD   反推最近一次commit，变成之前的状态，并生成新的commit
 
@@ -310,23 +262,12 @@ reset   只推荐使用于个人分支
 
 ## git HEAD / HEAD^ / HEAD~ 的含义
 
-https://segmentfault.com/a/1190000022506884
-
-
-
-
+<https://segmentfault.com/a/1190000022506884>
 
 ## 文件大小写问题
-
-
 
 git默认不识别大小写
 
 执行 命令
 
 git config core.ignorecase false
-
-
-
-
-
