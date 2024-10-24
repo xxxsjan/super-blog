@@ -347,3 +347,16 @@ esno 或者 tsx
 From v0.15, `esno` is essentially an alias of [`tsx`](https://github.com/esbuild-kit/tsx), with automated CJS/ESM mode and caching.
 
 从v0.15开始， `esno` 本质上是 `tsx` 的别名，具有自动CJS/ESM模式和缓存。
+
+
+
+## tsup
+
+配置打包输出
+
+```javascript
+"build": "tsup src/index.ts --dts --format cjs,esm --clean"
+"watch": "tsup src/index.ts --dts --format cjs,esm --watch"
+```
+
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151253265.png)

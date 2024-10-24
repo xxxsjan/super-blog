@@ -1,12 +1,15 @@
 入口
+
 ```json
 entry: {
     index: path.resolve(__dirname, "../src/pages/index/index.js"),
     user: path.resolve(__dirname, "../src/pages/user/user.js"),
 },
 ```
+
 这样输出的包名 默认就是index 和 user
 同样的需要两份html
+
 ```json
  plugins: [
     new HtmlWebpackPlugin({
@@ -39,6 +42,7 @@ entry: {
     }),
   ],
 ```
+
 webapck的splitChunk缓存组输出 index user common这三个包的
 假如只是一个入口就是 入口名 common 两个
 webpack5的话是 defaultVendors和 default

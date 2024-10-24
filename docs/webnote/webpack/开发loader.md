@@ -5,13 +5,16 @@
 - content 源文件的内容
 - map SourceMap 数据
 - meta 数据，可以是任何内容
+
 ```javascript
 module.exports = function (content,map,meta){
   // err content,map,meta
   this.callback(null,content,map,meta)
 }
 ```
+
 虽然是异步，到会等他完成才会执行下个loader
+
 ```javascript
 module.exports = function (content, map, meta) {
   const callback = this.async();
@@ -21,8 +24,11 @@ module.exports = function (content, map, meta) {
   }, 1000);
 };
 ```
-## 
+
+##
+
 loader API
+
 | 方法名 | 含义 | 用法 |
 | --- | --- | --- |
 | this.async | 异步回调 loader。返回 this.callback | const callback = this.async() |
@@ -31,4 +37,3 @@ loader API
 | this.emitFile | 产生一个文件 | this.emitFile(name, content, sourceMap) |
 | this.utils.contextify | 返回一个相对路径 | this.utils.contextify(context, request) |
 | this.utils.absolutify | 返回一个绝对路径 | this.utils.absolutify(context, request) |
-

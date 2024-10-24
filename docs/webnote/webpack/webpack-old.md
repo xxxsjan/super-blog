@@ -1,12 +1,8 @@
 # webpack-old
 
-
-
 ## webpack.config.js
 
-https://www.bilibili.com/video/BV1e7411j7T5
-
-
+<https://www.bilibili.com/video/BV1e7411j7T5>
 
 ```javascript
 process.env.NODE_ENV = "devolopment"
@@ -41,7 +37,7 @@ module.exports ={
         outputPath:'imgs',//输入到build/imgs文件夹
       }}
     {test:/\.html$/,loader:'html-loader'}
-		// 处理其他格式资源
+  // 处理其他格式资源
     {exclude:/\.(js|css|html)$/,loader:'file-loader'}
     }]
   },
@@ -62,10 +58,10 @@ module.exports ={
       quiet:true, // 显示重要信息，其他不显示
       overlay:false,//出错不全屏提示
       proxy:{
-	 			'/api':{
+     '/api':{
           target:'http://localhost:3000',
           pathRewrite:{
-						"^/api":""
+      "^/api":""
           }
         }
       }
@@ -73,36 +69,32 @@ module.exports ={
 }
 ```
 
-
-
 ### browserslist
 
 ```javascript
  // package.json
 "browserslist":{
-	"development":[
-		"last 1 chrome version",
-		"last 1 firefox version",
-		"last 1 safari version"
-	],
-	"production":[
+ "development":[
+  "last 1 chrome version",
+  "last 1 firefox version",
+  "last 1 safari version"
+ ],
+ "production":[
     ">0.2%",
     "not dead",
     "not op_mini all"
-	]
+ ]
 }
 ```
 
-
-
-#### 
+####
 
 #### babel
 
 处理箭头函数兼容性，promise不行
 
-- babel-loader   
-- @babel/preset-env   
+- babel-loader
+- @babel/preset-env
 - @babel/core
 
 全部兼容
@@ -116,7 +108,7 @@ module.exports = {
   module:{
     
       rules:[
-      {	
+      { 
         test:/\.js$/,
         exclude:/node_modules/,
         loader:'babel-loader',
@@ -142,15 +134,11 @@ module.exports = {
 }
 ```
 
-
-
 ## 开发环境优化
-
-
 
 ```plain
 module,exports ={
-	...
+ ...
   devSever：{ 
     contentBase:resolve(__dirname,'build')
     compress:true, // gzip
@@ -161,40 +149,30 @@ module,exports ={
 }
 ```
 
-
-
 ## rules-oneOf
 
 一个文件不会被多个loader过一遍
 
 ```plain
 module.exports ={
-	module:{
-		rules:[
-			{test:xxxxx},
-			{oneOf:[{test:xxx},{tst:xxx}]}
-		]
-	}
+ module:{
+  rules:[
+   {test:xxxxx},
+   {oneOf:[{test:xxx},{tst:xxx}]}
+  ]
+ }
 }
 ```
 
-## 
+##
 
 ## tree shaking
 
-
-
 去除无用代码
-
-
 
 1 必须使用es6 模块化引入 （import）
 
-
-
 2 production环境
-
-
 
 package.json
 
@@ -202,10 +180,6 @@ package.json
 "sideEffect":false   // 可能会干掉css/@babel/polyfill
 "sideEffect":["*.css"]
 ```
-
-
-
-
 
 ## js懒加载 || 预加载
 
@@ -219,11 +193,9 @@ index.js
 
 ```plain
 document.getElementById('btn').onclick(function(){
-	import(/* webpackChunkName: 'test',webpackPrefetch:true*/ './test').then().catch()
+ import(/* webpackChunkName: 'test',webpackPrefetch:true*/ './test').then().catch()
 })
 ```
-
-
 
 ## dll
 
@@ -232,45 +204,41 @@ document.getElementById('btn').onclick(function(){
 ```javascript
 // webpack.dll.js
 module.exports={
-	entry:{
-		//[name]:官方名
-		jqueryVentor:['jquery']
-	},
-	output:{
-		filename:'[name].js',
-		path:resolve(__dirname,'dll'),
-		library:'[name].[hash]' // 打包的库向外暴露叫什么名字
-	},
-	plugins:[
-		new webpack.DllPlugin({
-			name:'[name].[hash]',
-			path:resolve(__dirname,'dll/manifest.json') // 输出文件
-		})
-	]
+ entry:{
+  //[name]:官方名
+  jqueryVentor:['jquery']
+ },
+ output:{
+  filename:'[name].js',
+  path:resolve(__dirname,'dll'),
+  library:'[name].[hash]' // 打包的库向外暴露叫什么名字
+ },
+ plugins:[
+  new webpack.DllPlugin({
+   name:'[name].[hash]',
+   path:resolve(__dirname,'dll/manifest.json') // 输出文件
+  })
+ ]
 }
 package.json script
 "dll":'webpack --config ./webpack.dll.js'
 
 webpack.config.js
 module.exports={
-	plugins:[
+ plugins:[
     // 读取dll打包，webpack不用再给dll打包的包打包
-		new webpack.DllReferencePlugin({
-			manifest:resolve(__dirname,'dll/manifest.json')
-		})
+  new webpack.DllReferencePlugin({
+   manifest:resolve(__dirname,'dll/manifest.json')
+  })
     // html里引入js
     new AddAssetHtmlWebpackplugin({
-    	filename:resolve(__dirname,'dll/jqueryVentor.js')
+     filename:resolve(__dirname,'dll/jqueryVentor.js')
     })
-	]
+ ]
 }
 ```
 
-
-
 new 插件写法
-
-
 
 ```javascript
 const path = require('path')
@@ -323,7 +291,7 @@ config.plugins = [
         context: process.cwd(),
         manifest: require('./dll/chart-manifest.json')
     })
-  	new AddAssetHtmlPlugin({
+   new AddAssetHtmlPlugin({
         filepath: path.resolve(__dirname, './dll/*.js'), // dll文件位置
         publicPath: './js', // dll 引用路径
         outputPath: './js' // dll最终输出的目录
@@ -335,10 +303,9 @@ config.plugins = [
 ]
 ```
 
-## 
 
 ## webpack -h 提示安装webpack-cli
 
 webpack与webpack-cli
 
-https://segmentfault.com/a/1190000013699050
+<https://segmentfault.com/a/1190000013699050>

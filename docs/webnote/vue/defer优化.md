@@ -4,8 +4,8 @@
 
 ```vue
 <template>
-	第10帧开始渲染
-	<heavy-com v-if="defer(10)"></heavy-com>
+ 第10帧开始渲染
+ <heavy-com v-if="defer(10)"></heavy-com>
 </template>
 
 <script>
@@ -30,4 +30,3 @@ const defer = useDefer()
 
 
 ```
-
