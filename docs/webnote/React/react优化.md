@@ -25,4 +25,3 @@ class Child extends React.Component {
   }
 }
 ```
-

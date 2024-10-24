@@ -177,12 +177,6 @@ import MyContext from './context';
 this.context.text
 ```
 
-
-
-
-
-
-
 ## ref
 
 使用 `forwardRef` 可以让父组件可以访问子组件的 DOM 节点或 React 组件实例。
@@ -244,4 +238,3 @@ function Modal(props) {
   );
 }
 ```
-

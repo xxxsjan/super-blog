@@ -1,7 +1,5 @@
 # react传值
 
-
-
 ## 定义类型
 
 ts中不需要prop-type这个库了
@@ -26,11 +24,7 @@ fucntion component(props:PropsType){
 
 Context在 16.x 之前是定义一个全局的对象,类似 vue 的 eventBus,如果组件要使用到该值直接通过this.context获取
 
-
-
 16.x 之后的Context使用了Provider和Customer模式,在顶层的Provider中传入value，在子孙级的Consumer中获取该值，并且能够传递函数，用来修改context 声明一个全局的 context 定义,context.js
-
-
 
 ```
 context.js
@@ -129,7 +123,7 @@ this.props.history.push({pathname:`/web/search?id ${row.id}`});
 
 ## redux
 
-https://juejin.cn/post/6844903993278201870#heading-10
+<https://juejin.cn/post/6844903993278201870#heading-10>
 
 npm install redux react-redux
 
@@ -203,17 +197,11 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);
 ```
 
-
-
 ## MobX
-
-
 
 ## flux
 
-
-
-## useContext+useReducer 
+## useContext+useReducer
 
 ```javascript
 // 定义全局状态和 reducer

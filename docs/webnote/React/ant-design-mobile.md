@@ -1,14 +1,10 @@
 # Ant Design Mobile
 
-https://mobile.ant.design/zh
+<https://mobile.ant.design/zh>
 
+## InfiniteScroll
 
-
-## InfiniteScroll 
-
-https://mobile.ant.design/zh/components/infinite-scroll
-
-
+<https://mobile.ant.design/zh/components/infinite-scroll>
 
 ```jsx
 import React, { useState } from 'react'
@@ -36,4 +32,3 @@ export default () => {
   )
 }
 ```
-

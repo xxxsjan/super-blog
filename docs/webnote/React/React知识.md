@@ -135,8 +135,6 @@ function(e){
 this.refs.one
 ```
 
-
-
 ### 事件
 
 #### 键盘事件
@@ -368,8 +366,6 @@ module.exports = override(
 停止项目：pm2 stop 自定义名称
 删除项目：pm2 delete 自定义名称
 
-
-
 ### antd开发
 
 #### Form
@@ -441,13 +437,13 @@ export default wrapLogin;
 ```jsx
 this.props.children.forEach((item,i)=>{
     if(item.props['data-positon'] === 'header') {
-    	headerDom = item 
+     headerDom = item 
     }else if(item.props['data-positon'] === 'content') {
-    	contentDom = item 
+     contentDom = item 
     }else if(item.props['data-positon'] === 'footer') {
-   	    footerDom = item 
+        footerDom = item 
     }
-})	
+}) 
 子组件里面内容
 <div>
   {headerDom}
@@ -655,8 +651,6 @@ import logo from "./logo.svg";
 return (  <img src={logo} className="App-logo" alt="logo" />)
 ```
 
-
-
 ## 生命周期
 
 ***componentWillMount*****()** – 在渲染之前执行，在客户端和服务器端都会执行。
@@ -672,4 +666,3 @@ return (  <img src={logo} className="App-logo" alt="logo" />)
 ***componentDidUpdate*****()** – 在渲染发生后立即调用。
 
 ***componentWillUnmount*****()** – 从 DOM 卸载组件后调用。用于清理内存空间。
-

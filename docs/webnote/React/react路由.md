@@ -18,13 +18,9 @@ React Router 5 和 React Router 6 在 API 和用法上有一些差异。
 
 <https://reactrouter.com/en/main/start/tutorial>
 
-
-
 ## v6路由使用
 
-https://juejin.cn/post/7075585581706641415
-
-
+<https://juejin.cn/post/7075585581706641415>
 
 ## Outlet
 
@@ -112,8 +108,6 @@ function Contact() {
   return <h1>Contact</h1>;
 }
 ```
-
-
 
 ### React Router v5
 
@@ -317,8 +311,6 @@ export default routes;
 
 ## ScrollRestoration
 
-
-
 ```
 import { useState } from 'react';
 import { Outlet } from 'react-router';
@@ -346,6 +338,3 @@ const App: React.FC = () => {
 export default App;
 
 ```
-
-
-
