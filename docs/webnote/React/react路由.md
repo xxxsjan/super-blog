@@ -14,6 +14,42 @@ React Router 5 和 React Router 6 在 API 和用法上有一些差异。
 
 需要注意的是，React Router 6 目前还处于 beta 版本，可能会有一些 API 发生变化。建议在使用之前先仔细阅读官方文档和升级指南。
 
+## 路由配置
+
+Router下需要一个div包裹
+
+| exact    | 精确匹配                         |
+| -------- | :------------------------------- |
+| replace  | 替换当前路由，历史不记录被替换的 |
+| Redirect | 重定向组件                       |
+| redirect | 改路由                           |
+| Switch   | 组件 只匹配一个路由              |
+
+```react
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+<Router basename="/base">
+  <div>
+  <Link to="/">首页</Link>
+    <div>
+      <Route path='/shop/add' component={ShopAdd}></Route>
+    </div>
+  </div>
+</Router>
+```
+
+## 嵌套路由
+
+遍历时把自己小弟routes(children)传下去
+
+```react
+return <Route key={key} exact path={route.path} render={props => <route.component {...props} routes={route.routes} />}
+ />
+```
+
+
+
+
+
 ## 文档
 
 <https://reactrouter.com/en/main/start/tutorial>
