@@ -1,7 +1,7 @@
 
 # react
 
-## 
+##
 
 ## 安装babel插件
 
@@ -26,10 +26,6 @@ module exports = {
 }
 ```
 
-
-
-
-
 ## Echart不更新
 
 props和state最好别联系在一起，state的更新麻烦，
@@ -41,8 +37,6 @@ render时state不会更新，setState刷新的关键：
 1. setState不会立刻改变React组件中state的值
 2. setState通过引发一次组件的更新过程来引发重新绘制
 3. 多次setState函数调用产生的效果会合并。
-
-
 
 ## 生命周期
 
@@ -86,16 +80,12 @@ module exports = {
 }
 ```
 
-
-
 ### 单向绑定 defaultValue
 
 ```
 this.state = {}
 <input defaultValue={this.state.msg}></input>
 ```
-
-
 
 ## pureComponent
 
@@ -106,4 +96,3 @@ this.state = {}
 ```
 React.lazy(()=>import())
 ```
-
