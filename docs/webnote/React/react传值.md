@@ -290,3 +290,42 @@ auth.setData
 - 可以是useState提供的state 和 setState
 
 使用状态数据时都一样，通过useContext拿到数据，可以使用和设置状态数据
+
+## taro  react-redux
+
+```js
+import { useDispatch, useSelector } from 'react-redux'
+
+// 使用
+const user = useSelector((state: StoreDataType) => state.user)
+const selectInfo = useSelector((state: StoreDataType) => state.edit)
+const dispatch = useDispatch()
+
+
+dispatch(dispatchUser({
+  userId:666
+}))
+
+dispatch(dispatchEdit({
+    playletName: '',
+    company: '',
+    companyId: '',
+    playletId: ''
+}))
+
+
+// actions.js
+export function dispatchUser (payload) {
+  return addSyncHandler({
+    type: 'USER',
+    payload
+  })
+}
+
+export function dispatchEdit (payload) {
+  return addSyncHandler({
+    type: 'EDIT_SELECT',
+    payload
+  })
+}
+```
