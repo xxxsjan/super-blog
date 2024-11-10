@@ -18,7 +18,9 @@ vue-qr 生成二维码
 二维码生成
 [https://www.npmjs.com/package/vue-qr](https://www.npmjs.com/package/vue-qr)
 
-###
+## 文章
+
+[您可能一直在寻找的 10 个非常有用的前端库](https://mp.weixin.qq.com/s/9GEVbRdd7ntZkqbyzHSHBg)
 
 ## clipboard
 

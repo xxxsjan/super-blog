@@ -83,3 +83,13 @@ https://www.bilibili.com/video/BV18T411R7YR/?spm_id_from=444.41.list.card_archiv
 https://www.reaconverter.com/
 
 https://www.toprender.com/forum.php?mod=forumdisplay&fid=286&filter=typeid&typeid=237
+
+
+
+## GeekDesk
+
+小巧、美观的桌面快速启动工具
+
+https://github.com/BookerLiu/GeekDesk
+
+内置everything
