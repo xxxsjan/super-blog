@@ -1,7 +1,5 @@
 # taro开发笔记
 
-
-
 ## rpx问题
 
 ```
@@ -22,9 +20,7 @@ const systemInfo = Taro.getSystemInfoSync();
 
 总的来说，物理像素、逻辑像素和设备独立像素是移动设备中的三种不同的像素概念。在 Taro 中，使用 `rpx` 可以方便地实现适配不同设备的效果，`rpx` 是相对于屏幕宽度的 `1/750` 的逻辑像素，可以根据不同设备的屏幕宽度自适应调整实际的物理像素数量，从而实现屏幕适配的效果。
 
-
-
-devicePixelRatio 为2 
+devicePixelRatio 为2
 
 750rpx => 375px
 
@@ -51,9 +47,21 @@ pxTransform(windowHeight)
 乘上devicePixelRatio 才等于上面的计算结果
 ```
 
-### 
+###
 
+## 选择元素
 
+```js
 
+Taro.createSelectorQuery()
+  .select('.box1')
+  .boundingClientRect()
+  .select('.box2')
+  .boundingClientRect()
+  .selectAll('.items')
+  .boundingClientRect()
+  .exec(res=>{
+    const [box1,box2,items] = res
+  })
 
-
+```
