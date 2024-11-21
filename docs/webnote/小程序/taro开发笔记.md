@@ -41,27 +41,8 @@ const scrollStyle = {
     height: getScrollHeight(),
 };
 
-# 其他：pxTransform
+// 其他：pxTransform
 import {  pxTransform } from "@tarojs/taro";
 pxTransform(windowHeight)
 乘上devicePixelRatio 才等于上面的计算结果
-```
-
-###
-
-## 选择元素
-
-```js
-
-Taro.createSelectorQuery()
-  .select('.box1')
-  .boundingClientRect()
-  .select('.box2')
-  .boundingClientRect()
-  .selectAll('.items')
-  .boundingClientRect()
-  .exec(res=>{
-    const [box1,box2,items] = res
-  })
-
 ```
