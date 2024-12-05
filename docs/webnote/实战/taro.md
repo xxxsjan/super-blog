@@ -44,3 +44,28 @@ Taro.createSelectorQuery()
   })
 
 ```
+
+## 电脑版预览不了base64
+
+```js
+  const previewImage = (base64: string) => {
+    const filepath = Taro.env.USER_DATA_PATH + '/test.png'
+    console.log('filepath: ', filepath)
+    const fs = Taro.getFileSystemManager()
+    fs.writeFile({
+      filePath: filepath,
+      data: base64,
+      encoding: 'base64',
+      success: function (res) {
+        console.log(res)
+        Taro.previewImage({
+          current: 0,
+          urls: [filepath]
+        })
+      },
+      fail: function (res){
+        console.log('res: ', res)
+      }
+    })
+  }
+```
