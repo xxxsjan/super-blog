@@ -1,43 +1,5 @@
 # CSS
 
-## 各种布局
-
-### 圣杯布局（一体）
-
-[https://www.jianshu.com/p/81ef7e7094e8](https://www.jianshu.com/p/81ef7e7094e8)
-
-### 双飞翼（翅膀是margin）
-
-### 伪等高布局
-
- 所有子元素样式设置：
-
- padding-bottom:10000px;
-
- margin-bottom:-10000px;
-
- 父元素设置
-
- overflow:hidden;
-
-### 粘连布局
-
- 底部footer元素的上一个兄弟元素最小高度设置为min-height:100%
-
- html,body也得设置默认高度，不然上一行提到的兄弟元素没有高度参考（个人理解）
-
- html,body{ height: 100%; }
-
- 底部footer元素假如设置高度为50px
-
- 然后兄弟元素需要设置padding-bottom等于footer的高度，
-
- 因为footer原本是占兄弟元素底部的50px，不设置的话，
-
- 兄弟元素内的内容撑开到50px以内时不会把footer往下推
-
-### 两列布局
-
 ## 清除浮动-高度塌陷
 
 1、给父级加高度
@@ -107,8 +69,6 @@
 .clearfix{zoom: 1;}
 ```
 
-
-
 ## box布局
 
 | display: -webkit-box; | 类似flex |
@@ -125,8 +85,6 @@
 
  unicode-bidi:bidi-override;(文字倒序)
 
-
-
 ### 盒子倒影
 
 -webkit-box-reflect: above 10px;
@@ -135,17 +93,11 @@
 
 第二个值：偏移量（offset）
 
-
-
-
-
 ### resize支持拖动缩放
 
  overflow: auto;（需要这个才能使用）
 
  resize: both; （both全方向拖动缩放;horizontal水平拖动缩放）
-
-
 
 ### white-space
 
@@ -173,18 +125,6 @@ display:inline
 
 background：url:(img/*/) no-repeat -10px -10px;
 
-
-
-### 选择器优先级
-
-| 内联样式 | 1000 |
-| --- | --- |
-| id选择器 | 100 |
-| 类、伪类 | 10 |
-| 元素选择器 | 1 |
-| 通配* | 0 |
-| 继承样式 | 无优先级 |
-
 ## getComputedStyle和 getBoundingClientRect
 
 style.width  dom树
@@ -192,3 +132,41 @@ style.width  dom树
 window.getComputedStyle CSSOM
 
 Element.getBoundingClientRect  LayoutTree  用户眼睛看到的  可见尺寸
+
+## img底部间隙
+
+原因：img默认inline-block，默认字体基于baseline对齐，底部会出行间隙<br />
+
+解决：
+diisplay:block;
+fontsize：0;
+float：left;
+vertical-align: top;
+
+## css选择器
+
+[https://www.jianshu.com/p/75a2339b5f96](https://www.jianshu.com/p/75a2339b5f96)
+
+~ ： [通用兄弟选择器](https://links.jianshu.com/go?to=https%3A%2F%2Fdeveloper.mozilla.org%2Fzh-CN%2Fdocs%2FWeb%2FCSS%2FGeneral_sibling_combinator): 波浪号 ~，匹配指定关系的所有同层级兄弟元素，h1 ~ h2 => 与h1 具有共同父元素之后的所有同层级h2<br />>：子代选择器<br />+：[相邻兄弟选择器](https://links.jianshu.com/go?to=https%3A%2F%2Fdeveloper.mozilla.org%2Fzh-CN%2Fdocs%2FWeb%2FCSS%2FAdjacent_sibling_combinator): 加号 +，匹配指定关系的紧邻兄弟元素，第二个元素被选定，h1 + h2 => 与 h1 相邻且具有共同父元素的 h2<br />空格：后代选择器
+
+## 爱恨原则
+
+link--visited--hover-active，也就是我们常说到的LoVe HAte原则
+
+## text-transform
+
+[https://developer.mozilla.org/zh-CN/docs/Web/CSS/text-transform](https://developer.mozilla.org/zh-CN/docs/Web/CSS/text-transform)
+
+```json
+/* Keyword values */
+text-transform: capitalize;
+text-transform: uppercase;
+text-transform: lowercase;
+text-transform: none;
+text-transform: full-width;
+
+/* Global values */
+text-transform: inherit;
+text-transform: initial;
+text-transform: unset;
+```

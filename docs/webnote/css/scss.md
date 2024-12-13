@@ -90,9 +90,9 @@ SCSS中的@at-root可以用来放弃当前的嵌套层级，让其内部的CSS�
 
 ```scss
 @mixin usethemn(){
-	html[data-theme='light'] & {
-		color:#fff;
-	}
+ html[data-theme='light'] & {
+  color:#fff;
+ }
 }
 &是使用该mixin的那个选择器的变量，可以这么理解
 
@@ -128,16 +128,14 @@ $themes:(
 @mixin usetheme(){
     @each $key , $value in $themes{
         html[data-theme=#{$key}] & {
-		  @content
-	    }
+    @content
+     }
     }
 }
 @content是usetheme()的入参
 但使用@include usetheme(color:#000;)，@content会是color:#000;
 
 ```
-
-
 
 ## BEM规范
 
@@ -248,8 +246,6 @@ node-sass和node版本依赖较强，所以使用sass吧
 "serve": "set NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
 ```
 
-
-
 ## 语法
 
 ### unquote
@@ -264,17 +260,14 @@ $size:unquote('#{random(100)}px')
 
 ```scss
 @function getShadows($n){
-	$shadows: '#{random(100)}vw '#{random(100)}vh #fff'
+ $shadows: '#{random(100)}vw '#{random(100)}vh #fff'
     @for $i from 2 through $n {
           $shadows: '#{$shadows}, #{random(100)}vw '#{random(100)}vh #fff'  
     }    
-	@return unquote($shadows)
+ @return unquote($shadows)
 }
 
 usage
 
 box-shadows:getShadows(1000)
 ```
-
-
-
