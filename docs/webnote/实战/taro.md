@@ -69,3 +69,55 @@ Taro.createSelectorQuery()
     })
   }
 ```
+
+## 新版本
+
+```ts
+  useDidShow(()=>{
+    if (Taro.canIUse('getUpdateManager')) {
+      const updateManager = Taro.getUpdateManager()
+      updateManager && updateManager.onCheckForUpdate(function (res) {
+        if (res.hasUpdate) {
+          updateManager.onUpdateReady(function () {
+            Taro.showModal({
+              title: '更新提示',
+              content: '新版本已经准备好，是否重启应用？',
+              success: function (ress) {
+                if (ress.confirm) {
+                  updateManager.applyUpdate()
+                }
+              }
+            })
+          })
+          updateManager.onUpdateFailed(function () {
+            Taro.showModal({
+              title: '已经有新版本了哟~',
+              content: '新版本已经上线啦~，请您删除当前小程序，重新搜索打开哟~'
+            })
+          })
+        }
+      })
+    }
+  })
+```
+
+## 拦截复制
+
+```ts
+Taro.onCopyUrl(()=>{
+      const pages = Taro.getCurrentPages()
+      const page = pages[pages.length - 1]
+      const options = page.options
+      const url = page.route
+      const canCopyPage = ['pages/userDetail/index', 'pages/communityDetail/index']
+      if (!url || !canCopyPage.includes(url) || !options.id){
+        setTimeout(()=>{
+          Taro.setClipboardData({
+            data: '#小程序://name/wMR05laW9GDpKlg'
+          })
+        }, 500)
+      } else {
+        return {query: 'id=' + options.id}
+      }
+})
+```
