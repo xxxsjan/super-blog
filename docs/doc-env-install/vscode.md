@@ -243,3 +243,18 @@ CodeGeeX: AI Code AutoComplete, Chat, Auto Comment
 }
 ```
 
+
+### 文件夹分组
+
+```
+{
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "env.d.ts": "auto-imports.d.ts, components.d.ts, interface-extensions.d.ts",
+    "tsconfig.json": "tsconfig.*.json"
+  }
+}
+
+
+```
+
