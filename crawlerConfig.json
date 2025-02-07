@@ -1,6 +1,8 @@
 {
   "index_name": "super-blog",
-  "start_urls": ["https://blog.dolam.fun/"],
+  "start_urls": [
+    "https://super-blog-navy.vercel.app/"
+  ],
   "rateLimit": 8,
   "maxDepth": 10,
   "selectors": {
@@ -27,7 +29,10 @@
     ".table-of-contents"
   ],
   "custom_settings": {
-    "attributesForFaceting": ["lang", "tags"]
+    "attributesForFaceting": [
+      "lang",
+      "tags"
+    ]
   },
   "js_render": true
 }
