@@ -54,3 +54,7 @@ ollama create myllama2 --file myllama2.modelfile
 启动模型
 
 ollama run myllama2
+
+## lm studio  更改 镜像源
+
+<https://www.cnblogs.com/com3/p/18224574>
