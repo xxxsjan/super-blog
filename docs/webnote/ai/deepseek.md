@@ -58,3 +58,7 @@ ollama run myllama2
 ## lm studio  更改 镜像源
 
 <https://www.cnblogs.com/com3/p/18224574>
+
+## gpu要求
+
+<https://github.com/ollama/ollama/blob/main/docs/gpu.md>
