@@ -59,6 +59,12 @@ ollama run myllama2
 
 <https://www.cnblogs.com/com3/p/18224574>
 
-## gpu要求
+## ollama命令
 
-<https://github.com/ollama/ollama/blob/main/docs/gpu.md>
+ollama run deepseek-r1:7b --verbose
+
+--verbose 启用详细输出模式
+
+回复/bye 退出聊天
+
+ollama ps
