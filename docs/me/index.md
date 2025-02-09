@@ -7,7 +7,7 @@ slug: home
 
 ::: tip 关于我
 
-- [导航页](https://dolam.fun/)
+- [导航页](https://odep.xyz/)
 
 - [github](https://github.com/xxxsjan)
 

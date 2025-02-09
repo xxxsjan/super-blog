@@ -1,7 +1,7 @@
 {
   "index_name": "super-blog",
   "start_urls": [
-    "https://super-blog-navy.vercel.app/"
+    "https://blog.odep.xyz/"
   ],
   "rateLimit": 8,
   "maxDepth": 10,

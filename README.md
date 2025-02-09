@@ -6,7 +6,7 @@ vitepress
 
 ## 预览
 
-<https://dolam.top/>
+<https://odep.xyz/>
 
 ## 编译md文件报错
 
