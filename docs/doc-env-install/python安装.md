@@ -1,30 +1,24 @@
 # python安装
 
+## 一、Anaconda miniconda
 
-
-
-
-
-
-## 一、Anaconda
-
-https://blog.csdn.net/qq_41813454/article/details/136111020
+<https://blog.csdn.net/qq_41813454/article/details/136111020>
 
 ### 1 先清理已经安装的python
 
 ### 2 下载miniconda
 
-​	[官网下载](https://docs.anaconda.com/free/miniconda/)	or   [国内镜像](https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/)
+​ [官网下载](https://docs.anaconda.com/free/miniconda/)  or   [国内镜像](https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/)
 
 ### 3 安装
 
 Miniconda3-py39_24.1.2-0-Windows-x86_64为例子
 
-- ​	安装用户
+- ​ 安装用户
   - 只为当前用户安装，
   - 为所有用户安装（推荐）
 
-- ​	安装地址 ：
+- ​ 安装地址 ：
   - 新建一个c:/miniconda文件夹（推荐）
   - c:/Program Files里（不建议）
 - 勾选
@@ -35,7 +29,7 @@ Miniconda3-py39_24.1.2-0-Windows-x86_64为例子
 path中新增
 
 ```
-C:\\miniconda3
+C:\miniconda3
 C:\miniconda3\Library\bin
 C:\miniconda3\Scripts
 ```
@@ -52,10 +46,8 @@ python -V     自带python3.9环境
 
 #### 设置pip源
 
-https://pypi.tuna.tsinghua.edu.cn/simple
-https://mirrors.aliyun.com/pypi/simple/
-
-
+<https://pypi.tuna.tsinghua.edu.cn/simple>
+<https://mirrors.aliyun.com/pypi/simple/>
 
 1a 命令行设置pip镜像源
 
@@ -63,9 +55,7 @@ https://mirrors.aliyun.com/pypi/simple/
 pip config set global.index_url https://mirrors.aliyun.com/pypi/simple/
 ```
 
-windows文件位置：C:\Users\xxxxx\AppData\Roaming\pip\pip.ini 
-
-
+windows文件位置：C:\Users\xxxxx\AppData\Roaming\pip\pip.ini
 
 1b  手动设置，没有就新建文件夹/ 文件
 
@@ -84,8 +74,6 @@ trusted-host = pypi.tuna.tsinghua.edu.cn
 
 #### 设置conda源
 
-
-
 ##### 清华镜像源
 
 ```
@@ -95,11 +83,7 @@ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/m
 conda config --show-sources
 ```
 
-
-
 配置搜索和安装包时显示使用channel的 URL
-
-
 
 ```
 conda config --set show_channel_urls yes
@@ -107,9 +91,7 @@ conda config --set show_channel_urls yes
 conda config --show
 ```
 
-
-
-##### 文件位置：
+##### 文件位置
 
 C:\Users\xxxx
 
@@ -123,13 +105,11 @@ ssl_verify: true
 
 ### 7 初始化conda到全局PowerShell
 
-​	condabin文件夹下![image-20240411200015377](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/image-20240411200015377.png)
+​ condabin文件夹下![image-20240411200015377](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/image-20240411200015377.png)
 
 ```
 ./conda init --all
 ```
-
-
 
 ### 8 命令
 
@@ -143,13 +123,11 @@ conda env export > environment.yml：导出当前环境的配置信息到environ
 conda env create -f environment.yml：根据environment.yml文件中的配置信息创建一个新的环境。
 ———————————————
 
-
-
 ## 二、pyenv-win
 
-https://github.com/pyenv-win/pyenv-win
+<https://github.com/pyenv-win/pyenv-win>
 
-https://blog.csdn.net/Java_ZZZZZ/article/details/135478712
+<https://blog.csdn.net/Java_ZZZZZ/article/details/135478712>
 
 1. 下载项目zip
 
@@ -161,7 +139,7 @@ https://blog.csdn.net/Java_ZZZZZ/article/details/135478712
 
 4. 系统变量-Path-新建
 
-   %PYENV%\bin 
+   %PYENV%\bin
    %PYENV%\shims
 
    ![image-20240411125720872](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/image-20240411125720872.png)
@@ -181,7 +159,7 @@ pyenv which python  查看python安装路径
 
 #### 安装python卡住
 
-1 去https://www.python.org/ftp/python/  安装包exe下载放到install_cache 文件夹下
+1 去<https://www.python.org/ftp/python/>  安装包exe下载放到install_cache 文件夹下
 
 ![image-20240411131527581](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/image-20240411131527581.png)
 
@@ -193,19 +171,15 @@ https://www.python.org/ftp/python 全部替换为 https://npm.taobao.org/mirrors
 
 #### python -V没反应
 
-win10 进入设置 搜索 别名 
+win10 进入设置 搜索 别名
 
 ![image-20240411132645945](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/image-20240411132645945.png)
 
 ![image-20240411132629413](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/image-20240411132629413.png)
 
-
-
 ## 三、pyenv
 
-https://developer.aliyun.com/article/1462462#slide-9
-
-
+<https://developer.aliyun.com/article/1462462#slide-9>
 
 ## 四、查看cuda版本
 
