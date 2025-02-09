@@ -3,21 +3,31 @@
 [https://www.runoob.com/docker/docker-command-manual.html](https://www.runoob.com/docker/docker-command-manual.html)
 
 ### 镜像市场
+
 [https://hub.daocloud.io/](https://hub.daocloud.io/)
 [https://hub.docker.com/search?q=](https://hub.docker.com/search?q=)
+
 ### 镜像操作
+
 #### 查找
+
 docker search nginx
+
 ```
 docker search images_name       # 查看仓库的镜像资料
 docker pull images_name         # 下载镜像
 docker images                   # 显示本地镜像
 docker rmi images_name/image_id # 删除本地镜像
 ```
+
 #### Dockerfile创建
+
 docker build -t image-01 .
-#### 
+
+####
+
 ### 容器的命令
+
 ```
 docker ps        #查看当前运行的容器
 docker ps -a     #查看存在的所有容器
@@ -30,21 +40,26 @@ docker exec -it container_id/container_name [/bin/bash 或者 sh]  #进入容器
 exit #在容器内部 
 docker commit container_id/container_name # 将容器
 ```
+
 #### 创建容器
+
 docker run -d -p 80:80 [image-name]
 docker run -dp 80:80 [image-name]
 docker run -d -p 3000:80 --name [custom-container-name] [image-name]
+
 ##### -v 选项（volumes）
+
 本地路径:容器路径
 /D/docker:/home/jenkins   ===>  windows d盘
 test-dir  ===>   windows在\\wsl.localhost\docker-desktop-data\data\docker\volumes\_data
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281355094.png)
 
-
 #### 检查container
+
 [https://www.cnblogs.com/ivictor/p/4834864.html](https://www.cnblogs.com/ivictor/p/4834864.html)
  docker inspect 7dcfa72f17a1d64350ed73e6d6c918bad5679d12e38b202bcf3d21fd4f5b5f54
 Mounts下可以看到 之前-v设置的映射路径
+
 ```json
  "Mounts": [                                
      {                                      
@@ -59,9 +74,12 @@ Mounts下可以看到 之前-v设置的映射路径
 ```
 
 #### 进入容器
+
 docker exec -it bac2692e2b9a(容器ID) sh(指定进入方式 或者 bash /bin/bash)
 docker exec -it bac2692e2b9a sh
+
 ### 卷的操作
+
 ```
 #查看本地volume
 docker volume ls
@@ -70,7 +88,9 @@ docker volume rm volume_id/volume_name
 #删除所有的volume
 docker volume prune
 ```
+
 ### network
+
 ```
 #查看docker中存在的网络
 docker network ls
@@ -94,16 +114,23 @@ docker network disconnect front-net web2
 ```
 
 # Dockerfile
+
 [https://juejin.cn/post/6844904167987740686](https://juejin.cn/post/6844904167987740686)
+
 #### 命令
->  nginx:v3（镜像名称:镜像标签）
+>
+> nginx:v3（镜像名称:镜像标签）
 
 ```vue
 docker build -t nginx:v3 .
 ```
+
 #### 例子
+
 ##### node
+
 使用官方 Node.js 轻量级镜像[https://hub.docker.com/_/node](https://hub.docker.com/_/node)
+
 ```vue
 FROM node:16-slim
 # 定义工作目录
@@ -116,7 +143,9 @@ RUN npm install pm2 -g
 # 启动服务
 CMD pm2-runtime 'npm start'
 ```
+
 ##### maven
+
 ```vue
 FROM maven:3.5-jdk-8-alpine as builder
 
@@ -131,7 +160,9 @@ RUN mvn package -DskipTests
 # Run the web service on container startup.
 CMD ["java","-jar","/app/target/father-backend-0.0.1-SNAPSHOT.jar","--spring.profiles.active=prod"]
 ```
+
 ##### nginx
+
 ```vue
 FROM nginx
 
@@ -145,7 +176,9 @@ EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
 ```
+
 ##### java
+
 ```vue
 FROM java:8
 
@@ -159,16 +192,19 @@ ENTRYPOINT ["java", "-jar", "code-nav-mp-server.jar", "--spring.profiles.active=
 
 ```
 
-
 ## 占用端口则删除容器
-#删除已建的容器，防止容器名，端口冲突
+
+# 删除已建的容器，防止容器名，端口冲突
+
 ```bash
 if docker ps -a|grep -i container-name;then
    docker rm -f container-name
 fi
 ```
+
 镜像新增同名，不会删除，只会把原来的变为none
 需要手动删除
+
 ```bash
 echo ---------------Clear-Images...------------------
 clearImagesList=$(docker images -f "dangling=true" -q)
@@ -193,7 +229,7 @@ fi
 
 #### 安装镜像
 
-进入<https://hub.daocloud.io> 
+进入<https://hub.daocloud.io>
 
 搜索node，切换到版本获取下载地址
 

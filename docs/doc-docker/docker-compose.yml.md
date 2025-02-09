@@ -1,11 +1,17 @@
+# docker-compose
+
+## 创建jenkins
+
 [https://juejin.cn/post/6844904006184091662](https://juejin.cn/post/6844904006184091662)
 
 linux环境
 目录如下
-/home/jenkins 
-- docker-compose.yml 
+/home/jenkins
+
+- docker-compose.yml
 - jenkins-home
- docker-compose.yml 
+ docker-compose.yml
+
 ```ruby
 version: '3'                                    # 指定 docker-compose.yml 文件的写法格式
 services:                                       # 多个容器集合
@@ -24,7 +30,8 @@ services:                                       # 多个容器集合
       - /usr/local/bin/docker-compose:/usr/local/bin/docker-compose     # 同样的这是为了使用docker-compose命令
 ```
 
-执行
 cd /home/jenkins
-docker-compose up -d
+
+执行 docker-compose up -d
+
 即可创建容器
