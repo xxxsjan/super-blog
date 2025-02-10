@@ -1,39 +1,8 @@
+# docker安装使用jenkins
 
-[(一) jenkins + GitHub 手把手教你实现项目及自动化部署](https://www.bilibili.com/read/cv16633755)
-[（一）jenkins + GitHub 实现项目自动化部署 | Laravel China 社区](https://learnku.com/articles/44764)
-[https://www.jianshu.com/p/343bdd43c82a](https://www.jianshu.com/p/343bdd43c82a)
-[一套真实前端开发环境搭建+可持续集成+自动化部署实践（第二篇 jenkins关联 GitHub自动打包部署） - 掘金](https://juejin.im/post/5c1a3282f265da61764ad51a)
-[https://www.jianshu.com/p/6787a8b843d8](https://www.jianshu.com/p/6787a8b843d8)
+## 创建容器
 
-## docker安装jenkins
-
-### 创建容器
-
-#### 单行
-
-```
-docker run  -d  --rm -u root -p 8080:8080  -v jenkins-data:/var/jenkins_home  -v /var/run/docker.sock:/var/run/docker.sock -v /d/docker/jenkins/home:/home  --name jenkins jenkinsci/blueocean
-```
-
--rm 关闭后会移除容器
-
-```
-docker run  -d  -u root -p 8080:8080  -v jenkins-data:/var/jenkins_home  -v /var/run/docker.sock:/var/run/docker.sock -v /d/docker/jenkins/home:/home   --name jenkins jenkinsci/blueocean
-```
-
-#### 多行
-
-```javascript
-docker run \
-  -d \
-  --rm \
-  -u root \
-  -p 8080:8080 \
-  -v jenkins-data:/var/jenkins_home \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  -v "$HOME":/home \
-  jenkinsci/blueocean
-```
+### 使用命令创建
 
 搜索命令：docker search jenkinsci/blueocean
 下载镜像：docker pull  jenkinsci/blueocean
@@ -43,69 +12,54 @@ docker run \
 
 docker run  -d  --rm -u root -p 8080:8080  -v jenkins-data:/var/jenkins_home  -v /var/run/docker.sock:/var/run/docker.sock -v /d/docker/jenkins/home:/home   --name jenkins jenkinsci/blueocean
 
-### 安装node插件
+### 使用compose创建
 
-1. 安装 NodeJS 插件
-登录 Jenkins 管理界面，点击 “管理 Jenkins”。
-在管理页面中，选择 “插件管理”。
-切换到 “可选插件” 标签页，在搜索框中输入 “NodeJS Plugin”。
-勾选该插件后，点击 “直接安装”，安装完成后可选择重启 Jenkins 以使插件生效。
+```
+version: '3'
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    user: root
+    restart: always
+    ports:
+      - "${JENKINS_HTTP_PORT:-12180}:8080"
+      - "${TCP_PROXY_PORT:-15000}:50000"
+      - "3100:3100"
+    volumes:
+      # 数据卷挂载，用于持久化 Jenkins 数据
+      - ${JENKINS_DATA:-/www/dk_project/dk_app/dk_jenkins}/jenkins_home:/var/jenkins_home
+    healthcheck:
+      # 健康检查，确保 Jenkins 服务正常运行
+      test: ["CMD", "curl", "-f", "http://localhost:8080/login"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    logging:
+      driver: json-file
+      options:
+        # 日志文件大小限制，避免日志文件过大
+        max-size: "10m"
+        max-file: "3"
 
-2. 配置 Node.js 环境
-进入全局工具配置页面：在 Jenkins 管理界面，点击 “管理 Jenkins”，然后选择 “全局工具配置”。
-添加 Node.js 安装项：在页面中找到 “NodeJS” 部分，点击 “新增 NodeJS” 按钮。
-设置 Node.js 名称：在 “名称” 字段中为你要配置的 Node.js 环境起一个便于识别的名字，例如 “Node.js 18 LTS” 。
+```
 
-3. 在 Jenkins 任务中使用配置好的 Node.js 环境
-创建或编辑 Jenkins 任务：在 Jenkins 主页，点击要配置的任务名称，然后选择 “配置”。
-设置构建环境：在任务配置页面中，找到 “构建环境” 部分，勾选 “Provide Node & npm bin/folder to PATH” 。这一步会将配置好的 Node.js 和 npm 的可执行文件路径添加到 Jenkins 构建任务的环境变量 PATH 中，这样在后续的构建步骤中就可以直接使用 node 和 npm 命令。
+运行后，看日志，拿到初始密码
 
-## 前置准备
+### 进入web管理页面
 
-### github生成token
-
-![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281402283.png)
-
-勾选repo、admin:repo_hook
-![](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281350365.webp)
-
-#### jenkins-测试github服务连接
-
-找到系统设置
-![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281402494.png)
-
-滑下去，找到github
-
-![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281402793.png)
-
-点击添加github服务器
-![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281402891.png)
-
-选择secret text   输入 secret（github的token），描述最好也写上，起个备注作用
-`![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281402773.png)
-
-点击测试，没报红则测试通过
-![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281402337.png)
-
----
-
-## 首次进入jenkins
-
-`http://localhost:8080`
-
-### 输入密钥
+外网地址:12180，按推荐安装插件
 
 第一次打开页面，输入密码
 密码在 cat /var/jenkins_home/secrets/initialAdminPassword
-![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281403181.png)
+
 下一步，**安装推荐的插件**
-![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281350376.png)
+<img src="https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281350376.png" alt="image.png" style="zoom:50%;" />
 
 提示某些插件下载失败（如SSH Build Agents）就先跳过
 
 进入系统再设置源 解决下载错误的问题
 
-### 设置源
+#### 设置源
 
 在插件管理-高级进行设置源
 
@@ -114,20 +68,59 @@ https://updates.jenkins.io/update-center.json
 http://mirror.esuni.jp/jenkins/updates/update-center.json
 ```
 
-![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281350297.png)![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281405332.png)
+<img src="https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281350297.png" alt="image.png" style="zoom:50%;" /><img src="https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281405332.png" alt="image.png" style="zoom: 50%;" />
 
-创建用户或者使用管理员继续
-> 管理员账号：admin 密码为上面那个密码
+## github生成token
 
-下一步叫你重启，确认，等待
+<img src="https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281402283.png" alt="image.png" style="zoom:50%;" />
 
-## 开始使用
+勾选
 
-### 新建任务
+- [x] repo
 
-相关视频
+- [x] admin:repo_hook
+  <img src="https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281350365.webp" style="zoom:50%;" />
 
-<https://www.bilibili.com/video/BV1zM41127hC/?spm_id_from=333.337.search-card.all.click&vd_source=11e14f37a256537712e73b4b7f52411c>
+#### jenkins-测试github服务连接
+
+找到系统设置-系统配置-滑下去，找到github
+
+点击添加github服务器
+
+点击添加
+
+<img src="https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281402891.png" alt="image.png" style="zoom:50%;" />
+
+选择secret text
+
+输入 secret（github的token），
+
+描述最好也写上，起个备注作用
+`![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281402773.png)
+
+点击测试，没报红则测试通过
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281402337.png)
+
+---
+
+## 安装node插件
+
+1. 安装 NodeJS 插件
+   登录 Jenkins 管理界面，点击 “管理 Jenkins”。
+   在管理页面中，选择 “插件管理”。
+   切换到 “可选插件” 标签页，在搜索框中输入 “NodeJS Plugin”。
+   勾选该插件后，点击 “直接安装”，安装完成后可选择重启 Jenkins 以使插件生效。
+
+2. 配置 Node.js 环境
+   进入全局工具配置页面：在 Jenkins 管理界面，点击 “管理 Jenkins”，然后选择 “全局工具配置”。
+   添加 Node.js 安装项：在页面中找到 “NodeJS” 部分，点击 “新增 NodeJS” 按钮。
+   设置 Node.js 名称：在 “名称” 字段中为你要配置的 Node.js 环境起一个便于识别的名字，例如 “Node.js 18 LTS” 。
+
+3. 在 Jenkins 任务中使用配置好的 Node.js 环境
+   创建或编辑 Jenkins 任务：在 Jenkins 主页，点击要配置的任务名称，然后选择 “配置”。
+   设置构建环境：在任务配置页面中，找到 “构建环境” 部分，勾选 “Provide Node & npm bin/folder to PATH” 。这一步会将配置好的 Node.js 和 npm 的可执行文件路径添加到 Jenkins 构建任务的环境变量 PATH 中，这样在后续的构建步骤中就可以直接使用 node 和 npm 命令。
+
+## 新建任务
 
 左侧新建任务
 输入任务名，例如test，选择构建自由风格项目（自定义）
@@ -215,33 +208,9 @@ echo $PATH
 构建下的shell修改一下
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281404145.png)
 
-示例shell
+## shell示例
 
-作用是压缩项目代码，解压放到nginx代理的html目录
-
-```javascript
-echo $PATH
-node -v
-npm -v #检查编译环境
-npm install chromedriver --chromedriver_cdnurl=http://cdn.npm.taobao.org/dist/chromedriver
-npm install 
-npm run build #编译项目
-cd dist
-tar -zcvf dist.tar.gz * #所有文件压缩
-tar -zxvf /root/.jenkins/workspace/test/dist/dist.tar.gz -C /usr/share/nginx/html #压缩文件解压到nginx映射目录
-cd /root/.jenkins/workspace/vue-online-admin 
-rm -R dist #删除项目打包后的残留
-```
-
-## 目录说明
-
-/var/jenkins_home/workspace
-nginx html位置
-/usr/share/nginx/html
-git项目拉取目录
-/var/jenkins_home/workspace/test
-
-### docker jenkins next shell
+#### docker jenkins next shell
 
 ```
 npm install -g pnpm
@@ -252,12 +221,12 @@ APP_NAME="my-app"
 # 定义错误处理函数
 handle_error() {
     local error_message=$1
-    echo "$error_message"
+    echo "【ERROR】 $error_message"
     exit 1
 }
 
 echo "清理本地代码并拉取最新代码..."
-git reset --hard || handle_error "Git reset 失败"
+git reset --hard origin/main || handle_error "Git reset 失败"
 git clean -df || handle_error "Git clean 失败"
 git pull origin main || handle_error "首次 Git pull 失败"
 git checkout main || handle_error "Git checkout 失败"
@@ -271,9 +240,8 @@ node -v
 # pnpm run build
 pm2 stop $APP_NAME || true
 pm2 delete $APP_NAME || true
-pm2 start npm --name $APP_NAME -- run start -- --port 3001 ||  handle_error "pm2 start failed"
+pm2 start npm --name $APP_NAME -- run start -- --port 3100 ||  handle_error "pm2 start failed"
 
 echo "保存 PM2 进程列表..."
 pm2 save || handle_error "PM2 保存进程列表失败"
-echo $PATH
 ```
