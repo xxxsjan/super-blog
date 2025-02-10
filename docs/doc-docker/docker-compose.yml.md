@@ -1,37 +1,48 @@
 # docker-compose
 
-## 创建jenkins
+## lobe compose
 
-[https://juejin.cn/post/6844904006184091662](https://juejin.cn/post/6844904006184091662)
-
-linux环境
-目录如下
-/home/jenkins
-
-- docker-compose.yml
-- jenkins-home
- docker-compose.yml
-
-```ruby
-version: '3'                                    # 指定 docker-compose.yml 文件的写法格式
-services:                                       # 多个容器集合
-  docker_jenkins: 
-    user: root                                  # 为了避免一些权限问题 在这我使用了root
-    restart: always                             # 重启方式
-    image: jenkins/jenkins:lts                  # 指定服务所使用的镜像 在这里我选择了 LTS (长期支持)
-    container_name: jenkins                     # 容器名称
-    ports:                                      # 对外暴露的端口定义
-      - '8080:8080'
-      - '50000:50000'
-    volumes:                                    # 卷挂载路径
-      - /home/jenkins/jenkins_home/:/var/jenkins_home   # 这是我们一开始创建的目录挂载到容器内的jenkins_home目录
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /usr/bin/docker:/usr/bin/docker                 # 这是为了我们可以在容器内使用docker命令
-      - /usr/local/bin/docker-compose:/usr/local/bin/docker-compose     # 同样的这是为了使用docker-compose命令
+```
+# https://github.com/lobehub/lobe - chat 项目源网址
+version: '3.8'
+services:
+  lobe-chat:
+    image: lobehub/lobe-chat # 容器映像
+    container_name: lobe-chat # 容器名称
+    networks:
+      - bridge
+    ports:
+      - "3210:3210" # "服务器端口号:容器内端口号"
+    environment: # 环境变量xxx
+      - OPENAI_API_KEY=sk-xxxx # api密钥
+      - OPENAI_PROXY_URL=https://api-proxy.com/v1 # api代理
+      - ACCESS_CODE=lobe66 # 应用密码
+    restart: always
+networks:
+  bridge:
+    driver: bridge
 ```
 
-cd /home/jenkins
+## 宝塔jenkins插件的 compose
 
-执行 docker-compose up -d
+```
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    ports:
+      - "${JENKINS_HTTP_PORT:-12180}:8080"
+      - "${TCP_PROXY_PORT:-15000}:50000"
+    volumes:
+      - ${JENKINS_DATA:-/www/dk_project/dk_app/dk_jenkins}/jenkins_home:/var/jenkins_home
+    networks:
+      - dk_jenkins_btnet
 
-即可创建容器
+  ssh-agent:
+    image: jenkins/ssh-agent
+    networks:
+      - dk_jenkins_btnet
+
+networks:
+  dk_jenkins_btnet:
+    external: true
+```
