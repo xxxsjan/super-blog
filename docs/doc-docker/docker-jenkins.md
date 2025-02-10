@@ -1,45 +1,6 @@
 # docker安装使用jenkins
 
-## 创建容器
-
-### 使用命令创建
-
-搜索命令：docker search jenkinsci/blueocean
-下载镜像：docker pull  jenkinsci/blueocean
-新建容器：docker run  -d  --rm -u root -p 8080:8080  -v jenkins-data:/var/jenkins_home  -v /var/run/docker.sock:/var/run/docker.sock -v "$HOME":/home   jenkinsci/blueocean
-
-"$HOME"会报错，待解决，可使用下面命令
-
-docker run  -d  --rm -u root -p 8080:8080  -v jenkins-data:/var/jenkins_home  -v /var/run/docker.sock:/var/run/docker.sock -v /d/docker/jenkins/home:/home   --name jenkins jenkinsci/blueocean
-
-### 使用compose创建
-
-端口映射参考的 宝塔 docker jenkins插件的 compose
-
-```
-version: '3'
-services:
-  jenkins:
-    image: jenkins/jenkins:lts
-    user: root
-    restart: always
-    ports:
-      - "${JENKINS_HTTP_PORT:-12180}:8080"
-      - "${TCP_PROXY_PORT:-15000}:50000"
-      - "3100:3100"
-    volumes:
-      - ${JENKINS_DATA:-/www/dk_project/dk_app/dk_jenkins}/jenkins_home:/var/jenkins_home
-  networks:
-    - dk_jenkins_btnet
-  ssh-agent:
-    image: jenkins/ssh-agent
-    networks:
-      - dk_jenkins_btnet
-
-networks:
-  dk_jenkins_btnet:
-    external: true
-```
+## 安装node
 
 启动容器后，安装node
 
@@ -172,7 +133,7 @@ http://mirror.esuni.jp/jenkins/updates/update-center.json
 
 #### 构建
 
-----使用shell
+使用shell
 
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281404626.png)
 
@@ -238,8 +199,9 @@ git pull origin main || handle_error "二次 Git pull 失败"
 
 git status
 
-pnpm i
 node -v
+npm i pnpm pm2 -g
+pnpm i
 
 pm2 stop $APP_NAME || true
 pm2 delete $APP_NAME || true
