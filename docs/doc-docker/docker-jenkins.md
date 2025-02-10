@@ -43,20 +43,26 @@ docker run \
 
 docker run  -d  --rm -u root -p 8080:8080  -v jenkins-data:/var/jenkins_home  -v /var/run/docker.sock:/var/run/docker.sock -v /d/docker/jenkins/home:/home   --name jenkins jenkinsci/blueocean
 
-#### Dockerfile创建（待完善）
+### 安装node插件
 
-docker build -t .
+1. 安装 NodeJS 插件
+登录 Jenkins 管理界面，点击 “管理 Jenkins”。
+在管理页面中，选择 “插件管理”。
+切换到 “可选插件” 标签页，在搜索框中输入 “NodeJS Plugin”。
+勾选该插件后，点击 “直接安装”，安装完成后可选择重启 Jenkins 以使插件生效。
 
-```javascript
-FROM jenkinsci/blueocean
+2. 配置 Node.js 环境
+进入全局工具配置页面：在 Jenkins 管理界面，点击 “管理 Jenkins”，然后选择 “全局工具配置”。
+添加 Node.js 安装项：在页面中找到 “NodeJS” 部分，点击 “新增 NodeJS” 按钮。
+设置 Node.js 名称：在 “名称” 字段中为你要配置的 Node.js 环境起一个便于识别的名字，例如 “Node.js 18 LTS” 。
 
-```
-
----
+3. 在 Jenkins 任务中使用配置好的 Node.js 环境
+创建或编辑 Jenkins 任务：在 Jenkins 主页，点击要配置的任务名称，然后选择 “配置”。
+设置构建环境：在任务配置页面中，找到 “构建环境” 部分，勾选 “Provide Node & npm bin/folder to PATH” 。这一步会将配置好的 Node.js 和 npm 的可执行文件路径添加到 Jenkins 构建任务的环境变量 PATH 中，这样在后续的构建步骤中就可以直接使用 node 和 npm 命令。
 
 ## 前置准备
 
-#### github生成token
+### github生成token
 
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281402283.png)
 
@@ -234,3 +240,40 @@ nginx html位置
 /usr/share/nginx/html
 git项目拉取目录
 /var/jenkins_home/workspace/test
+
+### docker jenkins next shell
+
+```
+npm install -g pnpm
+npm install -g pm2
+pnpm --version
+
+APP_NAME="my-app"
+# 定义错误处理函数
+handle_error() {
+    local error_message=$1
+    echo "$error_message"
+    exit 1
+}
+
+echo "清理本地代码并拉取最新代码..."
+git reset --hard || handle_error "Git reset 失败"
+git clean -df || handle_error "Git clean 失败"
+git pull origin main || handle_error "首次 Git pull 失败"
+git checkout main || handle_error "Git checkout 失败"
+git pull origin main || handle_error "二次 Git pull 失败"
+echo "查看当前代码状态..."
+git status || handle_error "Git status 检查失败"
+
+pnpm i
+node -v
+
+# pnpm run build
+pm2 stop $APP_NAME || true
+pm2 delete $APP_NAME || true
+pm2 start npm --name $APP_NAME -- run start -- --port 3001 ||  handle_error "pm2 start failed"
+
+echo "保存 PM2 进程列表..."
+pm2 save || handle_error "PM2 保存进程列表失败"
+echo $PATH
+```
