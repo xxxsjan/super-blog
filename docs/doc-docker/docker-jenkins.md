@@ -14,6 +14,8 @@ docker run  -d  --rm -u root -p 8080:8080  -v jenkins-data:/var/jenkins_home  -v
 
 ### 使用compose创建
 
+端口映射参考的 宝塔 docker jenkins插件的 compose
+
 ```
 version: '3'
 services:
@@ -26,21 +28,27 @@ services:
       - "${TCP_PROXY_PORT:-15000}:50000"
       - "3100:3100"
     volumes:
-      # 数据卷挂载，用于持久化 Jenkins 数据
       - ${JENKINS_DATA:-/www/dk_project/dk_app/dk_jenkins}/jenkins_home:/var/jenkins_home
-    healthcheck:
-      # 健康检查，确保 Jenkins 服务正常运行
-      test: ["CMD", "curl", "-f", "http://localhost:8080/login"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-    logging:
-      driver: json-file
-      options:
-        # 日志文件大小限制，避免日志文件过大
-        max-size: "10m"
-        max-file: "3"
+  networks:
+    - dk_jenkins_btnet
+  ssh-agent:
+    image: jenkins/ssh-agent
+    networks:
+      - dk_jenkins_btnet
 
+networks:
+  dk_jenkins_btnet:
+    external: true
+```
+
+启动容器后，安装node
+
+```
+ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash;
+ source ~/.nvm/nvm.sh;
+ nvm install 22;
+ nvm use 22;
+ npm i pnpm pm2 -g;
 ```
 
 运行后，看日志，拿到初始密码
@@ -212,11 +220,7 @@ echo $PATH
 
 #### docker jenkins next shell
 
-```
-npm install -g pnpm
-npm install -g pm2
-pnpm --version
-
+```bash
 APP_NAME="my-app"
 # 定义错误处理函数
 handle_error() {
@@ -231,13 +235,12 @@ git clean -df || handle_error "Git clean 失败"
 git pull origin main || handle_error "首次 Git pull 失败"
 git checkout main || handle_error "Git checkout 失败"
 git pull origin main || handle_error "二次 Git pull 失败"
-echo "查看当前代码状态..."
-git status || handle_error "Git status 检查失败"
+
+git status
 
 pnpm i
 node -v
 
-# pnpm run build
 pm2 stop $APP_NAME || true
 pm2 delete $APP_NAME || true
 pm2 start npm --name $APP_NAME -- run start -- --port 3100 ||  handle_error "pm2 start failed"
