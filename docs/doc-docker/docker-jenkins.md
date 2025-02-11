@@ -177,7 +177,7 @@ pm2 save || handle_error "PM2 保存进程列表失败"
 
 - 安装 Publish Over SSH 插件
 - 进入 Jenkins 的全局配置界面（Manage Jenkins -> Configure System）。
-- 滚动页面找到 SSH Servers
+- 滚动页面找到 Publish over SSH -> SSH Servers
 - 点击 Add 按钮添加一个新的 SSH 服务器配置：
 - Name：为服务器配置起一个名称，例如 target-server。
 - Hostname：输入目标服务器的 IP 地址或域名。
