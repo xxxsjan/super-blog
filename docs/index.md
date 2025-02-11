@@ -5,8 +5,8 @@ title: Home
 
 hero:
   name: web笔记文档
-  text: vue react webpack node.js
-  tagline: 
+  text: Vue & React & Node.js
+  tagline: 好记性不如烂笔头
   image:
     src: /code.png
     alt: logo
