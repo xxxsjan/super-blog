@@ -183,6 +183,7 @@ pm2 save || handle_error "PM2 保存进程列表失败"
 - Hostname：输入目标服务器的 IP 地址或域名。
 - Username：用于 SSH 连接的用户名。
 - Remote Directory：指定远程服务器上的工作目录。
+- 勾选 Use password authentication, or use a different key
 - Password/Key：如果你使用密码认证，输入对应的密码；若使用密钥认证，点击 Advanced 按钮，在 Key 字段中粘贴私钥内容。
 - 点击 Test Configuration 按钮，确保能够成功连接到目标服务器。
 
