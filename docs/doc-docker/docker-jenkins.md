@@ -197,7 +197,7 @@ git pull origin main || handle_error "首次 Git pull 失败"
 git checkout main || handle_error "Git checkout 失败"
 git pull origin main || handle_error "二次 Git pull 失败"
 
-git status
+git log -1 --oneline --decorate origin/main
 
 node -v
 npm i pnpm pm2 -g
