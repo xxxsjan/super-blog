@@ -1,28 +1,15 @@
 # docker安装使用jenkins
 
-## 安装node
 
-启动容器后，安装node
-
-```
- curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash;
- source ~/.nvm/nvm.sh;
- nvm install 22;
- nvm use 22;
- npm i pnpm pm2 -g;
-```
-
-运行后，看日志，拿到初始密码
 
 ### 进入web管理页面
 
-外网地址:12180，按推荐安装插件
+1、按推荐安装插件
 
-第一次打开页面，输入密码
-密码在 cat /var/jenkins_home/secrets/initialAdminPassword
+2、密码在 cat /var/jenkins_home/secrets/initialAdminPassword
 
 下一步，**安装推荐的插件**
-<img src="https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281350376.png" alt="image.png" style="zoom:50%;" />
+
 
 提示某些插件下载失败（如SSH Build Agents）就先跳过
 
@@ -50,13 +37,15 @@ http://mirror.esuni.jp/jenkins/updates/update-center.json
 - [x] admin:repo_hook
   <img src="https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281350365.webp" style="zoom:50%;" />
 
-#### jenkins-测试github服务连接
+## 添加github token
 
-找到系统设置-系统配置-滑下去，找到github
+1、找到 系统设置- 系统配置 -
 
-点击添加github服务器
+2、滑下去，找到github
 
-点击添加
+3、点击添加github服务器
+
+4、点击添加
 
 <img src="https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281402891.png" alt="image.png" style="zoom:50%;" />
 
@@ -64,8 +53,9 @@ http://mirror.esuni.jp/jenkins/updates/update-center.json
 
 输入 secret（github的token），
 
-描述最好也写上，起个备注作用
-`![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281402773.png)
+描述最好也写上，起个备注作用，
+
+点击添加，返到上一层
 
 点击测试，没报红则测试通过
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281402337.png)
@@ -127,19 +117,14 @@ Credentials：如果是私有仓库，点击 “添加” 按钮，选择合适�
 
 使用shell
 
-输入几个测试命令
-
-```javascript
+```bash
+#输入几个测试命令
 pwd
 ls
 echo $PATH
 ```
 
-- 构建后的操作
 
-这里可以做一些打包结果上传服务器的操作
-
-这里跳过，不操作 点击保存
 
 #### docker jenkins next shell
 
@@ -168,37 +153,15 @@ pnpm i
 pm2 stop $APP_NAME || true
 pm2 delete $APP_NAME || true
 pm2 start npm --name $APP_NAME -- run start -- --port 3100 ||  handle_error "pm2 start failed"
-
-echo "保存 PM2 进程列表..."
-pm2 save || handle_error "PM2 保存进程列表失败"
+pm2 save
+pm2 restart $APP_NAME
 ```
 
-### 使用ssh
 
-- 安装 Publish Over SSH 插件 <https://plugins.jenkins.io/publish-over-ssh/>
-- 进入 Jenkins 的全局配置界面（Manage Jenkins -> Configure System）。
-- 滚动页面找到 Publish over SSH -> SSH Servers
-- 点击 Add 按钮添加一个新的 SSH 服务器配置：
-- Name：为服务器配置起一个名称，例如 target-server。
-- Hostname：输入目标服务器的 IP 地址或域名。
-- Username：用于 SSH 连接的用户名。
-- Remote Directory：指定远程服务器上的工作目录。
-- 勾选 Use password authentication, or use a different key
-- Password/Key：如果你使用密码认证，输入对应的密码；若使用密钥认证，点击 Advanced 按钮，在 Key 字段中粘贴私钥内容。
-- 点击 Test Configuration 按钮，确保能够成功连接到目标服务器。
 
-打开你要配置的 Jenkins 任务，进入 Configure 页面。
-滚动到 Build Environment 部分，勾选 Send files or execute commands over SSH after the build runs。
-在 SSH Server 下拉菜单中选择之前配置好的服务器（如 target-server）。
-在 Exec command 文本框中输入用于在目标服务器上创建文件的命令。以下是几种不同的创建文件方式及示例：
 
-```
-ssh root@47.121.117.97 <<\EOF
-  touch "/www/dk_project/dk_app/jenkins/$(date +"%Y%m%d%H%M%S").txt"
-EOF
-```
 
-## 密钥登录
+## ssh密钥登录服务器
 
 1、jenkins 服务器 生成 密钥 ssh-keygen -t rsa -b 4096 -C "<your_email@example.com>"，密钥会生成在 ~/.ssh 目录下
 2、查看内容 cat ~/.ssh/id_rsa.pub，复制内容 追加粘贴到目标服务器 ~/.ssh/authorized_keys  或者 ssh-copy-id root@66.22.33.97
@@ -214,5 +177,54 @@ EOF
 7、在 “Build” 部分，点击 “Add build step” -> “Execute shell”（如果是 Linux 服务器）或 “Execute Windows batch command”（如果是 Windows 服务器）。在命令框中输入 SSH 命令，例如：
 
 ```
-ssh user@server_ip 'ls -l'
+ssh root@11.22.33.44 <<\EOF
+  touch "/www/dk_project/dk_app/jenkins/$(date +"%Y%m%d%H%M%S").txt"
+EOF
+```
+
+
+
+## nodejs插件 使用pm2 start不生效
+
+> 均为自测结论，无科学依据
+>
+
+如果使用了pm2，任务中的node环境安装的pm2会随构建结束而销毁（测了几遍得出来的结论）
+
+但如果，外部环境（jenkins所在环境）有node，且安装了pm2，则正常
+
+### 解决方法1：
+
+只用一个node环境，不使用插件了，但要定义环境变量
+
+安装node
+
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash;
+source ~/.nvm/nvm.sh;
+nvm install 22;
+nvm use 22;
+```
+
+
+
+```bash
+# 如果需要获取外部环境，需要export
+export PATH=~/.nvm/versions/node/v22.13.1/bin:$PATH
+
+#如果pm2 start还有问题，可以再补一个pm2 restart
+# pm2 start npm --name "my-app" -- run dev
+# pm2 save
+```
+
+### 解决方法2
+
+1、外部安装node，全局安装pm2
+2、任务内部也全局安装pm2，且pm2 start后要pm2 save
+
+- save会把信息保存到外面的pm2里（[PM2] Successfully saved in /root/.pm2/dump.pm2）
+
+```bash
+# 任务里 执行 shell
+npm i pm2 -g
 ```
