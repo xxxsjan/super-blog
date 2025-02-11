@@ -91,53 +91,43 @@ http://mirror.esuni.jp/jenkins/updates/update-center.json
 
 ## 新建任务
 
-左侧新建任务
-输入任务名，例如test，选择构建自由风格项目（自定义）
+登录 Jenkins 管理界面，点击左侧菜单中的 “新建任务”。
+在 “输入任务名称” 框中输入你为该任务起的名称，比如 “vue - project - build”。
+选择 “自由风格的软件项目”，然后点击 “确定”。
 
-#### general
+配置任务
 
-设置git地址
+- 源码管理
 
-#### 源码管理
+在任务配置页面中，找到 “源码管理” 部分，选择 “Git”。
+Repository URL：输入远端 Vue 项目的 Git 仓库地址，例如 <https://github.com/yourusername/your-vue-project.git。>
+Credentials：如果是私有仓库，点击 “添加” 按钮，选择合适的凭证类型。
+如果使用 SSH 密钥，选择 “SSH Username with private key”，输入用户名和私钥内容；
+如果使用访问令牌，选择相应的令牌类型并输入令牌信息。
+如果是账户密码 ，选择 “Username with password”，输入用户名和密码。
 
-点击git
+并且选择监听分支，默认是master
 
-填写地址
-
-添加用户
-![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281403579.png)
-
-类型、用户名、密码和描述，填完
-
-![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281403817.png)
-
-并且选择监听分支
-
-默认是master，我的是main
-
-![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281403009.png)
-
-#### 构建触发器
+- 构建触发器
 
 设置轮询      **** *   表示每分钟，星号之间要一个空格
 
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281403841.png)
 
-#### 构建环境
+- 构建环境
 
-勾选**Use secret text(s) or file(s)**
-
-**绑定里添加secret text，就是之前github生成的token**
+勾选Use secret text(s) or file(s)
+点击添加
+选择secret text，
+设置github生成的token
 
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281403334.png)
 
-#### 构建
+- 构建
 
 使用shell
 
-![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281404626.png)
-
-输入几个测试命令试试水
+输入几个测试命令
 
 ```javascript
 pwd
@@ -145,39 +135,11 @@ ls
 echo $PATH
 ```
 
-#### 构建后的操作
+- 构建后的操作
 
 这里可以做一些打包结果上传服务器的操作
 
 这里跳过，不操作 点击保存
-![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281351835.png)
-
-### 构建
-
-回到首页，看到任务test已经出现了，点击test的名称
-![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281351172.png)
-
-进去后看左侧，点击立即构建
-
-![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281404339.png)
-
-然后下方出现构建的列表
-
-![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281404268.png)
-点击对应数字，可以进去看详情
-
-![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281351774.png)
-点击左侧的控制台输出，看到shell的测试命令有输出
-![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281404390.png)
-
-### 继续使用-shell脚本
-
-点击任务，点击配置，可再次设置配置
-![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281351750.png)
-构建下的shell修改一下
-![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281404145.png)
-
-## shell示例
 
 #### docker jenkins next shell
 
@@ -209,4 +171,28 @@ pm2 start npm --name $APP_NAME -- run start -- --port 3100 ||  handle_error "pm2
 
 echo "保存 PM2 进程列表..."
 pm2 save || handle_error "PM2 保存进程列表失败"
+```
+
+### 使用ssh
+
+- 安装 Publish Over SSH 插件
+- 进入 Jenkins 的全局配置界面（Manage Jenkins -> Configure System）。
+- 滚动页面找到 SSH Servers
+- 点击 Add 按钮添加一个新的 SSH 服务器配置：
+- Name：为服务器配置起一个名称，例如 target-server。
+- Hostname：输入目标服务器的 IP 地址或域名。
+- Username：用于 SSH 连接的用户名。
+- Remote Directory：指定远程服务器上的工作目录。
+- Password/Key：如果你使用密码认证，输入对应的密码；若使用密钥认证，点击 Advanced 按钮，在 Key 字段中粘贴私钥内容。
+- 点击 Test Configuration 按钮，确保能够成功连接到目标服务器。
+
+打开你要配置的 Jenkins 任务，进入 Configure 页面。
+滚动到 Build Environment 部分，勾选 Send files or execute commands over SSH after the build runs。
+在 SSH Server 下拉菜单中选择之前配置好的服务器（如 target-server）。
+在 Exec command 文本框中输入用于在目标服务器上创建文件的命令。以下是几种不同的创建文件方式及示例：
+
+```
+cd /www/dk_project/dk_app/jenkins
+DATE=$(date +"%Y%m%d")
+touch "/var/www/html/${DATE}.txt"
 ```
