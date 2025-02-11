@@ -1,7 +1,5 @@
 # docker安装使用jenkins
 
-
-
 ### 进入web管理页面
 
 1、按推荐安装插件
@@ -9,7 +7,6 @@
 2、密码在 cat /var/jenkins_home/secrets/initialAdminPassword
 
 下一步，**安装推荐的插件**
-
 
 提示某些插件下载失败（如SSH Build Agents）就先跳过
 
@@ -124,8 +121,6 @@ ls
 echo $PATH
 ```
 
-
-
 #### docker jenkins next shell
 
 ```bash
@@ -157,15 +152,11 @@ pm2 save
 pm2 restart $APP_NAME
 ```
 
-
-
-
-
 ## ssh密钥登录服务器
 
-1、jenkins 服务器 生成 密钥 ssh-keygen -t rsa -b 4096 -C "<your_email@example.com>"，密钥会生成在 ~/.ssh 目录下
-2、查看内容 cat ~/.ssh/id_rsa.pub，复制内容 追加粘贴到目标服务器 ~/.ssh/authorized_keys  或者 ssh-copy-id root@66.22.33.97
-3、目标服务器：cat ~/.ssh/authorized_keys 就可以看到添加进去了
+1、jenkins 服务器 生成密钥对 ssh-keygen -t rsa -b 4096 -C "<your_email@example.com>"，密钥会生成在 ~/.ssh 目录下
+2、 ~/.ssh/id_rsa.pub为公钥文件，执行 ssh-copy-id root@66.22.33.97 把公钥给到目标服务器，位置在 ~/.ssh/authorized_keys
+3、目标服务器：cat ~/.ssh/authorized_keys 看到添加进去则成功了
 4、安装 SSH Agent 插件 ，重启
 5、去到凭证管理，随便点个域，再点 Add Credentials，
 
@@ -173,6 +164,7 @@ pm2 restart $APP_NAME
 - 在 “Username” 字段中输入目标服务器的用户名。
 - 在 “Private Key” 部分，选择 “Enter directly”，然后将之前生成的私钥文件（id_rsa）的内容复制到文本框中。
 - 可以根据需要填写 “ID” 和 “Description” 字段，然后点击 “OK” 保存。
+
 6、在 Jenkins 任务的配置页面中，找到 “Build Environment” 部分，勾选 “Use secret text (s) or file (s)”，新增 SSH User Private Key， 添加的 SSH 密钥凭据。
 7、在 “Build” 部分，点击 “Add build step” -> “Execute shell”（如果是 Linux 服务器）或 “Execute Windows batch command”（如果是 Windows 服务器）。在命令框中输入 SSH 命令，例如：
 
@@ -181,8 +173,6 @@ ssh root@11.22.33.44 <<\EOF
   touch "/www/dk_project/dk_app/jenkins/$(date +"%Y%m%d%H%M%S").txt"
 EOF
 ```
-
-
 
 ## nodejs插件 使用pm2 start不生效
 
@@ -193,7 +183,7 @@ EOF
 
 但如果，外部环境（jenkins所在环境）有node，且安装了pm2，则正常
 
-### 解决方法1：
+### 解决方法1
 
 只用一个node环境，不使用插件了，但要定义环境变量
 
@@ -205,8 +195,6 @@ source ~/.nvm/nvm.sh;
 nvm install 22;
 nvm use 22;
 ```
-
-
 
 ```bash
 # 如果需要获取外部环境，需要export
