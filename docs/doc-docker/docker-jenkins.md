@@ -124,32 +124,29 @@ echo $PATH
 #### docker jenkins next shell
 
 ```bash
-APP_NAME="my-app"
-# 定义错误处理函数
-handle_error() {
-    local error_message=$1
-    echo "【ERROR】 $error_message"
-    exit 1
-}
+ssh root@47.121.117.97 <<\EOF
+  cd /www/wwwroot/home-site
+  APP_NAME="home-site"
+  handle_error() {
+      local error_message=$1
+      echo "【ERROR】 $error_message"
+      exit 1
+   }
+   echo "清理本地代码并拉取最新代码..."
+   git reset --hard origin/main || handle_error "Git reset 失败"
+   git clean -df || handle_error "Git clean 失败"
+   git pull origin main || handle_error "Git pull 失败"
+   git checkout main || handle_error "Git checkout 失败"
+   git log -1 --oneline --decorate origin/main
+   npm i
+   npm run build
+   pm2 stop $APP_NAME || true
+   pm2 delete $APP_NAME || true
+   pm2 start npm --name $APP_NAME -- run start -- --port 3100 ||  handle_error "pm2 start failed"
+   # pm2 save
+   # pm2 restart $APP_NAME
+EOF
 
-echo "清理本地代码并拉取最新代码..."
-git reset --hard origin/main || handle_error "Git reset 失败"
-git clean -df || handle_error "Git clean 失败"
-git pull origin main || handle_error "首次 Git pull 失败"
-git checkout main || handle_error "Git checkout 失败"
-git pull origin main || handle_error "二次 Git pull 失败"
-
-git log -1 --oneline --decorate origin/main
-
-node -v
-npm i pnpm pm2 -g
-pnpm i
-
-pm2 stop $APP_NAME || true
-pm2 delete $APP_NAME || true
-pm2 start npm --name $APP_NAME -- run start -- --port 3100 ||  handle_error "pm2 start failed"
-pm2 save
-pm2 restart $APP_NAME
 ```
 
 ## ssh密钥登录服务器
