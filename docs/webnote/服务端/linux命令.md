@@ -1,14 +1,10 @@
 # linux命令
 
-https://github.com/jaywcjlove/linux-command
+<https://github.com/jaywcjlove/linux-command>
 
+<https://wangchujiang.com/linux-command/>
 
-
-https://wangchujiang.com/linux-command/
-
-
-
-https://www.linuxcool.com/
+<https://www.linuxcool.com/>
 
 ```
 netstat -nplt
@@ -21,8 +17,6 @@ unzip xxx.zip
 
 curl -i "http://localhost:8000"
 ```
-
-
 
 ## 一个端口部署多个单页面应用
 
@@ -70,3 +64,12 @@ http {
 
 ```
 
+## location 匹配规则
+
+location ^~ /html-demo：
+
+匹配以 /html-demo 开头的任意 URI。这意味着不仅会匹配 /html-demo 本身，还会匹配 /html-demoabc、/html-demo/xyz 等。
+
+location ^~ /html-demo/：
+
+只匹配以 /html-demo/ 开头的 URI，也就是 /html-demo 后面必须紧跟一个斜杠。它会匹配 /html-demo/、/html-demo/xyz，但不会匹配 /html-demoabc。
