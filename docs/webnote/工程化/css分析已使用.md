@@ -14,4 +14,3 @@ console.log(purgeCSSResults[0].css);
 
 fs.writeFileSync("./output.css", purgeCSSResults[0].css);
 ```
-
