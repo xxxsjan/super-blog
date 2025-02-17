@@ -1,6 +1,6 @@
 ## vue-cli创建
 
-https://juejin.cn/post/6907428535510499336
+<https://juejin.cn/post/6907428535510499336>
 
 利用的是vue-cli的打包功能，进行输出common umd等js
 
@@ -8,15 +8,11 @@ https://juejin.cn/post/6907428535510499336
 vue-cli-service build --mode development --target lib --name Utils --entry ./lib/index.js
 ```
 
-
-
 ## webapck创建
 
 也可以使用webpack4进行打包输出umd类型的包
 
 webpack5也是类似
-
-
 
 ```javascript
 const { resolve } = require("path");
@@ -40,8 +36,6 @@ module.exports = {
 
 执行 webpack --config  webpack.config.js 即可
 
-
-
 打包出的东西可以直接本地引用
 
 或者上传npm官网
@@ -52,13 +46,11 @@ author信息，填上你帅气的昵称
 
 main的一定要设置，他只要是给npm publish识别你要上传什么去官网
 
-
-
 ## rollup创建
 
 这有个好例子
 
-https://github.dev/any86/v-use-axios
+<https://github.dev/any86/v-use-axios>
 
 ```javascript
 // rollup.config.js
@@ -98,7 +90,6 @@ export default defineConfig({
 ```
 
 ## 命令
-
 
 rollup -c  rollup.config.js
 

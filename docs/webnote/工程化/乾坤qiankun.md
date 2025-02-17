@@ -1,5 +1,7 @@
 ### 基座base
+
 main.js
+
 ```javascript
 import { registerMicroApps, start } from 'qiankun';
 
@@ -58,7 +60,9 @@ new Vue({
 }).$mount('#app');
 
 ```
+
 store.js
+
 ```javascript
 // main/src/store.js
 import { initGlobalState } from "qiankun";
@@ -93,10 +97,13 @@ actions.getGlobalState = (key) => {
 export default actions;
 
 ```
+
 ### 应用1 vue
+
 bootstrap
 mount
 unmount
+
 ```javascript
 import Vue from "vue";
 import App from "./App.vue";
@@ -158,7 +165,9 @@ export async function unmount(props) {
 }
 
 ```
+
 ### 应用2 react
+
 ```javascript
 import React from "react";
 import ReactDOM from "react-dom/client";

@@ -13,8 +13,6 @@
 npm config set registry https://registry.npmjs.org/
 ```
 
-
-
 ## 然后进行登录
 
 ```
