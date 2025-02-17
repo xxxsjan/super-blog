@@ -1,66 +1,24 @@
 # nginx
 
-
-
-```
-start nginx
-
-tasklist /fi "imagename eq nginx.exe"
-
-nginx -s stop  (快速停止nginx) 
-
-或 nginx -s quit  (完整有序的停止nginx)
-
-taskkill /f /t /im nginx.exe
-```
-
-## 代理静态文件
-
-```
-location /static/ {
-	alias /var/www/static/;
-}
-location /images/ {
-	alias /var/www/images/;
-}
-
-location /image/ {    
-  root  /data/;     
-  autoindex on;  # 请求目录时返回目录下的文件列表
-}
-```
-
-
-
-## 反向代理
-
-```
-location /api/ {
-	proxy_pass http://172.31.0.5:8080; 
-}
-```
-
 ## 负载均衡
 
 ```
 http {
-	upstream asdadad {
-		ip_hash;
+ upstream asdadad {
+  ip_hash;
         server 172.31.0.5:8080 weight=5;
         server 172.31.0.8:18083 weight=15;
         server 172.31.0.8:6666  backup; # 兜底服务器
     }
     server {
-    	location /api/ {
-			proxy_pass http://asdadad; 
-		}
+     location /api/ {
+   proxy_pass http://asdadad; 
+  }
     }
 }
 ```
 
-
 ### 注意
-
 
 /test/ 这种需要单页面部署的
 
@@ -71,20 +29,19 @@ http {
 因为
 
 root是找设置的目录下找，比如访问/test/user ，try_files如下
-   - $uri /usr/share/nginx/html/test/test/user 找不到这个文件
-   - $uri/ /usr/share/nginx/html/test/test/user/ 当做目录也找不到这个文件
-   - /test/index.html 访问/test/index.html 
-       - $uri /usr/share/nginx/html/test/test/index.html 找不到
-       - $uri/ /usr/share/nginx/html/test/test/index.html/ 找不到
-       - /test/index.html 找不到
+
+- $uri /usr/share/nginx/html/test/test/user 找不到这个文件
+- $uri/ /usr/share/nginx/html/test/test/user/ 当做目录也找不到这个文件
+- /test/index.html 访问/test/index.html
+  - $uri /usr/share/nginx/html/test/test/index.html 找不到
+  - $uri/ /usr/share/nginx/html/test/test/index.html/ 找不到
+  - /test/index.html 找不到
 
 alias则是改别名，比如访问/test/user ，try_files如下
-   - $uri /usr/share/nginx/html/test 找不到这个文件
-   - $uri/ /usr/share/nginx/html/test/ 当做目录也找不到这个文件
-   - /test/index.html 访问/test/index.html 
-       - $uri /usr/share/nginx/html/test/index.html 找到了
 
-
+- $uri /usr/share/nginx/html/test 找不到这个文件
+- $uri/ /usr/share/nginx/html/test/ 当做目录也找不到这个文件
+- /test/index.html 访问/test/index.html
+  - $uri /usr/share/nginx/html/test/index.html 找到了
 
 个人理解，有错望指出
-

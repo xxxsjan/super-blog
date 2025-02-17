@@ -52,8 +52,6 @@ some content...
 };
 ```
 
-
-
 ## 入口文件
 
 默认是app.vue作为入口文件
@@ -75,4 +73,3 @@ app.vue
   <NuxtPage />
 </template>
 ```
-
