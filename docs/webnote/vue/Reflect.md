@@ -15,8 +15,8 @@ const obj = {
 
 const proxy = new Proxy(obj,{
     get(target,key){
-		console.log('proxy get',key)
-		return target[key]
+  console.log('proxy get',key)
+  return target[key]
     }
 })
 
@@ -31,8 +31,6 @@ proxy.c 读取返回的是obj上的getter，此时this默认是指向obj的
 
 而不是代理对象，所以this.a this. b 的读取没有经过代理对象，所以无法打印
 
-
-
 ## 使用Reflect
 
 ```
@@ -46,8 +44,8 @@ const obj = {
 
 const proxy = new Proxy(obj,{
     get(target,key){
-		console.log('proxy get',key)
-		return Reflect.get(target,key,proxy)
+  console.log('proxy get',key)
+  return Reflect.get(target,key,proxy)
     }
 })
 
@@ -62,11 +60,9 @@ console.log(proxy.c)
 
 这时读取a b就是过proxy的，就能达到监听的目的
 
-
-
 ## Reflect的方法
 
-https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect
+<https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect>
 
 ```
 Reflect.apply(target, thisArgument, argumentsList)
@@ -108,11 +104,7 @@ Reflect.get(obj, 'c')// 直接调用[[GET]] 第三个参数receiver默认是当�
 
 ```
 
-
-
-
-
-## 拓展问题：
+## 拓展问题
 
 ### 和apply bind call改this有什么区别
 
@@ -124,8 +116,8 @@ const obj = {
         return this.a +this.b
     },
     d:function d(){
-   		console.log(this)
-    	return this.a +this.b
+     console.log(this)
+     return this.a +this.b
     }
 }
 Reflect.get(obj,'d',{a:2,b:3}) // 只是获取属性
@@ -135,4 +127,3 @@ Reflect.get(obj,'d',{a:2,b:3})() // 会执行d，打印的this是window
 所以区别在于apply call bind是改的调用时的this
 
 Reflect的receiver的设置会影响getter setter时的this，而不是调用时的this
-
