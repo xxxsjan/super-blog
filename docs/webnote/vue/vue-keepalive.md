@@ -6,13 +6,11 @@
 <router-view v-slot="{ Component, route }">
     <transition appear name="fade-transform" mode="out-in">
         <keep-alive :include="['home','dataScreen']" v-if="isRouterRefresh">
-        	<component :is="Component" :key="route.path" />
+         <component :is="Component" :key="route.path" />
         </keep-alive>
     </transition>
 </router-view>
 ```
-
-
 
 ## vben-admin
 
@@ -40,4 +38,3 @@
     </template>
   </RouterView>
 ```
-

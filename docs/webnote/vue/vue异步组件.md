@@ -1,8 +1,6 @@
 # vue异步组件
 
-https://juejin.cn/post/7108593780638351397
-
-
+<https://juejin.cn/post/7108593780638351397>
 
 ## defineAsyncComponent
 
@@ -105,10 +103,6 @@ const loader = () => {
 
 ```
 
-
-
-
-
 ## Vue.asyncComponent()
 
 ```
@@ -128,4 +122,3 @@ const MyComponent = Vue.extend({
   }
 });
 ```
-

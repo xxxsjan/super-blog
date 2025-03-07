@@ -1,6 +1,7 @@
 [https://www.jianshu.com/p/40f78e6481b4](https://www.jianshu.com/p/40f78e6481b4)
 [https://juejin.cn/post/7145018989981204517](https://juejin.cn/post/7145018989981204517)
 npm i -S vue-property-decorator
+
 ```javascript
 import { Watch, Prop, Emit, Mutation } from 'vue-property-decorator'
 

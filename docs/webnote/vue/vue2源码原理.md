@@ -1,8 +1,10 @@
 ### Watcher
+
 new Watcher(vm, expOrFn, cb, options)
 第四个参数可以配置他是什么类型的watcher
 第五个参数为isRenderWatcher ：是否是渲染watcher
 第四个参数有四种
+
 ```javascript
 if (options) {
   this.deep = !!options.deep // 深度
@@ -26,7 +28,9 @@ update () {
 ```
 
 ### mount的watcher（渲染 Watcher）
+
 mount挂载会new Watcher（组件更新）
+
 ```javascript
 updateComponent = () => {
   vm._update(vm._render(), hydrating)
@@ -39,8 +43,10 @@ new Watcher(vm, updateComponent, noop, {
   }
 }, true /* isRenderWatcher */)
 ```
+
 new Watcher （渲染watcher）触发pushTarget
 pushTarget会把当前wathcer实例进行压栈添加到维护数组中，并把全局Dep.target设置成当前watcher实例
+
 ```javascript
 export function pushTarget (_target: ?Watcher) {
   if (Dep.target) targetStack.push(Dep.target)
@@ -51,7 +57,9 @@ export function popTarget () {
   Dep.target = targetStack.pop()
 }
 ```
+
 这样后面对于响应式的getter即可进行依赖的收集，即dep.depend()
+
 ```javascript
 class Dep{
   depend () {
@@ -61,11 +69,14 @@ class Dep{
   }
 }
 ```
+
 ### 派发更新
+
 setter触发派发
  dep.notify()
 实际遍历调用wathcer的update
 不会马上执行回调，会有一个优化，在 nextTick 后执行所有 watcher 的 run
+
 ```javascript
 class Dep {
   notify () {
@@ -119,7 +130,9 @@ export function queueWatcher (watcher: Watcher) {
 ```
 
 ### computed 的 Watcher（computed  Watcher）
+
 initComputed
+
 ```javascript
 // 创建watcher数组  
 const watchers = vm._computedWatchers = Object.create(null)
@@ -139,7 +152,9 @@ for (const key in computed) {
 }
 
 ```
+
 对应wathcer中对应computed的特殊处理
+
 ```javascript
 class Watcher{
   constructor (
@@ -159,10 +174,11 @@ class Watcher{
   }  
 }
 ```
+
 ### watch 的 Watcher （user Watcher）
+
 ### isDef
+
 ```javascript
 const isDef = v => v !== undefined
 ```
-
-
