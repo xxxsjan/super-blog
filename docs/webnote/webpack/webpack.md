@@ -125,76 +125,6 @@ module.exports = {
 }
 ```
 
-### postcss-loader
-
-PostCSS 是一个允许使用 JS 插件转换样式的工具。 这些插件可以检查（lint）你的 CSS，支持 CSS Variables 和 Mixins， 编译尚未被浏览器广泛支持的先进的 CSS 语法，内联图片，以及其它很多优秀的功能。
-
-PostCSS 在业界被广泛地应用。PostCSS 的 **autoprefixer** 插件是最流行的 CSS 处理工具之一。
-
-autoprefixer 添加了浏览器前缀，它使用 Can I Use 上面的数据。
-
- 安装
-
-```javascript
-npm install postcss-loader autoprefixer --save-dev
-
-// webpack.config.js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const isDev = process.NODE_ENV === 'development';
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.(css|less)$/,
-        exclude: /node_modules/,
-        use: [
-          isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-            }
-          },
-          {
-            loader: 'postcss-loader'
-          },
-          {
-              loader: 'less-loader',
-              options: {
-                  lessOptions: {
-                      javascriptEnabled: true
-                  }
-              }
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-postcss.config.js
-
-必须设置支持的浏览器才会自动添加添加浏览器兼容
-
-```javascript
-module.exports = {
-  plugins: [
-    require('precss'),
-    require('autoprefixer')({
-      'browsers': [
-        'defaults',
-        'not ie < 11',
-        'last 2 versions',
-        '> 1%',
-        'iOS 7',
-        'last 3 iOS versions'
-      ]
-    })
-  ]
-}
-```
-
 ### svg-sprite-loader
 
 会把引用的 svg文件 塞到一个个 symbol 中，合并成一个大的SVG sprite，使用时则通过 SVG 的 <use/> 传入图标 id 后渲染出图标。最后将这个大的 svg 放入 body 中。symbol的id如果不特别指定，就是你的文件名。
@@ -301,8 +231,6 @@ module.exports = {
   }; 
 ```
 
-
-
 ## 老东西
 
 ### 详解CommonsChunkPlugin的配置和用法
@@ -332,4 +260,28 @@ module.exports = {
   "./esnext/index.js",
   "./esnext/configure.js"
 ],
+```
+
+## rules-oneOf
+
+一个文件不会被多个loader过一遍
+
+```plain
+module.exports ={
+ module:{
+  rules:[
+   {test:xxxxx},
+   {oneOf:[{test:xxx},{tst:xxx}]}
+  ]
+ }
+}
+```
+
+## tree shaking
+
+package.json
+
+```plain
+"sideEffect":false   // 可能会干掉css/@babel/polyfill
+"sideEffect":["*.css"]
 ```
