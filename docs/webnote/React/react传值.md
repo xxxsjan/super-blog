@@ -1,24 +1,6 @@
 # react传值
 
-## 定义类型
 
-ts中不需要prop-type这个库了
-
-```
-type PropsType = {
-  categoryList: string[];
-}
-
-fucntion component(props:PropsType){
-  return <div></div>
-}
-```
-
-技巧
-
-```
-<Com {...{dataOne,dataTwo,dataThree}}>
-```
 
 ## Provider,Consumer和Context
 
