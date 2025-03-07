@@ -1,6 +1,6 @@
 入口
 
-```json
+```js
 entry: {
     index: path.resolve(__dirname, "../src/pages/index/index.js"),
     user: path.resolve(__dirname, "../src/pages/user/user.js"),
@@ -10,7 +10,7 @@ entry: {
 这样输出的包名 默认就是index 和 user
 同样的需要两份html
 
-```json
+```js
  plugins: [
     new HtmlWebpackPlugin({
       filename: "index.html",
@@ -44,7 +44,11 @@ entry: {
 ```
 
 webapck的splitChunk缓存组输出 index user common这三个包的
+
 假如只是一个入口就是 入口名 common 两个
+
 webpack5的话是 defaultVendors和 default
+
 所以在对应的html里可以配置chunks: ["user", "common"] 只引入对应的包就行，
+
 引入其他入口的包就是多余的

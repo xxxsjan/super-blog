@@ -5,6 +5,7 @@ npm install -D babel-loader @babel/core @babel/preset-env webpack
 - @babel/preset-typescript    TypeScript
 - @babel/preset-react            React
 - @babel/preset-flow              Flow
+
 ### babel插件和预设的执行顺序
 
 - 插件比预设先执行
@@ -14,7 +15,9 @@ npm install -D babel-loader @babel/core @babel/preset-env webpack
 ![](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151245066.webp)
 
 ## 配置写法
-###  webpack.config.js
+
+### webpack.config.js
+
 ```javascript
 module: {
   rules: [
@@ -39,6 +42,7 @@ module: {
 ```
 
 ### packages.json
+
 ```javascript
 {
      "dependencies": {},
@@ -47,7 +51,9 @@ module: {
      }
 }
 ```
+
 ### babel.config.js
+
 ```javascript
 module.exports = (api) => {
   return {
@@ -74,7 +80,9 @@ module.exports = (api) => {
   };
 };
 ```
+
 ### 演示
+
 入口源代码
 
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151245390.png)
@@ -89,6 +97,7 @@ module.exports = (api) => {
         ],
 },
 ```
+
 输出代码
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151245330.png)
 配置@babel/preset-env后
@@ -108,23 +117,29 @@ module.exports = (api) => {
   ],
 },
 ```
+
 输出代码
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151245122.png)
 
 ## polyfill
+>
 > 在开发过程中，如果我们写的代码是es6语法的，其中有很多语法如：async、Array.isArray、Object.assign等等是低版本浏览器所不支持的。为了保证我们写的es6语法能够在各个新旧客户端上撒欢跑，我们需要引入polyfill对这些新的语法进行全局注入。
 
 #### 方法一 全量引入
+
 ##### 直接引入
- import '@babel/polyfill' 
+
+ import '@babel/polyfill'
 但上面那个已经废弃，现在全量引入是下面两句
 
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 
-##### 按需引入--优化：
+##### 按需引入--优化
+
 @babel/polyfill要装在**依赖**上
 再配置@babel/preset-env，useBuiltIns：'usage'
+
 ```javascript
 {
   "presets": [
@@ -143,8 +158,11 @@ import "regenerator-runtime/runtime";
   ]
 }
 ```
+
 #### 方法二
-使用插件@babel/transform-runtime 
+
+使用插件@babel/transform-runtime
+
 ```javascript
 { 
   "presets": [
@@ -162,8 +180,11 @@ import "regenerator-runtime/runtime";
   ] 
 }
 ```
+
 ### 总结
-#### 打包体积：
+
+#### 打包体积
+
 全局引入 @babel/polyfill + "useBuiltIns": "usage"的方式
 可以根据环境判断要引入哪些polyfill
 这个可以有效减少打包后代码的体积
@@ -174,16 +195,19 @@ babel-polyfill 是配置了执行环境的，通过环境看你需要哪些 poly
 
 所以使用transform-runtime后打包体积是小于@babel/polyfill + "useBuiltIns": "usage"的
 
-#### 全局污染：
+#### 全局污染
+
 @babel/polyfill比较暴力，会重写代码中的原生对象、方法
 而transform-runtime不会。  
 
-#### polyfill的广度：
+#### polyfill的广度
+
 instance 上新添加的一些方法
 babel-plugin-transform-runtime 是没有做处理的
 比如 数组的 includes, filter, fill 等
 
 ### 使用
+
 npm i -D @babel/core @babel/preset-env babel-loader core-js
 
 core-js就是处理高级的api，Promise什么的
@@ -241,10 +265,10 @@ test:/\.less$/,
 'less-loader']
 ```
 
-
 写一个babel插件
 [https://juejin.cn/post/7114486435487023112](https://juejin.cn/post/7114486435487023112)
 babel.config.js
+
 ```javascript
 
 {
@@ -259,7 +283,9 @@ babel.config.js
 
 
 ```
+
 src/plugins/my-plugin.js
+
 ```javascript
 // src/plugins/my-plugin.js
 module.exports = function(api, options, dirname) {
@@ -274,6 +300,7 @@ module.exports = function(api, options, dirname) {
 ```
 
 ## babel缓存
+
 开启：cacheDirectory: true   即可
 hash  webpack构建时生成的hash
 chunkhash   同一个打包文件chunkhash一样
@@ -281,10 +308,10 @@ contenthash 根据内容创建hash，唯一
 
 ```
 module.exports = {
-	...
-	module: {
-		rules: [
-			...
+ ...
+ module: {
+  rules: [
+   ...
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -293,14 +320,14 @@ module.exports = {
         enforce:"pre",// "post"
         options: {
         presets: [
-        	...
-      	],
+         ...
+       ],
         //开启babel缓存，第二次构建时，会读取之前的缓存
         cacheDirectory: true
         }
       }
-		]
-	}
+  ]
+ }
 }
 
 // 方法二：.bablerc
@@ -320,63 +347,64 @@ npm i -D thread-loader
 babel使用
 module.exports = {
 module:{
-	rules:[{
-		test:/\.js$/,
-		exclude:/node_modules/,
-		use:[
-			'thread-loader',// 开启多进程打包，启动消耗600ms，大于600ms使用就不亏
-			{
+ rules:[{
+  test:/\.js$/,
+  exclude:/node_modules/,
+  use:[
+   'thread-loader',// 开启多进程打包，启动消耗600ms，大于600ms使用就不亏
+   {
         //写法1
-				loader:'babel-loader',
+    loader:'babel-loader',
         // 写法2
         {
-        	loader:'babel-loader',
-        	options:{
-        		workers:2
-      		}
+         loader:'babel-loader',
+         options:{
+          workers:2
         }
-				options:{
-					preset:[
-						[
-							'@babel/preset-env',
-							{
-								useBuiltIns:'usage',
-								corejs:{verson:3},
-								targets:{
-									chrome:'60',
-									firefox:'50'
-								}
-							}
-						]
-					]	
-				}
-			}
-		]
-	}]
+        }
+    options:{
+     preset:[
+      [
+       '@babel/preset-env',
+       {
+        useBuiltIns:'usage',
+        corejs:{verson:3},
+        targets:{
+         chrome:'60',
+         firefox:'50'
+        }
+       }
+      ]
+     ] 
+    }
+   }
+  ]
+ }]
 }
 ```
+
 ## Happypack
 
 ```javascript
 module.exports={
-	module:{
-		rules:[
-			{
+ module:{
+  rules:[
+   {
         test:/.\js$/,
         exclude:/node_modules/,
         include:path.resolve('src'),
         use:'Happypack/loader?id=js'
-			},
-			{
-				test:/.\.css$/,
-				// use:['style-loader','css-loader'],
-				use:'Happypack/loader?id=css'
-			}
-		]
-	},
-	plugins:[
-		new Happypack({
-			id:'js',
+   },
+   {
+    test:/.\.css$/,
+    // use:['style-loader','css-loader'],
+    use:'Happypack/loader?id=css'
+   }
+  ]
+ },
+ plugins:[
+  new Happypack({
+   id:'js',
       use:[{
         loader:'babel-loader',
         options:{
@@ -384,13 +412,12 @@ module.exports={
             '@babel/preset-env',
             '@babel/preset-react'
           ]
-			}}]
-		})
+   }}]
+  })
     new Happypack({
-			id:'css',
-    	use:['style-loader','css-loader'],
-		})
-	]
+   id:'css',
+     use:['style-loader','css-loader'],
+  })
+ ]
 }
 ```
-
