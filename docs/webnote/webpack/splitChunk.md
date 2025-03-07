@@ -59,10 +59,6 @@ automaticNameDelimiter: '~'
 
 chunks: 'all',  多入口时，每个入口一个chunk，all表示所有的chunk公用的代码都要抽离
 
-
-
-
-
 ## maxInitialRequests的理解
 
 <https://www.cnblogs.com/kwzm/p/10316217.html>
@@ -93,7 +89,7 @@ entry3 引入了 react 、orgchart
 5、vendors~page1就是page1里面引入的第三方库lodash
 ```
 
-## 场景：
+## 场景
 
 main引入了math
 math里有add方法
@@ -117,4 +113,3 @@ optimization:{
 ```
 
 这也，math改变，会生成runtime文件，main.js并不会改变
-
