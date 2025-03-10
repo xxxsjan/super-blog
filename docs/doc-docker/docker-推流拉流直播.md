@@ -1,9 +1,15 @@
 ### 相关文章
+
 [利用Docker挂载Nginx-rtmp(服务器直播流分发)+FFmpeg(推流)+Vue.js结合Video.js(播放器流播放)来实现实时网络直播 - 掘金](https://juejin.cn/post/6844904132340531213)
+
 [https://www.jianshu.com/p/16741e363a77](https://www.jianshu.com/p/16741e363a77)
+
 ## Nginx-rtmp 方案
+
 docker pull alfg/nginx-rtmp
+
 docker run -it -p 1935:1935 -p 8080:80 --rm alfg/nginx-rtmp
+
 docker run -itd -p 1935:1935 -p 8080:80 --name nginx-rtmp-test alfg/nginx-rtmp
 
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281346654.png)
@@ -24,7 +30,7 @@ video 和 audio要对应
 
 先复制一个文件进容器
 
-docker cp ./test.mp4 b0b9e286173ca7a7dfb4ecb5973d4557617c54de01059a038e0ea970dddf56b9:/home            
+docker cp ./test.mp4 b0b9e286173ca7a7dfb4ecb5973d4557617c54de01059a038e0ea970dddf56b9:/home
              ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281346731.png)
 查看媒体信息
 
@@ -68,7 +74,9 @@ ffplay rtmp://127.0.0.1/live/test
 ffplay rtmp://127.0.0.1:11935/live/test
 
 ### vue
+
  pnpm add video.js  aes-decrypter  m3u8-parser  mpd-parser   mux.js url-toolkit   videojs-contrib-hls
+
 ```vue
 <template>
   <div>
@@ -107,13 +115,16 @@ ffplay rtmp://127.0.0.1:11935/live/test
 <style>
 </style>
 ```
+
 ## ffmpeg命令汇总
+
 [https://juejin.cn/post/6844903550229676039](https://juejin.cn/post/6844903550229676039)
 ffmpeg推流本地文件到服务器
 -re表示实际速度
 ffmpeg -re -i test.mp4 -acodec copy-vcodec copy -f flv rtmp://xxx、
 
-### ffmpeg拉流 且 下载 
+### ffmpeg拉流 且 下载
+
 -c copy保持原视频格式 ，不是rtmp协议的谨慎使用
 ffmpeg -i rtmp://xxx  -c copy hks2.flv
 自动转码，直接命名即可, ts后缀不对音频视频进行转码
@@ -122,22 +133,25 @@ ffmpeg -i rtmp://xxx  hks2.flv
 ffmpeg -i rtmp://xxx -acodec aac -vcodec   libx264 hks2.flv
 
 ### ffmpeg推mac本地摄像头
+
 ffmpeg -f avfoundation -video_size 1280x720 -framerate 30 -i 0:0 -vcodec libx264 -preset veryfast -f flv [http://192.168.1.103:8000/live/stream.flv](http://ip:8000/live/stream.flv)
+>
 > - ·-vide_size表示要输出的视频画面的分辨率尺寸
 > - -f后面的参数 flv表述输出的格式，再后面的地址 [http://ip:8000/live/stream.flv](https://link.juejin.cn?target=http%3A%2F%2Fip%3A8000%2Flive%2Fstream.flv) 表示想要输出的地址，这个地址的stream.flv可以按照自己需求随意修改，保持后缀是你需要的flv格式即可
 
-
 ### ffmpeg查看摄像头信息
+
 查看摄像头列表
 ffmpeg -list_devices true -f dshow -i dummy
 播放摄像头
-ffplay -f dshow -i video="Integrated Camera" 
->  Integrated Camera 是通过查看列表的命令行获得的名称
+ffplay -f dshow -i video="Integrated Camera"
+> Integrated Camera 是通过查看列表的命令行获得的名称
 
 查看摄像头的分辨率格式
 ffmpeg -list_options true -f dshow -i video="FULL HD webcam"
 
 ### ffmpeg摄像头推流RTSP&RTMP
+
 摄像头推流到RTMP服务
 ffmpeg -f dshow -i video="USB webcam" -vcodec libx264 -acodec aac -ar 44100 -ac 1 -r 25 -s 1920*1080 -f flv rtmp://192.168.1.3/live/desktop
 
@@ -145,6 +159,7 @@ ffmpeg -f dshow -i video="USB webcam" -vcodec libx264 -acodec aac -ar 44100 -ac 
 ffmpeg -f dshow -i video="FULL HD webcam" -rtsp_transport tcp -vcodec libx264 -preset ultrafast -acodec libmp3lame -ar 44100 -ac 1 -r 25 -f rtsp rtsp://192.168.0.1/webcam
 
 ### ffmpeg桌面推流RTSP&RTMP
+
 windows桌面推流到RTMP服务
 ffmpeg -f gdigrab -i desktop -vcodec libx264 -preset ultrafast -acodec libmp3lame -ar 44100 -ac 1 -r 25 -s 1920*1080 -f flv rtmp://192.168.1.3/live/desktop
 
@@ -152,6 +167,7 @@ windows桌面推流到RTSP服务（rtp over udp）
 ffmpeg -f gdigrab -i desktop -vcodec libx264 -preset ultrafast -acodec libmp3lame -ar 44100 -ac 1 -r 25 -f rtsp rtsp://192.168.0.1/desktop
 
 ### ffmpeg基本推拉流命令
+
 RTMP推流
 ffmpeg -re -i input.flv -f flv -r 25 -s 1920*1080 -an "rtmp://192.168.0.200/live/test"
 RTSP拉流转RTMP推流
@@ -164,70 +180,88 @@ RTSP拉流并播放 （tcp）
 ffplay -i -rtsp_transport tcp rtsp://localhost/test
 RTSP拉流并播放 （udp）
 ffplay -i rtsp://localhost/test
+
 ### 剪切视频
+
 ffmpeg -i "input.mp4" -vcodec copy -acodec copy -ss 00:02:00 -t 00:01:00  "output.mp4"
+
 ## SRS方案
+
 #### 文章
+
 [使用srs进行webrtc推流体验！](https://zhuanlan.zhihu.com/p/458504251)
 [Docker | SRS](https://ossrs.net/lts/zh-cn/docs/v4/doc/getting-started)
 [Docker 实战系列之 SRS 流媒体服务器_=蜗牛=的博客-CSDN博客_docker srs](https://blog.csdn.net/u011374856/article/details/107332309/)
 docker pull ossrs/srs
+
 ## docker+srs
+
 [https://www.jianshu.com/p/acb4f2af44b5](https://www.jianshu.com/p/acb4f2af44b5)
 [https://juejin.cn/post/6844904020168065037](https://juejin.cn/post/6844904020168065037)
+
 #### 拉取镜像
+
 docker pull ubuntu:18.04
 d盘映射，linux环境则正常写就行
 docker run  --name srs -v /d/srs/files:/root/files -d -i  -p 1935:1935  ubuntu:18.04
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281347190.png)
 查看容器列表：docker ps
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281347465.png)
-进入指定容器：docker exec -it srs bash    
+进入指定容器：docker exec -it srs bash
 （srs为上面步骤设置的容器名，或者使用容器id，容器id也不一定要粘贴全，取钱了十个字母也是可以的）
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281347488.png)
 
 下载慢或者下载出问题，多半是源有问题，
 设置源：
 [https://www.yuque.com/yuqueyonghudteckj/nws0pf/fe4836](https://www.yuque.com/yuqueyonghudteckj/nws0pf/fe4836)
-#### 
+
+####
+
 #### 更新软件
+
 apt **update**
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281347703.png)
 
 #### 安装依赖
+
 apt install -y git gcc g++ unzip make  python
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281347047.png)
 g++报错
 [https://blog.csdn.net/weixin_43894075/article/details/115141599](https://blog.csdn.net/weixin_43894075/article/details/115141599)
 
 #### 安装srs
+
 cd /home && git clone [https://gitee.com/songboy/srs.git](https://gitee.com/songboy/srs.git)
 查看目录
 cd  /home/srs/trunk/  && ls
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281347199.png)
 
 #### 编译
-cd /home/srs/trunk/ && ./configure && make 
+
+cd /home/srs/trunk/ && ./configure && make
 回车后直接刷屏
 不要慌，等~
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281347099.png)
 
 #### 启动
+
 上图有提示
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281347647.png)
 cd /home/srs/trunk/ && ./objs/srs -c conf/srs.conf
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281347496.png)
 
 #### obs推流测试
+
 rtmp://127.0.0.1/live/ikun
  ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281347477.png)
 
-
 #### 拉流测试
+
 ffplay rtmp://127.0.0.1/live/ikun
 ffplay rtmp://127.0.0.1/live/ikun -an
 -an 静音，不然很吵
 ffplay命令
+
 ```vue
 -x width    强制显示宽带。
 -y height    强制显示高度。
@@ -251,22 +285,23 @@ ffplay命令
 -af filtergraph    设置音频滤镜
 ```
 
-
-
 ## nodemedia方案
+
 [前端如何实现整套视频直播技术流程 - 掘金](https://juejin.cn/post/6844904071053180935)
 docker 安装 Ubuntu
 > linux下载nodemediaserver压缩包地址 [https://www.nodemedia.cn/doc/web/#/5?page_id=11](https://www.nodemedia.cn/doc/web/#/5?page_id=11)
 
 docker run -itdp 8000:8000 --name ubuntu-nodemediaserver ubuntu
 docker build -t ubuntu-nms .
+
 ```bash
 FROM ubuntu:18.04
 RUN apt-get update && apt-get install -y sudo && apt-get install wget -y
 ```
+
 docker run -itdp 8000:8000 --name ubuntu-nodemediaserver ubuntu-nms
 
-下载：wget https://cdn.nodemedia.cn/nms/3.18.0/nms-linux-amd64-v3.18.0-20221031.tar.gz
+下载：wget <https://cdn.nodemedia.cn/nms/3.18.0/nms-linux-amd64-v3.18.0-20221031.tar.gz>
 解压：tar -zxvf nms-linux-amd64-v3.18.0-20221031.tar.gz
 
 解压后 : cd nms-linux-amd64   &&  ./nms
@@ -283,16 +318,16 @@ systemctl enable ssh
 [docker 报错Failed to connect to bus: Host is down](https://blog.csdn.net/zhangyuhaifa/article/details/119756642)
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281347759.png)
 
-
 `http://localhost:8000`
 
 ffmpeg推流到8000
 ffmpeg -f avfoundation -video_size 1280x720 -framerate 30 -i 0:0 -vcodec libx264 -preset veryfast -f flv [http://192.168.1.103:8000/live/stream.flv](http://ip:8000/live/stream.flv)
+>
 > - ·-vide_size表示要输出的视频画面的分辨率尺寸
 > - -f后面的参数 flv表述输出的格式，再后面的地址 [http://ip:8000/live/stream.flv](https://link.juejin.cn?target=http%3A%2F%2Fip%3A8000%2Flive%2Fstream.flv) 表示想要输出的地址，这个地址的stream.flv可以按照自己需求随意修改，保持后缀是你需要的flv格式即可
 
-
 ## 拓展：windows安装ffmpeg
+>
 > ffmpeg可以做很多东西，剪辑压缩转格式什么的，但要敲命令
 > 也可以拉流播放各种协议格式的视频，拿来测试很不错
 > 更多功能我没涉及，说的可能片面了
@@ -313,13 +348,10 @@ C:\Program Files\ffmpeg\bin
 
 命令行执行ffmpeg -version即可看到版本号
 
-
-
 ![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307281354952.png)
 
-
-
 #### 剪切视频命令
+
 ffmpeg -i 1111.mp4 -ss 00:00:20 -t  00:00:10  -vcodec copy -acodec copy output.mp4
 > -ss 开始时间
 > -t 持续时间
