@@ -8,18 +8,18 @@ gyp verb check python checking for Python executable "python2" in the PATH
 
 **使用限制：node版本16.15**
 
-#### 方法一：
+#### 方法一
 
-https://blog.csdn.net/zhao97/article/details/109203025
+<https://blog.csdn.net/zhao97/article/details/109203025>
 
 ```plain
 npm config set sass_binary_site=https://npm.taobao.org/mirrors/node-sass
 npm config set sass_binary_site https://npm.taobao.org/mirrors/node-sass
 ```
 
-https://www.yuque.com/shenmingkai/notes/hf4bq7
+<https://www.yuque.com/shenmingkai/notes/hf4bq7>
 
-#### 方法二：
+#### 方法二
 
 ```plain
 npm install --global --production windows-build-tools
@@ -27,7 +27,7 @@ npm install --global windows-build-tools
 yarn global add windows-build-tools
 ```
 
-#### 方法三：
+#### 方法三
 
 windows-build-tools装不了的话，可以去C:\Users\admin\.windows-build-tools
 
@@ -37,13 +37,11 @@ windows-build-tools装不了的话，可以去C:\Users\admin\.windows-build-tool
 
 ##### 安装python27
 
-https://www.python.org/downloads/
+<https://www.python.org/downloads/>
 
 安装时记得选Add python.exe to Path>>Entire feature will be installed on local hard drive
 
 选上了会把安装目录添加到环境变量
-
-
 
 ------
 
@@ -63,8 +61,6 @@ python -V
 
 ![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202304291744819.png)
 
-
-
 ##### vs_buildtools 、 Visual Studio
 
 另一个vs_buildtools也要操作
@@ -75,35 +71,21 @@ python -V
 
 ![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202304291744405.png)
 
-
-
-
-
 ### 其他
 
-https://blog.csdn.net/wangtao88888888/article/details/106681641
-
-
+<https://blog.csdn.net/wangtao88888888/article/details/106681641>
 
 ### 报错：需要python3
 
-
-
 ![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202304291744923.png)
-
-
 
 ### 2 3共存方式
 
-https://blog.csdn.net/weixin_44953600/article/details/107638692
-
-
+<https://blog.csdn.net/weixin_44953600/article/details/107638692>
 
 直接改名
 
 python.exe改成 python2.exe
-
-
 
 #### pip共存
 
@@ -111,13 +93,10 @@ python3.x 目录下的 pip.exe文件删除
 
 安装pip2：在Dos中输入：python2 -m pip install --upgrade pip --force-reinstall
 
-安装 pip3： 在Dos中输入：python -m pip install --upgrade pip --force-reinstall 
-
-
+安装 pip3： 在Dos中输入：python -m pip install --upgrade pip --force-reinstall
 
 #### 其他方法
 
-https://www.jianshu.com/p/fe327b72fa31
+<https://www.jianshu.com/p/fe327b72fa31>
 
 miniconda会小一点,50m
-
