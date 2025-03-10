@@ -1,5 +1,7 @@
 ## 抽离css
+
 用到clean-webpack-plugin
+
 ```javascript
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module:{
@@ -20,8 +22,11 @@ plugins:[
   })
 ]
 ```
-## 抽离scss 或less
+
+## 抽离scss或less
+
 通过 extract-text-webpack-plugin 插件
+
 ```javascript
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 module:{
@@ -43,9 +48,12 @@ plugins:[
   new ExtractTextPlugin({ filename: "scss/[name].css" }),
 ]
 ```
+
 ## 依赖参考
+
 版本不一样可能会有api的报错，这里放出作为参考
 node 是12.22.9版本，这个可能会影响node-scss的使用
+
 ```json
 {
   "name": "w4-demo",
@@ -77,6 +85,7 @@ node 是12.22.9版本，这个可能会影响node-scss的使用
 
 如果想在 style 资源中注入内容，导入 css / sass / scss / less / stylus 这些内容。可以安装 style-resources-loader。
 主要作用是导入一些公共的样式文件，比如：variables / mixins / functions，避免在每个样式文件中手动的 @import 导入。
+
 ```javascript
 module.exports = {
   // ...
