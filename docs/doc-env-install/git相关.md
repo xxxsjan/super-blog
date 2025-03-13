@@ -271,3 +271,18 @@ git默认不识别大小写
 执行 命令
 
 git config core.ignorecase false
+
+
+
+## ssh
+
+```
+ssh-keygen -t rsa -b 4096 -C "666@qq.com"
+```
+
+保存路径C:\Users\admin/.ssh/id_rsa.pub，回车后命令行会显示
+
+查看 C:\Users\admin/.ssh/id_rsa.pub 内容
+
+将公钥 复制下来，放到 github 》setting 》 ssh 》新建
+
