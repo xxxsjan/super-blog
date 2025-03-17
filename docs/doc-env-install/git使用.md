@@ -7,24 +7,31 @@
 ### 全局 配置
 
 ```
+# 设置全局用户名
 git config --global user.name "xxxsjan"
+# 设置全局用户邮箱
 git config --global user.email "626653354@qq.com"
+# 查看全局配置列表
 git config --list
-// 移除配置
+
+# 移除全局用户名配置
 git config --global --unset user.name
+# 移除指定安全目录配置
 git config --global --unset safe.directory D:/aa/bbb/cccc
+# 移除所有安全目录配置
 git config --global --unset-all safe.directory
-// 编辑
+
+# 编辑全局配置
 git config --global --edit
-:wq保存退出
-:q退出
-:q!强制退出
+# 在 Vim 中，:wq 保存并退出
+# 在 Vim 中，:q 退出
+# 在 Vim 中，:q! 强制退出
 ```
 
 配置当前当前 fork 的仓库的原仓库地址
 git remote add upstream <原仓库 github 地址>
 
-fork 相关操作
+## fork 相关操作
 
 [https://zhuanlan.zhihu.com/p/467670042](https://zhuanlan.zhihu.com/p/467670042)
 
@@ -33,103 +40,111 @@ fork 相关操作
 #### 没仓库
 
 ```javascript
+# 创建项目目录
 mkdir vue-eleui
+# 进入项目目录
 cd vue-eleui
+# 初始化 Git 仓库
 git init
-touch README.md    #新建文件
-git add README.md    #添加暂存
-git commit -m "first commit"  #提交本地仓库
-git remote add origin https:xxxxxxxxxxxxxxxx   
+# 创建 README 文件
+touch README.md
+# 添加文件到暂存区
+git add README.md
+# 提交到本地仓库
+git commit -m "first commit"
+# 添加远程仓库地址
+git remote add origin https:xxxxxxxxxxxxxxxx
+# 推送至远程仓库的 master 分支
 git push -u origin master
 ```
 
 #### 有项目没仓库
 
 ```javascript
-打开项目根目录
+# 进入项目根目录
+cd <项目根目录>
+# 初始化 Git 仓库
 git init
+# 添加所有文件到暂存区
 git add .
+# 提交到本地仓库
 git commit -m "本地项目提交"
-#绑定码云
-git remote add origin https:xxxxxxxxxxxxxxxx  
-#在码云上新建master主分支,并推送
+# 添加远程仓库地址（以码云为例）
+git remote add origin https:xxxxxxxxxxxxxxxx
+# 在码云上创建 master 主分支并推送
 git push -u origin master
 ```
 
-#### 已有仓库
+#### 已有仓库情况
 
 ```
-项目根目录
+# 进入项目根目录
+cd <项目根目录>
+# 添加远程仓库地址
 git remote add origin https:xxxxxxxxxxxxxxxx
+# 推送至远程仓库的 master 分支
 git push -u origin master
 ```
 
 ### 常用命令
 
 ```sh
-提交分支
-远程没有分支
+# 提交新分支到远程仓库
 git push -u origin 新分支
-有分支直接 git push
-git init  #初始化git
-git add .    #添加
-git commit -m "你要添加的日志"  #可以不写
-git commit -am "你要添加的日志"  #可以不写git add直接提交
-#和自己的仓库简历远程连接，链接可以在你的github仓库中获得
-git remote add origin https://github.com/xxx/xxx 
-git pull orgin master    //从master 拉取
-git push -u origin master  // 推送到master
+# 若远程已有分支，直接推送
+git push
 
-#查看远程仓库地址
+# 初始化 Git 仓库
+git init
+# 添加所有文件到暂存区
+git add .
+# 提交到本地仓库并添加日志
+git commit -m "你要添加的日志"
+# 直接提交修改过的文件并添加日志
+git commit -am "你要添加的日志"
+# 添加远程仓库地址
+git remote add origin https://github.com/xxx/xxx
+# 从远程 master 分支拉取代码
+git pull origin master
+# 推送至远程 master 分支
+git push -u origin master
+
+# 查看远程仓库地址
 git remote -v
-#修改远程仓库地址（方法一）
-git remote origin set-url https://gitee.com/sjan233/shop_uniapp.git
-#先删后改（方法二）
+# 修改远程仓库地址（方法一）
+git remote set-url origin https://gitee.com/sjan233/shop_uniapp.git
+# 修改远程仓库地址（方法二：先删后改）
 git remote rm origin
 git remote add origin https://gitee.com/sjan233/bgsystem_byvueeleadmin
 
-rm -rf .git/  #删除当前路径下的 git仓库
-git branch  #Git分支
-git branch -a #查看远程分支
-git status  #git查看状态
-git add .   #添加文件
+# 删除当前路径下的 Git 仓库
+rm -rf .git
+# 查看本地分支
+git branch
+# 查看所有分支（包括远程分支）
+git branch -a
+# 查看 Git 状态
+git status
+# 添加文件到暂存区
+git add .
+# 查看当前路径
+pwd
+# 进入上一级目录
+cd ..
+# 提交代码并添加日志
+git commit -m "第一次提交"
+# 提交代码并添加注释
+git commit -m "注释内容"
+# 查看提交记录（简洁模式）
+git log --oneline
 
-pwd     #查看路径
-cd ..    #上层路径
-git commit -m "第一次提交"  #提交代码
-
-git commit -m "注释内容"     #提交
-
-git log --oneline # 查看提交记录
-
-#把远程dev分支拷贝到本地
+# 从远程 dev 分支创建并切换到本地 dev 分支
 git checkout -b dev origin/dev
-#拉取远程dev分支
+# 拉取远程 dev 分支代码
 git pull origin dev
 ```
 
-### 图形化管理工具
-
-1. github for desktop  --官方
-2. source tree
-    [https://www.jianshu.com/p/6d2717c2a3e1](https://www.jianshu.com/p/6d2717c2a3e1)
-3. tortoiseGit
-4. Git GUI Here（右键）
-
-### 报错
-
-##### 403： 无权限
-
-##### fatal: remote origin already exists
-
-先移除再添加
-
-```
-git remote rm origin
-git remote add origin https://gitee.com/sjan233/miniProgram_shop.git
-```
-
-##### ![rejected]  master->master(fetch first)
+### ![rejected]  master->master(fetch first)
 
 ##### error:failed to push some refs to '[https://github.com/xxx/xxx.git](https://github.com/xxx/xxx.git)'
 
@@ -138,27 +153,24 @@ git remote add origin https://gitee.com/sjan233/miniProgram_shop.git
 将线上、线下代码进行合并
 
 ```
+# 合并线上和线下代码
 git pull --rebase origin master
-```
-
-然后再进行 push
-
-```
+# 再次推送
 git push origin master
 ```
 
 #### cmd 报错：不是命令
 
-系统变量 path 设置为 C:\Program Files\Git\cmd，网上那个 git-core bin 的替换掉
+解决方案：将系统变量 path 设置为 C:\Program Files\Git\cmd，替换原有的 git-core bin 路径。
 
 工具更新
 
 ```
-打开Git Bash工具，查看Git版本：
+# 打开 Git Bash 工具，查看 Git 版本
 git --version
-更新Git工具版本：
+# 更新 Git 工具版本
 git update
-或
+# 或者使用以下命令更新
 git update-git-for-windows
 ```
 
@@ -181,16 +193,15 @@ git branch --set-upstream-to=origin/master master
 **也就是我们的 pull 命令改为下面这样的：**
 
 ```python
+# 指定本地 master 分支和远程 origin/master 的连接
+git branch --set-upstream-to=origin/master master
+# 强行合并两个不相干的分支
 git pull origin master --allow-unrelated-histories
-```
-
-如果设置了默认分支，可以这样写：
-
-```python
+# 若设置了默认分支，可简化命令
 git pull --allow-unrelated-histories
+# 推送至远程仓库
+git push
 ```
-
-然后 git push 就可以了。
 
 ### 编辑器出不去(vim编辑)
 
