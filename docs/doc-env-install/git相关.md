@@ -1,14 +1,4 @@
-# Git
-
-## git访问问题 host
-
-git连接慢，clone慢
-
-<https://blog.csdn.net/weixin_42728767/article/details/122568179>
-
-<https://juejin.cn/post/7090190514028937230?share_token=e2e2a9ad-4232-4d79-978a-871d440cda4e>
-
-### ip怎么看
+## git设置host
 
 <https://ping.chinaz.com/github.com> 这个网站可以看哪个ip延迟低，从而选择好的ip
 
@@ -17,8 +7,6 @@ git连接慢，clone慢
 ### hosts文件路径
 
 C:\Windows\System32\drivers\etc\hosts
-
-### hosts文件新增以下代码
 
 ```plain
 140.82.112.4  github.com
@@ -36,23 +24,13 @@ C:\Windows\System32\drivers\etc\hosts
 
 ### ![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305011859917.png)
 
-###
 
-## git地址变更
 
-个人空间地址变更后，执行以下命令更新你本地 git 仓库的 remote 地址，如:
+## git地址变更 （remote修改）
 
-git remote set-url origin <https://gitee.com/xxxsjan/vue-eleui.git>
+git remote set-url origin <github地址>
 
-## Gitlab分支策略建议指南
 
-[Gitlab分支策略建议指南](https://baijiahao.baidu.com/s?id=1737642596617193381&wfr=spider&for=pc)
-
-![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305011859463.jpeg)
-
-## ci/cd
-
-<https://juejin.cn/post/7012203717818580999>
 
 ## fork仓库的更新
 
@@ -74,65 +52,11 @@ git remote set-url origin <https://gitee.com/xxxsjan/vue-eleui.git>
 
 填写信息，这个是自己fork的仓库的commit
 
-## 通过命令
 
-<https://blog.csdn.net/u013673437/article/details/127198924>
 
-### 设置源地址
 
-git remote add upstream <原仓库github地址>
 
-git remote -v  查看具体remote
 
-### 拉取源仓库代码
-
-执行
-
-git fetch upstream
-
-代码信息会放在本地分支upstream/master  或者 upstream/main
-
-看执行后的提示信息即可知道
-
-### 切换到本地master分支
-
-合并upstream/master 或者 upstream/main 分支。
-
-git merge upstream/master
-
-git log
-
-### 更新自己仓库
-
-这时远程自己fork的仓库并没更新，需要
-
-git push origin master
-
-分支拉代码
-
-```javascript
-切换
-git checkout remotes/upstream/main
-拉取
-git pull  https://github.com/wangrongding/wechat-bot.git main
-git pull <remote> <branch>
-```
-
-## git 大小写不敏感 如何解决
-
-默认是true 忽略大小写
-
-改成false即可
-
-git config core.ignorecase false
-
-## 暂存代码切换分支
-
-git stash       暂存代码
-
-git checkout master  -- 切换分支
-
-git stash pop 把暂存的代码恢复
 
 ## 提交到暂存，提交错了分支
 
@@ -140,31 +64,7 @@ git stash pop 把暂存的代码恢复
 
 如果是是vscode，他支持撤销
 
-## 如果你拿到了a b需求，再发版，再合并主分支
 
-你需要git checkout -b  A 创建一个名为A的分支
-
-然后你去开发，开发完了，就 git add . 提交更改到暂存区
-
-这里没问题
-
-然后你需要提交远程，远程是没有A分支的，所以你需要
-
-git push --set-upstream origin A
-
-然后又来一个B需求，你又开了一个B分支，并且相同操作提交到了远程
-
-这时需要一个**发版**操作
-
-新建分支：git checkout -b release
-
-合并A分支：git merge origin/A
-
-合并B分支：git merge origin/B
-
-提交分支：git push -set-upstream origin release
-
-然后去到GitHub上创建pr，合并到main主分支
 
 ## git reset 和 git revert区别
 
@@ -176,20 +76,7 @@ git revert 撤销提交，会留记录
 
 git revert HEAD 会记录你的撤销操作在log里
 
-## 彻底清除git所有历史提交记录
 
-### <https://blog.csdn.net/jhsword/article/details/107543884>
-
-在线rename分支后，，你可以这样更新本地代码
-
-![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305011900108.png)
-
-```javascript
-git branch -m latest_branch main   // rename
-git fetch origin  
-git branch -u origin/main main  // branch 'main' set up to track 'origin/main'.
-git remote set-head origin -a // origin/HEAD set to main
-```
 
 ## git 撤销
 
@@ -260,17 +147,19 @@ revert 可适用于个人分支和公有分支，因为有迹可循
 
 reset   只推荐使用于个人分支
 
-## git HEAD / HEAD^ / HEAD~ 的含义
+ 
 
-<https://segmentfault.com/a/1190000022506884>
 
-## 文件大小写问题
+
+## git文件大小写问题
 
 git默认不识别大小写
 
 执行 命令
 
 git config core.ignorecase false
+
+
 
 ## ssh
 

@@ -1,26 +1,6 @@
-
-
 # vscode
 
-## 控制相关文件嵌套展示
-
-setting.json
-
-```javascript
-{
-	// 控制相关文件嵌套展示
-  "explorer.fileNesting.enabled": true,
-  "explorer.fileNesting.expand": false,
-  "explorer.fileNesting.patterns": {
-    "*.ts": "$(capture).test.ts, $(capture).test.tsx",
-    "*.tsx": "$(capture).test.ts, $(capture).test.tsx",
-    "*.env": "$(capture).env.*",
-    "CHANGELOG.md": "CHANGELOG*",
-    "package.json": "pnpm-lock.yaml,pnpm-workspace.yaml,LICENSE,.gitattributes,.gitignore,.gitpod.yml,CNAME,README*,.npmrc,.browserslistrc",
-    ".eslintrc.js": ".eslintignore,.prettierignore,.stylelintignore,.commitlintrc.js,.prettierrc.js,.stylelintrc.js"
-  },
-}
-```
+[vscode官网](https://code.visualstudio.com/)
 
 ## **vscode 插件**
 
@@ -50,9 +30,11 @@ Vue 2 Snippets	--vue 代码工具
 
 node sn  --代码工具
 
+
+
+
+
 ## 导出vscode插件数据
-
-
 
 ```
 code --list-extensions > extensions.txt
@@ -105,7 +87,6 @@ WallabyJs.console-ninja
 whtouche.vscode-js-console-utils
 wix.vscode-import-cost
 yutent.scss-to-css
-
 ```
 
 ### 还原
@@ -165,44 +146,12 @@ cat extensions.txt | xargs -n 1 code --install-extension
 
 
 
-### 代码补全
-
-#### html标签
-
-```
-"emmet.includeLanguages": {
-    "vue-html": "html",
-    "vue": "html"
-  },
-  "emmet.syntaxProfiles": {
-    "vue-html": "html",
-    "vue": "html"
-  }
-```
-
-
-
-## 终端自动提示和补全
-
-https://juejin.cn/post/7187442172671557689
-
-https://dev.to/animo/fish-like-autosuggestion-in-powershell-21ec
-
-https://juejin.cn/post/7224109605071945787
-
-
-
-
-
-## ai工具
+## ai插件
 
 ```
 Codeium
-
 TONGYI
-
-CodeGeeX: AI Code AutoComplete, Chat, Auto Comment
-
+CodeGeeX:
 ```
 
 
@@ -218,8 +167,6 @@ CodeGeeX: AI Code AutoComplete, Chat, Auto Comment
 }
 
 ```
-
-
 
 
 
@@ -254,7 +201,5 @@ CodeGeeX: AI Code AutoComplete, Chat, Auto Comment
     "tsconfig.json": "tsconfig.*.json"
   }
 }
-
-
 ```
 

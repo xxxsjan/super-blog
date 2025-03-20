@@ -5,3 +5,7 @@
 netsh winsock reset
 
 出处 ： https://pcedu.pconline.com.cn/1553/15536248.html
+
+
+
+或者修复host文件

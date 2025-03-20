@@ -210,19 +210,7 @@ git push
 3. 按键盘上的`“Esc”`键退出插入模式
 4. 最后在最下面输入`“ :wq ”`后按回车键即可
 
-#### 远程有打包 本地新增.gitignore 文件 更新远程
-
-重置所有缓存(注意后面有个.)
-
-git rm -r --cached .
-
-重新添加(注意后面有个.)
-
-git add .
-
-提交
-
-git commit -m ".gitignore is now working"
+ 
 
 ### 误操作
 
@@ -259,22 +247,7 @@ git rebase 分支名   ---以当前分支为基础，把别的分支的commit加
 
 - 不要在代码仓库中使用强制回滚的命令~
 
-### OpenSSL SSL_connect: Connection was reset in connection to github.com:443
 
-[https://www.codenong.com/27807319/](https://www.codenong.com/27807319/)
-
-```javascript
-运行以下命令来获取openssl正在使用的"正确"目录(在Linux / Git Bash下)
-openssl version -d | awk '{ print $2 }'
-git config --global http.sslCAInfo $(openssl version -d | awk '{ print $2 }')
-
-
-不推荐，但简单的解决方案：Disable certificate check
-git config --system http.sslverify false
-
-git config --global http.sslcainfo C:/Program Files/Git/mingw64/ssl/certs/ca-bundle.crt
-git config --global http.sslCAInfo C:/Program Files/Git/mingw64/ssl/certs/ca-bundle.crt
-```
 
 ## git 忽略大小写
 
