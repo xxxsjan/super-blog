@@ -1,7 +1,5 @@
 # Vercel KV
 
-
-
 [Vercel KV首页](https://vercel.com/storage/kv)
 
 [Vercel KV文档](https://vercel.com/docs/storage/vercel-kv/quickstart)
@@ -36,8 +34,6 @@
 
 点击cli，这里可以输入redis命令
 
-
-
 ![image-20230622024324249](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202306220243604.png)
 
 尝试创建一个数据
@@ -49,15 +45,11 @@ hset user:me email email@me.com id 123
 hgetall user:me
 ```
 
-
-
 ![image-20230622024429075](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202306220244998.png)
 
+### 创建一个next应用
 
-
-### 创建一个next应用 
-
-https://www.nextjs.cn/docs/getting-started
+<https://www.nextjs.cn/docs/getting-started>
 
 ```bash
 npx create-next-app@latest --typescript
@@ -67,15 +59,11 @@ npx create-next-app@latest --typescript
 
 全局安装vercel pnpm i -g vercel@latest
 
-
-
 执行vercel link
 
 选择connect with github
 
 ![image-20230622025220269](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202306220252503.png)
-
-
 
 ### KV连接项目
 
@@ -83,19 +71,11 @@ npx create-next-app@latest --typescript
 
 ![image-20230622021948489](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202306220219350.png)
 
-
-
 选择你刚刚link的项目名
-
-
 
 ![image-20230622022016303](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202306220220659.png)
 
-
-
 ![image-20230622032852261](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202306220328122.png)
-
-
 
 这样执行命令  vercel env pull .env.development.local   后
 
@@ -104,8 +84,6 @@ npx create-next-app@latest --typescript
 文件内容就会包含value值
 
 如果没connect执行命令，文件里面value都是空的
-
-
 
 ### 当接口使用
 
@@ -124,11 +102,7 @@ export default async function handler(
 }
 ```
 
-
-
 访问你的开发地址拼上/api/user即可看到效果
-
-
 
 ![image-20230622032416709](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202306220324028.png)
 
@@ -156,7 +130,7 @@ kv.incr() // increment a key value
 
 ### set
 
-https://vercel.com/docs/storage/vercel-kv/kv-reference#set
+<https://vercel.com/docs/storage/vercel-kv/kv-reference#set>
 
 ```javascript
 import { kv } from '@vercel/kv';
@@ -198,8 +172,6 @@ const users = createClient({
 const user = await users.hgetall('user:me');
 ```
 
-
-
 ## 补充
 
 ### 绑定github
@@ -209,8 +181,6 @@ vercel项目连接GitHub项目地址
 由于之前vercel link之后，vercel项目里会出现个新的项目
 
 但这个项目并没有github绑定
-
-
 
 点击connect git respository
 
@@ -244,4 +214,3 @@ export default async function handler(
   }
 }
 ```
-
