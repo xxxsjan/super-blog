@@ -30,35 +30,22 @@ var obj = {
 }
 ```
 
-### 原型链基础
+### in 可以判断原型上的key，hasOwnProperty()才能判断只在实例上的key
 
-#### 原型链查找规则
+### prototype上默认有一个constructor属性，他指向构造函数
 
-- `in` 操作符可以判断属性是否存在于对象或其原型链上
-- `hasOwnProperty()` 方法只判断属性是否存在于对象实例本身
+即people.prototype.constructor === Person
+如果通过对象字面量的形式重写了prototype
+constructor就不再指向构造函数了，而是指向Object
+即people.prototype.constructor === Object
+你也可以通过对象字面量，手动的把constructor指向Person，
+但这是constrctor就是可枚举的了，和原本规范的不可枚举背道而驰
+所以可以通过Object.defineProperty的方式定义constructor，
+且把enumerable设置为false
 
-#### 原型对象的constructor属性
+### 构造函数使用寄生模式，就不能使用instanceof来确定对象类型了
 
-- prototype上默认有一个constructor属性，指向构造函数
-- 示例：`people.prototype.constructor === Person`
-- 通过对象字面量重写prototype会导致constructor指向Object
-- 最佳实践：使用Object.defineProperty定义constructor，确保其不可枚举
-
-```javascript
-Object.defineProperty(People.prototype, 'constructor', {
-  enumerable: false,
-  value: People
-});
 ```
-
-### 原型继承模式
-
-#### 寄生构造函数模式的限制
-
-- 使用寄生模式时，instanceof操作符无法正确判断对象类型
-- 这是因为返回的对象与构造函数的原型链断开了连接
-
-```javascript
 function Fn(name) {
   this.name = name;
 }
@@ -74,44 +61,6 @@ console.log(fn instanceof Fn); // true
 console.log(fn2 instanceof Fn2); // false
 ```
 
-### ES6 Class中的原型链
-
-#### 基本概念
-
-- Class本质上是构造函数的语法糖
-- 类的所有方法都定义在prototype属性上
-- 实例的__proto__指向类的prototype
-
-#### 继承实现
-
-- 使用extends关键字实现继承
-- super关键字用于调用父类构造函数和方法
-
-```javascript
-class Animal {
-  constructor(name) {
-    this.name = name;
-  }
-}
-
-class Dog extends Animal {
-  constructor(name, breed) {
-    super(name);
-    this.breed = breed;
-  }
-}
-```
-
-### 原型链最佳实践
-
-1. 优先使用ES6 Class语法
-2. 避免直接修改原型对象
-3. 使用Object.create()创建对象关联
-4. 合理使用instanceof和Object.prototype.isPrototypeOf()
-5. 注意处理constructor属性
-
-```
-
 ## 初始化未声明的变量，会在全局声明该变量
 
 ### MutationObserver  监听
@@ -123,14 +72,12 @@ attributeFilter: ['foo']   只监听 foo 属性的变化
 attributeOldValue:true 回参会保存旧值
 
 ```
-
 let observer = new MutationObserver(
  (mutationRecords) => console.log(mutationRecords.map((x) => x.oldValue)));
 observer.observe(document.body, { attributeOldValue: true });
 document.body.setAttribute('foo', 'bar');
 document.body.setAttribute('foo', 'baz');
 document.body.setAttribute('foo', 'qux');
-
 ```
 
 拦截水印修改
@@ -138,7 +85,6 @@ document.body.setAttribute('foo', 'qux');
 [https://juejin.cn/post/6900713052270755847](https://juejin.cn/post/6900713052270755847)
 
 ```
-
 .watermark {
     position: fixed;
     top: 0px;
@@ -189,7 +135,6 @@ const targetNode = document.body;
 const observer = new MutationObserver(callback);
 // 以上述配置开始观察目标节点
 observer.observe(targetNode, config);
-
 ```
 
 ### html5的classList
@@ -204,19 +149,17 @@ observer.observe(targetNode, config);
 滚动实现节流效果，结合timeout提升性能
 
 ```
-
-let enabled = true;
-function handleScroll() {
- console.log('Invoked at', Date.now());
-}
-window.addEventListener('scroll', () => {
- if (enabled) {
- enabled = false;
- window.requestAnimationFrame(handleScroll);
- window.setTimeout(() => enabled = true, 50);
- }
+let enabled = true; 
+function handleScroll() { 
+ console.log('Invoked at', Date.now()); 
+} 
+window.addEventListener('scroll', () => { 
+ if (enabled) { 
+ enabled = false; 
+ window.requestAnimationFrame(handleScroll); 
+ window.setTimeout(() => enabled = true, 50); 
+ } 
 });
-
 ```
 
 ### input的size 和 maxlength
@@ -234,18 +177,16 @@ finally会忽略try 和 catch里的return，finally的优先
 第二个参数：Array，自定义显示哪个，且按顺序
 
 ```
-
-let book = {
- title: "Professional JavaScript",
- authors: [
- "Nicholas C. Zakas",
- "Matt Frisbie"
- ],
- edition: 4,
- year: 2017
-};
+let book = { 
+ title: "Professional JavaScript", 
+ authors: [ 
+ "Nicholas C. Zakas", 
+ "Matt Frisbie" 
+ ], 
+ edition: 4, 
+ year: 2017 
+}; 
 let jsonText = JSON.stringify(book, ["title", "edition"]); // '{"title":"Professional JavaScript","edition":4}'
-
 ```
 
 第三个参数
@@ -253,28 +194,26 @@ JSON.stringify()方法的第三个参数控制缩进和空格。在这个参数�
 空格数。例如，每级缩进 4 个空格，可以这样：
 
 ```
-
-let book = {
- title: "Professional JavaScript",
- authors: [
- "Nicholas C. Zakas",
- "Matt Frisbie"
- ],
- edition: 4,
- year: 2017
-};
-let jsonText = JSON.stringify(book, null, 4);
+let book = { 
+ title: "Professional JavaScript", 
+ authors: [ 
+ "Nicholas C. Zakas", 
+ "Matt Frisbie" 
+ ], 
+ edition: 4, 
+ year: 2017 
+}; 
+let jsonText = JSON.stringify(book, null, 4); 
 这样得到的 jsonText 格式如下：
-{
- "title": "Professional JavaScript",
- "authors": [
- "Nicholas C. Zakas",
- "Matt Frisbie"
- ],
- "edition": 4,
- "year": 2017
+{ 
+ "title": "Professional JavaScript", 
+ "authors": [ 
+ "Nicholas C. Zakas", 
+ "Matt Frisbie" 
+ ], 
+ "edition": 4, 
+ "year": 2017 
 }
-
 ```
 
 ### 页面销毁前的请求怎么实现  Beacon API
@@ -303,45 +242,42 @@ token
 值最好encodeURIComponent转化一下
 
 ```
-
-class CookieUtil {
- static get(name) {
- let cookieName = `${encodeURIComponent(name)}=`,
- cookieStart = document.cookie.indexOf(cookieName),
- cookieValue = null;
- if (cookieStart > -1){
- let cookieEnd = document.cookie.indexOf(";", cookieStart);
- if (cookieEnd == -1){
- cookieEnd = document.cookie.length;
- }
- cookieValue = decodeURIComponent(document.cookie.substring(cookieStart
-
-- cookieName.length, cookieEnd));
- }
- return cookieValue;
- }
- static set(name, value, expires, path, domain, secure) {
- let cookieText =
- `${encodeURIComponent(name)}=${encodeURIComponent(value)}`
- if (expires instanceof Date) {
- cookieText += `; expires=${expires.toGMTString()}`;
- }
- if (path) {
- cookieText += `; path=${path}`;
- }
- if (domain) {
- cookieText += `; domain=${domain}`;
- }
- if (secure) {
- cookieText += "; secure";
- }
- document.cookie = cookieText;
- }
- static unset(name, path, domain, secure) {
- CookieUtil.set(name, "", new Date(0), path, domain, secure);
- }
+class CookieUtil { 
+ static get(name) { 
+ let cookieName = `${encodeURIComponent(name)}=`, 
+ cookieStart = document.cookie.indexOf(cookieName), 
+ cookieValue = null; 
+ if (cookieStart > -1){ 
+ let cookieEnd = document.cookie.indexOf(";", cookieStart); 
+ if (cookieEnd == -1){ 
+ cookieEnd = document.cookie.length; 
+ } 
+ cookieValue = decodeURIComponent(document.cookie.substring(cookieStart 
+ + cookieName.length, cookieEnd)); 
+ } 
+ return cookieValue; 
+ } 
+ static set(name, value, expires, path, domain, secure) { 
+ let cookieText = 
+ `${encodeURIComponent(name)}=${encodeURIComponent(value)}` 
+ if (expires instanceof Date) { 
+ cookieText += `; expires=${expires.toGMTString()}`; 
+ } 
+ if (path) { 
+ cookieText += `; path=${path}`; 
+ } 
+ if (domain) { 
+ cookieText += `; domain=${domain}`; 
+ } 
+ if (secure) { 
+ cookieText += "; secure"; 
+ } 
+ document.cookie = cookieText; 
+ } 
+ static unset(name, path, domain, secure) { 
+ CookieUtil.set(name, "", new Date(0), path, domain, secure); 
+ } 
 };
-
 ```
 
 http-only设置true，js'无法document.cookie读取，只能服务器读取
@@ -352,7 +288,6 @@ http-only设置true，js'无法document.cookie读取，只能服务器读取
 - 外部终止使用worker.terminate() 这个就是立马终止
 
 ```
-
 // worker.js -------------------------------------------
 self.onmessage = async (e) => {
   // e.data里是传进来的数据
@@ -374,33 +309,30 @@ worker.onmessage = (e) => {
 worker.onerror = function (e) {
   console.log("error at " + e.filename + ":" + e.lineno + e.message);
 };
-
 ```
 
 importScripts的使用
 
 ```
-
 // main.js
-const worker = new Worker('./worker.js');
-// importing scripts
-// scriptA executes
-// scriptB executes
-// scripts imported
+const worker = new Worker('./worker.js'); 
+// importing scripts 
+// scriptA executes 
+// scriptB executes 
+// scripts imported 
 
 // ./scriptA.js
 console.log('scriptA executes');
 
 // ./scriptB.js
-console.log('scriptB executes');
+console.log('scriptB executes'); 
 
 // ./worker.js
-console.log('importing scripts');
-importScripts('./scriptA.js');
-importScripts('./scriptB.js');
+console.log('importing scripts'); 
+importScripts('./scriptA.js'); 
+importScripts('./scriptB.js'); 
 // importScripts('./scriptA.js', './scriptB.js');
 console.log('scripts imported');
-
 ```
 
 ### 命名规范
