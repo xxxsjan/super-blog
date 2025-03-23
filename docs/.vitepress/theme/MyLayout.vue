@@ -2,8 +2,7 @@
   <Layout>
     <!-- src/client/theme-default/Layout.vue -->
     <template #nav-bar-title-after>
-      <img v-if="!DEV" class="visitor" :src="badgeSrc"
-        onerror="this.style.display='none'" />
+      <img v-if="!DEV" class="visitor" :src="badgeSrc" onerror="this.style.display='none'" />
     </template>
     <template #layout-bottom>
       <!-- 网易云外链播放器 -->
@@ -41,10 +40,10 @@ const svgSrc = ref(svgSrcMap["black"]);
 
 const show = ref(true);
 
-// const songId = "30854100";// ピタカゲ(CROOKED)
 // const songId = "1923325275";// 只因你太美（狂放版）
 // const songId = "167876"; // 有何不可
-const songId = "2099887740"; // 离别开出花（DJHZ版）
+const songId = "28285736"; // 周柏豪 传闻
+
 
 const src = `https://music.163.com/outchain/player?type=2&id=${songId}&auto=1&height=66`;
 console.log("src: ", src);
