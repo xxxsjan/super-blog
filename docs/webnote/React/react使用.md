@@ -1,38 +1,66 @@
-# react使用
+# React 使用指南
 
+## 样式处理
 
+### SASS/SCSS 支持
 
-#### sass函数生成vw单位
+在React项目中使用SASS/SCSS需要安装相关依赖：
 
-vite 只需要安装sass
+- Vite项目：只需安装`sass`
+- Webpack项目：需要安装`sass`和`sass-loader`
 
-webpack需要安装 sass sass-loader
+#### 响应式布局工具函数
 
-```css
+使用SASS函数可以方便地将px转换为vw单位，实现响应式布局：
+
+```scss
 @function vw($px) {
   @return ($px / 375) * 100vw;
 }
 
-.box {
+.responsive-box {
   width: 100vw;
   height: 100vh;
   background-color: #bfa;
-  font-size: vw(10);
+  font-size: vw(10); // 10px在375px设计稿下的vw值
 }
-// 两种引入方式
-// 方式一
-import styles from "./App.scss";
-<div className={styles.box}>
-  <div>233</div>
-</div>
-// 方式二
-import "./App.scss";
-<div className="box">
-  <div>233</div>
-</div>
 ```
 
-### 路由配置
+#### 样式引入方式
+
+在React中有两种主要的样式引入方式：
+
+1. CSS Modules方式（推荐）：
+
+```jsx
+import styles from "./App.scss";
+
+function App() {
+  return (
+    <div className={styles.box}>
+      <div>Content</div>
+    </div>
+  );
+}
+```
+
+2. 全局样式方式：
+
+```jsx
+import "./App.scss";
+
+function App() {
+  return (
+    <div className="box">
+      <div>Content</div>
+    </div>
+  );
+}
+```
+
+## 路由配置
+
+React Router v6提供了声明式的路由配置方式。以下是一个典型的路由配置示例：
 
 ```tsx
 // App.tsx
@@ -47,126 +75,150 @@ function App() {
     </div>
   );
 }
+
 // routes.tsx
 export default function RoutesConfig() {
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/order" element={<Order />}>
-          <Route path="/order/ing" element={<Conduct />}/>
-          <Route path="/order/history" element={<History />}/>
-          <Route path="/order/back" element={<Back />}/>
-        </Route>
-        <Route path="/food" element={<Food />}>
-          <Route path="/food/nearby" element={<Nearby />} />
-          <Route path="/food/often" element={<Often />} />
-        </Route>
-        <Route path="/mine" element={<Mine />} />
-        <Route path="/orderdetail/:id" element={<OrderDetail />}/>
-      </Routes>
-    </>
+    <Routes>
+      {/* 主页路由 */}
+      <Route path="/" element={<Home />} />
+      <Route path="/home" element={<Home />} />
+      
+      {/* 订单相关路由 */}
+      <Route path="/order" element={<Order />}>
+        <Route path="/order/ing" element={<Conduct />} />
+        <Route path="/order/history" element={<History />} />
+        <Route path="/order/back" element={<Back />} />
+      </Route>
+      
+      {/* 美食相关路由 */}
+      <Route path="/food" element={<Food />}>
+        <Route path="/food/nearby" element={<Nearby />} />
+        <Route path="/food/often" element={<Often />} />
+      </Route>
+      
+      {/* 个人中心路由 */}
+      <Route path="/mine" element={<Mine />} />
+      
+      {/* 动态路由示例 */}
+      <Route path="/orderdetail/:id" element={<OrderDetail />} />
+    </Routes>
   );
 }
 ```
 
-## 组建通信
+## 组件通信
 
-<https://www.jb51.net/article/226671.htm>
+React提供了多种组件间通信的方式，以下是常用的几种：
 
+### Context API
 
-
-### context共享状态
-
-MyContext.js
+Context提供了一种在组件树中共享数据的方式，无需显式地通过组件树逐层传递props。
 
 ```javascript
+// MyContext.js - 创建Context
 import React from "react";
-const MyContext = React.createContext({text:'luck'});
-export default MyContext
-```
+const MyContext = React.createContext({ text: 'default value' });
+export default MyContext;
 
-某个根组件
-
-使用MyContext.Provider包一层
-
-```javascript
+// 根组件 - 提供Context
 import MyContext from './context';
-<MyContext.Provider value={{text:'good luck'}}>
-<Children></Children>
-</MyContext.Provider>
-```
 
-后代组件
+function RootComponent() {
+  return (
+    <MyContext.Provider value={{ text: 'shared value' }}>
+      <Children />
+    </MyContext.Provider>
+  );
+}
 
-```javascript
-import React from 'react';
+// 消费组件 - 使用Context
+import React, { useContext } from 'react';
 import MyContext from './context';
-// 获取数据
-this.context.text
+
+function ChildComponent() {
+  const context = useContext(MyContext);
+  return <div>{context.text}</div>;
+}
 ```
 
-## ref
+### Ref转发
 
-使用 `forwardRef` 可以让父组件可以访问子组件的 DOM 节点或 React 组件实例。
+使用`forwardRef`可以让父组件访问子组件的DOM节点或React组件实例：
 
-```
-const MyComponent = React.forwardRef((props, ref) => {
+```jsx
+// 子组件
+const ChildComponent = React.forwardRef((props, ref) => {
   return (
     <div ref={ref}>
-      {/* 子组件 */}
+      {/* 子组件内容 */}
     </div>
   );
 });
-// 父
+
+// 父组件
 function ParentComponent() {
-  const ref = useRef(null);
+  const childRef = useRef(null);
 
   useEffect(() => {
-    console.log(ref.current); // 访问子组件中的 DOM 节点或组件实例
+    // 可以访问子组件的DOM节点
+    console.log(childRef.current);
   }, []);
 
   return (
     <div>
-      <MyComponent ref={ref} />
+      <ChildComponent ref={childRef} />
     </div>
   );
 }
 ```
 
-## useImperativeHandle
+### useImperativeHandle
 
-暴露方法和属性
+`useImperativeHandle`用于自定义暴露给父组件的实例值：
 
-用于暴露组件实例中的某些方法或属性给父组件使用。
+```jsx
+const ChildComponent = React.forwardRef((props, ref) => {
+  const [count, setCount] = useState(0);
+  
+  useImperativeHandle(ref, () => ({
+    // 暴露给父组件的方法
+    increment: () => setCount(c => c + 1),
+    // 暴露给父组件的数据
+    currentCount: count
+  }));
 
+  return <div>{count}</div>;
+});
 ```
-useImperativeHandle(ref, () => ({
-    fn: xxx,
-    data: xxx,
-}));
-```
 
+## Portal
 
+`ReactDOM.createPortal`允许将子节点渲染到存在于父组件以外的DOM节点中，常用于创建模态框等覆盖层组件：
 
-## ReactDOM.createPortal
-
-挂载到body下
-
-```
-import React, { useState } from 'react';
+```jsx
+import React from 'react';
 import ReactDOM from 'react-dom';
 
-function Modal(props) {
+function Modal({ children, isOpen }) {
   const modalRoot = document.getElementById('modal-root');
-  const { children } = props;
-
+  
+  if (!isOpen) return null;
+  
   return ReactDOM.createPortal(
     <div className="modal-background">
-      <div className="modal-content">{children}</div>
+      <div className="modal-content">
+        {children}
+        <button onClick={onClose}>关闭</button>
+      </div>
     </div>,
     modalRoot
   );
 }
+```
+
+使用Portal时，需要在HTML中添加对应的容器节点：
+
+```html
+<div id="modal-root"></div>
 ```

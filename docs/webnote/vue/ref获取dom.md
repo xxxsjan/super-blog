@@ -1,10 +1,12 @@
-# ref获取dom
+# Vue3中的ref获取DOM
 
-## 模板引用  ref是字符串
+## 基础模板引用
 
-### 获取单个
+在Vue3中，我们可以使用ref来获取DOM元素或组件实例。模板引用提供了一种直接访问底层DOM元素的方式。
 
-```
+### 单个元素引用
+
+```vue
 <template>
   <div>
     <button ref="myButton" @click="handleClick">Click me!</button>
@@ -29,15 +31,15 @@ export default {
   }
 }
 </script>
-
-
 ```
 
-### 获取多个
+## v-for中的模板引用
 
-<https://cn.vuejs.org/guide/essentials/template-refs.html#function-refs>
+### 动态ref名称方式
 
-```
+通过动态拼接ref名称，可以获取v-for中的每个元素。
+
+```vue
 <template>
   <div>
     <div v-for="item in list" :key="item.id" :ref="'myRef'+item.id">{{ item.name }}</div>
@@ -71,42 +73,43 @@ export default {
   }
 }
 </script>
-
 ```
 
-### 结合v-for
+### 数组引用方式（推荐）
 
-直接获取了结果，推荐使用
+使用单个ref获取所有元素的数组，这是Vue3中最简洁的方式：
 
-```
-<div v-for="item in list" :key="item.id" ref="listRef">
-        {{ item.id }}
-      </div>
+```vue
+<template>
+  <div v-for="item in list" :key="item.id" ref="listRef">
+    {{ item.id }}
+  </div>
+</template>
 
-
+<script>
 const list = [
   { id: 1, name: "Foo" },
   { id: 2, name: "Bar" },
   { id: 3, name: "Baz" },
 ];
-const listRef = ref(null);// 获取的是一个ref数组，dom的话是dom，组件的话是实例
-
-
+const listRef = ref(null); // 获取的是一个ref数组，DOM元素或组件实例的数组
+</script>
 ```
 
-## 函数模板引用  ref是函数
+## 函数式ref
 
-### 获取单个多个都一样
+函数式ref允许我们在元素被挂载时执行自定义逻辑。
 
-他会多次触发，适合针对执行对应业务，收集的话注意去重
+> 详细文档请参考：[Vue3官方文档-函数模板引用](https://cn.vuejs.org/guide/essentials/template-refs.html#function-refs)
 
-```
+```vue
 <template>
   <div>
     <button @click="handleClick">Click me!</button>
     <my-component v-for="item in list" :key="item.id" :ref="createRef(item.id)"></my-component>
   </div>
 </template>
+
 <script>
 import { ref } from 'vue';
 import MyComponent from './MyComponent.vue';
@@ -140,5 +143,6 @@ export default {
   }
 }
 </script>
-
 ```
+
+注意：函数式ref会在每次组件更新时触发，适合需要即时响应元素变化的场景。如果需要收集引用，请注意去重处理。

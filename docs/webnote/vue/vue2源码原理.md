@@ -1,40 +1,62 @@
-### Watcher
+# Vue2 源码原理 - Watcher 机制详解
 
+## Watcher 概述
+
+Watcher 是 Vue 响应式系统的重要组成部分，负责监听数据变化并触发相应的更新操作。Vue 中存在三种主要类型的 Watcher：
+
+- 渲染 Watcher：负责组件的视图更新
+- 计算属性 Watcher：处理计算属性的依赖收集和计算
+- 用户 Watcher：处理用户通过 watch 选项定义的监听器
+
+## Watcher 基础实现
+
+```javascript
 new Watcher(vm, expOrFn, cb, options)
-第四个参数可以配置他是什么类型的watcher
-第五个参数为isRenderWatcher ：是否是渲染watcher
-第四个参数有四种
+```
+
+Watcher 构造函数接收四个主要参数：
+
+- vm: Vue 实例
+- expOrFn: 要监听的表达式或函数
+- cb: 回调函数
+- options: 配置选项
+
+### Watcher 配置选项
 
 ```javascript
 if (options) {
-  this.deep = !!options.deep // 深度
-  this.user = !!options.user // 用户自定义watcher 即 watch
-  this.computed = !!options.computed // computed watcher
-  this.sync = !!options.sync // 同步执行
-
+  this.deep = !!options.deep    // 深度监听
+  this.user = !!options.user    // 用户自定义 watcher (watch)
+  this.computed = !!options.computed  // 计算属性 watcher
+  this.sync = !!options.sync    // 同步执行
 } else {
   this.deep = this.user = this.computed = this.sync = false
 }
-// 各种模式的update分支走向
+```
+
+### 更新机制
+
+```javascript
 update () {
   if (this.computed) {
-    // ...
+    // 计算属性的处理逻辑
   } else if (this.sync) {
-    this.run()
+    this.run()  // 同步执行
   } else {
-    queueWatcher(this)
+    queueWatcher(this)  // 异步队列
   }
 }
 ```
 
-### mount的watcher（渲染 Watcher）
+## 渲染 Watcher
 
-mount挂载会new Watcher（组件更新）
+渲染 Watcher 在组件挂载时创建，负责触发组件的重新渲染：
 
 ```javascript
 updateComponent = () => {
   vm._update(vm._render(), hydrating)
 }
+
 new Watcher(vm, updateComponent, noop, {
   before () {
     if (vm._isMounted) {
@@ -44,8 +66,9 @@ new Watcher(vm, updateComponent, noop, {
 }, true /* isRenderWatcher */)
 ```
 
-new Watcher （渲染watcher）触发pushTarget
-pushTarget会把当前wathcer实例进行压栈添加到维护数组中，并把全局Dep.target设置成当前watcher实例
+### 依赖收集过程
+
+渲染 Watcher 创建时会触发 pushTarget：
 
 ```javascript
 export function pushTarget (_target: ?Watcher) {
@@ -58,10 +81,10 @@ export function popTarget () {
 }
 ```
 
-这样后面对于响应式的getter即可进行依赖的收集，即dep.depend()
+响应式数据的 getter 会进行依赖收集：
 
 ```javascript
-class Dep{
+class Dep {
   depend () {
     if (Dep.target) {
       Dep.target.addDep(this)
@@ -70,17 +93,13 @@ class Dep{
 }
 ```
 
-### 派发更新
+## 派发更新
 
-setter触发派发
- dep.notify()
-实际遍历调用wathcer的update
-不会马上执行回调，会有一个优化，在 nextTick 后执行所有 watcher 的 run
+当数据发生变化时，setter 会触发派发更新过程：
 
 ```javascript
 class Dep {
   notify () {
-    // stabilize the subscriber list first
     const subs = this.subs.slice()
     for (let i = 0, l = subs.length; i < l; i++) {
       subs[i].update()
@@ -89,17 +108,21 @@ class Dep {
 }
 
 class Watcher {
-  update(){
+  update() {
     if (this.computed) {
-      // 。。。
-    }else if(this.sync){ // 同步则直接执行
-      this.run()
-    }else{
-      queueWatcher(this)
+      // 计算属性的更新逻辑
+    } else if (this.sync) { 
+      this.run()  // 同步执行
+    } else {
+      queueWatcher(this)  // 异步队列
     }
   }
 }
-// src/core/observer/scheduler.js --> queueWatcher
+```
+
+### 异步更新队列
+
+```javascript
 const queue: Array<Watcher> = []
 let has: { [key: number]: ?true } = {}
 let waiting = false
@@ -112,51 +135,48 @@ export function queueWatcher (watcher: Watcher) {
     if (!flushing) {
       queue.push(watcher)
     } else {
-      // if already flushing, splice the watcher based on its id
-      // if already past its id, it will be run next immediately.
       let i = queue.length - 1
       while (i > index && queue[i].id > watcher.id) {
         i--
       }
       queue.splice(i + 1, 0, watcher)
     }
-    // queue the flush
     if (!waiting) {
       waiting = true
-      nextTick(flushSchedulerQueue) // 放到nextTick执行回调
+      nextTick(flushSchedulerQueue)
     }
   }
 }
 ```
 
-### computed 的 Watcher（computed  Watcher）
+## 计算属性 Watcher
 
-initComputed
+计算属性的初始化过程：
 
 ```javascript
-// 创建watcher数组  
+// 创建 watcher 实例
 const watchers = vm._computedWatchers = Object.create(null)
-// 遍历computed的key
+
+// 遍历计算属性
 for (const key in computed) {
-  // 每个key实例化一个watcher
   watchers[key] = new Watcher(
     vm,
     getter || noop,
     noop,
     computedWatcherOptions
   )
-  // 没有进行响应式的话，进行响应式设置，走defineComputed
+  
+  // 设置响应式
   if (!(key in vm)) {
     defineComputed(vm, key, userDef)
-  }  
+  }
 }
-
 ```
 
-对应wathcer中对应computed的特殊处理
+计算属性 Watcher 的特殊处理：
 
 ```javascript
-class Watcher{
+class Watcher {
   constructor (
     vm: Component,
     expOrFn: string | Function,
@@ -164,20 +184,17 @@ class Watcher{
     options?: ?Object,
     isRenderWatcher?: boolean
   ) {
-    // ...
     if (this.computed) {
       this.value = undefined
       this.dep = new Dep()
     } else {
       this.value = this.get()
     }
-  }  
+  }
 }
 ```
 
-### watch 的 Watcher （user Watcher）
-
-### isDef
+## 工具函数
 
 ```javascript
 const isDef = v => v !== undefined

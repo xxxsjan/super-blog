@@ -1,8 +1,6 @@
 
 # react
 
-
-
 ## 安装babel插件
 
 ```jsx
@@ -40,8 +38,6 @@ render时state不会更新，setState刷新的关键：
 
 3. 多次setState函数调用产生的效果会合并。
 
-   
-
 ## 生命周期
 
 ***componentWillMount*****()** – 在渲染之前执行，在客户端和服务器端都会执行。
@@ -58,7 +54,7 @@ render时state不会更新，setState刷新的关键：
 
 ***componentWillUnmount*****()** – 从 DOM 卸载组件后调用。用于清理内存空间。
 
-### 
+###
 
 ### 单向绑定 defaultValue
 
@@ -70,8 +66,6 @@ this.state = {}
 ## pureComponent
 
 官方的pureComponent，做了浅比较的优化
-
-
 
 ## 异步组件
 
@@ -127,3 +121,9 @@ const App = () => {
   );
 };
 ```
+
+## fiber
+
+指向
+
+![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/128311b7121f4d4f919d49b326b0271b~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp)

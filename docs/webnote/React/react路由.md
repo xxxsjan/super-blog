@@ -1,343 +1,175 @@
-# react路由
+# React Router 使用指南
 
-## 5 6区别
+## React Router v5 与 v6 的主要区别
 
-React Router 5 和 React Router 6 在 API 和用法上有一些差异。
+### 1. 路由组件命名变化
 
-以下是一些 React Router 6 的新特性和改变：
+- v5: `BrowserRouter`, `HashRouter`
+- v6: `Router`, `MemoryRouter`
 
-1. 路由器组件的名称已更改。在 React Router 6 中，`<BrowserRouter>` 更名为 `<Router>`，而 `<HashRouter>` 更名为 `<MemoryRouter>`。
-2. 新的路由匹配算法。React Router 6 中引入了一个新的路由匹配算法，它不再依赖于 `path-to-regexp` 库，而是使用了一个全新的基于 `trie` 数据结构的算法，使得路由匹配更快且更稳定。
-3. 路由配置方式的变化。在 React Router 5 中，我们可以使用嵌套的 `<Route>` 组件来定义路由，这种方式也被称为“声明式路由”。React Router 6 支持两种配置路由的方法：声明式路由和函数式路由配置。函数式路由配置更加灵活，可以更好地支持动态路由生成和代码分割等高级场景。
-4. 动态路由的改进。在 React Router 6 中，动态路由的语法发生了变化。现在我们可以使用 `${}` 语法来将动态参数嵌入到路由路径中，例如：`/user/:id` 可以写成 `/user/${id}`。
-5. 路由钩子的变化。在 React Router 6 中，路由钩子的命名和用法都发生了变化。例如，`<Route>` 组件的 `componentWillMount` 和 `componentWillUnmount` 钩子被重命名为 `useEffect` 和 `useEffectCleanup`，以更好地适应 React Hooks 的用法。
+### 2. 路由匹配算法
 
-需要注意的是，React Router 6 目前还处于 beta 版本，可能会有一些 API 发生变化。建议在使用之前先仔细阅读官方文档和升级指南。
+- v5: 使用 `path-to-regexp` 库
+- v6: 采用基于 `trie` 数据结构的新算法，提供更快速和稳定的路由匹配
 
-## 路由配置
+### 3. 路由配置方式
 
-Router下需要一个div包裹
+- v5: 主要使用声明式路由（嵌套的 `<Route>` 组件）
+- v6: 支持声明式路由和函数式路由配置，更灵活地支持动态路由和代码分割
 
-| exact    | 精确匹配                         |
-| -------- | :------------------------------- |
-| replace  | 替换当前路由，历史不记录被替换的 |
-| Redirect | 重定向组件                       |
-| redirect | 改路由                           |
-| Switch   | 组件 只匹配一个路由              |
+### 4. 动态路由语法
 
-```react
+- v5: `/user/:id`
+- v6: 支持 `/user/${id}` 模板字符串语法
+
+### 5. 路由钩子
+
+- v5: 使用生命周期钩子
+- v6: 采用 React Hooks 风格的 API
+
+## 基础路由配置
+
+### 路由组件和属性
+
+- `exact`: 精确匹配路由
+- `replace`: 替换当前路由（不保留历史记录）
+- `Redirect`: 重定向组件
+- `Switch`/`Routes`: 只匹配一个路由
+
+```jsx
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-<Router basename="/base">
-  <div>
-  <Link to="/">首页</Link>
-    <div>
-      <Route path='/shop/add' component={ShopAdd}></Route>
-    </div>
-  </div>
-</Router>
+
+function App() {
+  return (
+    <Router basename="/base">
+      <div>
+        <nav>
+          <Link to="/">首页</Link>
+        </nav>
+        <div>
+          <Route path='/shop/add' component={ShopAdd} />
+        </div>
+      </div>
+    </Router>
+  );
+}
+```
+
+## 路由传参
+
+### 1. URL参数
+
+```jsx
+// 路由定义
+<Route path="/user/:id" component={UserDetail} />
+
+// 组件中获取参数
+import { useParams } from 'react-router-dom';
+
+function UserDetail() {
+  const { id } = useParams();
+  return <div>User ID: {id}</div>;
+}
+```
+
+### 2. 查询字符串
+
+```jsx
+import { useLocation } from 'react-router-dom';
+
+function SearchPage() {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const query = searchParams.get('q');
+  return <div>Search Query: {query}</div>;
+}
+```
+
+### 3. 状态传递
+
+```jsx
+import { useLocation, useNavigate } from 'react-router-dom';
+
+// 传递状态
+const navigate = useNavigate();
+navigate('/detail', { state: { id: 123 } });
+
+// 接收状态
+const location = useLocation();
+const { state } = location;
 ```
 
 ## 嵌套路由
 
-遍历时把自己小弟routes(children)传下去
+### React Router v6 使用 Outlet
 
-```react
-return <Route key={key} exact path={route.path} render={props => <route.component {...props} routes={route.routes} />}
- />
-```
-
-
-
-
-
-## 文档
-
-<https://reactrouter.com/en/main/start/tutorial>
-
-## v6路由使用
-
-<https://juejin.cn/post/7075585581706641415>
-
-## Outlet
-
-### React Router v6
-
-`Outlet` 是 React Router v6 中的一个新特性，用于渲染嵌套路由中的子路由。
-
-它类似于 React Router v5 中的 `Switch` 和嵌套的 `Route` 组件，但更加简洁和易于使用。
+`Outlet` 组件用于在父路由中渲染子路由内容：
 
 ```jsx
-import React from 'react';
-import { BrowserRouter, Routes, Route, Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+
+function Layout() {
+  return (
+    <div>
+      <nav>{/* 导航内容 */}</nav>
+      <main>
+        <Outlet /> {/* 子路由内容将在这里渲染 */}
+      </main>
+    </div>
+  );
+}
 
 function App() {
   return (
-    <BrowserRouter>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/contact">Contact</Link>
-            </li>
-          </ul>
-        </nav>
-
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="about" element={<About />} />
+        <Route path="contact" element={<Contact />} />
+      </Route>
+    </Routes>
   );
-}
-
-function Home() {
-  return (
-    <div>
-      <h1>Home</h1>
-      <Outlet />
-    </div>
-  );
-}
-
-function HomeContent() {
-  return <p>Welcome to the home page!</p>;
-}
-
-function HomeSubpage1() {
-  return <p>This is subpage 1 of Home.</p>;
-}
-
-function HomeSubpage2() {
-  return <p>This is subpage 2 of Home.</p>;
-}
-
-function About() {
-  return (
-    <div>
-      <h1>About</h1>
-      <Outlet />
-    </div>
-  );
-}
-
-function AboutContent() {
-  return <p>Welcome to the about page!</p>;
-}
-
-function AboutSubpage1() {
-  return <p>This is subpage 1 of About.</p>;
-}
-
-function AboutSubpage2() {
-  return <p>This is subpage 2 of About.</p>;
-}
-
-function Contact() {
-  return <h1>Contact</h1>;
 }
 ```
 
-### React Router v5
+## RouterProvider 的使用
 
-在 React Router 5 中，可以使用 `Switch` 组件和 `Route` 组件来实现类似 Vue Router 中的 `router-view` 的效果，
-
-并且可以使用嵌套路由来实现类似 Vue Router 中的 `router-view` 嵌套的效果
+### 使用 createBrowserRouter
 
 ```jsx
-import React from 'react';
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
-
-function App() {
-  return (
-    <BrowserRouter>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/contact">Contact</Link>
-            </li>
-          </ul>
-        </nav>
-
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/contact" component={Contact} />
-        </Switch>
-      </div>
-    </BrowserRouter>
-  );
-}
-
-function Home() {
-  return (
-    <div>
-      <h1>Home</h1>
-      <Switch>
-        <Route exact path="/" component={HomeContent} />
-        <Route path="/home/subpage1" component={HomeSubpage1} />
-        <Route path="/home/subpage2" component={HomeSubpage2} />
-      </Switch>
-    </div>
-  );
-}
-
-function HomeContent() {
-  return <p>Welcome to the home page!</p>;
-}
-
-function HomeSubpage1() {
-  return <p>This is subpage 1 of Home.</p>;
-}
-
-function HomeSubpage2() {
-  return <p>This is subpage 2 of Home.</p>;
-}
-
-function About() {
-  return (
-    <div>
-      <h1>About</h1>
-      <Switch>
-        <Route exact path="/about" component={AboutContent} />
-        <Route path="/about/subpage1" component={AboutSubpage1} />
-        <Route path="/about/subpage2" component={AboutSubpage2} />
-      </Switch>
-    </div>
-  );
-}
-
-function AboutContent() {
-  return <p>Welcome to the about page!</p>;
-}
-
-function AboutSubpage1() {
-  return <p>This is subpage 1 of About.</p>;
-}
-
-function AboutSubpage2() {
-  return <p>This is subpage 2 of About.</p>;
-}
-
-function Contact() {
-  return <h1>Contact</h1>;
-}
-```
-
-## RouterProvider
-
-### 第一种
-
-#### index.tsx
-
-```
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import { RouterProvider } from 'react-router5';
+// index.tsx
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import routes from './routes';
 
-function App() {
-  return (
-    <RouterProvider routes={routes}>
-      <BrowserRouter>
-        {/* 应用的其他组件 */}
-      </BrowserRouter>
-    </RouterProvider>
-  );
-}
+const router = createBrowserRouter(routes, { 
+  basename: '/app' 
+});
 
-ReactDOM.render(<App />, document.getElementById('root'));
-
-在上面的示例中，使用 `RouterProvider` 包裹了 `BrowserRouter` 组件，
-并将路由配置对象 `routes` 作为属性传递给 `RouterProvider`。
+ReactDOM.render(
+  <RouterProvider router={router} />,
+  document.getElementById('root')
+);
 ```
 
-### 第二种
-
-#### index.tsx
+### 路由配置文件
 
 ```jsx
-import 'antd-mobile/es/global';
-import dayjs from 'dayjs';
-import zhCN from 'dayjs/locale/zh-cn';
-import ReactDOM from 'react-dom';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import routes from './router';
+// routes.ts
+import { RouteObject } from 'react-router';
 
-dayjs.locale(zhCN);
-
-// export const BASE_NAME = '/webapp';
-export const BASE_NAME = '/';
-
-function render() {
-  const router = createBrowserRouter(routes, { basename: BASE_NAME });
-  ReactDOM.render(<RouterProvider router={router} />, document.getElementById('root'));
-}
-
-render();
-```
-
-#### App.tsx
-
-```jsx
-import { useState } from 'react';
-import { Outlet } from 'react-router';
-import { ScrollRestoration } from 'react-router-dom';
-import { AuthPage } from './components/Auth';
-import { AuthContext, AuthContextDataType } from './hooks/useAuth';
-import './styles/global.less';
-
-const App: React.FC = () => {
-  const [state, setState] = useState<AuthContextDataType>();
-  return (
-    <>
-      <AuthContext.Provider value={{ data: state, setData: setState }}>
-        <AuthPage>
-          <>
-            <Outlet />
-            <ScrollRestoration />
-          </>
-        </AuthPage>
-      </AuthContext.Provider>
-    </>
-  );
-};
-
-export default App;
-```
-
-#### router.ts
-
-```jsx
-import App from '@/App';
-import { Navigate, RouteObject } from 'react-router';
-import workRoutes from './work';
-
-let routes: RouteObject[] = [
+const routes: RouteObject[] = [
   {
     path: '/',
-    element: <App />,
+    element: <Layout />,
     children: [
       {
-        path: '/',
-        element: <Navigate to="/main/home" />
+        index: true,
+        element: <Home />
       },
-      ...workRoutes
+      {
+        path: 'about',
+        element: <About />
+      }
     ]
   }
 ];
@@ -345,32 +177,64 @@ let routes: RouteObject[] = [
 export default routes;
 ```
 
+## 路由守卫
+
+### 实现认证保护
+
+```jsx
+function PrivateRoute({ children }) {
+  const auth = useAuth(); // 自定义认证 hook
+
+  if (!auth.isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+}
+
+// 使用
+<Route
+  path="/dashboard"
+  element={
+    <PrivateRoute>
+      <Dashboard />
+    </PrivateRoute>
+  }
+/>
+```
+
 ## ScrollRestoration
 
-```
-import { useState } from 'react';
-import { Outlet } from 'react-router';
-import { ScrollRestoration } from 'react-router-dom';
-import { AuthPage } from './components/Auth';
-import { AuthContext, AuthContextDataType } from './hooks/useAuth';
-import './styles/global.less';
+用于在路由切换时自动恢复滚动位置：
 
-const App: React.FC = () => {
-  const [state, setState] = useState<AuthContextDataType>();
+```jsx
+import { ScrollRestoration } from 'react-router-dom';
+
+function App() {
   return (
     <>
-      <AuthContext.Provider value={{ data: state, setData: setState }}>
-        <AuthPage>
-          <>
-            <Outlet />
-            <ScrollRestoration />
-          </>
-        </AuthPage>
-      </AuthContext.Provider>
+      <Routes>{/* 路由配置 */}</Routes>
+      <ScrollRestoration /> {/* 自动管理滚动位置 */}
     </>
   );
-};
-
-export default App;
-
+}
 ```
+
+## 最佳实践
+
+1. 使用懒加载优化性能
+
+```jsx
+import { lazy, Suspense } from 'react';
+
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+
+<Suspense fallback={<Loading />}>
+  <Route path="/dashboard" element={<Dashboard />} />
+</Suspense>
+```
+
+2. 集中管理路由配置
+3. 使用 TypeScript 增强类型安全
+4. 实现错误边界处理路由异常
+5. 合理使用路由钩子优化用户体验
