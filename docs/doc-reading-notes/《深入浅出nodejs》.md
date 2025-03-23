@@ -1,12 +1,19 @@
 # 垃圾回收
+
 - 在Node中通过JavaScript使用内存时就会发现只能使用部分内存（64位系统下约为1.4 GB,32位系统下约为0.7 GB）。
 - 垃圾回收的3种基本算法都需要将应用逻辑暂停下来，待执行完垃圾回收后再恢复执行应用逻辑，这种行为被称为“全停顿”（stop-the-world）
 - 通过在Node启动时使用--prof参数，可以得到V8执行时的性能分析数据，其中包含了垃圾回收执行时占用的时间。
+
 # 内存泄漏排查工具
+
 ## heapdump
+
 npm install heapdump
+
 ## memwatch
+
 npm install menwatch
+
 ```javascript
 var memwatch = require('memwatch');
 memwatch.on('leak', function (info) {
@@ -34,7 +41,9 @@ http.createServer(function (req, res) {
 console.log('Server running at http://127.0.0.1:1337/');
 
 ```
+
 ### stats事件
+
 ```javascript
 stats:
         { num_full_gc: 4, // 第几次全堆垃圾回收
@@ -48,8 +57,11 @@ stats:
 在这些数据中，num_full_gc和num_inc_gc比较直观地反应了垃圾回收的情况。
 
 ```
+
 ### leak事件
+
 如果经过连续5次垃圾回收后，内存仍然没有被释放，这意味着有内存泄漏的产生，node-memwatch会出发一个leak事件。某次leak事件得到的数据如下所示：
+
 ```javascript
 leak:
 { 
@@ -59,8 +71,11 @@ leak:
   reason: 'heap growth over 5 consecutive GCs (8m 13s) -43.33 mb/hr' 
 }
 ```
+
  这个数据能显示5次垃圾回收的过程中内存增长了多少。
+
 ### 获取堆内存差异
+
 ```javascript
 var memwatch = require('memwatch');
         var leakArray = [];
@@ -80,9 +95,12 @@ var memwatch = require('memwatch');
     console.log(JSON.stringify(diff, null, 2));
 
 ```
+
 # commonjs原理
+
 类似闭包，模块是常驻老生代内存的
 local假如是对象，需要提供清空队列的接口，以供调用者释放内存
+
 ```javascript
 (function (exports, require, module, __filename, __dirname) {
   var local = "局部变量";
@@ -95,7 +113,9 @@ local假如是对象，需要提供清空队列的接口，以供调用者释放
 ```
 
 # 文件流stream
+
 由于V8的内存限制，我们无法通过fs.readFile()和fs.writeFile()直接进行大文件的操作，而改用fs.createReadStream()和fs.createWriteStream()方法通过流的方式实现对大文件的操作。
+
 ```javascript
 var reader = fs.createReadStream('in.txt');
 var writer = fs.createWriteStream('out.txt');
@@ -114,37 +134,50 @@ reader.pipe(writer);
 ```
 
 可读流提供了管道方法pipe()，封装了data事件和写入操作。通过流的方式，上述代码不会受到V8内存限制的影响，有效地提高了程序的健壮性
+
 ## 可读流乱码
+>
 > 读取遇到宽字节的中文会出现乱码
 
-### highWaterMark方案：
+### highWaterMark方案
+
 将文件可读流的每次读取的Buffer长度限制为11，代码如下：
+
 ```javascript
 var rs = fs.createReadStream('test.md', {highWaterMark: 11});
 ```
+
 解释：中文在utf-8占三个字节，11 = 3+3+3+2，剩余两个假如是中文的其中两个，就会乱码
 11只是实例，值越大出现乱码概率越低，但还是避免不了
-### setEncoding方案：
+
+### setEncoding方案
+
 ```javascript
 var rs = fs.createReadStream('test.md', { highWaterMark: 11});
 rs.setEncoding('utf8');
 原理是 setEncoding 的decoder会识别编码，断开的会缓存，下一组再续上
 ```
+
 虽然string_decoder模块很奇妙，但是它也并非万能药，它目前只能处理UTF-8、Base64和UCS-2/UTF-16LE这3种编码。所以，通过setEncoding()的方式不可否认能解决大部分的乱码问题，但并不能从根本上解决该问题。
-### 拼接buffer方案：
+
+### 拼接buffer方案
+
 具体不描述了
+
 # Buffer类型
+
 编码不支持GBK GB2312 BIG-5
 需要使用第三方库 iconv 或者 iconv-lite
 
-
 # 网络
+
 Node提供了net、dgram、http、https这4个模块，
 分别用于处理TCP、UDP、HTTP、HTTPS，适用于服务器端和客户端。
 
 telnet可以调试tcp
 dgram可以新建服务端，也可以新建客户端，两者相互调试。就send 、onmessage那套
 获取http报文，使用curl
+
 ```javascript
 curl http://127.0.0.1:1337
 回车
@@ -162,27 +195,36 @@ agent:new http.Agent({maxSockets:10})
 agent:false
 
 ## 流式处理解析报文
+
 这里要介绍到的模块是formidable。它基于流式处理解析报文，将接收到的文件写入到系统的临时文件夹中
 
 ## 预防csrf
+
 ```javascript
 <form id="test" method="POST" action="http://domain_a.com/guestbook">
           <input type="hidden" name="content" value="vim是这个世界上最好的编辑器" />
           <input type="hidden" name="_csrf" value="<%=_csrf%>" />
         </form>
 ```
+
 ## 静态文件代理优化
+>
 > 传路径可以减少io判断
 
 对于这种情况，我们需要做的是提升匹配成功率，那么就不能使用默认的/路径来进行匹配了，因为它的误伤率太高。给它添加一个更好的路由路径是个不错的选择，如下所示：
+
 ```javascript
 app.use('/public', staticFile);
 ```
+
 # 页面性能
+
 使用高效的方法。必要时通过jsperf.com测试基准性能。
 
 # MIME判断
+
 mime库可以判断
+
 ```javascript
 var mime = require('mime');
 
@@ -194,10 +236,13 @@ var mime = require('mime');
 ```
 
 # 附件下载
+
 content-disposition  
 inline是即时查看内容
 attachment是附件  content-disposition :attachment ;filename="filename.txt"
+
 ## 实现附件下载api
+
 ```javascript
 res.sendfile = function (filepath) {
   fs.stat(filepath, function(err, stat) {
@@ -215,7 +260,9 @@ res.sendfile = function (filepath) {
 ```
 
 # 响应跳转302
+
 当我们的URL因为某些问题（譬如权限限制）不能处理当前请求，需要将用户跳转到别的URL时，我们也可以封装出一个快捷的方法实现跳转，如下所示：
+
 ```javascript
   res.redirect = function (url) {
           res.setHeader('Location', url);
@@ -224,27 +271,47 @@ res.sendfile = function (filepath) {
         };
 ```
 
-
 # 进程
-## 进程复制
+
+## 进程创建
+
+### 进程复制
+
+Node.js提供了多种创建进程的方式，最简单的方式是通过`fork()`方法复制进程。这在多核CPU系统中特别有用，可以充分利用系统资源：
+
 ```javascript
 var fork = require('child_process').fork;
 var cpus = require('os').cpus();
 for (var i = 0; i < cpus.length; i++) {
   fork('./worker.js');
 }
-
 ```
-在*nix系统下可以通过ps aux | grep worker.js查看到进程的数量
 
-## 创建子进程
-child_process模块给予Node可以随意创建子进程（child_process）的能力。它提供了4个方法用于创建子进程。
-❑ spawn()：启动一个子进程来执行命令。
-❑ exec()：启动一个子进程来执行命令，与spawn()不同的是其接口不同，它有一个回调函数获知子进程的状况。
-❑ execFile()：启动一个子进程来执行可执行文件。
-❑ fork()：与spawn()类似，不同点在于它创建Node的子进程只需指定要执行的JavaScript文件模块即可。
-spawn()与exec()、execFile()不同的是，后两者创建时可以指定timeout属性设置超时时间，一旦创建的进程运行超过设定的时间将会被杀死。
-exec()与execFile()不同的是，exec()适合执行已有的命令，execFile()适合执行文件。这里我们以一个寻常命令为例，node worker.js分别用上述4种方法实现，如下所示：
+在*nix系统下可以通过`ps aux | grep worker.js`查看到进程的数量。
+
+### 创建子进程的四种方式
+
+Node.js的`child_process`模块提供了4种不同的方法来创建子进程，每种方法都有其特定的使用场景：
+
+1. **spawn()**: 用于启动一个子进程来执行命令
+   - 适用于需要持续运行的进程
+   - 可以实时获取输出流
+
+2. **exec()**: 启动一个子进程来执行命令
+   - 与spawn()的主要区别是有回调函数
+   - 可以设置超时时间
+   - 适合执行简单的shell命令
+
+3. **execFile()**: 启动一个子进程来执行可执行文件
+   - 直接执行文件，不会创建shell
+   - 性能略高于exec()
+
+4. **fork()**: 专门用于创建Node.js进程
+   - 只需指定要执行的JavaScript文件
+   - 会自动建立IPC通道
+
+示例代码：
+
 ```javascript
 var cp = require('child_process');
 cp.spawn('node', ['worker.js']);
@@ -256,36 +323,52 @@ cp.execFile('worker.js', function (err, stdout, stderr) {
 });
 cp.fork('./worker.js');
 ```
-以上4个方法在创建子进程之后均会返回子进程对象。
-如果是JavaScript文件通过execFile()运行，它的首行内容必须添加如下代码：
-```javascript
- #! /usr/bin/env node
-```
-尽管4种创建子进程的方式有些差别，但事实上后面3种方法都是spawn()的延伸应用。
 
-[node子进程](https://www.yuque.com/yuqueyonghudteckj/zpdk0q/hhdtgcatq038xsl3?view=doc_embed)
-### 一图总结
-![74dae7ad2b07cb91f37d035e97b31ec.jpg](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307141122709.jpeg)
+注意：如果使用execFile()运行JavaScript文件，需要在文件首行添加：
+
+```javascript
+#! /usr/bin/env node
+```
+
+[更多关于Node.js子进程的详细信息](https://www.yuque.com/yuqueyonghudteckj/zpdk0q/hhdtgcatq038xsl3?view=doc_embed)
+
+### 子进程创建方法对比
+
+![子进程创建方法对比](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202307141122709.jpeg)
 
 ## 进程通信
+
+### IPC通道
+
+进程间通信（IPC）是Node.js多进程模型中的重要概念。当使用fork()或其他API创建子进程时，Node.js会自动建立IPC通道，使得父子进程之间可以进行通信。
+
+通信示例：
+
 ```javascript
 // parent.js
-        var cp = require('child_process');
-        var n = cp.fork(__dirname + '/sub.js');
+var cp = require('child_process');
+var n = cp.fork(__dirname + '/sub.js');
 
-        n.on('message', function (m) {
-          console.log('PARENT got message:', m);
-        });
+n.on('message', function (m) {
+  console.log('PARENT got message:', m);
+});
 
-        n.send({hello: 'world'});
+n.send({hello: 'world'});
+
 // sub.js
-        process.on('message', function (m) {
-          console.log('CHILD got message:', m);
-        });
+process.on('message', function (m) {
+  console.log('CHILD got message:', m);
+});
 
-        process.send({foo: 'bar'});
-
+process.send({foo: 'bar'});
 ```
-通过fork()或者其他API，创建子进程之后，为了实现父子进程之间的通信，父进程与子进程之间将会创建IPC通道。通过IPC通道，父子进程之间才能通过message和send()传递消息。
+
 ### 句柄传递
+
+除了基本的消息传递，Node.js还支持在进程间传递句柄（handle）。句柄可以是服务器对象、socket连接等。
+
+基本语法：
+
+```javascript
 child.send(message, [sendHandle])
+```

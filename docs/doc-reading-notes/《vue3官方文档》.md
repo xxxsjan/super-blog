@@ -10,10 +10,34 @@ example1.items = example1.items.filter(item => item.message.match(/Foo/))
 
 当它们处于同一节点，`v-if` 的优先级比 `v-for` 更高，这意味着 `v-if` 将没有权限访问 `v-for` 里的变量：
 
-## .passive
+## 事件修饰符 - .passive
 
-滚动事件使用可以提高性能
+### 基本介绍
+
+.passive 修饰符用于优化事件监听器的性能，特别是在处理滚动事件时。它告诉浏览器你的事件处理器不会调用 preventDefault()，从而使浏览器可以立即开始滚动，而不需要等待事件处理器完成执行。
+
+### 使用方法
+
+```vue
+<!-- 基本用法 -->
 @scroll.passive="onScroll"
+
+<!-- 在组件中的实际应用 -->
+<div class="scroll-container" @scroll.passive="handleScroll">
+  <!-- 滚动内容 -->
+</div>
+```
+
+### 性能优化
+
+- 在移动端应用中特别有用，可以显著提升滚动性能
+- 适用于大列表或无限滚动场景
+- 建议在所有不需要阻止默认滚动行为的场景下使用
+
+### 注意事项
+
+- 不要在 .passive 修饰符的处理函数中使用 preventDefault()
+- 与 .prevent 修饰符互斥，不能同时使用
 
 ### 元素位置受限
 
@@ -27,7 +51,7 @@ example1.items = example1.items.filter(item => item.message.match(/Foo/))
 </table>
 ```
 
-这个自定义组件 `<blog-post-row>` 会被作为无效的内容提升到外部，并导致最终渲染结果出错。我们可以使用特殊的 `[is](https://v3.cn.vuejs.org/api/special-attributes.html#is)`[ attribute](https://v3.cn.vuejs.org/api/special-attributes.html#is) 作为一个变通的办法：
+这个自定义组件 `<blog-post-row>` 会被作为无效的内容提升到外部，并导致最终渲染结果出错。我们可以使用特殊的 `[is](https://v3.cn.vuejs.org/api/special-attributes.html#is)`[attribute](https://v3.cn.vuejs.org/api/special-attributes.html#is) 作为一个变通的办法：
 
 ```
 <table>
