@@ -1,7 +1,7 @@
 ---
 layout: home
 
-title: Home
+title: 前端技术知识库
 
 hero:
   name: web笔记文档
