@@ -44,6 +44,8 @@ General下找到Applications，点击
 
 创建成功
 
+get start不用管
+
 ## 获取各种key
 
 来到这个页面
@@ -56,8 +58,9 @@ General下找到Applications，点击
 
 - indexName                   也就是前面创建的应用名称
 - Application ID              就是appid
-- Search-Only API Key   类似 公钥 的东西，大家能看到
-- Admin API Key    类似私钥的东西，自己保管好，其实也不用保管，复制粘贴到github上管理就行，后面说
+- Search-Only API Key   只有搜索权限
+- Write API Key        有写入权限
+- Admin API Key    最高管理员权限，后面要复制粘贴到github上管理
 
 ![](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202304111452311.png)
 
