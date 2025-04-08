@@ -5,7 +5,7 @@
       <img v-if="!DEV" class="visitor" :src="badgeSrc" onerror="this.style.display='none'" />
     </template>
     <template #layout-bottom>
-      <NeteaseMusicPlayer />
+      <!-- <NeteaseMusicPlayer /> -->
     </template>
   </Layout>
 </template>
