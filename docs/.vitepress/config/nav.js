@@ -10,5 +10,9 @@ const _navList = [
   //   text: "我的标签",
   //   link: "/tags",
   // }
+  {
+    text: "留言板",
+    link: "/comment",
+  },
 ];
 export default _navList;

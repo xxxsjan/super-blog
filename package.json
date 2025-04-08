@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@vercel/analytics": "^1.0.1",
+    "@waline/client": "^2.15.8",
     "cross-env": "^7.0.3",
     "dayjs": "^1.11.11",
     "fast-glob": "^3.2.11",
