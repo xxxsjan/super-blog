@@ -7,14 +7,16 @@
 import { init } from '@waline/client';
 import '@waline/client/dist/waline.css';
 import { onMounted } from 'vue';
+let waline;
 onMounted(() => {
     // https://waline.js.org/guide/get-started/#html-%E5%BC%95%E5%85%A5-%E5%AE%A2%E6%88%B7%E7%AB%AF
-    init({
+    waline = init({
         el: '#waline',
         serverURL: 'https://waline1-ten.vercel.app',
         placeholder: '请留下你的评论...',
         avatar: 'mp',
-        meta: ['nick', 'mail', 'link']
+        meta: ['nick', 'mail', 'link'],
+        dark: '.dark',
     });
 });
 </script>
