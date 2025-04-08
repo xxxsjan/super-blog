@@ -84,9 +84,9 @@ function createSideNav(docDirName) {
 
 const arr = [
   { text: "笔记", docDirName: "webnote" },
-  { text: "源码分析", docDirName: "source-code" },
-  { text: "js相关", docDirName: "doc-js" },
-  { text: "读书笔记", docDirName: "doc-reading-notes" },
+  // { text: "源码分析", docDirName: "source-code" },
+  // { text: "js相关", docDirName: "doc-js" },
+  // { text: "读书笔记", docDirName: "doc-reading-notes" },
   { text: "环境安装", docDirName: "doc-env-install" },
   { text: "docker", docDirName: "doc-docker" },
   // { text: "life", docDirName: "doc-life" },
