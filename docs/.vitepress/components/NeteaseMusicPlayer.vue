@@ -3,8 +3,8 @@
         <div class="prefix" @click="show = !show">
             <img :src="svgSrc" alt="" />
         </div>
-        <iframe width="330" height="86" frameborder="0" scrolling="no" allowtransparency="yes" :src="src">
-        </iframe>
+        <iframe sandbox="allow-scripts" frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86
+            src="//music.163.com/outchain/player?type=2&id=2645500113&auto=1&height=66"></iframe>
     </div>
 </template>
 
@@ -27,12 +27,17 @@ const svgSrcMap = {
 const svgSrc = ref(svgSrcMap["black"]);
 
 const show = ref(true);
+const list = [
+    '//music.163.com/outchain/player?type=2&id=2645500113&auto=1&height=66', // 跳楼机
+    '//music.163.com/outchain/player?type=2&id=1923325275&auto=1&height=66', // 只因你太美（狂放版）
+    '//music.163.com/outchain/player?type=2&id=167876&auto=1&height=66', // 有何不可
+    '//music.163.com/outchain/player?type=2&id=28285736&auto=1&height=66', // 周柏豪 传闻
+]
 
-// const songId = "1923325275";// 只因你太美（狂放版）
-// const songId = "167876"; // 有何不可
-const songId = "28285736"; // 周柏豪 传闻
-const src = `//music.163.com/outchain/player?type=2&id=${songId}&auto=1&height=66`;
+const src = `//music.163.com/outchain/player?type=2&id=${list[0]}&auto=1&height=66`;
+
 console.log("src: ", src);
+
 watch(
     () => data.isDark.value,
     (val) => {
