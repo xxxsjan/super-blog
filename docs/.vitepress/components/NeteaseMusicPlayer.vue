@@ -17,7 +17,6 @@ export default {
 <script setup>
 import { useData } from "vitepress";
 import { ref, watch } from "vue";
-import crawlerConfig from '../../../crawlerConfig.json'
 
 const data = useData();
 
@@ -32,28 +31,14 @@ const show = ref(true);
 // const songId = "1923325275";// 只因你太美（狂放版）
 // const songId = "167876"; // 有何不可
 const songId = "28285736"; // 周柏豪 传闻
-
-
 const src = `//music.163.com/outchain/player?type=2&id=${songId}&auto=1&height=66`;
 console.log("src: ", src);
-
 watch(
     () => data.isDark.value,
     (val) => {
         svgSrc.value = val ? svgSrcMap["white"] : svgSrcMap["black"];
     }
 );
-
-
-const DEV = import.meta.env.MODE === 'development';
-
-const start_urls = crawlerConfig?.start_urls[0]
-
-const origin = start_urls && new URL(start_urls)?.origin
-
-const badgeSrc = `https://visitor-badge.laobi.icu/badge?page_id=${origin}`
-
-
 </script>
 
 <style scoped>
