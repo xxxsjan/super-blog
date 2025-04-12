@@ -15,7 +15,7 @@ docker run -d -p 5433:80 --name pgadmin4 -e PGADMIN_DEFAULT_EMAIL=test@123.com -
 <http://localhost:5433/>
 ```
 
-- 输入我们设置的邮箱test@123.com和密码123456，点击Login
+- 输入我们设置的邮箱<test@123.com>和密码123456，点击Login
 
 ![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202304140851611.png)
 

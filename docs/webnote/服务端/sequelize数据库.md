@@ -4,7 +4,7 @@
 
  npm i sequelize mysql2
 
-https://github.com/demopark/sequelize-docs-Zh-CN
+<https://github.com/demopark/sequelize-docs-Zh-CN>
 
 ### mysql
 
@@ -46,11 +46,7 @@ create TABLE user_score
 )
 ```
 
-
-
 创建table前需要先有databaes（不然报错：No database selected）
-
-
 
 新建数据库 ikun_test
 
@@ -189,18 +185,16 @@ UserScoreModel.count({
 });
 ```
 
-
-
 ## 条件判断where
 
-https://www.sequelize.cn/core-concepts/model-querying-basics#%E5%BA%94%E7%94%A8-where-%E5%AD%90%E5%8F%A5
+<https://www.sequelize.cn/core-concepts/model-querying-basics#%E5%BA%94%E7%94%A8-where-%E5%AD%90%E5%8F%A5>
 
 ### 几种写法
 
 ```
 Post.findAll({
   where: {
-  	// 常规 SELECT * FROM post WHERE authorId = 2;
+   // 常规 SELECT * FROM post WHERE authorId = 2;
     authorId: 2
     status: 'active'
     // 一对一 SELECT * FROM post WHERE authorId = 2;
@@ -273,4 +267,3 @@ Post.findAll({
   }
 });
 ```
-

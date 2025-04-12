@@ -43,5 +43,3 @@ alias则是改别名，比如访问/test/user ，try_files如下
 - $uri/ /usr/share/nginx/html/test/ 当做目录也找不到这个文件
 - /test/index.html 访问/test/index.html
   - $uri /usr/share/nginx/html/test/index.html 找到了
-
-个人理解，有错望指出
