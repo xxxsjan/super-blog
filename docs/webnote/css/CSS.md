@@ -77,7 +77,7 @@
 | -webkit-box-orient:vertical; | 同flex-direction: column |
 |  |  |
 
-### 文字排版
+### 文字排版 国际化常用
 
  direction: ltr;左到右（文字顺序不变）
 

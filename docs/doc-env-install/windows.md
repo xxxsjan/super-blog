@@ -9,3 +9,7 @@ netsh winsock reset
 
 
 或者修复host文件
+
+
+
+有火绒或者其他安全管家的，可以去工具箱里修复网络

@@ -151,14 +151,6 @@ reset   只推荐使用于个人分支
 
 
 
-## git文件大小写问题
-
-git默认不识别大小写
-
-执行 命令
-
-git config core.ignorecase false
-
 
 
 ## ssh
@@ -172,3 +164,204 @@ git config core.ignorecase false
 4、公钥 复制下来，放到 github 》setting 》 ssh 》新建
 
 5、类型选择 Signing keys
+
+
+
+
+
+### 全局 配置
+
+```
+# 设置全局用户名
+git config --global user.name "xxxsjan"
+# 设置全局用户邮箱
+git config --global user.email "626653354@qq.com"
+# 查看全局配置列表
+git config --list
+
+# 移除全局用户名配置
+git config --global --unset user.name
+# 移除指定安全目录配置
+git config --global --unset safe.directory D:/aa/bbb/cccc
+# 移除所有安全目录配置
+git config --global --unset-all safe.directory
+
+# 编辑全局配置
+git config --global --edit
+# 在 Vim 中，:wq 保存并退出
+# 在 Vim 中，:q 退出
+# 在 Vim 中，:q! 强制退出
+```
+
+配置当前当前 fork 的仓库的原仓库地址
+git remote add upstream <原仓库 github 地址>
+
+
+
+### 创建仓库
+
+#### 没仓库
+
+```javascript
+git init
+
+git add .
+
+git commit -m "first commit"
+
+git remote add origin https:xxxxxxxxxxxxxxxx
+
+git push -u origin master
+```
+
+#### 有项目没仓库
+
+```javascript
+git init
+
+git add .
+
+git commit -m "本地项目提交"
+
+git remote add origin https:xxxxxxxxxxxxxxxx
+
+git push -u origin master
+```
+
+#### 已有仓库情况
+
+```
+git remote add origin https:xxxxxxxxxxxxxxxx
+
+git push -u origin master
+```
+
+
+
+### ![rejected]  master->master(fetch first)
+
+##### error:failed to push some refs to '[https://github.com/xxx/xxx.git](https://github.com/xxx/xxx.git)'
+
+原因是：刚才在网站上改了 README.md 文件，添加了一些项目的说明，然后使用 Git 客户端再次提交的时候，需要先更新服务器上的变化，然后才能提交，也就是先更新再提交。
+
+将线上、线下代码进行合并
+
+```
+# 合并线上和线下代码
+git pull --rebase origin master
+# 再次推送
+git push origin master
+```
+
+#### cmd 报错：不是命令
+
+解决方案：将系统变量 path 设置为 C:\Program Files\Git\cmd，替换原有的 git-core bin 路径。
+
+工具更新
+
+```
+# 打开 Git Bash 工具，查看 Git 版本
+git --version
+# 更新 Git 工具版本
+git update
+# 或者使用以下命令更新
+git update-git-for-windows
+```
+
+[https://blog.csdn.net/weixin_42596434/article/details/88759295](https://blog.csdn.net/weixin_42596434/article/details/88759295)
+
+原因是没有指定本地 `master` 分支和远程 `origin/master` 的连接，这里根据提示：
+
+```python
+git branch --set-upstream-to=origin/master master
+```
+
+**解决方案：**
+
+因为远程仓库新建时，有 LIENCE，由于本地仓库和远程仓库有不同的开始点，也就是两个仓库没有共同的 commit 出现，无法提交
+
+此时我们需要在后面加上 --allow-unrelated-histories
+
+把两段不相干的 分支进行强行合并
+
+**也就是我们的 pull 命令改为下面这样的：**
+
+```python
+# 指定本地 master 分支和远程 origin/master 的连接
+git branch --set-upstream-to=origin/master master
+# 强行合并两个不相干的分支
+git pull origin master --allow-unrelated-histories
+# 若设置了默认分支，可简化命令
+git pull --allow-unrelated-histories
+# 推送至远程仓库
+git push
+```
+
+
+
+### 编辑器出不去(vim编辑)
+
+1. 按键盘上的`“i”`键可进入插入模式
+2. 这时可以修改最上方的黄色部分，改成你想写的合并原因
+3. 按键盘上的`“Esc”`键退出插入模式
+4. 最后在最下面输入`“ :wq ”`后按回车键即可
+
+ 
+
+### 误操作
+
+### 工作中
+
+git commit -m "备注"
+
+此时不要急着 push，先 pull 看看分支的代码有没更新---git pull
+
+```javascript
+#可设置upstream上流分支，提交分支到远程仓库remote，提示远程没有对应分支
+git push --set-upstream origin bc-a
+
+git fetch是将远程主机的最新内容拉到本地，用户在检查了以后决定是否合并到工作本机分支中。
+
+git pull = git fetch + git merge
+
+git rebase 分支名   ---以当前分支为基础，把别的分支的commit加到后面（其他分支的commit就算早于base分支也会放到后面，比如master 1，2，5，另一个 1 2 3 4，rebase后为12534）
+```
+
+
+
+## git 忽略大小写
+
+```
+git config core.ignorecase false
+
+git config --unset core.ignorecase
+
+git config --list
+```
+
+
+
+
+
+## gitignore已经添加了，但线上没删除
+
+要取消追踪才行，gitigonre只会对新追踪的生效
+
+```
+git rm -r --cached [dirname]
+git commit -m 'remove dirname'
+git push origin master
+
+```
+
+
+
+## 删除：远端已删除，本地还显示的分支
+
+git remote prune origin
+
+
+
+## 删除远端分支
+
+git push origin --delete [branchname]
