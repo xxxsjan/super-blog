@@ -1,7 +1,5 @@
 # esbuild打包
 
-
-
 ## 命令行脚本
 
 ```
@@ -12,7 +10,7 @@
 
 - `src/index.js` 是入口文件
 - `--bundle` 进行打包
-- --platform=node:指定目标平台为 Node.js   可选：node  browser 
+- --platform=node:指定目标平台为 Node.js   可选：node  browser
 - ---format=esm    输出esm    可选：esm cjs iife
 - `-o dist/index.js` 输出到指定文件
 - `--minify`: 最小化、压缩打包后的代码
@@ -24,9 +22,9 @@ entryPoints: 指定入口文件
 outfile: 指定输出文件
 bundle: true 表示进行打包
 external: 指定忽略的外部依赖
-sourcemap: 生成 sourcemap 
-format: 指定输出格式,这里根据 outputFormat 变量计算得来 
-globalName: 指定全局变量名 
+sourcemap: 生成 sourcemap
+format: 指定输出格式,这里根据 outputFormat 变量计算得来
+globalName: 指定全局变量名
 platform: 指定目标平台,浏览器或 Node
 plugins: 使用的插件
 define: 定义全局变量
@@ -69,8 +67,6 @@ esbuild
   .then((ctx) => ctx.watch());
 
 ```
-
-
 
 ## 钩子
 
@@ -139,6 +135,3 @@ await esbuild.build({
 类似babel，解析import的文件
 
 ### onDispose
-
-
-

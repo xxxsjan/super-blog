@@ -1,8 +1,6 @@
 # unplugin-icons自动引入图标
 
-
 npm i -D @vue/compiler-sfc
-
 
 ```js
 
@@ -36,4 +34,3 @@ module.exports = {
     }, 
 };
 ```
-
