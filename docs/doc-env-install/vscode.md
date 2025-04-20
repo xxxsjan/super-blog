@@ -8,39 +8,29 @@
 
 错误提示，会出现在代码行尾部进行提示
 
-
-
-### import cost 
+### import cost
 
 导入模块的大小
-
-
 
 ### any-rule
 
 你要的"正则"都在这!
 
-https://marketplace.visualstudio.com/items?itemName=russell.any-rule
+<https://marketplace.visualstudio.com/items?itemName=russell.any-rule>
 
-Node Snippets 	--node代码工具
+Node Snippets  --node代码工具
 
-React Native Tools 	 --React代码工具
+React Native Tools   --React代码工具
 
-Vue 2 Snippets	--vue 代码工具
+Vue 2 Snippets --vue 代码工具
 
 node sn  --代码工具
-
-
-
-
 
 ## 导出vscode插件数据
 
 ```
 code --list-extensions > extensions.txt
 ```
-
-
 
 ```
 alefragnani.project-manager
@@ -144,8 +134,6 @@ cat extensions.txt | xargs -n 1 code --install-extension
 }
 ```
 
-
-
 ## ai插件
 
 ```
@@ -153,8 +141,6 @@ Codeium
 TONGYI
 CodeGeeX:
 ```
-
-
 
 ## js项目路径跳转
 
@@ -168,11 +154,10 @@ CodeGeeX:
 
 ```
 
-
-
 ## setting.json
 
 ### js文件 div补全 emmet
+
 ```
 "emmet.includeLanguages": {
     "javascript": "javascriptreact"
@@ -190,7 +175,6 @@ CodeGeeX:
 }
 ```
 
-
 ### 文件夹分组
 
 ```
@@ -203,3 +187,18 @@ CodeGeeX:
 }
 ```
 
+### 格式化报错 delete cr
+
+1 修改.prettierrc文件， `npx prettier --write .`  可以修改文件
+
+```
+{
+  "endOfLine": "auto"
+}
+```
+
+2 关闭git自动转换
+
+```
+git config --global core.autocrlf false
+```
