@@ -12,7 +12,7 @@
 
 ## 在线预览
 
-- 预览地址：[https://odep.xyz/](https://odep.xyz/)
+- 预览地址：[https://odep.shop/](https://odep.shop/)
 
 ## 本地开发
 

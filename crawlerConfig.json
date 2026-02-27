@@ -1,7 +1,7 @@
 {
   "index_name": "super-blog",
   "start_urls": [
-    "https://blog.odep.xyz/"
+    "https://blog.odep.shop/"
   ],
   "rateLimit": 8,
   "maxDepth": 10,

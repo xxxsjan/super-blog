@@ -7,7 +7,7 @@ slug: home
 
 ::: tip 关于我
 
-- [导航页](https://odep.xyz/)
+- [导航页](https://odep.shop/)
 
 - [github](https://github.com/xxxsjan)
 
