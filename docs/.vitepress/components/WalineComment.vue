@@ -9,10 +9,12 @@ import '@waline/client/dist/waline.css';
 import { onMounted } from 'vue';
 let waline;
 onMounted(() => {
+    // 评论系统：example.yourdomain.com
+    // 评论管理：example.yourdomain.com/ui 第一个注册是管理员 6@x266
     // https://waline.js.org/guide/get-started/#html-%E5%BC%95%E5%85%A5-%E5%AE%A2%E6%88%B7%E7%AB%AF
     waline = init({
         el: '#waline',
-        serverURL: 'https://waline1-ten.vercel.app',
+        serverURL: 'https://waline2-bay.vercel.app',
         placeholder: '请留下你的评论...',
         avatar: 'mp',
         meta: ['nick', 'mail', 'link'],
