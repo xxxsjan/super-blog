@@ -5,29 +5,28 @@ title: 前端技术知识库
 
 hero:
   name: web笔记文档
-  text: Vue & React & Node.js
-  tagline: 好记性不如烂笔头
+  text: 前端开发笔记与实践记录
+  tagline: 把踩过的坑、用过的方案写下来，方便以后查阅
   image:
     src: /code.png
     alt: logo
   actions:
     - theme: brand
-      text: 笔记
+      text: 开始阅读
       link: /webnote/
     - theme: alt
       text: 关于我
       link: /me/
 features:
-  - icon: ⚡️ 
-    title: 前端基础记录
-    details: HTML、CSS、JS、TS、Vue、React、Webpack、Node.js、HTTP、浏览器
+  - icon: ⚡️
+    title: 前端基础
+    details: 覆盖 HTML、CSS、JS、TS，以及 Vue、React、工程化与浏览器相关笔记
   - icon: 🖖
-    title: 环境安装
-    details: 环境搭建的记录，是学习新技术的基础
+    title: 环境搭建
+    details: 开发环境、工具链与依赖安装记录，减少从零配置的重复劳动
   - icon: 🛠️
-    title: 源码学习
-    details: 源码的阅读与学习，是学习原理与细节的必要手段，也是对知识掌握程度的检验
+    title: 源码阅读
+    details: 从实现细节入手理解框架原理，把「会用」推进到「知其所以然」
 ---
-
 
 <!-- <VercelAnalytics /> -->
