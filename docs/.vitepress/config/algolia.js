@@ -4,8 +4,8 @@ export default {
   provider: "algolia", // algolia搜索 https://www.algolia.com/apps/YBYUHFPZ1C/dashboard
   options: {
     indexName: crawlerConfig.index_name,
-    appId: "YBYUHFPZ1C",
-    apiKey: "d4076b979399477f79c55eec660730ec",
+    appId: "NJY3W69K4P",
+    apiKey: "55eacff59654ae2e9a9c00a41071f103",
 
     // locales: {
     // zh: {
