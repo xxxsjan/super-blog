@@ -3,45 +3,17 @@ import FlexSearch from "flexsearch";
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
+import { tokenize } from "./tokenize.js";
 
 const md = new MarkdownIt();
-const searchVue = fileURLToPath(
-  new URL("../components/LocalSearch.vue", import.meta.url)
-);
+const Index = FlexSearch.Index || FlexSearch;
+const searchVue = fileURLToPath(new URL("./Search.vue", import.meta.url));
 
-/** 中英混合分词：中文用双字（单字保留），英文/数字按词（需与 LocalSearch.vue 保持一致） */
-export function tokenize(text) {
-  if (!text) return [];
-  const s = String(text).toLowerCase();
-  const tokens = [];
-  let i = 0;
-  while (i < s.length) {
-    const ch = s[i];
-    if (/[a-z0-9_]/.test(ch)) {
-      let j = i + 1;
-      while (j < s.length && /[a-z0-9_]/.test(s[j])) j++;
-      tokens.push(s.slice(i, j));
-      i = j;
-      continue;
-    }
-    if (/[\u4e00-\u9fff]/.test(ch)) {
-      let j = i + 1;
-      while (j < s.length && /[\u4e00-\u9fff]/.test(s[j])) j++;
-      const run = s.slice(i, j);
-      if (run.length === 1) {
-        tokens.push(run);
-      } else {
-        for (let k = 0; k < run.length - 1; k++) {
-          tokens.push(run.slice(k, k + 2));
-        }
-      }
-      i = j;
-      continue;
-    }
-    i++;
-  }
-  return tokens;
-}
+const DEFAULT_OPTIONS = {
+  previewLength: 80,
+  buttonLabel: "搜索",
+  placeholder: "请输入关键词",
+};
 
 async function walkMarkdown(dir) {
   const out = [];
@@ -108,14 +80,13 @@ async function buildDocs(root) {
 }
 
 function buildIndexPayload(docs, options) {
-  // FlexSearch 0.7：自定义分词应挂在 encode 上（tokenize 字符串模式才生效）
-  const index = new FlexSearch.Index({
+  const index = new Index({
     encode: (str) => tokenize(str),
     tokenize: "forward",
   });
   for (const doc of docs) index.add(doc.id, doc.text);
 
-  const previewLength = options.previewLength || 80;
+  const previewLength = options.previewLength;
   const PREVIEW_LOOKUP = {};
   for (const doc of docs) {
     let preview = md.render(doc.b || "").replace(/<[^>]+>/g, "");
@@ -141,23 +112,41 @@ function buildIndexPayload(docs, options) {
 
   const Options = {
     previewLength,
-    buttonLabel: options.buttonLabel || "搜索",
-    placeholder: options.placeholder || "请输入关键词",
+    buttonLabel: options.buttonLabel,
+    placeholder: options.placeholder,
   };
 
-  // 双层 JSON：避免 Vite 转换巨型 object literal 时弄坏转义（原插件的坑）
+  // 双层 JSON：避免 Vite 转换巨型 object literal 时弄坏转义
   return `export default JSON.parse(${JSON.stringify(
     JSON.stringify({ INDEX_DATA, PREVIEW_LOOKUP, Options })
   )})`;
 }
 
-export function LocalFlexSearchPlugin(options = {}) {
+/**
+ * VitePress 本地中文搜索插件（FlexSearch）
+ *
+ * @example
+ * // docs/vite.config.js
+ * import { SearchPlugin } from './.vitepress/plugins/vitepress-plugin-flexsearch/index.js'
+ * export default defineConfig({
+ *   plugins: [SearchPlugin({ buttonLabel: '搜索' })]
+ * })
+ *
+ * // themeConfig.search 请留空，避免与内置/Algolia 搜索按钮重复
+ *
+ * @param {object} [options]
+ * @param {number} [options.previewLength=80]
+ * @param {string} [options.buttonLabel='搜索']
+ * @param {string} [options.placeholder='请输入关键词']
+ */
+export function SearchPlugin(options = {}) {
+  const opts = { ...DEFAULT_OPTIONS, ...options };
   const virtualId = "virtual:search-data";
   const resolvedVirtual = "\0" + virtualId;
   let root = "";
 
   return {
-    name: "local-flex-search",
+    name: "vitepress-plugin-flexsearch",
     enforce: "pre",
     config() {
       return {
@@ -176,11 +165,17 @@ export function LocalFlexSearchPlugin(options = {}) {
     },
     async load(id) {
       if (id !== resolvedVirtual) return;
-      console.log("  🔎 Indexing (local-flex-search)...");
+      console.log("  🔎 Indexing (vitepress-plugin-flexsearch)...");
       const docs = await buildDocs(root);
-      const code = buildIndexPayload(docs, options);
+      const code = buildIndexPayload(docs, opts);
       console.log("  🔎 Done.", docs.length, "sections");
       return code;
     },
   };
 }
+
+/** @deprecated 使用 SearchPlugin */
+export const LocalFlexSearchPlugin = SearchPlugin;
+
+export { tokenize };
+export default SearchPlugin;

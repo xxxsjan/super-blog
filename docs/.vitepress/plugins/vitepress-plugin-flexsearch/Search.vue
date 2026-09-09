@@ -2,6 +2,8 @@
 import { ref, onMounted, computed } from "vue";
 import { withBase } from "vitepress";
 import FlexSearch from "flexsearch";
+import { tokenize } from "./tokenize.js";
+import "./style.css";
 
 // Vite 走 module 入口时 default 就是 Index；Node/bundle 则是 { Index }
 const Index = typeof FlexSearch === "function" ? FlexSearch : FlexSearch.Index;
@@ -16,40 +18,6 @@ const buttonLabel = ref("搜索");
 const placeholder = ref("请输入关键词");
 const origin = ref("");
 const isMac = ref(false);
-
-/** 必须与 localFlexSearch 插件建索引时一致 */
-function tokenize(text) {
-  if (!text) return [];
-  const s = String(text).toLowerCase();
-  const tokens = [];
-  let i = 0;
-  while (i < s.length) {
-    const ch = s[i];
-    if (/[a-z0-9_]/.test(ch)) {
-      let j = i + 1;
-      while (j < s.length && /[a-z0-9_]/.test(s[j])) j++;
-      tokens.push(s.slice(i, j));
-      i = j;
-      continue;
-    }
-    if (/[\u4e00-\u9fff]/.test(ch)) {
-      let j = i + 1;
-      while (j < s.length && /[\u4e00-\u9fff]/.test(s[j])) j++;
-      const run = s.slice(i, j);
-      if (run.length === 1) {
-        tokens.push(run);
-      } else {
-        for (let k = 0; k < run.length - 1; k++) {
-          tokens.push(run.slice(k, k + 2));
-        }
-      }
-      i = j;
-      continue;
-    }
-    i++;
-  }
-  return tokens;
-}
 
 const result = computed(() => {
   if (!searchTerm.value || !searchIndex.value) return [];
@@ -112,7 +80,7 @@ onMounted(async () => {
     index.import("ctx", data.INDEX_DATA.ctx);
     searchIndex.value = index;
   } catch (e) {
-    console.error("[local-search] init failed", e);
+    console.error("[vitepress-plugin-flexsearch] init failed", e);
     loadError.value = "搜索索引加载失败，请刷新重试";
   }
 
