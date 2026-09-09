@@ -180,7 +180,13 @@ onMounted(async () => {
     <div id="docsearch" @click="openSearch">
       <button type="button" class="DocSearch DocSearch-Button" aria-label="Search">
         <span class="DocSearch-Button-Container">
-          <svg width="20" height="20" class="DocSearch-Search-Icon" viewBox="0 0 20 20">
+          <svg
+            class="DocSearch-Search-Icon"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            aria-label="search icon"
+          >
             <path
               d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z"
               stroke="currentColor"
@@ -271,9 +277,5 @@ onMounted(async () => {
   text-align: center;
   color: var(--vp-c-text-2);
   padding: 24px 0;
-}
-.VPNavBarSearch {
-  display: flex;
-  align-items: center;
 }
 </style>
