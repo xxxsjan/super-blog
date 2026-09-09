@@ -1,13 +1,20 @@
-## verdaccio
+# Verdaccio
 
-[https://juejin.cn/post/6932264833312096270](https://juejin.cn/post/6932264833312096270#heading-1)
+参考：[掘金文章](https://juejin.cn/post/6932264833312096270#heading-1)
+
+```bash
 npm i -g verdaccio
-执行    verdaccio   即可启动，参考如下
-![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151259833.png)
-> config file是配置文件config.yaml
-> htpasswd是用户名单
+verdaccio
+```
 
-配置文件config.yaml里加个 search: true
+启动后参考如下：
+
+![image.png](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151259833.png)
+
+> config file 是配置文件 `config.yaml`
+> htpasswd 是用户名单
+
+配置文件 `config.yaml` 里加个 `search: true`
 这样可以搜索
 
 ### 权限修改

@@ -1,6 +1,7 @@
-cb-ui里的一个例子
-主要是是解析vue文件为js
-这部分vue比常规vue多了自定义的一些标签
+# Vite 插件开发
+
+cb-ui 里的一个例子，主要是解析 vue 文件为 js。
+这部分 vue 比常规 vue 多了自定义的一些标签。
 
 ```javascript
 // demo.vue

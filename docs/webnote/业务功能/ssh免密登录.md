@@ -1,6 +1,8 @@
-https://book.ruims.top/server/shell/ssh-nopass/
+# SSH 免密登录
 
-大致原理，就是在客户端 client 生成一对密钥（包括公钥和私钥），然后将公钥传到服务器 server。当 client 通过 ssh 登录 server 时，不用再输入密码就能直接登进去，这就是 ssh 免密登录。
+参考：<https://book.ruims.top/server/shell/ssh-nopass/>
+
+大致原理：在客户端生成一对密钥（公钥和私钥），再把公钥传到服务器。之后通过 ssh 登录时不必再输入密码。
 
 ### client 操作
 在客户端，生成密钥方式如下：
