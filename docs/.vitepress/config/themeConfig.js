@@ -1,19 +1,26 @@
 import { sideBarObj } from "./sidebar";
 import nav from "./nav";
+import localSearchConfig from "./localSearch";
 import algoliaConfig from "./algolia";
+import { searchProvider } from "./searchProvider";
 
 // const icpRecordCode = "粤ICP备2021026613号";
 const icpRecordCode = "粤ICP备2024285819号";
 const copyright = `Copyright © 2019-${new Date().getFullYear()} xxxsjan`;
 // const publicSecurityRecordCode = "粤ICP备2021026613号-1";
 
+// flexsearch 由 docs/vite.config.js 插件注入，主题 search 需留空以免重复按钮
+const searchConfig =
+  searchProvider === "algolia"
+    ? algoliaConfig
+    : searchProvider === "local"
+      ? localSearchConfig
+      : undefined;
+
 /** @type {import("vitepress").DefaultTheme.Config} */
 const themeConfig = {
   logo: "/code.png",
-  search: {
-    // provider: 'local',
-    ...algoliaConfig,
-  },
+  search: searchConfig,
   socialLinks: [{ icon: "github", link: "https://github.com/xxxsjan" }],
   nav,
   lastUpdated: true, // 最后更新时间
