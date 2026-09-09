@@ -1,25 +1,25 @@
-# pgadmin4管理mysql
+# Postgres 与 pgAdmin4
 
-## 使用pgadmin4
+## 使用 pgAdmin4
 
-<https://cloud.tencent.com/developer/article/1679495>
+参考：<https://cloud.tencent.com/developer/article/1679495>
 
-```
+```bash
 docker pull dpage/pgadmin4
 docker pull postgres
 
 docker run -d -p 5432:5432 --name postgresql -v pgdata:/var/lib/postgresql/data -e POSTGRES_PASSWORD=pg123456 postgres
 
 docker run -d -p 5433:80 --name pgadmin4 -e PGADMIN_DEFAULT_EMAIL=test@123.com -e PGADMIN_DEFAULT_PASSWORD=123456 dpage/pgadmin4
-
-<http://localhost:5433/>
 ```
 
-- 输入我们设置的邮箱<test@123.com>和密码123456，点击Login
+访问：<http://localhost:5433/>
+
+- 使用设置的邮箱 `test@123.com` 和密码 `123456` 登录
 
 ![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202304140851611.png)
 
-- ## 连接server
+## 连接 Server
 
 <img src="https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202304140851517.png" alt="img" style="zoom:50%;" />
 
@@ -27,12 +27,12 @@ docker run -d -p 5433:80 --name pgadmin4 -e PGADMIN_DEFAULT_EMAIL=test@123.com -
 
 <img src="https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202304140851606.png" alt="img" style="zoom:50%;" />
 
-默认username是postgres，password是上面设置的pg123456 注意，
+默认 username 是 `postgres`，password 是上面设置的 `pg123456`。
 
-因为pgadmin运行在[docker](https://cloud.tencent.com/product/tke?from=10680)里，所以host不能写localhost。
+因为 pgAdmin 运行在 Docker 里，host 不能写 `localhost`。
 
-host.docker.internal代表[宿主机](https://cloud.tencent.com/product/cdh?from=10680)器，或者用宿主机IP。
+`host.docker.internal` 代表宿主机，或直接用宿主机 IP。
 
 ![img](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202304140851704.png)
 
-## 连接成功，完成
+## 连接成功

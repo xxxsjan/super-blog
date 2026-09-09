@@ -1,17 +1,19 @@
-# 使用sequelize连接mysql
+# Sequelize
 
-#### 安装
+## 安装
 
- npm i sequelize mysql2
+```bash
+npm i sequelize mysql2
+```
 
-<https://github.com/demopark/sequelize-docs-Zh-CN>
+文档：<https://github.com/demopark/sequelize-docs-Zh-CN>
 
-### mysql
+## MySQL
 
-可以使用docker搭个mysql先
+可以用 Docker 先搭一个 MySQL：
 
-```json
-docker run -d  -p 3306:3306  --name mysql57 -v ~/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 459651132a11
+```bash
+docker run -d -p 3306:3306 --name mysql57 -v ~/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 459651132a11
 ```
 
 进入mysql
