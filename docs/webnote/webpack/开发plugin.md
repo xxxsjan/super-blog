@@ -1,5 +1,8 @@
-使用Tapable出发事件
-插件基本结构
+# 开发 Plugin
+
+使用 Tapable 触发事件。
+
+## 插件基本结构
 
 ```javascript
 class Myplugin{

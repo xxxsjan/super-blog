@@ -1,16 +1,21 @@
-[1800字了解babel的使用](https://zhuanlan.zhihu.com/p/471350036)
+# Babel
+
+[1800 字了解 Babel 的使用](https://zhuanlan.zhihu.com/p/471350036)
+
+```bash
 npm install -D babel-loader @babel/core @babel/preset-env webpack
+```
 
-- @babel/preset-env              ES2015+ 语法
-- @babel/preset-typescript    TypeScript
-- @babel/preset-react            React
-- @babel/preset-flow              Flow
+- `@babel/preset-env`：ES2015+ 语法
+- `@babel/preset-typescript`：TypeScript
+- `@babel/preset-react`：React
+- `@babel/preset-flow`：Flow
 
-### babel插件和预设的执行顺序
+### 插件和预设的执行顺序
 
 - 插件比预设先执行
-- 插件执行顺序 前向后  
-- 预设执行顺序 后向前
+- 插件执行顺序：前 → 后
+- 预设执行顺序：后 → 前
 
 ![](https://raw.githubusercontent.com/xxxsjan/pic-bed/main/202305151245066.webp)
 

@@ -1,10 +1,12 @@
-[http://xxpromise.gitee.io/webpack5-docs/origin/loader.html](http://xxpromise.gitee.io/webpack5-docs/origin/loader.html#_2-loader-%E6%8E%A5%E5%8F%97%E7%9A%84%E5%8F%82%E6%95%B0)
+# 开发 Loader
 
-### loader参数
+[文档参考](http://xxpromise.gitee.io/webpack5-docs/origin/loader.html#_2-loader-%E6%8E%A5%E5%8F%97%E7%9A%84%E5%8F%82%E6%95%B0)
 
-- content 源文件的内容
-- map SourceMap 数据
-- meta 数据，可以是任何内容
+### loader 参数
+
+- `content`：源文件内容
+- `map`：SourceMap 数据
+- `meta`：元数据，可以是任何内容
 
 ```javascript
 module.exports = function (content,map,meta){
@@ -13,7 +15,7 @@ module.exports = function (content,map,meta){
 }
 ```
 
-虽然是异步，到会等他完成才会执行下个loader
+虽然是异步，也会等它完成再执行下一个 loader。
 
 ```javascript
 module.exports = function (content, map, meta) {

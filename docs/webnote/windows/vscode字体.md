@@ -1,11 +1,8 @@
-# vscode-font
-vscode-font
+# VS Code 字体
 
-字体下载地址
+字体下载：https://github.com/githubnext/monaspace/tree/main/fonts/otf
 
-https://github.com/githubnext/monaspace/tree/main/fonts/otf
-
-vscode 设置 Editor: Font Family 按需修改为以下
+在 VS Code 设置 `Editor: Font Family`，按需改为对应字体名。
 ```
 'Monaspace Radon', monospace
 'Monaspace Krypton', monospace
